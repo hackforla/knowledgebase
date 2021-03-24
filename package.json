@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-gdocs2md",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Gatsby plugin transforming Google Docs to markdown files",
   "repository": "https://github.com/icaraps/gatsby-source-gdocs2md",
   "license": "MIT",
