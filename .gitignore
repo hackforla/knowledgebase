@@ -14,3 +14,4 @@
 /write-document-to-tests.js
 /__tests__/*
 tests
+node_modules
