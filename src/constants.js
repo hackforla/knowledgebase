@@ -4,7 +4,7 @@ module.exports = {
     debug: false,
     demoteHeadings: true,
     folder: undefined,
-    target: 'src/pages',
+    target: "googledocs-output",
     imagesOptions: undefined,
     keepDefaultStyle: false,
     pageContext: [],
@@ -15,5 +15,5 @@ module.exports = {
     skipLists: false,
     skipQuotes: false,
     skipTables: false,
-  }
-}
+  },
+};

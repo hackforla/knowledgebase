@@ -15,3 +15,7 @@
 /__tests__/*
 tests
 node_modules
+.env
+*.bkup
+*.backup
+

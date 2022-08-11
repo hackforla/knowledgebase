@@ -28,7 +28,6 @@ exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
 
   try {
     timer.setStatus("fetching");
-
     const googleDocuments = await fetchDocuments(options);
 
     timer.setStatus("creating nodes");
