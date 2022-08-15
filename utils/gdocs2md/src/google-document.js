@@ -10,7 +10,7 @@ const { DEFAULT_OPTIONS } = require("./constants");
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
 
-class GoogleDocument {
+class ElementsOfGoogleDocument {
   constructor({ document, properties = {}, options = {}, links = {} }) {
     this.document = document;
     this.links = links;
@@ -26,8 +26,6 @@ class GoogleDocument {
     // Keep the class scope in loops
     this.formatText = this.formatText.bind(this);
     this.normalizeElement = this.normalizeElement.bind(this);
-
-    this.process();
   }
 
   formatText(
@@ -268,11 +266,10 @@ class GoogleDocument {
     ]);
     const isPrevList = prevListId === paragraph.bullet.listId;
     const prevList = _get(this.elements, [this.elements.length - 1, "value"]);
-    const text = this.stringifyContent(
-      paragraph.elements.map((el) => {
-        this.formatText(el, { inlineImages: true });
-      })
-    );
+    const textArray = paragraph.elements.map((el) => {
+      return this.formatText(el, { inlineImages: true });
+    });
+    const text = this.stringifyContent(textArray);
 
     if (isPrevList && Array.isArray(prevList)) {
       const { nestingLevel } = paragraph.bullet;
@@ -600,5 +597,5 @@ json2md.converters.footnote = function (footnote) {
 };
 
 module.exports = {
-  GoogleDocument: GoogleDocument,
+  ElementsOfGoogleDocument,
 };

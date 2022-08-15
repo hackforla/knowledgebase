@@ -1,7 +1,9 @@
 const { google } = require("googleapis");
 const GoogleOAuth2 = require("google-oauth2-env-vars");
 const { ENV_TOKEN_VAR } = require("./constants");
-const { GoogleDocument } = require("../../gdocs2md/src/google-document");
+const {
+  ElementsOfGoogleDocument: GoogleDocument,
+} = require("../../gdocs2md/src/google-document");
 const {
   writeDocumentToTests,
 } = require("../../gdocs2md/src/write-document-to-tests");
@@ -42,6 +44,7 @@ async function fetchDocuments(options) {
         options,
         links,
       });
+      googleDocument.process();
 
       if (process.env.NODE_ENV === "DOCS_TO_TESTS") {
         writeDocumentToTests(googleDocument);

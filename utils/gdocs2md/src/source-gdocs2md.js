@@ -37,6 +37,7 @@ exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
     for (let googleDocument of googleDocuments) {
       // console.log(googleDocument);
       const { properties } = googleDocument;
+      googleDocument.process();
       const markdown = googleDocument.toMarkdown();
 
       fs.outputFileSync(

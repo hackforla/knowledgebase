@@ -201,11 +201,7 @@ exports[`Crosslinks between documents 1`] = `
 "
 `;
 
-exports[`Skip codes 1`] = `
-"
-Type gatsby-source-gdocs2md-token to generate a token
-"
-`;
+exports[`Skip codes 1`] = `""`;
 
 exports[`Skip footnotes 1`] = `
 "
