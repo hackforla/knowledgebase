@@ -400,10 +400,10 @@ class ElementsOfGoogleDocument {
     this.elements.push({ type: "blockquote", value: blockquote });
   }
 
-  processCode(table) {
+  processCode(codeBlock) {
     if (this.options.skipCodes) return;
 
-    const firstRow = table.tableRows[0];
+    const firstRow = codeBlock.tableRows[0];
     const firstCell = firstRow.tableCells[0];
     const codeContent = firstCell.content
       .map(({ paragraph }) =>
