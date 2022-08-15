@@ -1,9 +1,10 @@
 const { google } = require("googleapis");
 const GoogleOAuth2 = require("google-oauth2-env-vars");
-
-const { ENV_TOKEN_VAR } = require("./constants");
-const { GoogleDocument } = require("./google-document");
-const { writeDocumentToTests } = require("./write-document-to-tests");
+const { ENV_TOKEN_VAR } = require("../../gdocs2md/src/constants");
+const { GoogleDocument } = require("../../gdocs2md/src/google-document");
+const {
+  writeDocumentToTests,
+} = require("../../gdocs2md/src/write-document-to-tests");
 const { fetchFiles } = require("./google-drive");
 
 async function fetchDocument(id) {

@@ -2,7 +2,9 @@ const fs = require("fs-extra");
 const path = require("path");
 const _merge = require("lodash/merge");
 
-const { fetchDocuments } = require("./google-docs");
+const {
+  fetchDocuments,
+} = require("../../getGdocsTokenAndFetch/src/google-docs");
 const { DEFAULT_OPTIONS } = require("./constants");
 
 exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
