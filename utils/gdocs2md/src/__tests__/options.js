@@ -6,13 +6,11 @@ const documentLists = require("./documents/lists.json");
 const documentQuotes = require("./documents/quotes.json");
 const documentCodes = require("./documents/codes.json");
 const documentTables = require("./documents/tables.json");
-const {
-  ElementsOfGoogleDocument: GoogleDocument,
-} = require("../../src/google-document");
+const { ElementsOfGoogleDocument } = require("../../src/google-document");
 
 test(`"KeepDefaultStyle" option`, () => {
   const options = { keepDefaultStyle: true };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentTexts,
     options,
   });
@@ -22,7 +20,7 @@ test(`"KeepDefaultStyle" option`, () => {
 
 test(`"DemoteHeading" option enabled`, () => {
   const options = { demoteHeadings: true };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentTexts,
     options,
   });
@@ -32,7 +30,7 @@ test(`"DemoteHeading" option enabled`, () => {
 
 test(`"DemoteHeading" option disabled`, () => {
   const options = { demoteHeadings: false };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentTexts,
     options,
   });
@@ -46,7 +44,7 @@ test(`Crosslinks between documents`, () => {
     ["unknow"]: "/404",
   };
 
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentLinks,
     links,
   });
@@ -59,7 +57,7 @@ test(`Skip headings`, () => {
   const options = {
     skipHeadings: true,
   };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentTexts,
     options,
   });
@@ -72,7 +70,7 @@ test(`Skip images`, () => {
   const options = {
     skipImages: true,
   };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentImages,
     options,
   });
@@ -85,7 +83,7 @@ test(`Skip footnotes`, () => {
   const options = {
     skipFootnotes: true,
   };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentFootnotes,
     options,
   });
@@ -98,7 +96,7 @@ test(`Skip lists`, () => {
   const options = {
     skipLists: true,
   };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentLists,
     options,
   });
@@ -111,7 +109,7 @@ test(`Skip quotes`, () => {
   const options = {
     skipQuotes: true,
   };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentQuotes,
     options,
   });
@@ -124,7 +122,7 @@ test(`Skip codes`, () => {
   const options = {
     skipCodes: true,
   };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentCodes,
     options,
   });
@@ -136,7 +134,7 @@ test(`Skip tables`, () => {
   const options = {
     skipTables: true,
   };
-  const googleDocument = new GoogleDocument({
+  const googleDocument = new ElementsOfGoogleDocument({
     document: documentTables,
     options,
   });

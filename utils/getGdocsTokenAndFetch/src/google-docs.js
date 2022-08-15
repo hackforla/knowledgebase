@@ -2,7 +2,7 @@ const { google } = require("googleapis");
 const GoogleOAuth2 = require("google-oauth2-env-vars");
 const { ENV_TOKEN_VAR } = require("./constants");
 const {
-  ElementsOfGoogleDocument: GoogleDocument,
+  ElementsOfGoogleDocument,
 } = require("../../gdocs2md/src/google-document");
 const {
   writeDocumentToTests,
@@ -38,7 +38,7 @@ async function fetchDocuments(options) {
   const googleDocuments = await Promise.all(
     documentsProperties.map(async (properties) => {
       const document = await fetchDocument(properties.id);
-      const googleDocument = new GoogleDocument({
+      const googleDocument = new ElementsOfGoogleDocument({
         document,
         properties,
         options,
