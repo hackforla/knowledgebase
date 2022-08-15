@@ -35,11 +35,9 @@ class GoogleDocument {
     { inlineImages = false, namedStyleType = "NORMAL_TEXT" } = {}
   ) {
     if (el.inlineObjectElement) {
-      console.log("processing inLineImages", inlineImages);
       const image = this.getImage(el);
       if (image) {
         if (inlineImages) {
-          console.log("inline image", image.alt, image.source, image.title);
           return `![${image.alt}](${image.source} "${image.title}")`;
         }
         this.elements.push({
@@ -272,7 +270,6 @@ class GoogleDocument {
     const prevList = _get(this.elements, [this.elements.length - 1, "value"]);
     const text = this.stringifyContent(
       paragraph.elements.map((el) => {
-        console.log("calling formattext loop");
         this.formatText(el, { inlineImages: true });
       })
     );
@@ -313,7 +310,6 @@ class GoogleDocument {
       SUBTITLE: "h2",
       TITLE: "h1",
     };
-    console.log("processing paragraph");
     const namedStyleType = paragraph.paragraphStyle.namedStyleType;
     const tag = tags[namedStyleType];
     const isHeading = tag.startsWith("h");
@@ -348,7 +344,6 @@ class GoogleDocument {
       // Headings
       else if (isHeading) {
         if (this.options.skipHeadings) return;
-        console.log("heading call formattext");
 
         const text = this.formatText(el, {
           namedStyleType,
@@ -361,7 +356,6 @@ class GoogleDocument {
 
       // Texts
       else {
-        console.log("calling else formattext", el);
         const text = this.formatText(el);
 
         if (text) {
