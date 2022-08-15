@@ -102,7 +102,7 @@ const getTreeMetadata = (tree, file) => {
 
 /**
  * @param {object} options
- * @param {Partial<import('..').Metadata>} options.metadata
+ * @param {Partial<import('../..').Metadata>} options.metadata
  * @param {Record<string, unknown>=} options.defaults
  */
 const updateFile = ({ file, folder }) => {
@@ -150,8 +150,8 @@ async function getGoogleDrive() {
 const rateLimit = wait(10, 1500);
 const BATCH_SIZE = 100;
 /**
- * @param {import('..').Options & FetchDocumentsOptions} options
- * @returns {Promise<(import('..').DocumentFile & { path: string })[]>}
+ * @param {import('../..').Options & FetchDocumentsOptions} options
+ * @returns {Promise<(import('../..').DocumentFile & { path: string })[]>}
  */
 async function fetchDocumentsFiles({ drive, parents, options }) {
   if (parents.length > BATCH_SIZE) {
@@ -194,7 +194,7 @@ async function fetchDocumentsFiles({ drive, parents, options }) {
   const collectDocuments = (files) =>
     files
       .filter(
-        /** @returns {file is import("..").DocumentFile} */
+        /** @returns {file is import("../..").DocumentFile} */
         (file) => file.mimeType === MIME_TYPE_DOCUMENT
       )
       .map((file) => {
@@ -300,7 +300,7 @@ async function fetchDocumentsFiles({ drive, parents, options }) {
   return fetchNextPage(res.data.nextPageToken);
 }
 
-/** @param {import('..').Options} pluginOptions */
+/** @param {import('../..').Options} pluginOptions */
 async function fetchFiles({ folder, ...options }) {
   const drive = await getGoogleDrive();
 

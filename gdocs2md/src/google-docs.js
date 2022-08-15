@@ -23,7 +23,7 @@ async function fetchDocument(id) {
   return res.data;
 }
 
-/** @param {import('..').Options} options */
+/** @param {import('../..').Options} options */
 async function fetchDocuments(options) {
   const documentsProperties = await fetchFiles(options);
   const links = documentsProperties.reduce(
