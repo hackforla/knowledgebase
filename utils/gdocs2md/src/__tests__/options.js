@@ -6,7 +6,7 @@ const documentLists = require("./documents/lists.json");
 const documentQuotes = require("./documents/quotes.json");
 const documentCodes = require("./documents/codes.json");
 const documentTables = require("./documents/tables.json");
-const { ElementsOfGoogleDocument } = require("../../src/google-document");
+const { ElementsOfGoogleDocument } = require("../elements-of-google-document");
 
 test(`"KeepDefaultStyle" option`, () => {
   const options = { keepDefaultStyle: true };
@@ -126,6 +126,7 @@ test(`Skip codes`, () => {
     document: documentCodes,
     options,
   });
+  googleDocument.process();
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });

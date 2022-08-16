@@ -1,9 +1,7 @@
 const { google } = require("googleapis");
 const GoogleOAuth2 = require("google-oauth2-env-vars");
 const { ENV_TOKEN_VAR } = require("./constants");
-const {
-  ElementsOfGoogleDocument,
-} = require("../../gdocs2md/src/google-document");
+const { GoogleDocument } = require("./google-document");
 const {
   writeDocumentToTests,
 } = require("../../gdocs2md/src/write-document-to-tests");
@@ -33,18 +31,16 @@ async function fetchDocuments(options) {
     (acc, properties) => ({ ...acc, [properties.id]: properties.slug }),
     {}
   );
-  console.log("exec promise");
 
   const googleDocuments = await Promise.all(
     documentsProperties.map(async (properties) => {
       const document = await fetchDocument(properties.id);
-      const googleDocument = new ElementsOfGoogleDocument({
+      const googleDocument = new GoogleDocument({
         document,
         properties,
         options,
         links,
       });
-      googleDocument.process();
 
       if (process.env.NODE_ENV === "DOCS_TO_TESTS") {
         writeDocumentToTests(googleDocument);

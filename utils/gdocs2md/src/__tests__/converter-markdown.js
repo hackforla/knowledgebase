@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require(`path`);
 
-const { ElementsOfGoogleDocument } = require("../../src/google-document");
+const { ElementsOfGoogleDocument } = require("../elements-of-google-document");
 
 const documentsPath = path.join(__dirname, "documents");
 const filenames = fs.readdirSync(documentsPath);

@@ -13,7 +13,7 @@ Object {
   "elements": Array [
     Object {
       "type": "p",
-      "value": "Type \`gatsby-source-gdocs2md-token\` to generate a token",
+      "value": "",
     },
     Object {
       "type": "code",

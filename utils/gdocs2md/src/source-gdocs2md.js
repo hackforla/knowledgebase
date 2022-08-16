@@ -6,6 +6,7 @@ const {
   fetchDocuments,
 } = require("../../getGdocsTokenAndFetch/src/google-docs");
 const { DEFAULT_OPTIONS } = require("./constants");
+const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
 
 exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
@@ -31,11 +32,23 @@ exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
   try {
     timer.setStatus("fetching");
     const googleDocuments = await fetchDocuments(options);
-
-    timer.setStatus("creating nodes");
+    let x = 0;
+    for (let googleDocument of googleDocuments) {
+      googleDocuments[x] = new ElementsOfGoogleDocument({
+        document: googleDocument.document,
+        properties: googleDocument.properties,
+        options: options,
+        links: googleDocument.links,
+        options: googleDocument.options,
+        links: googleDocument.links,
+      });
+      x++;
+    }
+    timer.setStatus("fetched");
+    for (let googleDocument of googleDocuments) await googleDocument.process();
+    timer.setStatus("processsed");
 
     for (let googleDocument of googleDocuments) {
-      // console.log(googleDocument);
       const { properties } = googleDocument;
       googleDocument.process();
       const markdown = googleDocument.toMarkdown();
@@ -48,6 +61,7 @@ exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
         markdown
       );
     }
+    timer.setStatus("written");
 
     timer.setStatus(googleDocuments.length + " markdown pages created");
 

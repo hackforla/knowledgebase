@@ -16,16 +16,6 @@ class ElementsOfGoogleDocument {
     this.links = links;
     this.properties = properties;
     this.options = _merge({}, DEFAULT_OPTIONS, options);
-
-    this.cover = null;
-    this.elements = [];
-    this.headings = [];
-    this.footnotes = {};
-    this.related = [];
-
-    // Keep the class scope in loops
-    this.formatText = this.formatText.bind(this);
-    this.normalizeElement = this.normalizeElement.bind(this);
   }
 
   formatText(
@@ -514,6 +504,16 @@ class ElementsOfGoogleDocument {
   }
 
   process() {
+    this.cover = null;
+    this.elements = [];
+    this.headings = [];
+    this.footnotes = {};
+    this.related = [];
+
+    // Keep the class scope in loops
+    this.formatText = this.formatText.bind(this);
+    this.normalizeElement = this.normalizeElement.bind(this);
+
     this.bodyFontSize = _get(
       this.getTextStyle("NORMAL_TEXT"),
       "fontSize.magnitude"
