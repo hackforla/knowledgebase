@@ -7,6 +7,7 @@ const _merge = require("lodash/merge");
 const { isCodeBlocks, isQuote } = require("./google-document-types");
 const { DEFAULT_OPTIONS } = require("./constants");
 const { getGatsbyFrontMatter } = require("./gdocs2md-gatsby");
+const { normalizeElement } = require("./normalize-element");
 
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
@@ -513,7 +514,7 @@ class ElementsOfGoogleDocument {
 
     // Keep the class scope in loops
     this.formatText = this.formatText.bind(this);
-    this.normalizeElement = this.normalizeElement.bind(this);
+    // this.normalizeElement = this.normalizeElement.bind(this);
 
     this.bodyFontSize = _get(
       this.getTextStyle("NORMAL_TEXT"),
@@ -564,20 +565,8 @@ class ElementsOfGoogleDocument {
     this.processInternalLinks();
   }
 
-  normalizeElement(element) {
-    if (element.type && element.value) {
-      return { [element.type]: this.normalizeElement(element.value) };
-    }
-
-    if (Array.isArray(element)) {
-      return element.map(this.normalizeElement);
-    }
-
-    return element;
-  }
-
   toMarkdown() {
-    const json = this.elements.map(this.normalizeElement);
+    const json = this.elements.map(normalizeElement);
     const markdownContent = json2md(json);
     const markdownFrontmatter = this.getFrontMatter();
 

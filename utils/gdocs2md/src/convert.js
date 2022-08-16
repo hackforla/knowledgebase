@@ -1,15 +1,15 @@
 const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
+const json2md = require("json2md");
+const { normalizeElement } = require("./normalize-element");
 
 const convertGDoc2ElementsObj = (gDoc) => {
-  const obj = new ElementsOfGoogleDocument(...gDoc);
+  const obj = new ElementsOfGoogleDocument({ ...gDoc });
   obj.process();
-  return obj.elements;
+  return obj;
 };
 
-const convertElementsObj2MD = (elements) => {
-  const json = this.elements.map((element) =>
-    Array.isArray(element) ? element : [element]
-  );
+const convertElements2MD = (elements) => {
+  const json = elements.map(normalizeElement);
   return json2md(json);
 };
 
@@ -55,5 +55,5 @@ module.exports = {
   addHeading2MarkdownAnchor,
   formatHeading2MarkdownSection,
   convertGDoc2ElementsObj,
-  convertElementsObj2MD,
+  convertElements2MD,
 };
