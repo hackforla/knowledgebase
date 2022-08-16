@@ -4,7 +4,7 @@ exports[`Document "Breaks" to Markdown 1`] = `""`;
 
 exports[`Document "Codes" to Markdown 1`] = `
 "
-Type \`gatsby-source-gdocs2md-token\` to generate a token
+ new example needs to be added
 
 \`\`\`js
 
