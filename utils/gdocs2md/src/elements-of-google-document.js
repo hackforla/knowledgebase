@@ -1,11 +1,12 @@
 const json2md = require("json2md");
-const yamljs = require("yamljs");
+// const yamljs = require("yamljs");
 const _get = require("lodash/get");
 const _repeat = require("lodash/repeat");
 const _merge = require("lodash/merge");
 
 const { isCodeBlocks, isQuote } = require("./google-document-types");
 const { DEFAULT_OPTIONS } = require("./constants");
+const { getGatsbyFrontMatter } = require("./gdocs2md-gatsby");
 
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
@@ -576,18 +577,15 @@ class ElementsOfGoogleDocument {
   }
 
   toMarkdown() {
-    const frontmatter = {
-      ...this.properties,
-      ...(this.cover ? { cover: this.cover } : {}),
-    };
     const json = this.elements.map(this.normalizeElement);
     const markdownContent = json2md(json);
-    const markdownFrontmatter =
-      Object.keys(frontmatter).length > 0
-        ? `---\n${yamljs.stringify(frontmatter)}---\n`
-        : "";
+    const markdownFrontmatter = this.getFrontMatter();
 
     return `${markdownFrontmatter}${markdownContent}`;
+  }
+
+  getFrontMatter() {
+    return getGatsbyFrontMatter(this);
   }
 }
 
