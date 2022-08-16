@@ -22,7 +22,9 @@ exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
       x++;
     }
     timer.setStatus("fetched");
-    for (let googleDocument of googleDocuments) await googleDocument.process();
+    for (let googleDocument of googleDocuments) {
+      await googleDocument.process();
+    }
     timer.setStatus("processsed");
 
     for (let googleDocument of googleDocuments) {
