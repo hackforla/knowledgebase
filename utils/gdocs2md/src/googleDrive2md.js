@@ -8,7 +8,7 @@ const {
 const { DEFAULT_OPTIONS } = require("./constants");
 const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
 
-exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
+exports.googleDrive2MD = async ({ actions: { reporter } }, pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
 
   if (!options.folder) {
@@ -30,7 +30,6 @@ exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
   timer.start();
 
   try {
-    timer.setStatus("fetching");
     const googleDocuments = await fetchDocuments(options);
     let x = 0;
     for (let googleDocument of googleDocuments) {
@@ -50,7 +49,6 @@ exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
 
     for (let googleDocument of googleDocuments) {
       const { properties } = googleDocument;
-      googleDocument.process();
       const markdown = googleDocument.toMarkdown();
 
       fs.outputFileSync(
@@ -63,10 +61,7 @@ exports.sourceGDocs2MD = async ({ actions: { reporter } }, pluginOptions) => {
     }
     timer.setStatus("written");
 
-    timer.setStatus(googleDocuments.length + " markdown pages created");
-
-    timer.end();
-
+    console.log(googleDocuments.length + " markdown pages created");
     return;
   } catch (e) {
     if (options.debug) {

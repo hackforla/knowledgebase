@@ -1,3 +1,3 @@
-const {sourceGDocs2MD} = require("./source-gdocs2md")
+const { googleDrive2MD } = require("./googleDrive2md");
 
-exports.onPreInit = sourceGDocs2MD
+exports.onPreInit = googleDrive2MD;
