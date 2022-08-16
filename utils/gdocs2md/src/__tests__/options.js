@@ -131,7 +131,7 @@ test(`Skip codes`, () => {
   expect(documentObject).toMatchSnapshot();
 });
 
-test(`Skip tables`, () => {
+test.skip(`Skip tables`, () => {
   const options = {
     skipTables: true,
   };

@@ -1,3 +1,3 @@
-const { googleDrive2MD } = require("./googleDrive2md");
+const { gdrive2md } = require("./gdrive2md");
 
-exports.onPreInit = googleDrive2MD;
+exports.onPreInit = gdrive2md;
