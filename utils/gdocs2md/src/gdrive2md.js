@@ -10,21 +10,6 @@ const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
 
 exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
-
-  if (!options.folder) {
-    if (options.folders && options.folders.length > 0) {
-      reporter.warn(
-        `source-gdocs2md: "folders" option will be deprecated in the next version, please use "folder" option instead`
-      );
-      Object.assign(options, {
-        folder: options.folders[0],
-      });
-    } else {
-      reporter.warn(`source-gdocs2md: Missing "folder" option`);
-      return;
-    }
-  }
-
   const timer = reporter.activityTimer(`source-gdocs2m`);
 
   timer.start();
