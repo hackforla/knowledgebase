@@ -15,7 +15,7 @@ const convertElements2MD = (elements) => {
 
 const addHeading2MarkdownAnchor = (markdown) => {
   const lines = markdown.split("\n");
-  const addedLinesCount = 0;
+  let addedLinesCount = 0;
   const linesCopy = [...lines];
   linesCopy.forEach((line, index) => {
     if (line.startsWith("## ")) {
@@ -25,6 +25,7 @@ const addHeading2MarkdownAnchor = (markdown) => {
       addedLinesCount++;
     }
   });
+  return lines.join("\n");
 };
 
 const formatHeading2MarkdownSections = (markdown) => {
