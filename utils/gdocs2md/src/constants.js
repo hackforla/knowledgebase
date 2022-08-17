@@ -3,7 +3,7 @@ module.exports = {
     debug: false,
     demoteHeadings: true,
     folder: undefined,
-    target: "googledocs-output",
+    target: "/Users/ethanadmin/projects/hackforla-website/_guide-pages",
     imagesOptions: undefined,
     keepDefaultStyle: false,
     pageContext: [],

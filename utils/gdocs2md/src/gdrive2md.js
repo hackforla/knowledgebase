@@ -40,8 +40,6 @@ exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
       );
     }
     timer.setStatus("written");
-
-    console.log(googleDocuments.length + " markdown pages created");
     return;
   } catch (e) {
     if (options.debug) {
