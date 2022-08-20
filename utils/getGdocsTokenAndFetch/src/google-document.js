@@ -1,5 +1,4 @@
 const json2md = require("json2md");
-const yamljs = require("yamljs");
 const _merge = require("lodash/merge");
 
 const { DEFAULT_OPTIONS } = require("./constants");

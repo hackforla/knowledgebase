@@ -1,6 +1,6 @@
 const yamljs = require("yamljs");
 
-const getGatsbyFrontMatter = (gdoc) => {
+const getFrontMatterFromGdoc = (gdoc) => {
   const frontmatter = {
     ...gdoc.properties,
     ...(gdoc.cover ? { cover: gdoc.cover } : {}),
@@ -12,6 +12,4 @@ const getGatsbyFrontMatter = (gdoc) => {
   return markdownFrontmatter;
 };
 
-module.exports = {
-  getGatsbyFrontMatter,
-};
+module.exports = { getFrontMatterFromGdoc };

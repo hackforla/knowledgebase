@@ -6,7 +6,7 @@ const _merge = require("lodash/merge");
 
 const { isCodeBlocks, isQuote } = require("./google-document-types");
 const { DEFAULT_OPTIONS } = require("./constants");
-const { getGatsbyFrontMatter } = require("./gdocs2md-gatsby");
+const { getFrontMatterFromGdoc } = require("./utils.js");
 const { normalizeElement } = require("./normalize-element");
 
 const HORIZONTAL_TAB_CHAR = "\x09";
@@ -574,7 +574,7 @@ class ElementsOfGoogleDocument {
   }
 
   getFrontMatter() {
-    return getGatsbyFrontMatter(this);
+    return getFrontMatterFromGdoc(this);
   }
 }
 

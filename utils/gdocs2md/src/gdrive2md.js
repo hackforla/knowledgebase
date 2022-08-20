@@ -10,7 +10,7 @@ const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
 
 exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
-  const timer = reporter.activityTimer(`source-gdocs2m`);
+  const timer = reporter.activityTimer(`source-gdocs2md`);
 
   timer.start();
 

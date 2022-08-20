@@ -10,7 +10,7 @@ exports.writeDocumentToTests = (googleDocument) => {
       // "..",
       // "__tests__",
       "documents",
-      `${_kebabCase(googleDocument.document.title)}.json`
+      `${_kebabCase(googleDocument.document.title)}-gdocs.json`
     ),
     JSON.stringify(googleDocument.document)
   );

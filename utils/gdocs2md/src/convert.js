@@ -21,8 +21,8 @@ const addHeading2MarkdownAnchor = (markdown) => {
     if (line.startsWith("## ")) {
       const text = line.substring(3).replace(" ", "-");
       const anch = `<a name="${text}"></a>`;
-      lines.splice(index + addedLinesCount, 0, anch);
-      addedLinesCount++;
+      lines.splice(index + addedLinesCount, 0, anch, "");
+      addedLinesCount += 2;
     }
   });
   return lines.join("\n");
@@ -31,7 +31,7 @@ const addHeading2MarkdownAnchor = (markdown) => {
 const formatHeading2MarkdownSections = (markdown) => {
   let markdownLines = markdown.split("\n");
   let heading1Created = false;
-  const divStart = '<div class="section-container"><span />';
+  const divStart = '<div class="section-container" markdown="1">';
   const divEnd = "</div>";
   let x = 0;
   while (x < markdownLines.length) {
@@ -60,9 +60,27 @@ const insertElement = (elements, element, x) => {
   return { counter: x + newLines.length };
 };
 
+const removeBlankLines = (elements) => {
+  foundBeginning = false;
+  countTripleDashes = 0;
+  while (elements.length < x && !foundBeginning) {
+    while (elements[x].trim() === "") {
+      elements.splice(x, 1);
+    }
+    element = elements[x];
+    if (element === "---") {
+      countTripleDashes++;
+    }
+    if (countTripleDashes === 2 || countTripleDashes === 0) {
+      foundBeginning = true;
+    }
+  }
+  return markdown.replace(/\n\n/g, "\n");
+};
+
 module.exports = {
   addHeading2MarkdownAnchor,
-  formatHeading2MarkdownSection: formatHeading2MarkdownSections,
-  convertGDoc2ElementsObj,
   convertElements2MD,
+  convertGDoc2ElementsObj,
+  formatHeading2MarkdownSection: formatHeading2MarkdownSections,
 };
