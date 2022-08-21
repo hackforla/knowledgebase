@@ -10,7 +10,7 @@ const convertGDoc2ElementsObj = (gDoc) => {
 
 const convertElements2MD = (elements) => {
   const json = elements.map(normalizeElement);
-  return json2md(json);
+  return removeBlankLines(json2md(json));
 };
 
 const addHeading2MarkdownAnchor = (markdown) => {
@@ -60,22 +60,26 @@ const insertElement = (elements, element, x) => {
   return { counter: x + newLines.length };
 };
 
-const removeBlankLines = (elements) => {
-  foundBeginning = false;
-  countTripleDashes = 0;
-  while (elements.length < x && !foundBeginning) {
-    while (elements[x].trim() === "") {
-      elements.splice(x, 1);
+const removeBlankLines = (markdown) => {
+  let foundBeginning = false;
+  let countTripleDashes = 0;
+  let index = 0;
+  let markdownLines = markdown.split("\n");
+
+  while (markdownLines.length < index && !foundBeginning) {
+    while (elements[index].trim() === "") {
+      marakdownLines.splice(index, 1);
     }
-    element = elements[x];
+    element = elements[index];
     if (element === "---") {
       countTripleDashes++;
     }
     if (countTripleDashes === 2 || countTripleDashes === 0) {
       foundBeginning = true;
     }
+    index++;
   }
-  return markdown.replace(/\n\n/g, "\n");
+  return markdownLines.join("\n");
 };
 
 module.exports = {
@@ -83,4 +87,5 @@ module.exports = {
   convertElements2MD,
   convertGDoc2ElementsObj,
   formatHeading2MarkdownSection: formatHeading2MarkdownSections,
+  removeBlankLines,
 };
