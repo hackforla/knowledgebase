@@ -44,7 +44,7 @@ const jekyllifyFrontMatter = (gdoc, markdown) => {
     ["category", "Development"],
     // todo: change below to be dyname
     [" svg", "svg/2FA.svg"],
-    [" provider-link", "/guide-pages/2FA"],
+    [" provider-link", "/guide-pages/how-to-set-reminders-in-slack"],
   ];
   frontMatter = "";
   attributeValuePairs.forEach(([attributeName, value]) => {
