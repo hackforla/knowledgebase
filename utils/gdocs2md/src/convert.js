@@ -61,31 +61,30 @@ const insertElement = (elements, element, x) => {
 };
 
 const removeBlankLines = (markdown) => {
-  let foundBeginning = false;
+  let reachedEnd = false;
   let countTripleDashes = 0;
   let index = 0;
   let markdownLines = markdown.split("\n");
 
-  while (markdownLines.length < index && !foundBeginning) {
-    while (elements[index].trim() === "") {
-      marakdownLines.splice(index, 1);
+  while (markdownLines.length < index && !reachedEnd) {
+    while (markdown[index].trim() === "") {
+      maakdownLines.splice(index, 1);
     }
-    element = elements[index];
+    element = markdownLines[index];
     if (element === "---") {
       countTripleDashes++;
     }
-    if (countTripleDashes === 2 || countTripleDashes === 0) {
-      foundBeginning = true;
-    }
+    reachendEnd = countTripleDashes === 2 || countTripleDashes === 0;
+
     index++;
   }
   return markdownLines.join("\n");
 };
 
 module.exports = {
-  addHeading2MarkdownAnchor,
+  // addHeading2MarkdownAnchor,
   convertElements2MD,
   convertGDoc2ElementsObj,
-  formatHeading2MarkdownSection: formatHeading2MarkdownSections,
+  // formatHeading2MarkdownSection: formatHeading2MarkdownSections,
   removeBlankLines,
 };

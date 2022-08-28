@@ -23,7 +23,7 @@ const checkFrontMatterAttribute = (
   value
 ) => {
   return !existingFrontMatter.includes(attributeName + ":")
-    ? existingFrontMatter + `\n${attributeName}: ${value}\n`
+    ? existingFrontMatter + `${attributeName}: ${value}\n`
     : "";
 };
 
