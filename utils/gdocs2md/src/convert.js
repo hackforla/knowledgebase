@@ -66,9 +66,12 @@ const removeBlankLines = (markdown) => {
   let index = 0;
   let markdownLines = markdown.split("\n");
 
-  while (markdownLines.length < index && !reachedEnd) {
-    while (markdown[index].trim() === "") {
-      maakdownLines.splice(index, 1);
+  while (index < markdownLines.length && !reachedEnd) {
+    while (
+      markdownLines[index] != undefined &&
+      markdownLines[index].trim() === ""
+    ) {
+      markdownLines.splice(index, 1);
     }
     element = markdownLines[index];
     if (element === "---") {

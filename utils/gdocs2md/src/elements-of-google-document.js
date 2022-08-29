@@ -34,6 +34,10 @@ class ElementsOfGoogleDocument {
           type: "img",
           value: image,
         });
+        downloadImageFromURL(
+          image.source,
+          el.inlineObjectElement.inlineObjectId
+        );
       }
     }
 
