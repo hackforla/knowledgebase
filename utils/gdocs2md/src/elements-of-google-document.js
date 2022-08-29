@@ -3,6 +3,7 @@ const json2md = require("json2md");
 const _get = require("lodash/get");
 const _repeat = require("lodash/repeat");
 const _merge = require("lodash/merge");
+const path = require("path");
 
 const { isCodeBlocks, isQuote } = require("./google-document-types");
 const { DEFAULT_OPTIONS } = require("./constants");
@@ -37,6 +38,7 @@ class ElementsOfGoogleDocument {
         });
         downloadImageFromURL(
           image.source,
+          this.options.target,
           el.inlineObjectElement.inlineObjectId
         );
       }

@@ -3,6 +3,7 @@ module.exports = {
     debug: false,
     demoteHeadings: true,
     folder: undefined,
+    // TODO: change to assets/images/(subdir), change to go up a level
     target: "/Users/ethanadmin/projects/hackforla-website/_guide-pages",
     imagesOptions: undefined,
     keepDefaultStyle: false,
