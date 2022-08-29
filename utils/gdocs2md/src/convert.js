@@ -13,20 +13,20 @@ const convertElements2MD = (elements) => {
   return removeBlankLines(json2md(json));
 };
 
-const addHeading2MarkdownAnchor = (markdown) => {
-  const lines = markdown.split("\n");
-  let addedLinesCount = 0;
-  const linesCopy = [...lines];
-  linesCopy.forEach((line, index) => {
-    if (line.startsWith("## ")) {
-      const text = line.substring(3).replace(" ", "-");
-      const anch = `<a name="${text}"></a>`;
-      lines.splice(index + addedLinesCount, 0, anch, "");
-      addedLinesCount += 2;
-    }
-  });
-  return lines.join("\n");
-};
+// const addHeading2MarkdownAnchor = (markdown) => {
+//   const lines = markdown.split("\n");
+//   let addedLinesCount = 0;
+//   const linesCopy = [...lines];
+//   linesCopy.forEach((line, index) => {
+//     if (line.startsWith("## ")) {
+//       const text = line.substring(3).replace(" ", "-");
+//       const anch = `<a name="${text}"></a>`;
+//       lines.splice(index + addedLinesCount, 0, anch, "");
+//       addedLinesCount += 2;
+//     }
+//   });
+//   return lines.join("\n");
+// };
 
 const formatHeading2MarkdownSections = (markdown) => {
   let markdownLines = markdown.split("\n");
@@ -85,9 +85,8 @@ const removeBlankLines = (markdown) => {
 };
 
 module.exports = {
-  // addHeading2MarkdownAnchor,
   convertElements2MD,
   convertGDoc2ElementsObj,
-  // formatHeading2MarkdownSection: formatHeading2MarkdownSections,
+  formatHeading2MarkdownSections,
   removeBlankLines,
 };
