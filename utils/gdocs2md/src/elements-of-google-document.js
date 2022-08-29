@@ -8,6 +8,7 @@ const { isCodeBlocks, isQuote } = require("./google-document-types");
 const { DEFAULT_OPTIONS } = require("./constants");
 const { getFrontMatterFromGdoc } = require("./utils.js");
 const { normalizeElement } = require("./normalize-element");
+const { downloadImageFromURL } = require("./download-image");
 
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
