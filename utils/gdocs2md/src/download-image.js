@@ -5,13 +5,15 @@ var fs = require("fs"),
 
 var path = require("path");
 
-var downloadImageFromURL = async (url, dir, filename, callback) => {
+var downloadImageFromURL = async (url, filename, callback) => {
   // const url = "https://unsplash.com/photos/AaEQmoufHLk/download?force=true";
   // TODO: try jpeg
+  const dir = path.dirname(filename);
+
   fs.mkdirSync(dir, { recursive: true });
-  const fullFilename = path.join(dir, filename + "-gdocs.png");
-  console.log("image dir", fullFilename);
-  const writer = fs.createWriteStream(fullFilename);
+  // const fullFilename = filename + "-gdocs.png";
+  console.log("image dir", filename);
+  const writer = fs.createWriteStream(filename);
 
   const response = await axios({
     url,

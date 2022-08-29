@@ -36,10 +36,17 @@ class ElementsOfGoogleDocument {
           type: "img",
           value: image,
         });
+        const filename = path.join(
+          this.options.imagesTarget || this.options.target,
+          `${this.properties.path ? this.properties.path : "index"}-${
+            el.inlineObjectElement.inlineObjectId
+          }-gdocs.png`
+        );
+        console.log("Downloading image", filename);
         downloadImageFromURL(
           image.source,
-          this.options.target,
-          el.inlineObjectElement.inlineObjectId
+          filename
+          // el.inlineObjectElement.inlineObjectId
         );
       }
     }
