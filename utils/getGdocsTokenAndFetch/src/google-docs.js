@@ -41,18 +41,9 @@ async function fetchDocuments(options) {
         options,
         links,
       });
-
-      if (process.env.NODE_ENV === "DOCS_TO_TESTS") {
-        writeDocumentToTests(googleDocument);
-      }
-
       return googleDocument;
     })
   );
-
-  if (process.env.NODE_ENV === "DOCS_TO_TESTS") {
-    process.exit();
-  }
 
   return googleDocuments;
 }

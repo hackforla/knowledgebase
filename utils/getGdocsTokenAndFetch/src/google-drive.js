@@ -6,7 +6,7 @@ const GoogleOAuth2 = require("google-oauth2-env-vars");
 const yamljs = require("yamljs");
 
 const { ENV_TOKEN_VAR } = require("./constants");
-const { wait } = require("../../gdocs2md/src/wait");
+const { wait } = require("./wait");
 
 const MIME_TYPE_DOCUMENT = "application/vnd.google-apps.document";
 const MIME_TYPE_FOLDER = "application/vnd.google-apps.folder";
