@@ -4,7 +4,7 @@ import { config } from "dotenv";
 config();
 
 const folderId = process.env.GDRIVE_TEST_FOLDER_ID;
-const root = process.env.LOCAL_TEST_JSON_FOLDER;
+const root = process.env.LOCAL_TEST_ROOT;
 const suffix = process.env.SUFFIX;
 const pluginOptions = {
   folder: folderId,

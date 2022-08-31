@@ -128,6 +128,16 @@ async function getGoogleDrive() {
   const googleOAuth2 = new GoogleOAuth2({
     token: ENV_TOKEN_VAR,
   });
+  console.log(
+    "debug auth",
+    ENV_TOKEN_VAR,
+    "xxx",
+    process.env.GOOGLE_OAUTH_CLIENT_ID,
+    "xxx",
+    process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+    "xxx",
+    process.env.GOOGLE_DOCS_TOKEN
+  );
   const auth = await googleOAuth2.getAuth();
 
   return google.drive({ version: "v3", auth });
@@ -303,12 +313,15 @@ async function fetchFoldersAndFilesInParents({ drive, parents, options }) {
 /** @param {import('../..').Options} pluginOptions */
 async function fetchFilesAndFoldersInParent({ folder, ...options }) {
   const drive = await getGoogleDrive();
+  console.log("debug 1");
 
   const res = await drive.files.get({
     fileId: folder,
     fields: "description",
     supportsAllDrives: true,
   });
+
+  console.log("debug 2");
 
   const documentsFiles = await fetchFoldersAndFilesInParents({
     drive,

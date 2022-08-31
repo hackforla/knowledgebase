@@ -13,8 +13,8 @@ const { DEFAULT_OPTIONS } = require("./constants.js");
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   const paramValues = getParamValues();
-  const matchPattern = paramValues["matchpattern"];
   var googleDocuments = await filterGoogleDocs(options);
+  console.log("abc");
 
   googleDocuments.forEach(async (loopGoogleDocument) => {
     const googleDocument = await convertGDoc2ElementsObj({
