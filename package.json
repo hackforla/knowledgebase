@@ -7,6 +7,7 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
     "fs-extra": "^10.1.0",
     "google-oauth2-env-vars": "^1.3.0",
     "googleapis": "67.1.1",
@@ -29,7 +30,7 @@
     "gatsby-source-gdocs2md": "./generate-token.js"
   },
   "scripts": {
-    "build": "babel gdocs2md/src --out-dir out/gdocs2md --ignore \"**/__tests__\"",
+    "build": "babel src --out-dir out/gdocs2md --ignore \"**/__tests__\"",
     "prepare": "cross-env NODE_ENV=production npm run build",
     "watch": "babel -w src --out-dir . --ignore \"**/__tests__\""
   },

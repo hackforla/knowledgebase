@@ -6,7 +6,7 @@ const { DEFAULT_OPTIONS } = require("./constants");
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
 
-class GoogleDocument {
+class GoogleDocumentObj {
   constructor({ document, properties = {}, options = {}, links = {} }) {
     this.document = document;
     this.links = links;
@@ -16,5 +16,5 @@ class GoogleDocument {
 }
 
 module.exports = {
-  GoogleDocument,
+  GoogleDocumentObj,
 };

@@ -28,10 +28,6 @@ const checkFrontMatterAttribute = (
 const jekyllifyFrontMatter = (gdoc, markdown) => {
   let { frontMatter: existingFrontMatter, markdownBody } =
     getExistingFrontMatter(markdown);
-  // TODO: using target, calculate targetImage and targetImageAlt
-  // const fileName = replace("properties.title" || "untitled", " ", "-");
-  // const targetImage = '"assetsimages/' + fileName + ".png";
-  // const imageName =  fs.existsSync(`${targetImage}`) ? targetImage : '"svg/
   const attributeValuePairs = [
     ["title", gdoc.document.title],
     ["description", gdoc.document.description],

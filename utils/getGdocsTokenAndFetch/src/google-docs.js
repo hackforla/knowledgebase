@@ -1,13 +1,10 @@
 const { google } = require("googleapis");
 const GoogleOAuth2 = require("google-oauth2-env-vars");
 const { ENV_TOKEN_VAR } = require("./constants");
-const { GoogleDocument } = require("./google-document");
-const {
-  writeDocumentToTests,
-} = require("../../gdocs2md/src/write-document-to-tests");
-const { fetchFiles } = require("./google-drive");
+const { GoogleDocumentObj } = require("./google-document");
+const { fetchFilesAndFoldersInParent } = require("./google-drive");
 
-async function fetchDocument(id) {
+async function fetchGDocById(id) {
   const googleOAuth2 = new GoogleOAuth2({
     token: ENV_TOKEN_VAR,
   });
@@ -25,8 +22,8 @@ async function fetchDocument(id) {
 }
 
 /** @param {import('../..').Options} options */
-async function fetchDocuments(options) {
-  const documentsProperties = await fetchFiles(options);
+async function fetchGoogleDocumentsObj(options) {
+  const documentsProperties = await fetchFilesAndFoldersInParent(options);
   const links = documentsProperties.reduce(
     (acc, properties) => ({ ...acc, [properties.id]: properties.slug }),
     {}
@@ -34,8 +31,8 @@ async function fetchDocuments(options) {
 
   const googleDocuments = await Promise.all(
     documentsProperties.map(async (properties) => {
-      const document = await fetchDocument(properties.id);
-      const googleDocument = new GoogleDocument({
+      const document = await fetchGDocById(properties.id);
+      const googleDocument = new GoogleDocumentObj({
         document,
         properties,
         options,
@@ -49,5 +46,5 @@ async function fetchDocuments(options) {
 }
 
 module.exports = {
-  fetchDocuments,
+  fetchGoogleDocumentsObj,
 };

@@ -3,7 +3,7 @@ const path = require("path");
 const pkg = require("lodash");
 const { merge: _merge } = pkg;
 const {
-  fetchDocuments,
+  fetchGoogleDocumentsObj,
 } = require("../../getGdocsTokenAndFetch/src/google-docs.js");
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert.js");
 const { jekyllifyFrontMatter } = require("./utils.js");
@@ -13,7 +13,7 @@ const { DEFAULT_OPTIONS } = require("./constants.js");
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   const paramValues = getParamValues();
-  matchPattern = paramValues["matchpattern"];
+  const matchPattern = paramValues["matchpattern"];
   var googleDocuments = await filterGoogleDocs(options);
 
   console.log("looping", matchPattern);
@@ -25,7 +25,13 @@ const jekyllifyDocs = async (pluginOptions) => {
     let markdown = await convertElements2MD(googleDocument.elements);
     markdown = jekyllifyFrontMatter(googleDocument, markdown);
     const { properties } = googleDocument;
-    writeMarkdown(options, properties, markdown, "-gdocs.md");
+    writeContent({
+      target: options.target,
+      suffix: options.suffix,
+      filename: properties.path,
+      extension: options.extension,
+      content: markdown,
+    });
     // const frontMatter = getFrontMatterFromGdoc(googleDocument);
     // markdown = getFrontMatterFromGdoc(googleDocument, markdown);    // markdown = formatHeading2MarkdownSection(markdown);
     // markdown = addHeading2MarkdownAnchor(markdown);  });
@@ -33,7 +39,7 @@ const jekyllifyDocs = async (pluginOptions) => {
 };
 
 async function filterGoogleDocs(options) {
-  let googleDocuments = await fetchDocuments(options);
+  let googleDocuments = await fetchGoogleDocumentsObj(options);
   // TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
     googleDocuments = googleDocuments.filter(({ document }) => {
@@ -63,28 +69,24 @@ const jsonifyDocs = async (pluginOptions) => {
   googleDocuments.forEach(async (googleDocument) => {
     console.log("inside");
     const { properties } = googleDocument;
-    writeMarkdown(
-      options,
-      properties,
-      JSON.stringify(googleDocument),
-      "-gdocs.json"
-    );
+    writeContent({
+      target: options.target,
+      suffix: options.suffix,
+      filename: properties.path,
+      extension: options.extension,
+      content: JSON.stringify(googleDocument),
+    });
   });
 };
 
-function writeMarkdown(
-  options,
-  properties,
-  markdown,
-  suffixAndExtension = ".md"
-) {
+function writeContent({ content, filename, target, suffix, extension }) {
   const file = path.join(
-    options.target,
-    `${properties.path ? properties.path : "index"}${suffixAndExtension}`
+    target,
+    `${filename ? filename : "index"}${suffix}.${extension}`
   );
   const dir = path.dirname(file);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(file, markdown);
+  fs.writeFileSync(file, content);
 }
 
 module.exports = { jekyllifyDocs, jsonifyDocs };

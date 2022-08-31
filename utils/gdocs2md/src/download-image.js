@@ -11,7 +11,6 @@ var downloadImageFromURL = async (url, filename, callback) => {
   const dir = path.dirname(filename);
 
   fs.mkdirSync(dir, { recursive: true });
-  // const fullFilename = filename + "-gdocs.png";
   console.log("image dir", filename);
   const writer = fs.createWriteStream(filename);
 

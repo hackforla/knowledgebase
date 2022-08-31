@@ -3,7 +3,7 @@ const path = require("path");
 const _merge = require("lodash/merge");
 
 const {
-  fetchDocuments,
+  fetchGoogleDocumentsObj,
 } = require("../../getGdocsTokenAndFetch/src/google-docs");
 const { DEFAULT_OPTIONS } = require("./constants");
 const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
@@ -15,7 +15,7 @@ exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
   timer.start();
 
   try {
-    const googleDocuments = await fetchDocuments(options);
+    const googleDocuments = await fetchGoogleDocumentsObj(options);
     let x = 0;
     for (let googleDocument of googleDocuments) {
       googleDocuments[x] = new ElementsOfGoogleDocument({ ...googleDocument });
