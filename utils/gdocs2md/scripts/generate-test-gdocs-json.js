@@ -1,14 +1,15 @@
 import path from "path";
 import { jsonifyDocs } from "../src/jekyllUtils.js";
-// const pkg = require("lodash");
-// import { merge as _merge } from "lodash";
-const folderId = process.env("GDRIVE_TEST_FOLDER_ID");
-const root = process.env("LOCAL_TEST_FOLDER");
+import { config } from "dotenv";
+config();
+
+const folderId = process.env.GDRIVE_TEST_FOLDER_ID;
+const root = process.env.LOCAL_TEST_JSON_FOLDER;
+const suffix = process.env.SUFFIX;
 const pluginOptions = {
   folder: folderId,
   target: path.join(root, "gdocs-json"),
-  // imagesTarget: path.join(root, "assets/images"),
-  suffix: "x-gdocs",
+  suffix: suffix,
   extension: "json",
 };
 

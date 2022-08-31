@@ -16,9 +16,7 @@ const jekyllifyDocs = async (pluginOptions) => {
   const matchPattern = paramValues["matchpattern"];
   var googleDocuments = await filterGoogleDocs(options);
 
-  console.log("looping", matchPattern);
   googleDocuments.forEach(async (loopGoogleDocument) => {
-    console.log("inside");
     const googleDocument = await convertGDoc2ElementsObj({
       ...loopGoogleDocument,
     });
@@ -67,7 +65,6 @@ const jsonifyDocs = async (pluginOptions) => {
 
   console.log("looping", matchPattern);
   googleDocuments.forEach(async (googleDocument) => {
-    console.log("inside");
     const { properties } = googleDocument;
     writeContent({
       target: options.target,
@@ -84,6 +81,7 @@ function writeContent({ content, filename, target, suffix, extension }) {
     target,
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
+  console.log("writing", file);
   const dir = path.dirname(file);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(file, content);
