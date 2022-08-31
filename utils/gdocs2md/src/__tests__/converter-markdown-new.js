@@ -18,13 +18,22 @@ const pluginOptions = {
 };
 
 async function main() {
-  const documentsPath = path.join(__dirname, "markdown-documents");
-  const filenames = fs.readdirSync(documentsPath);
+  const actualDocumentsPath = path.join(
+    __dirname,
+    "actual-generated-markdowns"
+  );
+  const expectedDocumentsPath = path.join(__dirname, "expected-markdowns");
+  const filenames = fs.readdirSync(actualDocumentsPath);
 
   filenames.forEach(function (filename) {
     test(`Document "${filename}" converted to Markdown`, () => {
-      const markdown = fs.readFileSync(filename);
-      expect(markdown).toMatchSnapshot();
+      const actualMarkdown = fs.readFileSync(
+        path.join(actualDocumentsPath, filename)
+      );
+      const expectedMarkdown = fs.readFileSync(
+        path.join(expectedDocumentsPath, filename)
+      );
+      expect(actualDocumentsPath).toMatchSnapshot();
     });
   });
 }
