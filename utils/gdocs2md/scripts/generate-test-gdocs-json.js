@@ -14,7 +14,3 @@ const pluginOptions = {
 };
 
 jsonifyDocs(pluginOptions);
-
-const fake = async () => {};
-
-export default fake;

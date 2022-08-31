@@ -15,7 +15,3 @@ const pluginOptions = {
 };
 
 jekyllifyDocs(pluginOptions);
-
-const fake = async () => {};
-
-export default fake;
