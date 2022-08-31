@@ -20,9 +20,12 @@ const pluginOptions = {
 async function main() {
   const actualDocumentsPath = path.join(
     __dirname,
-    "actual-generated-markdowns"
+    "actual-results/markdowns-generated-from-google-drive"
   );
-  const expectedDocumentsPath = path.join(__dirname, "expected-markdowns");
+  const expectedDocumentsPath = path.join(
+    __dirname,
+    "expected-results/markdowns-generated-from-google-drive"
+  );
   const filenames = fs.readdirSync(actualDocumentsPath);
 
   filenames.forEach(function (filename) {
@@ -33,7 +36,7 @@ async function main() {
       const expectedMarkdown = fs.readFileSync(
         path.join(expectedDocumentsPath, filename)
       );
-      expect(actualDocumentsPath).toMatchSnapshot();
+      expect(actualMarkdown).toEqual(expectedMarkdown);
     });
   });
 }
