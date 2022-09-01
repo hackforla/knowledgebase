@@ -5,12 +5,14 @@ const { ElementsOfGoogleDocument } = require("../elements-of-google-document");
 
 const documentsPath = path.join(__dirname, "gdocs-json");
 const filenames = fs.readdirSync(documentsPath);
-
+console.log("debug", documentsPath);
 filenames.forEach(function (filename) {
   const filepath = path.join(documentsPath, filename);
   const file = fs.readFileSync(filepath, "utf8");
-  const document = JSON.parse(file);
-  const googleDocument = new ElementsOfGoogleDocument({ document });
+  const parsedGdoc = JSON.parse(file);
+  const googleDocument = new ElementsOfGoogleDocument({
+    ...parsedGdoc,
+  });
   googleDocument.process();
 
   test(`Document "${googleDocument.document.title}" to Object`, () => {

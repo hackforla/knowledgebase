@@ -127,15 +127,15 @@ patterns.
 `;
 
 exports[`Document "Quotes" to Markdown 1`] = `
-"> \\"The way to get started is to quit talking and begin doing.\\"
+"> \"The way to get started is to quit talking and begin doing.\"
 "
 `;
 
 exports[`Document "Tables" to Markdown 1`] = `
 "| Col 1 | Col 2 | Col 3 |
 | ----- | ----- | ----- |
-| Col 1 line 1 | Col 2 line 1 | Col 3 line 1
-Col 1 line 2 | Col 2 line 2 | Col 3 line 2 |
+| Col 1 line 1 | Col 2 line 1 | Col 3 line 1 |
+| Col 1 line 2 | Col 2 line 2 | Col 3 line 2 |
 "
 `;
 
