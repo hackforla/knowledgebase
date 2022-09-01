@@ -3,7 +3,7 @@ const path = require("path");
 const pkg = require("lodash");
 const { merge: _merge } = pkg;
 const {
-  fetchGoogleDocumentsObj,
+  fetchGoogleDocObjs,
 } = require("../../getGdocsTokenAndFetch/src/google-docs.js");
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert.js");
 const { jekyllifyFrontMatter } = require("./utils.js");
@@ -37,7 +37,7 @@ const jekyllifyDocs = async (pluginOptions) => {
 };
 
 async function filterGoogleDocs(options) {
-  let googleDocuments = await fetchGoogleDocumentsObj(options);
+  let googleDocuments = await fetchGoogleDocObjs(options);
   // TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
     googleDocuments = googleDocuments.filter(({ document }) => {
