@@ -1,0 +1,74 @@
+Tasks
+
+- Completed
+  - [x] Create directory with some Google doc guides
+  - [x] Create node script that calls npm package to convert google docs to markdown from specified Google dir and its subdirs to specified output location
+  - [x] Inspect results for Google doc guides
+  - [x] Modify markdown directly for images and sections
+  - [x] Inspect results again
+  - [x] Fix images issue
+  - [x] Create script to copy converted documents where build process would pick them up
+  - [x] Manually create a TOC page for listing the guides
+  - [x] Create separate directories for in progress. Add a new document and revised document to this directory.
+  - [x] Manually create a TOC that shows original and in progress guides.
+- [ ] Config
+  - [ ] Make gdocs output directory configurable
+  - [ ] Make frontmatter generation configurable
+  - [ ] Make frontmatter content configurable
+  - [ ] Add option to not download file
+  - [ ] Add option to link to image.source
+- [ ] **_ +++ DOCUMENTATION _**
+  - [x] (obsoleted) Explain linkDir.sh
+  - [ ] History of fork
+  - [ ] Copy and customize extensive documentation on package
+  - [ ] +++ Generate certificate and token
+  - [ ] +++ Env vars
+  - [ ] +++ How to test
+  - [ ] +++ Front matter
+- [ ] **_ MISC _**
+  - [ ] +++ Propose dir structure
+  - [ ] Fix two documents that fail test due to incorrect sample
+  - [ ] Find out from Alyssa why identify code block by quotes, explain how they do it
+  - [ ] Code block
+  - [ ] Get rid of Reporter
+  - [ ] Test out if links can be different than filename?
+  - [ ] Add ID: to frontmatter of google doc and use for filename for consistent URL
+  - [ ] Add hook to automatically generate new markdown and TOC when a file is added, deleted,modified
+- [ ] **_ +++ TEST _**
+  - [x] Generate JSON of Google Docs
+  - [x] Create docs of different types
+  - [x] Generate JSON
+  - [x] Create a jekyllifyDoc to jekllify a single doc
+  - [x] Copy existing tests and modify
+  - +++ [x] Generate markdown as part of tests
+  - [ ] Change test packages to async and troubleshoot async related warning
+  - [ ] Change object test to have a before/after
+  - [ ] Add test that starts with downloaded json files
+- [ ] **_ +++ TEST TOC (ALYSSA'S PULL REQUEST) _**
+  - [ ] Test out TOC.html
+- [ ] **_ +++ TOKEN _**
+  - [ ] +++ Auto renew token
+  - [ ] Improve error message if token not set up
+  - [ ] Don't prompt for certificate if already exists
+- [x] **_ FRONT MATTER _**
+  - [x] Automated
+  - [x] Custom
+  - [x] Custom overwrites automated
+  - [x] Automated overwrites default
+  - [ ] Autogenerate provider-link
+  - [ ] Autogenerate image name - if svg exists use it, else configured default
+- [ ] **_ +++ IMAGES _**
+  - [x] +++ Store image locally (otherwise, permission issue)
+  - [x] +++ Set size
+  - [ ] +++ Change link to point to the image
+- [ ] **_ CREATE NPMJS PACKAGE _**
+  - [ ] Token + fetch google docs
+  - [ ] gdocs2md
+  - [ ] jekyllify
+- [ ] **_ MAKE CONFIGURABLE _**
+  - [ ] Configure individual elements obj => md
+  - [ ] Add elements obj => md
+  - [ ] Configure individual JSON => obj
+- [ ] **_ REFACTOR _**
+  - [ ] Rename fetch functions
+  - [ ] Change to functional rather than object based for process procedures

@@ -10,7 +10,8 @@ const convertGDoc2ElementsObj = (gDoc) => {
 
 const convertElements2MD = (elements) => {
   const json = elements.map(normalizeElement);
-  return removeBlankLines(json2md(json));
+  const markdown = json2md(json);
+  return removeBlankLines(markdown);
 };
 
 // const addHeading2MarkdownAnchor = (markdown) => {

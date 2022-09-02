@@ -12,7 +12,6 @@ const { DEFAULT_OPTIONS } = require("./constants.js");
 
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
-  const paramValues = getParamValues();
   var googleDocuments = await filterGoogleDocs(options);
   console.log("abc");
 
@@ -81,7 +80,7 @@ function writeContent({ content, filename, target, suffix, extension }) {
     target,
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
-  console.log("writing", file);
+  console.log("writing", file, "x", filename);
   const dir = path.dirname(file);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(file, content);

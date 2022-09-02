@@ -1,0 +1,83 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "name": "Attach",
+        "port": 9229,
+        "request": "attach",
+        "skipFiles": [
+            "<node_internals>/**"
+        ],
+        "type": "node"
+    },
+        {
+            "name": "Attach x",
+            "port": 9229,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "name": "Attach",
+            "port": 9229,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "type": "node",
+            "name": "vscode-jest-tests.v2x",
+            "request": "launch",
+            "program": "${workspaceFolder}/hfla-utils/node_modules/.bin/jest",
+            "args": [
+                "--runInBand",
+                "--watchAll=false",
+                "--testNamePattern",
+                "${jest.testNamePattern}",
+                "--runTestsByPath",
+                "${jest.testFile}"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "generate md2",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/scripts/example-generate-md.js"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "generate gdocs",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/scripts/generate-gdocs.js"
+        },
+                {
+                    "type": "pwa-node",
+                    "request": "launch",
+                    "name": "Launch Program3",
+                    "args": [
+                        "matchpattern=slack"
+                    ],
+                    "skipFiles": [
+                        "<node_internals>/**"
+                    ],
+                    "program": "${workspaceFolder}/src/example2.js"
+                }
+    ]
+}

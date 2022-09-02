@@ -8,6 +8,7 @@ const {
 const { DEFAULT_OPTIONS } = require("./constants");
 const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
 
+// todo: get this to work so uses new code
 exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   const timer = reporter.activityTimer(`source-gdocs2md`);

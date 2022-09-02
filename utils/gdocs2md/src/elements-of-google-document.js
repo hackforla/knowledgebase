@@ -1,10 +1,10 @@
-const json2md = require("json2md");
 // const yamljs = require("yamljs");
 const _get = require("lodash/get");
 const _repeat = require("lodash/repeat");
 const _merge = require("lodash/merge");
 const path = require("path");
 
+const json2md = require("./json2md-extended");
 const { isCodeBlocks, isQuote } = require("./google-document-types");
 const { DEFAULT_OPTIONS } = require("./constants");
 const { getFrontMatterFromGdoc } = require("./utils.js");
@@ -33,14 +33,17 @@ class ElementsOfGoogleDocument {
           return `![${image.alt}](${image.source} "${image.title}")`;
         }
         this.elements.push({
-          type: "img",
+          type: "imgkramdown",
           value: image,
         });
-        const filename = path.join(
-          this.options.imagesTarget || this.options.target,
+        const relativeFilename = path.join(
           `${this.properties.path ? this.properties.path : "index"}-${
             el.inlineObjectElement.inlineObjectId
           }-gdocs.png`
+        );
+        const filename = path.join(
+          this.options.imagesTarget || this.options.target,
+          relativeFilename
         );
         console.log("Downloading image", filename);
         downloadImageFromURL(
@@ -174,11 +177,14 @@ class ElementsOfGoogleDocument {
 
     const inlineObject = inlineObjects[el.inlineObjectElement.inlineObjectId];
     const embeddedObject = inlineObject.inlineObjectProperties.embeddedObject;
+    const size = embeddedObject.size;
 
     return {
       source: embeddedObject.imageProperties.contentUri,
       title: embeddedObject.title || "",
       alt: embeddedObject.description || "",
+      height: size?.height?.magnitude + size?.height?.unit || "",
+      width: size?.width?.magnitude + size?.width?.unit || "",
     };
   }
 

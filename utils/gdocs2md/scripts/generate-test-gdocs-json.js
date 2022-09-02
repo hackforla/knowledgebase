@@ -1,7 +1,7 @@
 import path from "path";
 import { jsonifyDocs } from "../src/jekyllUtils.js";
 import { config } from "dotenv";
-config();
+config({ path: path.resolve(process.cwd(), "scripts/.env") });
 
 const folderId = process.env.GDRIVE_TEST_FOLDER_ID;
 const root = process.env.LOCAL_TEST_ROOT;
