@@ -50,13 +50,17 @@ class ElementsOfGoogleDocument {
           // el.inlineObjectElement.inlineObjectId
         );
         console.log("image.source", image.source);
-        if (inlineImages) {
-          return `![${image.alt}](${image.source} "${image.title}")`;
+        // if (inlineImages) {
+        let html = `<img src="${image.targetSource}" title="${image.title}" alt="${image.alt}" height="${image.height}" width="${image.width}">`;
+        if (el.inlineObjectElement.textStyle.link) {
+          html = `<a href="${el.inlineObjectElement.textStyle.link.url}">${html}</a>`;
         }
-        this.elements.push({
-          type: "imgextension",
-          value: image,
-        });
+        return html;
+        // }
+        // this.elements.push({
+        //   type: "imgextension",
+        //   value: image,
+        // });
       }
     }
 
