@@ -67,21 +67,26 @@ const removeBlankLines = (markdown) => {
   let index = 0;
   let markdownLines = markdown.split("\n");
 
+  console.log("starting removeBlankLines");
   while (index < markdownLines.length && !reachedEnd) {
+    console.log("top of while loop", reachedEnd);
     while (
       markdownLines[index] != undefined &&
       markdownLines[index].trim() === ""
     ) {
+      console.log("removing blank line");
       markdownLines.splice(index, 1);
     }
+    console.log("regular line");
     element = markdownLines[index];
     if (element === "---") {
       countTripleDashes++;
     }
-    reachendEnd = countTripleDashes === 2 || countTripleDashes === 0;
+    reachedEnd = countTripleDashes === 2 || countTripleDashes === 0;
 
     index++;
   }
+  console.log("tripledashes b", countTripleDashes);
   return markdownLines.join("\n");
 };
 

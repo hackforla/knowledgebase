@@ -53,7 +53,7 @@ const getTreeMetadata = (tree, file) => {
   tree.forEach((item) => {
     const nameSlugified = _kebabCase(item.name);
 
-    path += `/${nameSlugified}`;
+    path += `/${item.name}`;
 
     if (item.skip !== true) {
       slug += `/${nameSlugified}`;
@@ -128,16 +128,16 @@ async function getGoogleDrive() {
   const googleOAuth2 = new GoogleOAuth2({
     token: ENV_TOKEN_VAR,
   });
-  console.log(
-    "debug auth",
-    ENV_TOKEN_VAR,
-    "xxx",
-    process.env.GOOGLE_OAUTH_CLIENT_ID,
-    "xxx",
-    process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-    "xxx",
-    process.env.GOOGLE_DOCS_TOKEN
-  );
+  // console.log(
+  //   "debug auth",
+  //   ENV_TOKEN_VAR,
+  //   "xxx",
+  //   process.env.GOOGLE_OAUTH_CLIENT_ID,
+  //   "xxx",
+  //   process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+  //   "xxx",
+  //   process.env.GOOGLE_DOCS_TOKEN
+  // );
   const auth = await googleOAuth2.getAuth();
 
   return google.drive({ version: "v3", auth });

@@ -1,6 +1,7 @@
 // const yamljs = require("yamljs");
 const _get = require("lodash/get");
 const _repeat = require("lodash/repeat");
+const _kebabCase = require("lodash/kebabCase");
 const _merge = require("lodash/merge");
 const path = require("path");
 
@@ -29,28 +30,33 @@ class ElementsOfGoogleDocument {
     if (el.inlineObjectElement) {
       const image = this.getImage(el);
       if (image) {
-        if (inlineImages) {
-          return `![${image.alt}](${image.source} "${image.title}")`;
-        }
-        this.elements.push({
-          type: "imgkramdown",
-          value: image,
-        });
+        image.alt = image.alt || image.title || "img";
         const relativeFilename = path.join(
           `${this.properties.path ? this.properties.path : "index"}-${
             el.inlineObjectElement.inlineObjectId
           }-gdocs.png`
         );
+        const relativeTargetUrl = `${this.properties.slug}-${el.inlineObjectElement.inlineObjectId}-gdocs.png`;
         const filename = path.join(
           this.options.imagesTarget || this.options.target,
-          relativeFilename
+          relativeTargetUrl
         );
+        // todo: change to have separate var for slug path and slug
+        image.targetSource = path.join("/assets/images", relativeTargetUrl);
         console.log("Downloading image", filename);
         downloadImageFromURL(
           image.source,
           filename
           // el.inlineObjectElement.inlineObjectId
         );
+        console.log("image.source", image.source);
+        if (inlineImages) {
+          return `![${image.alt}](${image.source} "${image.title}")`;
+        }
+        this.elements.push({
+          type: "imgextension",
+          value: image,
+        });
       }
     }
 
@@ -183,8 +189,8 @@ class ElementsOfGoogleDocument {
       source: embeddedObject.imageProperties.contentUri,
       title: embeddedObject.title || "",
       alt: embeddedObject.description || "",
-      height: size?.height?.magnitude + size?.height?.unit || "",
-      width: size?.width?.magnitude + size?.width?.unit || "",
+      height: Math.round(size?.height?.magnitude) + size?.height?.unit || "",
+      width: Math.round(size?.width?.magnitude) + size?.width?.unit || "",
     };
   }
 
