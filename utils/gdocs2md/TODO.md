@@ -25,6 +25,7 @@ Tasks
   - [ ] +++ Env vars
   - [ ] +++ How to test
   - [ ] +++ Front matter
+  - [ ] savejson and savemarkdown parameters
 - [ ] **_ MISC _**
   - [ ] +++ Propose dir structure
   - [ ] Fix two documents that fail test due to incorrect sample
@@ -71,4 +72,5 @@ Tasks
   - [ ] Configure individual JSON => obj
 - [ ] **_ REFACTOR _**
   - [ ] Rename fetch functions
-  - [ ] Change to functional rather than object based for process procedures
+  - [ ] Extract functions that are long
+  - [ ] ?? Change to functional rather than object based for process procedures

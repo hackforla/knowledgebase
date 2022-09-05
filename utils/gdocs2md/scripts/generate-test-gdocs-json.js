@@ -11,6 +11,8 @@ const pluginOptions = {
   target: path.join(root, "gdocs-json"),
   suffix: suffix,
   extension: "json",
+  savejson: "true",
+  savemarkdown: "false",
 };
 
-jsonifyDocs(pluginOptions);
+jekliffyDocs(pluginOptions);

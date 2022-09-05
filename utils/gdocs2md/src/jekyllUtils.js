@@ -14,18 +14,30 @@ const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   var googleDocuments = await filterGoogleDocs(options);
 
-  googleDocuments.forEach(async (loopGoogleDocument) => {
-    const googleDocument = await convertGDoc2ElementsObj({
-      ...loopGoogleDocument,
-    });
-    let markdown = await convertElements2MD(googleDocument.elements);
-    markdown = jekyllifyFrontMatter(googleDocument, markdown);
+  googleDocuments.forEach(async (googleDocument) => {
     const { properties } = googleDocument;
+    if (options.saveJson) {
+      writeContent({
+        target: options.target,
+        suffix: options.suffix,
+        filename: properties.path,
+        extension: "json",
+        content: JSON.stringify(googleDocument),
+      });
+    }
+    if (!options.saveMarkdown) {
+      return;
+    }
+    const googleDocObj = await convertGDoc2ElementsObj({
+      ...googleDocument,
+    });
+    let markdown = await convertElements2MD(googleDocObj.elements);
+    markdown = jekyllifyFrontMatter(googleDocObj, markdown);
     writeContent({
       target: options.target,
       suffix: options.suffix,
       filename: properties.path,
-      extension: options.extension,
+      extension: "md",
       content: markdown,
     });
     // const frontMatter = getFrontMatterFromGdoc(googleDocument);
@@ -85,4 +97,4 @@ function writeContent({ content, filename, target, suffix, extension }) {
   fs.writeFileSync(file, content);
 }
 
-module.exports = { jekyllifyDocs, jsonifyDocs };
+module.exports = { getParamValues, jekyllifyDocs, jsonifyDocs };
