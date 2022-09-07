@@ -56,7 +56,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/scripts/example-generate-md.js"
+            "program": "${workspaceFolder}/scripts/generate-files.js"
         },
         {
             "type": "pwa-node",
