@@ -11,12 +11,13 @@ Tasks
   - [x] Manually create a TOC page for listing the guides
   - [x] Create separate directories for in progress. Add a new document and revised document to this directory.
   - [x] Manually create a TOC that shows original and in progress guides.
-- [ ] Config
+- [ ] Config / customize
   - [ ] Make gdocs output directory configurable
   - [ ] Make frontmatter generation configurable
   - [ ] Make frontmatter content configurable
   - [ ] Add option to not download file
   - [ ] Add option to link to image.source
+  - [ ] Customize name of classes for "center" and "right-align"
 - [ ] **_ +++ DOCUMENTATION _**
   - [x] (obsoleted) Explain linkDir.sh
   - [ ] History of fork
@@ -28,6 +29,12 @@ Tasks
   - [ ] savejson and savemarkdown parameters
 - [ ] **_ MISC _**
   - [ ] +++ Propose dir structure
+  - [ ] +++ Overview
+  - [ ] Style using hfla css
+  - [ ] +++ Center
+    - [x] +++ Make a div
+    - [ ] Change to a style
+  - [ ]
   - [ ] Fix two documents that fail test due to incorrect sample
   - [ ] Find out from Alyssa why identify code block by quotes, explain how they do it
   - [ ] Code block
@@ -42,6 +49,7 @@ Tasks
   - [x] Create a jekyllifyDoc to jekllify a single doc
   - [x] Copy existing tests and modify
   - +++ [x] Generate markdown as part of tests
+  - [ ] Download google docs
   - [ ] Change test packages to async and troubleshoot async related warning
   - [ ] Change object test to have a before/after
   - [ ] Add test that starts with downloaded json files

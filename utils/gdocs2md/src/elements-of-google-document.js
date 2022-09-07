@@ -396,10 +396,13 @@ class ElementsOfGoogleDocument {
       content = this.indentText(content, tagIndentLevel);
     }
 
-    this.elements.push({
-      type: tag,
-      value: content,
-    });
+    this.elements.push(
+      ...this.htmlFormatter({
+        paragraph,
+        type: tag,
+        value: content,
+      })
+    );
 
     if (isHeading) {
       this.headings.push({
@@ -408,6 +411,21 @@ class ElementsOfGoogleDocument {
         index: this.elements.length - 1,
       });
     }
+  }
+
+  htmlFormatter({ paragraph, type, value }) {
+    const alignment = paragraph.paragraphStyle.alignment;
+    if (alignment === "CENTER") {
+      return [
+        {
+          type: "html",
+          value: '<div class="center"markdown="1">',
+        },
+        { type, value },
+        { type: "html", value: "</div>" },
+      ];
+    }
+    return [{ type, value }];
   }
 
   processQuote(table) {

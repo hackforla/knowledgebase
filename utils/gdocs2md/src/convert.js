@@ -10,7 +10,11 @@ const convertGDoc2ElementsObj = (gDoc) => {
 
 const convertElements2MD = (elements) => {
   const json = elements.map(normalizeElement);
-  const markdown = json2md(json);
+  let markdown = json2md(json);
+  markdown =
+    '<div class="content-section">\n<div class="section-container" markdown="1">\n' +
+    markdown +
+    "</div>\n</div>";
   return removeBlankLines(markdown);
 };
 
