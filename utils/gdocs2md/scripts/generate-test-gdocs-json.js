@@ -8,7 +8,7 @@ const root = process.env.LOCAL_TEST_ROOT;
 const suffix = process.env.SUFFIX;
 const pluginOptions = {
   folder: folderId,
-  target: path.join(root, "gdocs-json"),
+  target: path.join(root, "gdoc-json"),
   suffix: suffix,
   extension: "json",
   savejson: "true",

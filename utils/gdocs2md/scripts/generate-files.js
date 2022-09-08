@@ -11,7 +11,7 @@ const saveJson = paramValues["savejson"] === "true";
 const saveMarkdown = paramValues["savemarkdown"]?.toLowerCase() !== "false";
 const folderId = process.env.GDRIVE_ROOT_FOLDER_ID;
 const root = process.env.LOCAL_ROOT_FOLDER;
-const suffix = process.env.SUFFIX || "-gdocs";
+const suffix = process.env.SUFFIX || "-gdoc";
 console.log("local root", process.env.LOCAL_ROOT_FOLDER, "x", root);
 const pluginOptions = {
   folder: folderId,

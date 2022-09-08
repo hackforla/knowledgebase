@@ -33,9 +33,9 @@ class ElementsOfGoogleDocument {
         const relativeFilename = path.join(
           `${this.properties.path ? this.properties.path : "index"}-${
             el.inlineObjectElement.inlineObjectId
-          }-gdocs.png`
+          }-gdoc.png`
         );
-        const relativeTargetUrl = `${this.properties.slug}-${el.inlineObjectElement.inlineObjectId}-gdocs.png`;
+        const relativeTargetUrl = `${this.properties.slug}-${el.inlineObjectElement.inlineObjectId}-gdoc.png`;
         const filename = path.join(
           this.options.imagesTarget || this.options.target,
           relativeTargetUrl
@@ -419,7 +419,7 @@ class ElementsOfGoogleDocument {
       return [
         {
           type: "html",
-          value: '<div class="center"markdown="1">',
+          value: '<div class="center" markdown="1">',
         },
         { type, value },
         { type: "html", value: "</div>" },

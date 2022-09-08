@@ -30,7 +30,7 @@ const jekyllifyFrontMatter = (gdoc, markdown) => {
     getExistingFrontMatter(markdown);
   const attributeValuePairs = [
     ["title", gdoc.document.title],
-    ["description", gdoc.document.description],
+    ["description", gdoc.document.description || ""],
     ["short-description", ""],
     ["card-type", "guide-page"],
     ["status", "active"],

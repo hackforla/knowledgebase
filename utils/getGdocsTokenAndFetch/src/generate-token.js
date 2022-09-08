@@ -14,6 +14,8 @@ async function generateToken(privs, apis) {
     token: "GOOGLE_DOCS_TOKEN",
     apis: apis || [("docs.googleapis.com", "drive.googleapis.com")],
   });
+  const token = await googleOAuth2.getToken();
+
   console.log("end generating");
 
   await googleOAuth2.generateEnvVars();
