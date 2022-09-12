@@ -58,16 +58,7 @@
             ],
             "program": "${workspaceFolder}/scripts/generate-files.js"
         },
-        {
-            "type": "pwa-node",
-            "request": "launch",
-            "name": "generate gdocs",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/scripts/generate-gdocs.js"
-        },
-                {
+                 {
                     "type": "pwa-node",
                     "request": "launch",
                     "name": "Launch Program3",
