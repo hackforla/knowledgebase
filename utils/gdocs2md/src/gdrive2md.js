@@ -4,7 +4,7 @@ const _merge = require("lodash/merge");
 
 const {
   fetchGoogleDocObjs,
-} = require("../../getGdocsTokenAndFetch/src/google-docs");
+} = require("../../googleoauth2-utils/src/google-docs");
 const { DEFAULT_OPTIONS } = require("./constants");
 const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
 

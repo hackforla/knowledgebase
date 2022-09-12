@@ -4,7 +4,7 @@ const pkg = require("lodash");
 const { merge: _merge } = pkg;
 const {
   fetchGoogleDocObjs,
-} = require("../../getGdocsTokenAndFetch/src/google-docs.js");
+} = require("../../googleoauth2-utils/src/google-docs.js");
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert.js");
 const { jekyllifyFrontMatter } = require("./utils.js");
 const { DEFAULT_OPTIONS } = require("./constants.js");
