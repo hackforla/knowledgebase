@@ -7,14 +7,13 @@ async function generateToken(privs, apis) {
   console.log("generating");
   const googleOAuth2 = new GoogleOAuth2({
     scope: privs || [
-      "https://www.googleapis.com/auth/drive",
-      // "https://www.googleapis.com/auth/documents.readonly",
-      // "https://www.googleapis.com/auth/drive.metadata.readonly",
+      // "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/documents.readonly",
+      "https://www.googleapis.com/auth/drive.readonly",
     ],
     token: "GOOGLE_DOCS_TOKEN",
     apis: apis || [("docs.googleapis.com", "drive.googleapis.com")],
   });
-  const token = await googleOAuth2.getToken();
 
   console.log("end generating");
 

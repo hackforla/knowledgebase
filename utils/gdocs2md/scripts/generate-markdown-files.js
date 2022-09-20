@@ -2,9 +2,8 @@ import path from "path";
 import { jekyllifyDocs } from "../src/jekyllUtils.js";
 import { config } from "dotenv";
 import { getParamValues } from "../src/jekyllUtils.js";
-config({ path: path.resolve(process.cwd(), "scripts/.env") });
-console.log(process.cwd());
-
+config({ path: path.resolve(process.cwd(), ".env.dev.local") });
+console.log("process.env", process.env);
 const paramValues = getParamValues();
 const matchPattern = paramValues["matchpattern"];
 const saveJson = paramValues["savejson"] === "true";
@@ -15,7 +14,7 @@ const suffix = process.env.SUFFIX || "-gdoc";
 console.log("local root", process.env.LOCAL_ROOT_FOLDER, "x", root);
 const pluginOptions = {
   folder: folderId,
-  target: root,
+  // target: root,
   imagesTarget: path.join(root, "assets/images"),
   suffix: suffix,
   matchPattern,

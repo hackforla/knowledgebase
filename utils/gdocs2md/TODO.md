@@ -11,27 +11,29 @@ Tasks
   - [x] Manually create a TOC page for listing the guides
   - [x] Create separate directories for in progress. Add a new document and revised document to this directory.
   - [x] Manually create a TOC that shows original and in progress guides.
-- [ ] Config / customize
-  - [ ] Make gdocs output directory configurable
-  - [ ] Make frontmatter generation configurable
-  - [ ] Make frontmatter content configurable
-  - [ ] Add option to not download file
-  - [ ] Add option to link to image.source
-  - [ ] Customize name of classes for "center" and "right-align"
+- [x] Config / customize
+  - [x] Make gdocs output directory configurable
+  - [x] Make frontmatter generation configurable
+  - [x] Make frontmatter content configurable
+  - [x] Add option to not download file
+  - [x] Add option to link to image.source
+  - [x] Customize name of classes for "center" and "right-align"
 - [ ] **_ +++ DOCUMENTATION _**
   - [x] (obsoleted) Explain linkDir.sh
   - [ ] History of fork
   - [ ] Copy and customize extensive documentation on package
-  - [ ] +++ Generate certificate and token
+  - [x] +++ Generate certificate and token
   - [ ] +++ Env vars
   - [ ] +++ How to test
   - [ ] +++ Front matter
   - [ ] savejson and savemarkdown parameters
 - [ ] **_ MISC _**
-  - [ ] +++ Propose dir structure
-  - [ ] +++ Overview
+  - [ ] +++ Propose and implement dir structure
+  - [ ] +++ Verify output for Slack reminders
+  - [ ] +++ Add document style to template
+  - [ ] +++ Remove document style from template
   - [ ] Style using hfla css
-  - [ ] +++ Center
+  - [x] +++ Center
     - [x] +++ Make a div
     - [ ] Change to a style
   - [ ]
@@ -42,7 +44,7 @@ Tasks
   - [ ] Test out if links can be different than filename?
   - [ ] Add ID: to frontmatter of google doc and use for filename for consistent URL
   - [ ] Add hook to automatically generate new markdown and TOC when a file is added, deleted,modified
-- [ ] **_ +++ TEST _**
+- [x] **_ +++ TEST _**
   - [x] Generate JSON of Google Docs
   - [x] Create docs of different types
   - [x] Generate JSON
@@ -53,7 +55,7 @@ Tasks
   - [ ] Change test packages to async and troubleshoot async related warning
   - [ ] Change object test to have a before/after
   - [ ] Add test that starts with downloaded json files
-- [ ] **_ +++ TEST TOC (ALYSSA'S PULL REQUEST) _**
+- [x] **_ +++ TEST TOC (ALYSSA'S PULL REQUEST) _**
   - [ ] Test out TOC.html
 - [ ] **_ +++ TOKEN _**
   - [ ] +++ Auto renew token
@@ -69,7 +71,7 @@ Tasks
 - [ ] **_ +++ IMAGES _**
   - [x] +++ Store image locally (otherwise, permission issue)
   - [x] +++ Set size
-  - [ ] +++ Change link to point to the image
+  - [x] +++ Change link to point to the image
 - [ ] **_ CREATE NPMJS PACKAGE _**
   - [ ] Token + fetch google docs
   - [ ] gdocs2md
