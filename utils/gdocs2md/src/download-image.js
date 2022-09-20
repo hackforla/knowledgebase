@@ -11,7 +11,7 @@ var downloadImageFromURL = async (url, filename, callback) => {
   const dir = path.dirname(filename);
 
   fs.mkdirSync(dir, { recursive: true });
-  console.log("Downloading image", filename);
+  // console.log("Downloading image", filename);
   const writer = fs.createWriteStream(filename);
 
   const response = await axios({

@@ -42,13 +42,12 @@ class ElementsOfGoogleDocument {
         );
         // todo: change to have separate var for slug path and slug
         image.targetSource = path.join("/assets/images", relativeTargetUrl);
-        console.log("Downloading image", filename);
+        // console.log("Downloading image", filename);
         downloadImageFromURL(
           image.source,
           filename
           // el.inlineObjectElement.inlineObjectId
         );
-        console.log("image.source", image.source);
         // if (inlineImages) {
         let html = `<img src="${image.targetSource}" title="${image.title}" alt="${image.alt}" height="${image.height}" width="${image.width}">`;
         if (el.inlineObjectElement.textStyle.link) {
@@ -614,7 +613,9 @@ class ElementsOfGoogleDocument {
 
   toMarkdown() {
     const json = this.elements.map(normalizeElement);
+    console.log("debug here");
     const markdownContent = json2md(json);
+    console.log("debug there");
     const markdownFrontmatter = this.getFrontMatter();
 
     return `${markdownFrontmatter}${markdownContent}`;

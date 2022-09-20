@@ -7,7 +7,6 @@ config({ path: path.resolve(__dirname, "./.env") });
 const folderId = process.env.GDRIVE_TEST_FOLDER_ID;
 const root = process.env.LOCAL_TEST_ROOT;
 const suffix = process.env.SUFFIX;
-console.log("root is", root);
 
 const pluginOptions = {
   folder: folderId,

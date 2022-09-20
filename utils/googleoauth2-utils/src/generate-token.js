@@ -5,7 +5,6 @@ const GoogleOAuth2 = require("google-oauth2-env-vars");
 const { ENV_TOKEN_VAR } = require("./constants");
 
 async function generateToken(privs, apis) {
-  console.log("generating");
   const googleOAuth2 = new GoogleOAuth2({
     scope: privs || [
       // "https://www.googleapis.com/auth/drive",
@@ -15,8 +14,6 @@ async function generateToken(privs, apis) {
     token: ENV_TOKEN_VAR,
     apis: apis || [("docs.googleapis.com", "drive.googleapis.com")],
   });
-
-  console.log("end generating");
 
   await googleOAuth2.generateEnvVars();
 

@@ -7,6 +7,7 @@ const yamljs = require("yamljs");
 
 const { ENV_TOKEN_VAR } = require("./constants");
 const { wait } = require("./wait");
+const { getAuth } = require("./google-auth");
 
 const MIME_TYPE_DOCUMENT = "application/vnd.google-apps.document";
 const MIME_TYPE_FOLDER = "application/vnd.google-apps.folder";
@@ -100,6 +101,7 @@ const getTreeMetadata = (tree, file) => {
   };
 };
 
+// TODO: Do we need metadata?
 /**
  * @param {object} options
  * @param {Partial<import('../..').Metadata>} options.metadata
@@ -125,11 +127,10 @@ const updateFile = ({ file, folder }) => {
 };
 
 async function getGoogleDrive() {
-  console.log("debug process", process.env[ENV_TOKEN_VAR]);
-  const googleOAuth2 = new GoogleOAuth2({
-    token: ENV_TOKEN_VAR,
-  });
-  const auth = await googleOAuth2.getAuth();
+  // const googleOAuth2 = new GoogleOAuth2({
+  //   token: ENV_TOKEN_VAR,
+  // });
+  const auth = await getAuth();
 
   return google.drive({ version: "v3", auth });
 }
@@ -304,15 +305,12 @@ async function fetchFoldersAndFilesInParents({ drive, parents, options }) {
 /** @param {import('../..').Options} pluginOptions */
 async function fetchFilesAndFoldersInParent({ folder, ...options }) {
   const drive = await getGoogleDrive();
-  console.log("debug 1");
 
   const res = await drive.files.get({
     fileId: folder,
     fields: "description",
     supportsAllDrives: true,
   });
-
-  console.log("debug 2");
 
   const documentsFiles = await fetchFoldersAndFilesInParents({
     drive,

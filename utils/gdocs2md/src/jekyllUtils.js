@@ -73,7 +73,6 @@ const jsonifyDocs = async (pluginOptions) => {
   matchPattern = paramValues["matchpattern"];
   var googleDocuments = await filterGoogleDocs(options);
 
-  console.log("looping", matchPattern);
   googleDocuments.forEach(async (googleDocument) => {
     const { properties } = googleDocument;
     writeContent({
@@ -91,7 +90,7 @@ function writeContent({ content, filename, target, suffix, extension }) {
     target,
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
-  console.log("writing", file, "x", filename);
+  // console.log("writing", file, "x", filename);
   const dir = path.dirname(file);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(file, content);
