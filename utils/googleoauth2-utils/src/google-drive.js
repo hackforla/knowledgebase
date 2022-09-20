@@ -125,28 +125,10 @@ const updateFile = ({ file, folder }) => {
 };
 
 async function getGoogleDrive() {
-  let oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_OAUTH_CLIENT_ID,
-    process.env.GOOGLE_OAUTH_CLIENT_SECRET
-  );
-  let refreshToken = JSON.parse(process.env.GOOGLE_DOCS_TOKEN).refresh_token;
-
-  oauth2Client.credentials.refresh_token = refreshToken;
-
-  const token = await new Promise((resolve, reject) => {
-    oauth2Client.refreshAccessToken((error, tokens) => {
-      console.log("debug auth");
-      if (error) {
-        throw error;
-      }
-      resolve(tokens);
-    });
-  });
-  process.env.GOOGLE_DOCS_TOKEN = JSON.stringify(token);
+  console.log("debug process", process.env[ENV_TOKEN_VAR]);
   const googleOAuth2 = new GoogleOAuth2({
     token: ENV_TOKEN_VAR,
   });
-  console.log("debug auth", process.env.GOOGLE_DOCS_TOKEN);
   const auth = await googleOAuth2.getAuth();
 
   return google.drive({ version: "v3", auth });

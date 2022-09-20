@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 
 const GoogleOAuth2 = require("google-oauth2-env-vars");
+const { ENV_TOKEN_VAR } = require("./constants");
 
 async function generateToken(privs, apis) {
   console.log("generating");
@@ -11,7 +12,7 @@ async function generateToken(privs, apis) {
       "https://www.googleapis.com/auth/documents.readonly",
       "https://www.googleapis.com/auth/drive.readonly",
     ],
-    token: "GOOGLE_DOCS_TOKEN",
+    token: ENV_TOKEN_VAR,
     apis: apis || [("docs.googleapis.com", "drive.googleapis.com")],
   });
 
