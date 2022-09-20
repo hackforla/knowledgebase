@@ -4,23 +4,8 @@ const { jekyllifyDocs } = require("../jekyllUtils.js");
 const { config } = require("dotenv");
 config({ path: path.resolve(__dirname, "./.env") });
 
-const folderId = process.env.GDRIVE_TEST_FOLDER_ID;
-const root = process.env.LOCAL_TEST_ROOT;
-const suffix = process.env.SUFFIX;
-
-const pluginOptions = {
-  folder: folderId,
-  target: path.join(root, "markdown-documents"),
-  imagesTarget: path.join(root, "assets/images"),
-  suffix: suffix,
-  extension: "md",
-};
-
 async function main() {
-  const actualDocumentsPath = path.join(
-    __dirname,
-    "actual-results/markdowns-generated-from-google-drive"
-  );
+  const actualDocumentsPath = path.join(__dirname, "actual-results");
   const expectedDocumentsPath = path.join(
     __dirname,
     "expected-results/markdowns-generated-from-google-drive"

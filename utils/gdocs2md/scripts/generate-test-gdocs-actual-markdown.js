@@ -11,8 +11,8 @@ const pluginOptions = {
   target: path.join(root, "gdoc-json"),
   suffix: suffix,
   extension: "json",
-  savejson: "true",
-  savemarkdown: "false",
+  savejson: "false",
+  savemarkdown: "true",
 };
 
 jsonifyDocs(pluginOptions);

@@ -1,8 +1,9 @@
 out/
-/__tests__/*
 tests
 node_modules
 .env
 *.bkup
 *.backup
 _site
+.DS_STORE
+

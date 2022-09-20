@@ -9,9 +9,9 @@ const saveMarkdown = paramValues["savemarkdown"]?.toLowerCase() !== "false";
 const envPath = path.resolve(process.cwd(), ".env.dev.local");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
-const folderId = process.env.GDRIVE_ROOT_FOLDER_ID;
-const root = process.env.LOCAL_ROOT_FOLDER;
-const suffix = process.env.SUFFIX || "-gdoc";
+const folderId = process.env.DEV_GDRIVE_ROOT_ID;
+const root = process.env.DEV_LOCAL_ROOT;
+const suffix = process.env.DEV_SUFFIX;
 const pluginOptions = {
   folder: folderId,
   target: root,
