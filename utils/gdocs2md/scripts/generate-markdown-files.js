@@ -4,7 +4,7 @@ import { config } from "dotenv";
 import { getParamValues } from "../src/jekyllUtils.js";
 const paramValues = getParamValues();
 const matchPattern = paramValues["matchpattern"];
-const saveJson = paramValues["savejson"] === "true";
+const saveJson = paramValues["savejson"]?.toLowerCase() === "true";
 const saveMarkdown = paramValues["savemarkdown"]?.toLowerCase() !== "false";
 const envPath = path.resolve(process.cwd(), ".env.dev.local");
 config({ path: envPath });

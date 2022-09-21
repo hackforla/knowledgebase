@@ -13,8 +13,10 @@ const { DEFAULT_OPTIONS } = require("./constants.js");
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   var googleDocuments = await filterGoogleDocs(options);
+  console.log("debug a");
 
   googleDocuments.forEach(async (googleDocument) => {
+    console.log("debug b");
     const { properties } = googleDocument;
     if (options.saveJson) {
       writeContent({
@@ -28,6 +30,7 @@ const jekyllifyDocs = async (pluginOptions) => {
     if (!options.saveMarkdown) {
       return;
     }
+    console.log("debug c");
     const googleDocObj = await convertGDoc2ElementsObj({
       ...googleDocument,
     });

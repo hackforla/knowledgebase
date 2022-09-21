@@ -4,15 +4,15 @@ import { config } from "dotenv";
 // Read .env file from directory where command is issued
 config({ path: path.resolve(process.cwd(), ".env.test.local") });
 const folderId = process.env.TEST_GDRIVE_ROOT_ID;
-const root = process.env.TEST_LOCAL_GDOC_JSON_ROOT;
+const root = process.env.TEST_LOCAL_GDOC_JSON_FOLDER;
 const suffix = process.env.TEST_SUFFIX;
 const pluginOptions = {
   folder: folderId,
-  target: path.join(root, "gdoc-json"),
+  target: root,
   suffix: suffix,
   extension: "json",
-  savejson: "true",
-  savemarkdown: "false",
+  saveJson: true,
+  saveMarkdown: false,
 };
 
 jsonifyDocs(pluginOptions);

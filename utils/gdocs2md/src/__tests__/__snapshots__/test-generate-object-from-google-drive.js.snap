@@ -222,44 +222,24 @@ exports[`Document "Images" to Object 1`] = `
   "cover": null,
   "elements": [
     {
-      "type": "img",
-      "value": {
-        "alt": "",
-        "source": "https://lh5.googleusercontent.com/pI7YHsq0cwDeRS2__nZNYEdzRgwyMsKPRcBBfljD7qGD0new44FBQHMp9sqeq92WHMs4BRYni11R3l4w1dYVdKmFc1tgnL4VK-YDjLRmDS15iL0iw3e6fM_Pa3zNzXZBKDwIWibc6U4dSd7ulO4qktwWjRzvZBi5Gipbf35706PqZ42_g2SRjUG3jUI4-_4HEfc",
-        "title": "",
-      },
-    },
-    {
       "type": "h2",
-      "value": "The below is a small image embedded in the sentence",
+      "value": "The below is a small image <img src="/assets/images/images-kix.z1ebyhut5s2j-gdoc.png" title="" alt="img" height="26PT" width="29PT">embedded in the sentence",
     },
     {
       "type": "p",
       "value": "Here is a medium screen sho",
     },
     {
-      "type": "img",
-      "value": {
-        "alt": "",
-        "source": "https://lh5.googleusercontent.com/r1Mt25cLRPP48631g4hZ9tTLCjFDZtivODQw54INhoPVTB6IUDWebSCkm2idyskePs1E0J6fM1KZ6Z02iOEkoHYiEuOEQ7H0d6vCxewh7wfcaF6EkxEWk6FxqOGVQyr2pFEjI8qUxBGL1rN8vkRau30SYS0ym0x4UaFbo0FUWsIhG7iaRwI02oJNMDJEBP0klMA",
-        "title": "",
-      },
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.gj9e7st5rdpn-gdoc.png" title="" alt="img" height="116PT" width="163PT">",
     },
     {
       "type": "h2",
       "value": "Big screenshot",
     },
     {
-      "type": "img",
-      "value": {
-        "alt": "",
-        "source": "https://lh3.googleusercontent.com/8CVxMB3Tt0sK5VvQuiqJw-vlYXzgTX2CH3i2zQsG62XgzzvitdUVDq4gdKp5zo0zp4J6azD2J6G780HZ33tOb2tS5LQ098wHB9gwee98NagPOSunLN7RirT9lfU8enFYO_htKxjUsBfko38L8YfO_AdwhfsrPSd8Ma8MwoDqJoBCxs72nUaAhFDdhNAsbyJwARM",
-        "title": "",
-      },
-    },
-    {
       "type": "p",
-      "value": "t",
+      "value": "<img src="/assets/images/images-kix.kddapeqgsmu2-gdoc.png" title="" alt="img" height="113PT" width="442PT">t",
     },
     {
       "type": "p",
@@ -270,12 +250,8 @@ exports[`Document "Images" to Object 1`] = `
       "value": "Image with title and description",
     },
     {
-      "type": "img",
-      "value": {
-        "alt": "This is a wild animal.",
-        "source": "https://lh3.googleusercontent.com/wRnlyznYiw5RF-IY4G83jr1c9sCYGM9w55xinE1sbxSG3f5Q4l24UFUCOIcDZES4j1mPOCRgbuVHw99yG8TX7F-87Sk0g5dVviKlS3fc3qpSJWWRdAPVFiwetsVA2h1PbSuQN59T9T0nz-tQuICI6ngLf-eidfPq2Spo0JZCN1q0ub6HVAi_9UflpAed4rK3Mjk",
-        "title": "A cute but DANGEROUS cat",
-      },
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.hzxae7urw0ps-gdoc.png" title="A cute but DANGEROUS cat" alt="This is a wild animal." height="452PT" width="540PT">",
     },
     {
       "type": "p",
@@ -286,12 +262,8 @@ exports[`Document "Images" to Object 1`] = `
       "value": "An image with a link ",
     },
     {
-      "type": "img",
-      "value": {
-        "alt": "",
-        "source": "https://lh4.googleusercontent.com/nUTGUYt2OiexwrS7UP6ebivL22RHGBiM6ReeskhJPFHDpcIdw_Piocxg5ccxQBoV-7tc1kS7J9GR7aFml0-k7u4XBwzz1S0IZpdusV_-6vkEN6uM2cCYBSNIZ0boqzaM3IAUF63c9vt5ohbJaU3pp72ukAqXuUdYAItAEkWi6Ejd9_XqG_DUujwxNnyZel6e4bo",
-        "title": "",
-      },
+      "type": "p",
+      "value": "<a href="https://hackforla.org"><img src="/assets/images/images-kix.2wzcr0yvecvn-gdoc.png" title="" alt="img" height="175PT" width="345PT"></a>",
     },
     {
       "type": "p",
@@ -302,12 +274,8 @@ exports[`Document "Images" to Object 1`] = `
       "value": "An image with a title, description, and link",
     },
     {
-      "type": "img",
-      "value": {
-        "alt": "",
-        "source": "https://lh4.googleusercontent.com/nUTGUYt2OiexwrS7UP6ebivL22RHGBiM6ReeskhJPFHDpcIdw_Piocxg5ccxQBoV-7tc1kS7J9GR7aFml0-k7u4XBwzz1S0IZpdusV_-6vkEN6uM2cCYBSNIZ0boqzaM3IAUF63c9vt5ohbJaU3pp72ukAqXuUdYAItAEkWi6Ejd9_XqG_DUujwxNnyZel6e4bo",
-        "title": "",
-      },
+      "type": "p",
+      "value": "<a href="https://hackforla.org"><img src="/assets/images/images-kix.h4w26n3u65e4-gdoc.png" title="" alt="img" height="175PT" width="345PT"></a>",
     },
     {
       "type": "p",
@@ -322,12 +290,8 @@ exports[`Document "Images" to Object 1`] = `
       "value": "This image is from https://www.codeforboston.org/img/cfb-logo/cfb-logo-stacked-dark.png",
     },
     {
-      "type": "img",
-      "value": {
-        "alt": "",
-        "source": "https://lh3.googleusercontent.com/QB9v_irPHSgf74e7xTikDiF388boRhrf05fgu7tXBCUyoW1eZyU5Yyy7HNSFNUdLg-sF1fQi3pOtJwFeA0s7cgYs_KOpIK9Eyqdc-9poH_oVxQOANr5GTaGrKzxEXaP-9-u9HO3mkQs6vcPwSMFQkov0ROWUmFW1PIthH6vn3QSnWBaEHWE690xrrauo0VUl2S8",
-        "title": "",
-      },
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.2trx3axtnom8-gdoc.png" title="" alt="img" height="109PT" width="278PT">",
     },
     {
       "type": "p",
@@ -338,12 +302,8 @@ exports[`Document "Images" to Object 1`] = `
       "value": "An image inserted with a link and resized",
     },
     {
-      "type": "img",
-      "value": {
-        "alt": "",
-        "source": "https://lh3.googleusercontent.com/1wVP9fuHiumDVk8pWslheSBUJdor8zikP3lTUCs7atcLRdc_fGvFxEp9S3yPyPI-CWTam-777JhCc8mk1MbU8wPfyR09mWrEO3Xb_K0ogc8dlHGS4bXMlGemxrmiBYjgt_V3XEThg3FTdq41Mj9NJm_iO8v3IE3xZElea_n3_7nSGpIRgUUW0L_Ojp1tNOgHRJ4",
-        "title": "",
-      },
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.5339ecji5sn2-gdoc.png" title="" alt="img" height="45PT" width="116PT">",
     },
     {
       "type": "p",
@@ -354,12 +314,16 @@ exports[`Document "Images" to Object 1`] = `
       "value": "Centered Image",
     },
     {
-      "type": "img",
-      "value": {
-        "alt": "",
-        "source": "https://lh6.googleusercontent.com/CAvp-wuOo2h7nNjyBtIhyyO8Xi4aBI3SngcXmMLj0mQYm-nQSLUedtfKC8DHpZsAl7UGT-JRBY7zpuIBXrrfLrgUziv1NLtnudbKiv0IVux2bdEqSaoquXhjv1jwolGvm-MqlCpC20C5Fsi44vkpKmDHBD6U-sizaFFMaSHfJUVzNaefPAQUvpX-1AihSxFHfY0",
-        "title": "",
-      },
+      "type": "html",
+      "value": "<div class="center" markdown="1">",
+    },
+    {
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.m4hgxr43lors-gdoc.png" title="" alt="img" height="45PT" width="97PT">",
+    },
+    {
+      "type": "html",
+      "value": "</div>",
     },
     {
       "type": "p",

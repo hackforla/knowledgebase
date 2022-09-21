@@ -3,7 +3,7 @@ const path = require(`path`);
 
 const { ElementsOfGoogleDocument } = require("../elements-of-google-document");
 
-const documentsPath = path.join(__dirname, "gdoc-json");
+const documentsPath = path.join(__dirname, "gdocs-json");
 const filenames = fs.readdirSync(documentsPath);
 filenames.forEach(function (filename) {
   const filepath = path.join(documentsPath, filename);
