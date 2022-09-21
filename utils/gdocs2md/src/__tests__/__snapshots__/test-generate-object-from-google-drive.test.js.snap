@@ -1,0 +1,468 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Document "Advanced Formatting - color and fonts" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "p",
+      "value": "Times New Roman",
+    },
+    {
+      "type": "p",
+      "value": "Courier New",
+    },
+    {
+      "type": "p",
+      "value": "Impact",
+    },
+    {
+      "type": "p",
+      "value": "<span style='font-size:1.82em'>20 point font</span>",
+    },
+    {
+      "type": "p",
+      "value": "<span style='color:rgb(255, 0, 0)'>Red text</span>",
+    },
+    {
+      "type": "p",
+      "value": "<span style='color:rgb(255, 255, 255);background-color:rgb(255, 0, 255)'>White text with pink bangrounds</span>",
+    },
+  ],
+}
+`;
+
+exports[`Document "Bold italic" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "h2",
+      "value": "**Bold** and **_Bold, Italic Heading_**",
+    },
+    {
+      "type": "p",
+      "value": "This is **bold**, _italic_, **bold & italic**, <ins>underline</ins>, **_<ins>bold & italic & underline</ins>_**",
+    },
+  ],
+}
+`;
+
+exports[`Document "Bullets and Lists" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "p",
+      "value": "this is a bulleted list:",
+    },
+    {
+      "type": "ul",
+      "value": [
+        "item1",
+        {
+          "type": "ul",
+          "value": [
+            "subitem 1.1",
+          ],
+        },
+        "item 2",
+        {
+          "type": "ul",
+          "value": [
+            "item 2.1",
+            "item 2.2",
+            {
+              "type": "ul",
+              "value": [
+                "item 2.2.1",
+                {
+                  "type": "ul",
+                  "value": [
+                    "item 2.2.1.1",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      "type": "p",
+      "value": "This is a numbered list",
+    },
+    {
+      "type": "ol",
+      "value": [
+        "Must Have",
+        {
+          "type": "ol",
+          "value": [
+            "Feature A",
+            {
+              "type": "ol",
+              "value": [
+                "Subfeature A.1",
+                "Subfeature A.2",
+              ],
+            },
+            "Feature B",
+          ],
+        },
+        "Should Have",
+        {
+          "type": "ol",
+          "value": [
+            "Feature X1",
+            "Feature X2",
+          ],
+        },
+        "Could Have",
+        {
+          "type": "ol",
+          "value": [
+            "Non-critical feature 1",
+            "Non-critical feature 2",
+            "Non-critical feature 3",
+          ],
+        },
+        "Won't Have",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`Document "Custom Frontmatter" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "p",
+      "value": "---",
+    },
+    {
+      "type": "p",
+      "value": "id: 134",
+    },
+    {
+      "type": "p",
+      "value": "title: Custom Title ",
+    },
+    {
+      "type": "p",
+      "value": "category: development",
+    },
+    {
+      "type": "p",
+      "value": "---",
+    },
+    {
+      "type": "p",
+      "value": "Front matter looks like:",
+    },
+  ],
+}
+`;
+
+exports[`Document "Footnotes" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "p",
+      "value": "This sentence has detailed info in a footnote[^1]",
+    },
+    {
+      "type": "footnote",
+      "value": {
+        "number": "1",
+        "text": " <span style='font-size:0.91em'>This information is so tangential it needs to go into a footnote</span>",
+      },
+    },
+  ],
+}
+`;
+
+exports[`Document "Headings" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "h2",
+      "value": "Most Important Topic (Heading 1)",
+    },
+    {
+      "type": "p",
+      "value": "Description of important topic",
+    },
+    {
+      "type": "h3",
+      "value": "Important Subtopic (Heading 2)",
+    },
+    {
+      "type": "p",
+      "value": "Description of subtopic",
+    },
+    {
+      "type": "h4",
+      "value": "Buried Info (Heading 3)",
+    },
+    {
+      "type": "p",
+      "value": "Description of buried info",
+    },
+  ],
+}
+`;
+
+exports[`Document "Images" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "h2",
+      "value": "The below is a small image <img src="/assets/images/images-kix.z1ebyhut5s2j-gdoc.png" title="" alt="img" height="26PT" width="29PT">embedded in the sentence",
+    },
+    {
+      "type": "p",
+      "value": "Here is a medium screen sho",
+    },
+    {
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.gj9e7st5rdpn-gdoc.png" title="" alt="img" height="116PT" width="163PT">",
+    },
+    {
+      "type": "h2",
+      "value": "Big screenshot",
+    },
+    {
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.kddapeqgsmu2-gdoc.png" title="" alt="img" height="113PT" width="442PT">t",
+    },
+    {
+      "type": "p",
+      "value": "===============================",
+    },
+    {
+      "type": "h2",
+      "value": "Image with title and description",
+    },
+    {
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.hzxae7urw0ps-gdoc.png" title="A cute but DANGEROUS cat" alt="This is a wild animal." height="452PT" width="540PT">",
+    },
+    {
+      "type": "p",
+      "value": "====================================================================",
+    },
+    {
+      "type": "h2",
+      "value": "An image with a link ",
+    },
+    {
+      "type": "p",
+      "value": "<a href="https://hackforla.org"><img src="/assets/images/images-kix.2wzcr0yvecvn-gdoc.png" title="" alt="img" height="175PT" width="345PT"></a>",
+    },
+    {
+      "type": "p",
+      "value": "====================================================================",
+    },
+    {
+      "type": "h2",
+      "value": "An image with a title, description, and link",
+    },
+    {
+      "type": "p",
+      "value": "<a href="https://hackforla.org"><img src="/assets/images/images-kix.h4w26n3u65e4-gdoc.png" title="" alt="img" height="175PT" width="345PT"></a>",
+    },
+    {
+      "type": "p",
+      "value": "====================================================================",
+    },
+    {
+      "type": "h2",
+      "value": "An image inserted with a link",
+    },
+    {
+      "type": "p",
+      "value": "This image is from https://www.codeforboston.org/img/cfb-logo/cfb-logo-stacked-dark.png",
+    },
+    {
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.2trx3axtnom8-gdoc.png" title="" alt="img" height="109PT" width="278PT">",
+    },
+    {
+      "type": "p",
+      "value": "====================================================================",
+    },
+    {
+      "type": "h2",
+      "value": "An image inserted with a link and resized",
+    },
+    {
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.5339ecji5sn2-gdoc.png" title="" alt="img" height="45PT" width="116PT">",
+    },
+    {
+      "type": "p",
+      "value": "====================================================================",
+    },
+    {
+      "type": "h2",
+      "value": "Centered Image",
+    },
+    {
+      "type": "html",
+      "value": "<div class="center" markdown="1">",
+    },
+    {
+      "type": "p",
+      "value": "<img src="/assets/images/images-kix.m4hgxr43lors-gdoc.png" title="" alt="img" height="45PT" width="97PT">",
+    },
+    {
+      "type": "html",
+      "value": "</div>",
+    },
+    {
+      "type": "p",
+      "value": "====================================================================",
+    },
+    {
+      "type": "h2",
+      "value": "Right Justified Image",
+    },
+  ],
+}
+`;
+
+exports[`Document "Link" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "p",
+      "value": "[Google](https://google.com)",
+    },
+  ],
+}
+`;
+
+exports[`Document "Non-continous list" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "ul",
+      "value": [
+        "",
+      ],
+    },
+    {
+      "type": "p",
+      "value": "This is a numbered list",
+    },
+    {
+      "type": "ol",
+      "value": [
+        "Must Have",
+      ],
+    },
+    {
+      "type": "p",
+      "value": "		Here is an explanation that does not have a number",
+    },
+    {
+      "type": "ol",
+      "value": [
+        "Should Have Have",
+        "Could Have",
+        "Won't Have",
+      ],
+    },
+    {
+      "type": "p",
+      "value": "		Won't have means won't have this release",
+    },
+    {
+      "type": "ol",
+      "value": [
+        "Really will never have",
+        "Really really",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`Document "Table" to Object 1`] = `
+{
+  "cover": null,
+  "elements": [
+    {
+      "type": "p",
+      "value": "Here is a table",
+    },
+    {
+      "type": "table",
+      "value": {
+        "headers": [
+          "Animal",
+          "What I like about the animal",
+          "Age",
+        ],
+        "rows": [
+          [
+            "Dog",
+            "They are man's best friend and great for taking on walks.They are totally accepting",
+            "15",
+          ],
+          [
+            "Cat",
+            "Meoww!  Need I say more?  Is there any animal with more videos?",
+            "12",
+          ],
+          [
+            "Elephant",
+            "You know that elephants have tusks but did you know they are dangerous?  In Nepal there are more deaths from elephants than any other animal.  It is against the law to kill an elephant even if it has killed multiple people.",
+            "40",
+          ],
+        ],
+      },
+    },
+    {
+      "type": "p",
+      "value": "Text in a one cell table will be treated as a code block",
+    },
+    {
+      "type": "table",
+      "value": {
+        "headers": [
+          "if (x = 3) {  print('You are right'}",
+        ],
+        "rows": [],
+      },
+    },
+    {
+      "type": "table",
+      "value": {
+        "headers": [
+          "Fonts",
+        ],
+        "rows": [
+          [
+            "**Bold**, _italic_",
+          ],
+          [
+            "**_Bold & Italic_**",
+          ],
+          [
+            "**_<ins>Bold, Italic, and Underline</ins>_**",
+          ],
+        ],
+      },
+    },
+  ],
+}
+`;
