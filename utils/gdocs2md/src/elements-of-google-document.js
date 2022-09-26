@@ -37,7 +37,7 @@ class ElementsOfGoogleDocument {
         );
         const relativeTargetUrl = `${this.properties.slug}-${el.inlineObjectElement.inlineObjectId}-gdoc.png`;
         const filename = path.join(
-          this.options.imagesTarget || this.options.target,
+          this.options.imagesTarget || this.options.targetMarkdownDir,
           relativeTargetUrl
         );
         // todo: change to have separate var for slug path and slug
@@ -404,10 +404,16 @@ class ElementsOfGoogleDocument {
     );
 
     if (isHeading) {
+      /* TODO: refactor code below - define heading when
+         creating them, rather than after the fact */
+      let indexPos = this.elements.length - 1;
+      while (this.elements[indexPos].value !== content) {
+        indexPos = indexPos - 1;
+      }
       this.headings.push({
         tag,
         text: content,
-        index: this.elements.length - 1,
+        indexPos,
       });
     }
   }
@@ -415,6 +421,7 @@ class ElementsOfGoogleDocument {
   htmlFormatter({ paragraph, type, value }) {
     const alignment = paragraph.paragraphStyle.alignment;
     if (alignment === "CENTER") {
+      console.log("debug center", value);
       return [
         {
           type: "html",
@@ -546,6 +553,7 @@ class ElementsOfGoogleDocument {
           return match;
         }
       );
+      console.log("debug x");
 
       this.elements = JSON.parse(elementsStringifiedWithRelativePaths);
     }
@@ -597,6 +605,7 @@ class ElementsOfGoogleDocument {
         else {
           this.processParagraph(paragraph, i);
         }
+        console.log("debug processed something");
       }
     );
 
@@ -609,6 +618,7 @@ class ElementsOfGoogleDocument {
     }
 
     this.processInternalLinks();
+    console.log("debug done");
   }
 
   toMarkdown() {

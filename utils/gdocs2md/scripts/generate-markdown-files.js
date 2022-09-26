@@ -9,12 +9,12 @@ const saveMarkdown = paramValues["savemarkdown"]?.toLowerCase() !== "false";
 const envPath = path.resolve(process.cwd(), ".env.dev.local");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
-const folderId = process.env.DEV_GDRIVE_ROOT_ID;
-const root = process.env.DEV_LOCAL_ROOT;
-const suffix = process.env.DEV_SUFFIX;
+const folderId = process.env.WEBSITE_GDRIVE_ROOT_ID;
+const root = process.env.WEBSITE_LOCAL_ROOT;
+const suffix = process.env.WEBSITE_SUFFIX;
 const pluginOptions = {
   folder: folderId,
-  target: root,
+  targetMarkdownDir: root,
   imagesTarget: path.join(root, "assets/images"),
   suffix: suffix,
   matchPattern,

@@ -13,14 +13,12 @@ const { DEFAULT_OPTIONS } = require("./constants.js");
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   var googleDocuments = await filterGoogleDocs(options);
-  console.log("debug a");
 
   googleDocuments.forEach(async (googleDocument) => {
-    console.log("debug b");
     const { properties } = googleDocument;
     if (options.saveJson) {
       writeContent({
-        target: options.target,
+        target: options.targetGdocJson,
         suffix: options.suffix,
         filename: properties.path,
         extension: "json",
@@ -30,14 +28,13 @@ const jekyllifyDocs = async (pluginOptions) => {
     if (!options.saveMarkdown) {
       return;
     }
-    console.log("debug c");
     const googleDocObj = await convertGDoc2ElementsObj({
       ...googleDocument,
     });
     let markdown = await convertElements2MD(googleDocObj.elements);
     markdown = jekyllifyFrontMatter(googleDocObj, markdown);
     writeContent({
-      target: options.target,
+      target: options.targetMarkdownDir,
       suffix: options.suffix,
       filename: properties.path,
       extension: "md",
@@ -71,21 +68,27 @@ function getParamValues() {
 }
 
 const jsonifyDocs = async (pluginOptions) => {
-  const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
-  const paramValues = getParamValues();
-  matchPattern = paramValues["matchpattern"];
-  var googleDocuments = await filterGoogleDocs(options);
+  const options = _merge(
+    { saveMarkdown: false, saveJson: true },
+    DEFAULT_OPTIONS,
+    pluginOptions
+  );
+  await jekyllifyDocs(options);
+  // TODO: remove below
+  // const paramValues = getParamValues();
+  // matchPattern = paramValues["matchpattern"];
+  // var googleDocuments = await filterGoogleDocs(options);
 
-  googleDocuments.forEach(async (googleDocument) => {
-    const { properties } = googleDocument;
-    writeContent({
-      target: options.target,
-      suffix: options.suffix,
-      filename: properties.path,
-      extension: options.extension,
-      content: JSON.stringify(googleDocument),
-    });
-  });
+  // googleDocuments.forEach(async (googleDocument) => {
+  //   const { properties } = googleDocument;
+  //   writeContent({
+  //     target: options.targetMarkdownDir,
+  //     suffix: options.suffix,
+  //     filename: properties.path,
+  //     extension: options.extension,
+  //     content: JSON.stringify(googleDocument),
+  //   });
+  // });
 };
 
 function writeContent({ content, filename, target, suffix, extension }) {

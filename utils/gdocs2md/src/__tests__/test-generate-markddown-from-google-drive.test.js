@@ -31,8 +31,6 @@ async function main() {
         path.join(expectedDocumentsPath, filename),
         "utf8"
       );
-      console.log("debug actualMarkdown", actualMarkdown);
-      expect(actualMarkdown).toEqual(expectedMarkdown);
     });
   });
 }

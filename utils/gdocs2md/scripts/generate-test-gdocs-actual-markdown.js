@@ -9,7 +9,7 @@ const suffix = process.env.TEST_SUFFIX;
 console.log("root", root, "suffix", suffix);
 const pluginOptions = {
   folder: folderId,
-  target: path.join(
+  targetMarkdownDir: path.join(
     root,
     "actual-results/markdowns-generated-from-google-drive"
   ),

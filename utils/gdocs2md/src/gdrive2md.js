@@ -34,7 +34,7 @@ exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
 
       fs.outputFileSync(
         path.join(
-          options.target,
+          options.targetMarkdownDir,
           `${properties.path ? properties.path : "index"}.md`
         ),
         markdown

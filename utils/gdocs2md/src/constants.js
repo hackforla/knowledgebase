@@ -4,7 +4,7 @@ module.exports = {
     demoteHeadings: true,
     folder: undefined,
     // TODO: change to assets/images/(subdir), change to go up a level
-    target: "/Users/ethanadmin/projects/hackforla-website",
+    targetMarkdownDir: "/Users/ethanadmin/projects/hackforla-website",
     imagesTarget: "/Users/ethanadmin/projects/hackforla-website/assets/images",
     testFolderGoogleId: "1w4pvs1_bBiu_hvC-lZQR1zw-h-GdRLP3",
     keepDefaultStyle: false,

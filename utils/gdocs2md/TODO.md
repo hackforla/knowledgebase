@@ -25,16 +25,19 @@ Tasks
   - [ ] History of fork
   - [ ] Copy and customize extensive documentation on package
   - [x] +++ Generate certificate and token
-  - [ ] +++ Env vars
-  - [ ] +++ How to test
-  - [ ] +++ Front matter
+  - [x] +++ Env vars
+  - [x] +++ How to test
+  - [x] +++ Front matter
   - [ ] savejson and savemarkdown parameters
+- [ ] Investigate going back to Google App Script
 - [ ] **_ MISC _**
-  - [ ] +++ Propose and implement dir structure
+  - [x] +++ Propose and implement dir structure
   - [ ] +++ Verify output for Slack reminders
   - [ ] +++ Add document style to template
   - [ ] +++ Remove document style from template
   - [ ] Style using hfla css
+  - [ ] +++ Autogenerate image name - if svg exists use it, else configured default
+
   - [x] +++ Center
     - [x] +++ Make a div
     - [ ] Change to a style
@@ -46,6 +49,7 @@ Tasks
   - [ ] Test out if links can be different than filename?
   - [ ] Add ID: to frontmatter of google doc and use for filename for consistent URL
   - [ ] Add hook to automatically generate new markdown and TOC when a file is added, deleted,modified
+
 - [x] **_ +++ TEST _**
   - [x] Generate JSON of Google Docs
   - [x] Create docs of different types
@@ -53,12 +57,16 @@ Tasks
   - [x] Create a jekyllifyDoc to jekllify a single doc
   - [x] Copy existing tests and modify
   - +++ [x] Generate markdown as part of tests
+  - [ ] Change test-generate-object-from-google-drive to use actual and expected
+    - [ ] Create script to generate object (element)
+    - [ ] Use the generated script in test
+  - [ ] Change tests to be unit based so each step is tested separately
   - [ ] Download google docs
   - [ ] Change test packages to async and troubleshoot async related warning
   - [ ] Change object test to have a before/after
   - [ ] Add test that starts with downloaded json files
 - [x] **_ +++ TEST TOC (ALYSSA'S PULL REQUEST) _**
-  - [ ] Test out TOC.html
+  - [x] Test out TOC.html
 - [ ] **_ +++ TOKEN _**
   - [ ] +++ Auto renew token
   - [ ] Improve error message if token not set up
@@ -69,7 +77,6 @@ Tasks
   - [x] Custom overwrites automated
   - [x] Automated overwrites default
   - [ ] Autogenerate provider-link
-  - [ ] Autogenerate image name - if svg exists use it, else configured default
 - [ ] **_ +++ IMAGES _**
   - [x] +++ Store image locally (otherwise, permission issue)
   - [x] +++ Set size
@@ -82,7 +89,12 @@ Tasks
   - [ ] Configure individual elements obj => md
   - [ ] Add elements obj => md
   - [ ] Configure individual JSON => obj
+  - [ ] Template for front matter
 - [ ] **_ REFACTOR _**
   - [ ] Rename fetch functions
   - [ ] Extract functions that are long
+  - [ ] Move LOCAL_JSON variable to a constant which is appended with root
+  - [ ] Look for hard coded strings, especially where root and other dirs defined
+  - [ ] Combine jekyllUtils into other module
+  - [ ] Rename objects with jekyll in the name
   - [ ] ?? Change to functional rather than object based for process procedures
