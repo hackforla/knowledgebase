@@ -23,18 +23,18 @@ async function fetchGoogleDocJson(id) {
 
 /** @param {import('../..').Options} options */
 async function fetchGoogleDocObjs(options) {
-  const documentsProperties = await fetchFilesAndFoldersInParent(options);
-  const links = documentsProperties.reduce(
+  const gdocsProperties = await fetchFilesAndFoldersInParent(options);
+  const links = gdocsProperties.reduce(
     (acc, properties) => ({ ...acc, [properties.id]: properties.slug }),
     {}
   );
 
   const gdocs = await Promise.all(
-    documentsProperties.map(async (properties) => {
-      const document = await fetchGoogleDocJson(properties.id);
+    gdocsProperties.map(async (gdocProperties) => {
+      const document = await fetchGoogleDocJson(gdocProperties.id);
       const gdoc = new GoogleDocumentObj({
         document,
-        properties,
+        properties: gdocProperties,
         options,
         links,
       });
