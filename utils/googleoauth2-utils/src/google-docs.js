@@ -29,20 +29,20 @@ async function fetchGoogleDocObjs(options) {
     {}
   );
 
-  const googleDocuments = await Promise.all(
+  const gdocs = await Promise.all(
     documentsProperties.map(async (properties) => {
       const document = await fetchGoogleDocJson(properties.id);
-      const googleDocument = new GoogleDocumentObj({
+      const gdoc = new GoogleDocumentObj({
         document,
         properties,
         options,
         links,
       });
-      return googleDocument;
+      return gdoc;
     })
   );
 
-  return googleDocuments;
+  return gdocs;
 }
 
 module.exports = {

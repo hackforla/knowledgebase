@@ -12,24 +12,24 @@ const { DEFAULT_OPTIONS } = require("./constants.js");
 
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
-  var googleDocuments = await filterGoogleDocs(options);
+  var gdocs = await filterGoogleDocs(options);
 
-  googleDocuments.forEach(async (googleDocument) => {
-    const { properties } = googleDocument;
+  gdocs.forEach(async (gdoc) => {
+    const { properties } = gdoc;
     if (options.saveJson) {
       writeContent({
         target: options.targetGdocJson,
         suffix: options.suffix,
         filename: properties.path,
         extension: "json",
-        content: JSON.stringify(googleDocument),
+        content: JSON.stringify(gdoc),
       });
     }
     if (!options.saveMarkdown) {
       return;
     }
     const googleDocObj = await convertGDoc2ElementsObj({
-      ...googleDocument,
+      ...gdoc,
     });
     let markdown = await convertElements2MD(googleDocObj.elements);
     markdown = jekyllifyFrontMatter(googleDocObj, markdown);
@@ -40,21 +40,21 @@ const jekyllifyDocs = async (pluginOptions) => {
       extension: "md",
       content: markdown,
     });
-    // const frontMatter = getFrontMatterFromGdoc(googleDocument);
-    // markdown = getFrontMatterFromGdoc(googleDocument, markdown);    // markdown = formatHeading2MarkdownSection(markdown);
+    // const frontMatter = getFrontMatterFromGdoc(gdoc);
+    // markdown = getFrontMatterFromGdoc(gdoc, markdown);    // markdown = formatHeading2MarkdownSection(markdown);
     // markdown = addHeading2MarkdownAnchor(markdown);  });
   });
 };
 
 async function filterGoogleDocs(options) {
-  let googleDocuments = await fetchGoogleDocObjs(options);
+  let gdocs = await fetchGoogleDocObjs(options);
   // TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
-    googleDocuments = googleDocuments.filter(({ document }) => {
+    gdocs = gdocs.filter(({ document }) => {
       return document.title.toLowerCase().includes(matchPattern.toLowerCase());
     });
   }
-  return googleDocuments;
+  return gdocs;
 }
 
 function getParamValues() {
@@ -77,16 +77,16 @@ const jsonifyDocs = async (pluginOptions) => {
   // TODO: remove below
   // const paramValues = getParamValues();
   // matchPattern = paramValues["matchpattern"];
-  // var googleDocuments = await filterGoogleDocs(options);
+  // var gdocs = await filterGoogleDocs(options);
 
-  // googleDocuments.forEach(async (googleDocument) => {
-  //   const { properties } = googleDocument;
+  // gdocs.forEach(async (gdoc) => {
+  //   const { properties } = gdoc;
   //   writeContent({
   //     target: options.targetMarkdownDir,
   //     suffix: options.suffix,
   //     filename: properties.path,
   //     extension: options.extension,
-  //     content: JSON.stringify(googleDocument),
+  //     content: JSON.stringify(gdoc),
   //   });
   // });
 };

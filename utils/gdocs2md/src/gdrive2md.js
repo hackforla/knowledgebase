@@ -16,21 +16,21 @@ exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
   timer.start();
 
   try {
-    const googleDocuments = await fetchGoogleDocObjs(options);
+    const gdocs = await fetchGoogleDocObjs(options);
     let x = 0;
-    for (let googleDocument of googleDocuments) {
-      googleDocuments[x] = new ElementsOfGoogleDocument({ ...googleDocument });
+    for (let gdoc of gdocs) {
+      gdocs[x] = new ElementsOfGoogleDocument({ ...gdoc });
       x++;
     }
     timer.setStatus("fetched");
-    for (let googleDocument of googleDocuments) {
-      await googleDocument.process();
+    for (let gdoc of gdocs) {
+      await gdoc.process();
     }
     timer.setStatus("processsed");
 
-    for (let googleDocument of googleDocuments) {
-      const { properties } = googleDocument;
-      const markdown = googleDocument.toMarkdown();
+    for (let gdoc of gdocs) {
+      const { properties } = gdoc;
+      const markdown = gdoc.toMarkdown();
 
       fs.outputFileSync(
         path.join(
