@@ -19,7 +19,12 @@ exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
     const gdocs = await fetchGoogleDocObjs(options);
     let x = 0;
     for (let gdoc of gdocs) {
-      gdocs[x] = new ElementsOfGoogleDocument({ ...gdoc });
+      gdocs[x] = new ElementsOfGoogleDocument({
+        document: gdoc.document,
+        options: gdoc.options,
+        properties: gdoc.properties,
+        links: gdoc.links,
+      });
       x++;
     }
     timer.setStatus("fetched");

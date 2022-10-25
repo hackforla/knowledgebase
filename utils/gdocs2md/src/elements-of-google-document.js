@@ -605,7 +605,6 @@ class ElementsOfGoogleDocument {
         else {
           this.processParagraph(paragraph, i);
         }
-        console.log("debug processed something");
       }
     );
 

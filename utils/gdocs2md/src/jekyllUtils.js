@@ -8,31 +8,33 @@ const {
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert.js");
 const { jekyllifyFrontMatter } = require("./utils.js");
 const { DEFAULT_OPTIONS } = require("./constants.js");
+const { now } = require("lodash");
 // TODO: add to constants
+function debugLog() {
+  console.log("debug args", Date.now().toString().substring(9), ...arguments);
+}
 
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
-  var gdocs = await filterGoogleDocs(options);
+  const gdocs = await filterGoogleDocs(options);
 
-  gdocs.forEach(async (gdoc) => {
+  async function processGdoc(gdoc) {
+    let googleDocObj = {};
+    let doProcessElements = options.saveMarkdown || options.saveJson;
+    let doProcessMarkdown = options.saveMarkdown;
     const { properties } = gdoc;
-    if (options.saveJson) {
-      writeContent({
-        target: options.targetGdocJson,
-        suffix: options.suffix,
-        filename: properties.path,
-        extension: "json",
-        content: JSON.stringify(gdoc),
-      });
-    }
-    if (!options.saveMarkdown) {
-      return;
-    }
-    const googleDocObj = await convertGDoc2ElementsObj({
+    debugLog("step 1a", Date.now());
+    saveGdoc(options, properties, gdoc);
+    debugLog("step 2");
+    if (!doProcessElements) return;
+    googleDocObj = await convertGDoc2ElementsObj({
       ...gdoc,
     });
+    debugLog("step4", googleDocObj.properties.path);
+    if (!doProcessMarkdown) return;
     let markdown = await convertElements2MD(googleDocObj.elements);
     markdown = jekyllifyFrontMatter(googleDocObj, markdown);
+    debugLog("step 5", googleDocObj.properties.path);
     writeContent({
       target: options.targetMarkdownDir,
       suffix: options.suffix,
@@ -40,11 +42,30 @@ const jekyllifyDocs = async (pluginOptions) => {
       extension: "md",
       content: markdown,
     });
-    // const frontMatter = getFrontMatterFromGdoc(gdoc);
-    // markdown = getFrontMatterFromGdoc(gdoc, markdown);    // markdown = formatHeading2MarkdownSection(markdown);
-    // markdown = addHeading2MarkdownAnchor(markdown);  });
-  });
+    debugLog("step 6");
+  }
+
+  // using "for" loop to avoid async issues
+  // otherwise second document will start before everything is done with first
+  // end results are fine with "forEach" but cleaner to have all activites done
+  // before starting next
+  // *** READ ABOVE BEFORE CHANGING TO "forEach" ***
+  for (let i = 0; i < gdocs.length; i++) {
+    await processGdoc(gdocs[i]);
+  }
 };
+
+function saveGdoc(options, properties, gdoc) {
+  if (options.saveJson) {
+    writeContent({
+      target: options.targetGdocJson,
+      suffix: options.suffix,
+      filename: properties.path,
+      extension: "json",
+      content: JSON.stringify(gdoc),
+    });
+  }
+}
 
 async function filterGoogleDocs(options) {
   let gdocs = await fetchGoogleDocObjs(options);
