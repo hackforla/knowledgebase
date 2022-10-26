@@ -101,12 +101,6 @@ const getTreeMetadata = (tree, file) => {
   };
 };
 
-// TODO: Do we need metadata?
-/**
- * @param {object} options
- * @param {Partial<import('../..').Metadata>} options.metadata
- * @param {Record<string, unknown>=} options.defaults
- */
 const updateFile = ({ file, folder }) => {
   Object.assign(file, {
     exclude: false,
@@ -155,12 +149,12 @@ const BATCH_SIZE = 100;
  * @param {import('../..').Options & fetchGoogleDocumentsObjOptions} options
  * @returns {Promise<(import('../..').DocumentFile & { path: string })[]>}
  */
-async function fetchFoldersAndFilesInParents({ drive, parents, options }) {
+async function fetchFoldersAndFilesInSubfolders({ drive, parents, options }) {
   if (parents.length > BATCH_SIZE) {
     return _flatten(
       await Promise.all(
         evenlyChunk(parents, BATCH_SIZE).map((parents) =>
-          fetchFoldersAndFilesInParents({
+          fetchFoldersAndFilesInSubfolders({
             drive,
             parents,
             options,
@@ -248,7 +242,7 @@ async function fetchFoldersAndFilesInParents({ drive, parents, options }) {
     if (nextParents.length === 0) {
       return documents;
     }
-    const documentsInFolders = await fetchFoldersAndFilesInParents({
+    const documentsInFolders = await fetchFoldersAndFilesInSubfolders({
       drive,
       parents: nextParents,
       options,
@@ -263,7 +257,7 @@ async function fetchFoldersAndFilesInParents({ drive, parents, options }) {
     // process one batch of children while continuing on with pages
     const parentBatch = nextParents.slice(0, BATCH_SIZE);
     nextParents = nextParents.slice(BATCH_SIZE);
-    const results = await fetchFoldersAndFilesInParents({
+    const results = await fetchFoldersAndFilesInSubfolders({
       drive,
       parents: parentBatch,
       options,
@@ -285,7 +279,7 @@ async function fetchFoldersAndFilesInParents({ drive, parents, options }) {
       if (nextParents.length === 0) {
         return documents;
       }
-      const finalDocumentsInFolders = await fetchFoldersAndFilesInParents({
+      const finalDocumentsInFolders = await fetchFoldersAndFilesInSubfolders({
         drive,
         parents: nextParents,
         options,
@@ -303,7 +297,7 @@ async function fetchFoldersAndFilesInParents({ drive, parents, options }) {
 }
 
 /** @param {import('../..').Options} pluginOptions */
-async function fetchFilesAndFoldersInParent({ folder, ...options }) {
+async function fetchFoldersAndFilesInFolder({ folder, ...options }) {
   const drive = await getGoogleDrive();
 
   const res = await drive.files.get({
@@ -312,7 +306,7 @@ async function fetchFilesAndFoldersInParent({ folder, ...options }) {
     supportsAllDrives: true,
   });
 
-  const documentsFiles = await fetchFoldersAndFilesInParents({
+  const documentsFiles = await fetchFoldersAndFilesInSubfolders({
     drive,
     parents: [
       {
@@ -328,5 +322,5 @@ async function fetchFilesAndFoldersInParent({ folder, ...options }) {
 }
 
 module.exports = {
-  fetchFilesAndFoldersInParent,
+  fetchFoldersAndFilesInFolder,
 };

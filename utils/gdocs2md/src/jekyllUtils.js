@@ -20,28 +20,20 @@ const jekyllifyDocs = async (pluginOptions) => {
 
   async function processGdoc(gdoc) {
     let googleDocObj = {};
-    let doProcessElements = options.saveMarkdown || options.saveJson;
-    let doProcessMarkdown = options.saveMarkdown;
     const { properties } = gdoc;
+    const filename = properties.path;
     debugLog("step 1a", Date.now());
-    saveGdoc(options, properties, gdoc);
     debugLog("step 2");
-    if (!doProcessElements) return;
     googleDocObj = await convertGDoc2ElementsObj({
       ...gdoc,
     });
+    if (options.saveGdoc) writeGdoc(options, filename, gdoc);
     debugLog("step4", googleDocObj.properties.path);
-    if (!doProcessMarkdown) return;
+    if (!options.saveMarkdown) return;
     let markdown = await convertElements2MD(googleDocObj.elements);
     markdown = jekyllifyFrontMatter(googleDocObj, markdown);
     debugLog("step 5", googleDocObj.properties.path);
-    writeContent({
-      target: options.targetMarkdownDir,
-      suffix: options.suffix,
-      filename: properties.path,
-      extension: "md",
-      content: markdown,
-    });
+    writeMarkdown(options, filename, markdown);
     debugLog("step 6");
   }
 
@@ -55,16 +47,24 @@ const jekyllifyDocs = async (pluginOptions) => {
   }
 };
 
-function saveGdoc(options, properties, gdoc) {
-  if (options.saveJson) {
-    writeContent({
-      target: options.targetGdocJson,
-      suffix: options.suffix,
-      filename: properties.path,
-      extension: "json",
-      content: JSON.stringify(gdoc),
-    });
-  }
+function writeMarkdown(options, filename, markdown) {
+  writeContent({
+    target: options.targetMarkdownDir,
+    suffix: options.suffix,
+    filename,
+    extension: "md",
+    content: markdown,
+  });
+}
+
+function writeGdoc(options, filename, gdoc) {
+  writeContent({
+    target: options.targetGdocJson,
+    suffix: options.suffix,
+    filename,
+    extension: "json",
+    content: JSON.stringify(gdoc),
+  });
 }
 
 async function filterGoogleDocs(options) {
@@ -90,7 +90,7 @@ function getParamValues() {
 
 const jsonifyDocs = async (pluginOptions) => {
   const options = _merge(
-    { saveMarkdown: false, saveJson: true },
+    { saveMarkdown: false, saveGdoc: true },
     DEFAULT_OPTIONS,
     pluginOptions
   );
@@ -113,6 +113,7 @@ const jsonifyDocs = async (pluginOptions) => {
 };
 
 function writeContent({ content, filename, target, suffix, extension }) {
+  console.log("debug path", target, filename, suffix, extension);
   const file = path.join(
     target,
     `${filename ? filename : "index"}${suffix}.${extension}`

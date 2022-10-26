@@ -11,7 +11,7 @@ const pluginOptions = {
   targetGdocJson: root,
   suffix: suffix,
   extension: "json",
-  saveJson: true,
+  saveGdoc: true,
   saveMarkdown: false,
 };
 

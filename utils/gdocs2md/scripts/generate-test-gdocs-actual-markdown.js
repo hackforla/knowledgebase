@@ -15,7 +15,7 @@ const pluginOptions = {
   ),
   suffix: suffix,
   extension: "md",
-  saveJson: false,
+  saveGdoc: false,
   saveMarkdown: true,
 };
 

@@ -2,7 +2,7 @@ Tasks
 
 +++ Required for MVP
 
-- Completed
+- [] Completed
   - [x] Create directory with some Google doc guides
   - [x] Create node script that calls npm package to convert google docs to markdown from specified Google dir and its subdirs to specified output location
   - [x] Inspect results for Google doc guides
@@ -31,6 +31,7 @@ Tasks
   - [ ] savejson and savemarkdown parameters
 - [ ] Investigate going back to Google App Script
 - [ ] **_ MISC _**
+
   - [x] +++ Propose and implement dir structure
   - [ ] +++ Verify output for Slack reminders
   - [ ] +++ Add document style to template
