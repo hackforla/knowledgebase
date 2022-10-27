@@ -3,7 +3,11 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Server is running!");
+});
+
+app.get("/convert-all", (req, res) => {
+  res.send("Server is running!");
 });
 
 app.listen(port, () => {

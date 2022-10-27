@@ -8,7 +8,7 @@ const documentCodes = require("./documents/codes.json");
 const documentTables = require("./documents/tables.json");
 const { ElementsOfGoogleDocument } = require("../elements-of-google-document");
 
-test(`"KeepDefaultStyle" option`, () => {
+test.skip(`"KeepDefaultStyle" option`, () => {
   const options = { keepDefaultStyle: true };
   const googleDocument = new ElementsOfGoogleDocument({
     document: documentTexts,
@@ -18,7 +18,7 @@ test(`"KeepDefaultStyle" option`, () => {
   expect(googleDocument.toMarkdown()).toMatchSnapshot();
 });
 
-test(`"DemoteHeading" option enabled`, () => {
+test.skip(`"DemoteHeading" option enabled`, () => {
   const options = { demoteHeadings: true };
   const googleDocument = new ElementsOfGoogleDocument({
     document: documentTexts,

@@ -14,7 +14,7 @@ filenames.forEach(function (filename) {
   });
   googleDocument.process();
 
-  test(`Document "${googleDocument.document.title}" to Object`, () => {
+  test(`Document "${googleDocument.document.title}" to Objects`, () => {
     const { cover, elements } = googleDocument;
 
     expect({
