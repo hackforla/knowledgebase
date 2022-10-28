@@ -14,6 +14,17 @@ function debugLog() {
   console.log("debug args", Date.now().toString().substring(9), ...arguments);
 }
 
+const setObjectValuesFromParamValues = (obj) => {
+  const { argv } = process;
+  const paramValues = argv.slice(2);
+  paramValues.forEach((paramValue) => {
+    let [key, value] = paramValue.split("=");
+    if (value.toLowerCase() == "true") value = true;
+    if (value.toLowerCase() == "false") value = false;
+    obj[key] = value;
+  });
+};
+
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   const gdocs = await filterGoogleDocs(options);
@@ -78,16 +89,6 @@ async function filterGoogleDocs(options) {
   return gdocs;
 }
 
-function getParamValues() {
-  const paramValues = {};
-  const args = process.argv.slice(2);
-  args.forEach((arg) => {
-    const [key, value] = arg.split("=");
-    paramValues[key.toLowerCase()] = value;
-  });
-  return paramValues;
-}
-
 const jsonifyDocs = async (pluginOptions) => {
   const options = _merge(
     { saveMarkdown: false, saveGdoc: true },
@@ -95,21 +96,6 @@ const jsonifyDocs = async (pluginOptions) => {
     pluginOptions
   );
   await jekyllifyDocs(options);
-  // TODO: remove below
-  // const paramValues = getParamValues();
-  // matchPattern = paramValues["matchpattern"];
-  // var gdocs = await filterGoogleDocs(options);
-
-  // gdocs.forEach(async (gdoc) => {
-  //   const { properties } = gdoc;
-  //   writeContent({
-  //     target: options.targetMarkdownDir,
-  //     suffix: options.suffix,
-  //     filename: properties.path,
-  //     extension: options.extension,
-  //     content: JSON.stringify(gdoc),
-  //   });
-  // });
 };
 
 function writeContent({ content, filename, target, suffix, extension }) {
@@ -124,4 +110,4 @@ function writeContent({ content, filename, target, suffix, extension }) {
   fs.writeFileSync(file, content);
 }
 
-module.exports = { getParamValues, jekyllifyDocs, jsonifyDocs };
+module.exports = { setObjectValuesFromParamValues, jekyllifyDocs, jsonifyDocs };

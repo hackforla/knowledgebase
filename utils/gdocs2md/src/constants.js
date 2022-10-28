@@ -1,15 +1,17 @@
 const path = require("path");
 const { config } = require("dotenv");
 console.log("process.cwd()", process.cwd());
-const envPath = path.resolve(process.cwd(), ".env.dev.local");
+const envPath = path.resolve(process.cwd(), ".env.local");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
 console.log("process.env.ENV_PATH", process.env.ENV_PATH);
 const folderId = process.env.WEBSITE_GDRIVE_ROOT_ID;
 const root = process.env.WEBSITE_LOCAL_ROOT;
 const suffix = process.env.WEBSITE_SUFFIX;
+console.log("constants", process.env.GOOGLE_DOCS_TOKEN || "no token");
 console.log("root", root);
 module.exports = {
+  ENV_TOKEN_VAR: "GOOGLE_DOCS_TOKEN",
   DEFAULT_OPTIONS: {
     debug: false,
     demoteHeadings: true,
