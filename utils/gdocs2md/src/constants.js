@@ -1,7 +1,7 @@
 const path = require("path");
 const { config } = require("dotenv");
 console.log("process.cwd()", process.cwd());
-const envPath = path.resolve(process.cwd(), ".env.local");
+const envPath = path.resolve(process.cwd(), ".env.dev.local");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
 console.log("process.env.ENV_PATH", process.env.ENV_PATH);

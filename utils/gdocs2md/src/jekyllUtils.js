@@ -27,6 +27,9 @@ const setObjectValuesFromParamValues = (obj) => {
 
 const jekyllifyDocs = async (pluginOptions) => {
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
+  if (options.folder) {
+    throw new Error("Must provide a folder");
+  }
   const gdocs = await filterGoogleDocs(options);
 
   async function processGdoc(gdoc) {
