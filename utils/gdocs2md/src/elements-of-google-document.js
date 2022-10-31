@@ -421,7 +421,6 @@ class ElementsOfGoogleDocument {
   htmlFormatter({ paragraph, type, value }) {
     const alignment = paragraph.paragraphStyle.alignment;
     if (alignment === "CENTER") {
-      console.log("debug center", value);
       return [
         {
           type: "html",
@@ -553,7 +552,6 @@ class ElementsOfGoogleDocument {
           return match;
         }
       );
-      console.log("debug x");
 
       this.elements = JSON.parse(elementsStringifiedWithRelativePaths);
     }
@@ -617,14 +615,11 @@ class ElementsOfGoogleDocument {
     }
 
     this.processInternalLinks();
-    console.log("debug done");
   }
 
   toMarkdown() {
     const json = this.elements.map(normalizeElement);
-    console.log("debug here");
     const markdownContent = json2md(json);
-    console.log("debug there");
     const markdownFrontmatter = this.getFrontMatter();
 
     return `${markdownFrontmatter}${markdownContent}`;

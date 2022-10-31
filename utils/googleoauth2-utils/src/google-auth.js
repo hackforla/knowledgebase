@@ -10,13 +10,17 @@ const refreshExpiredTokenVar = async () => {
   );
   const currentToken = JSON.parse(process.env[ENV_TOKEN_VAR]);
   const expiry_date = currentToken.expiry_date;
+  console.log(expiry_date, Date.now());
   if (expiry_date < Date.now()) {
-    const refreshToken = currentToken.refresh_token;
-    oauth2Client.credentials.refresh_token = refreshToken;
-    const newToken = await getRefreshToken(oauth2Client);
-    process.env[ENV_TOKEN_VAR] = JSON.stringify(newToken);
-    replaceEnvVar(ENV_TOKEN_VAR, process.env[ENV_TOKEN_VAR]);
+    throw new Error(`Token expired ${new Date(expiry_date)}`);
   }
+  const refreshToken = currentToken.refresh_token;
+  console.log("token refreshed a", currentToken.expiry_date);
+  oauth2Client.credentials.refresh_token = refreshToken;
+  await getRefreshToken(oauth2Client);
+  process.env[ENV_TOKEN_VAR] = JSON.stringify(oauth2Client.credentials);
+  replaceEnvVar(ENV_TOKEN_VAR, process.env[ENV_TOKEN_VAR]);
+  console.log("new expire date", oauth2Client.credentials.expiry_date);
 };
 
 const getAuth = async () => {

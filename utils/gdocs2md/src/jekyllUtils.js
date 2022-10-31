@@ -36,19 +36,14 @@ const jekyllifyDocs = async (pluginOptions) => {
     let googleDocObj = {};
     const { properties } = gdoc;
     const filename = properties.path;
-    debugLog("step 1a", Date.now());
-    debugLog("step 2");
     googleDocObj = await convertGDoc2ElementsObj({
       ...gdoc,
     });
     if (options.saveGdoc) writeGdoc(options, filename, gdoc);
-    debugLog("step4", googleDocObj.properties.path);
     if (!options.saveMarkdown) return;
     let markdown = await convertElements2MD(googleDocObj.elements);
     markdown = jekyllifyFrontMatter(googleDocObj, markdown);
-    debugLog("step 5", googleDocObj.properties.path);
     writeMarkdown(options, filename, markdown);
-    debugLog("step 6");
   }
 
   // using "for" loop to avoid async issues
@@ -102,7 +97,7 @@ const jsonifyDocs = async (pluginOptions) => {
 };
 
 function writeContent({ content, filename, target, suffix, extension }) {
-  console.log("debug path", target, filename, suffix, extension);
+  console.log("writing markdown", target, filename, suffix, extension);
   const file = path.join(
     target,
     `${filename ? filename : "index"}${suffix}.${extension}`
