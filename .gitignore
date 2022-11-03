@@ -8,3 +8,5 @@ _site
 .DS_STORE
 actual-results
 **.local
+venv
+__pycache__
