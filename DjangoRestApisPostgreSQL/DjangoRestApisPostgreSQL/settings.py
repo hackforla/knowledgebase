@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8081',
+    'http://localhost:8000',
 )
 # Application definition
 
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'knowledgebase.apps.KnowledgebaseConfig',
     'corsheaders',
-    'django_baker',
 ]
 
 MIDDLEWARE = [
@@ -83,14 +82,14 @@ WSGI_APPLICATION = 'DjangoRestApisPostgreSQL.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databasescr
-
+DJANGO_SUPERUSER_PASSWORD = 'admin'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'ethanadmin',
-        'PASSWORD': 'admin',
-        'HOST': '127.0.0.1',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
