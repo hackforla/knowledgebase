@@ -1,6 +1,6 @@
 const path = require("path");
 const { config } = require("dotenv");
-const envPath = path.resolve(process.cwd(), ".env.dev.local");
+const envPath = path.resolve(process.cwd(), ".env");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
 const folderId = process.env.WEBSITE_GDRIVE_ROOT_ID;
