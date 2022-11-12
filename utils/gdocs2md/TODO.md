@@ -24,10 +24,11 @@ Tasks
   - [x] (obsoleted) Explain linkDir.sh
   - [ ] History of fork
   - [ ] Copy and customize extensive documentation on package
-  - [x] +++ Generate certificate and token
-  - [x] +++ Env vars
-  - [x] +++ How to test
-  - [x] +++ Front matter
+  - [ ] +++ Generate certificate and token
+  - [ ] +++ Env vars
+  - [ ] +++ How to test (check)
+  - [ ] +++ Front matter
+  - [ ] +++ Dir structure
   - [ ] savejson and savemarkdown parameters
 - [ ] Investigate going back to Google App Script
 - [ ] **_ MISC _**
@@ -51,6 +52,9 @@ Tasks
   - [ ] Add ID: to frontmatter of google doc and use for filename for consistent URL
   - [ ] Add hook to automatically generate new markdown and TOC when a file is added, deleted,modified
 
+- [ ] **_ +++ DOCKER _** - [ ] Get to work locally
+- [ ] Prod env variables
+- [ ] Prod secrets
 - [x] **_ +++ TEST _**
   - [x] Generate JSON of Google Docs
   - [x] Create docs of different types

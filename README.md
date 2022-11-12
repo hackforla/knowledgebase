@@ -6,27 +6,27 @@
 
 <p><details><summary>Why use Google Docs to write your content ?</summary>
 
--   🖋 Best online WYSIWYG editor
--   🖥 Desktop web app
--   📱 Mobile app
--   🛩 Offline redaction
--   🔥 No need for external CMS
--   ✅ No more content in your source code
+- 🖋 Best online WYSIWYG editor
+- 🖥 Desktop web app
+- 📱 Mobile app
+- 🛩 Offline redaction
+- 🔥 No need for external CMS
+- ✅ No more content in your source code
 
 </details></p>
 
 ## Features
 
--   **Google Docs** formatting options (headings, bullets, tables, images...)
--   `MDX` support to use `<ReactComponents />` in your documents
--   **Gatsby** v3 & v2 support
--   `gatsby-plugin-image` and `gatsby-image` support
--   Code blocs support
--   **Gatsby Cloud** support
--   Slug generation from **Google Drive** tree
--   Crosslinks between pages
--   Related content
--   Custom metadata to enhance documents
+- **Google Docs** formatting options (headings, bullets, tables, images...)
+- `MDX` support to use `<ReactComponents />` in your documents
+- **Gatsby** v3 & v2 support
+- `gatsby-plugin-image` and `gatsby-image` support
+- Code blocs support
+- **Gatsby Cloud** support
+- Slug generation from **Google Drive** tree
+- Crosslinks between pages
+- Related content
+- Custom metadata to enhance documents
 
 ## Installation
 
@@ -36,31 +36,19 @@ Download `gatsby-source-gdocs2md` and `gatsby-transformer-remark` (or `gatsby-pl
 yarn add gatsby-source-gdocs2md gatsby-transformer-remark
 ```
 
--   `gatsby-source-gdocs2md` transform **Google Docs** to **Markdown**
--   `gatsby-transformer-remark` transform **Markdown** to **HTML**
--   `gatsby-plugin-mdx` transform **Markdown** to **MDX**
+- `gatsby-source-gdocs2md` transform **Google Docs** to **Markdown**
+- `gatsby-transformer-remark` transform **Markdown** to **HTML**
+- `gatsby-plugin-mdx` transform **Markdown** to **MDX**
 
 ## Token generation
 
-The package needs 3 `.env` variables.
+To generate gooogle variables in .env file:
 
-<p><details><summary>Preview variables</summary>
+- Open a terminal at the root of your project
+- Type the following command
 
-```dotenv
-GOOGLE_OAUTH_CLIENT_ID=2...m.apps.googleusercontent.com
-GOOGLE_OAUTH_CLIENT_SECRET=Q...axL
-GOOGLE_DOCS_TOKEN={"access_token":"ya...J0","refresh_token":"1..mE","scope":"https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/documents.readonly","token_type":"Bearer","expiry_date":1598284554759}
 ```
-
-</details></p>
-
-`gatsby-source-gdocs2md` expose a script to generate it.
-
--   Open a terminal at the root of your project
--   Type the following command
-
-```shell
-gatsby-source-gdocs2md-token
+node utils/googleoauth2-utils/src/generate-token.js
 ```
 
 ## Usage
@@ -72,9 +60,9 @@ Go to your [Google Drive](https://drive.google.com/drive/), create a folder and 
 ```js
 ↳ 🗂 Root folder
     ↳ 🗂 en `locale: en` `skip: true`
-        ↳ 📝 Home 
+        ↳ 📝 Home
         ↳ 📝 About
-        ↳ 🗂 Posts 
+        ↳ 🗂 Posts
             ↳ 🗂 Drafts `exclude: true`
                 ↳ 📝 Draft 1
             ↳ 📝 My year 2020 `date: 2021-01-01`
@@ -85,7 +73,7 @@ Go to your [Google Drive](https://drive.google.com/drive/), create a folder and 
 
 <p><details><summary>🤡 How to enhance documents with metadata?</summary>
 
--   Fill the document (or folder) `description` field in Google Drive with a `YAML` object
+- Fill the document (or folder) `description` field in Google Drive with a `YAML` object
 
 ```yaml
 locale: fr
@@ -98,25 +86,25 @@ date: 2019-01-01
 
 > There are special metadata
 >
-> -   For folders:
->     -   `exclude: true`: Exclude the folder and its documents
->     -   `skip: true`: Remove the folder from slug but keep its documents
-> -   For documents:
->     -   `index:true`: Use document as the folder index
+> - For folders:
+>   - `exclude: true`: Exclude the folder and its documents
+>   - `skip: true`: Remove the folder from slug but keep its documents
+> - For documents:
+>   - `index:true`: Use document as the folder index
 
--   Spread metadata into the tree using folders metadata.
-
-> ⬆️ For the tree example above:
->
-> -   "en" folder will be removed from slug because of `skip: true`
-
--   Exclude folders and documents using `exclude: true`. Perfect to keep drafts documents. One you want to publish a page, just move the document one level up.
+- Spread metadata into the tree using folders metadata.
 
 > ⬆️ For the tree example above:
 >
-> -   Documents under `Drafts` will be exclude because of `exclude: true`.
+> - "en" folder will be removed from slug because of `skip: true`
 
--   Every metadata will be available in `GoogleDocs` nodes and you can use everywhere in you `Gatsby` site
+- Exclude folders and documents using `exclude: true`. Perfect to keep drafts documents. One you want to publish a page, just move the document one level up.
+
+> ⬆️ For the tree example above:
+>
+> - Documents under `Drafts` will be exclude because of `exclude: true`.
+
+- Every metadata will be available in `GoogleDocs` nodes and you can use everywhere in you `Gatsby` site
 
 </details></p>
 
@@ -167,44 +155,44 @@ You also can add metadata (`locale`, `date` ...) to your documents.
 
 ### Add the plugin to your `gatsby-config.js` file
 
-| Option           | Required | Type    | Default | Example        |
-| ---------------- | -------- | ------- | ------- | -------------- |
-| folder           | `true`   | String  | `null`  | `"1Tn1dCbIc"`  |
-| target           | `false`  | String  | `src/pages`| `"src/gdocs"`  |
-| pageContext      | `false`  | Array   | `[]`    | `["locale"]`   |
-| demoteHeadings   | `false`  | Boolean | `true`  | `false`        |
-| imagesOptions    | `false`  | Object  | `null`  | `{width: 512}` |
-| keepDefaultStyle | `false`  | Boolean | `false` | `true`         |
-| skipCodes        | `false`  | Boolean | `false` | `true`         |
-| skipFootnotes    | `false`  | Boolean | `false` | `true`         |
-| skipHeadings     | `false`  | Boolean | `false` | `true`         |
-| skipImages       | `false`  | Boolean | `false` | `true`         |
-| skipLists        | `false`  | Boolean | `false` | `true`         |
-| skipQuotes       | `false`  | Boolean | `false` | `true`         |
-| skipTables       | `false`  | Boolean | `false` | `true`         |
-| debug            | `false`  | Boolean | `false` | `true`         |
+| Option           | Required | Type    | Default     | Example        |
+| ---------------- | -------- | ------- | ----------- | -------------- |
+| folder           | `true`   | String  | `null`      | `"1Tn1dCbIc"`  |
+| target           | `false`  | String  | `src/pages` | `"src/gdocs"`  |
+| pageContext      | `false`  | Array   | `[]`        | `["locale"]`   |
+| demoteHeadings   | `false`  | Boolean | `true`      | `false`        |
+| imagesOptions    | `false`  | Object  | `null`      | `{width: 512}` |
+| keepDefaultStyle | `false`  | Boolean | `false`     | `true`         |
+| skipCodes        | `false`  | Boolean | `false`     | `true`         |
+| skipFootnotes    | `false`  | Boolean | `false`     | `true`         |
+| skipHeadings     | `false`  | Boolean | `false`     | `true`         |
+| skipImages       | `false`  | Boolean | `false`     | `true`         |
+| skipLists        | `false`  | Boolean | `false`     | `true`         |
+| skipQuotes       | `false`  | Boolean | `false`     | `true`         |
+| skipTables       | `false`  | Boolean | `false`     | `true`         |
+| debug            | `false`  | Boolean | `false`     | `true`         |
 
 ```js
 module.exports = {
-    plugins: [
-        {
-            resolve: "gatsby-source-gdocs2md",
-            options: {
-                // https://drive.google.com/drive/folders/FOLDER_ID
-                folder: "FOLDER_ID",
-                // defaults to src/pages
-                target: "FOLDER_PATH",
-            },
-        },
-        "gatsby-transformer-remark",
-        //
-        // OR "gatsby-plugin-mdx" for advanced usage using MDX
-        //
-        // You need some transformations?
-        // Checkout https://www.gatsbyjs.com/plugins/?=gatsby-remark
-        // And pick-up some plugins
-    ],
-}
+  plugins: [
+    {
+      resolve: "gatsby-source-gdocs2md",
+      options: {
+        // https://drive.google.com/drive/folders/FOLDER_ID
+        folder: "FOLDER_ID",
+        // defaults to src/pages
+        target: "FOLDER_PATH",
+      },
+    },
+    "gatsby-transformer-remark",
+    //
+    // OR "gatsby-plugin-mdx" for advanced usage using MDX
+    //
+    // You need some transformations?
+    // Checkout https://www.gatsbyjs.com/plugins/?=gatsby-remark
+    // And pick-up some plugins
+  ],
+};
 ```
 
 <p><details><summary>📷 How to use images ?</summary>
@@ -217,18 +205,18 @@ yarn add gatsby-plugin-sharp gatsby-transformer-sharp gatsby-remark-images
 
 ```js
 module.exports = {
-    plugins: [
-        "gatsby-source-gdocs2md",
-        "gatsby-plugin-sharp",
-        "gatsby-transformer-sharp",
-        {
-            resolve: "gatsby-transformer-remark",
-            options: {
-                plugins: ["gatsby-remark-images"],
-            },
-        },
-    ],
-}
+  plugins: [
+    "gatsby-source-gdocs2md",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: ["gatsby-remark-images"],
+      },
+    },
+  ],
+};
 ```
 
 </details></p>
@@ -249,31 +237,31 @@ Add the `gatsby-remark-prismjs` plugin to your `gatsby-config.js`
 
 ```js
 module.exports = {
-    plugins: [
-        "gatsby-source-gdocs2md",
-        {
-            resolve: "gatsby-transformer-remark",
-            options: {
-                plugins: ["gatsby-remark-prismjs"],
-            },
-        },
-    ],
-}
+  plugins: [
+    "gatsby-source-gdocs2md",
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: ["gatsby-remark-prismjs"],
+      },
+    },
+  ],
+};
 ```
 
 Import a `prismjs` theme in your `gatsby-browser.js`
 
 ```js
-require("prismjs/themes/prism.css")
+require("prismjs/themes/prism.css");
 ```
 
 </details></p>
 
 ### Trigger production builds
 
--   Go to [Google Drive example folder](https://drive.google.com/drive/folders/1YJWX_FRoVusp-51ztedm6HSZqpbJA3ag)
--   Create a copy of **Trigger Gatsby Build** file using `Right Click -> Create a copy`
--   Open your copy and update the **Build Webhook URL** in `A2`
--   Click the **Deploy** button to trigger a new build
+- Go to [Google Drive example folder](https://drive.google.com/drive/folders/1YJWX_FRoVusp-51ztedm6HSZqpbJA3ag)
+- Create a copy of **Trigger Gatsby Build** file using `Right Click -> Create a copy`
+- Open your copy and update the **Build Webhook URL** in `A2`
+- Click the **Deploy** button to trigger a new build
 
 > This method works with any hosting services: Gatsby Cloud, Netlify...

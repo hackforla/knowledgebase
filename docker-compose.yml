@@ -11,13 +11,15 @@
 #       - /node/node_modules:/node/node_modules
 services:
   node:
+    image: hfla-gdocs2md
+    container_name: hfla-gdocs2mdcontainer
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./utils/Dockerfile
     volumes:
       # https://stackoverflow.com/a/32785014/232619
       - .:/app
       - /app/node_modules
-    # command: node gdocs2md/scripts/start-express.js
+    command: ls
     ports:
       - 3000:3000
