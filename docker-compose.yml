@@ -10,19 +10,19 @@
 #       - .:/node
 #       - /node/node_modules:/node/node_modules
 services:
-  # node:
-  #   image: hfla-gdocs2md
-  #   container_name: hfla-gdocs2md
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile-node
-  #   volumes:
-  #     # https://stackoverflow.com/a/32785014/232619
-  #     - .:/app
-  #     - /app/node_modules
-  #   command: ls
-  #   ports:
-  #     - 3000:3000
+  node:
+    image: hfla-gdocs2md-node
+    container_name: hfla-gdocs2md-node
+    build:
+      context: .
+      dockerfile: Dockerfile-node
+    volumes:
+      # https://stackoverflow.com/a/32785014/232619
+      - .:/app
+      - /app/node_modules
+    command: node ./gdocs2md/scripts/start-express.js
+    ports:
+      - 3000:3000
 
   django:
     image: hfla-django
@@ -36,6 +36,7 @@ services:
     command: ./start.sh
     ports:
       - 8000:8000
+      - 5432:5432
   db:
     image: postgres:13
     volumes:

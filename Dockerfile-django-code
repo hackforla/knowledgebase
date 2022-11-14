@@ -1,0 +1,13 @@
+FROM hfla-django
+# RUN mkdir -p /node/node_modules && chown -R node:node /node
+
+# add bash
+
+
+# Create app directory
+WORKDIR /
+
+COPY ./DjangoRestApisPostgreSQL/requirements.txt ./
+COPY ./DjangoRestApisPostgreSQL ./
+CMD ["python", "manage.py", "runserver"]
+EXPOSE 8000
