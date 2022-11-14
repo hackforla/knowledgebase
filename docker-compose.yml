@@ -10,16 +10,38 @@
 #       - .:/node
 #       - /node/node_modules:/node/node_modules
 services:
-  node:
-    image: hfla-gdocs2md
-    container_name: hfla-gdocs2md
+  # node:
+  #   image: hfla-gdocs2md
+  #   container_name: hfla-gdocs2md
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-node
+  #   volumes:
+  #     # https://stackoverflow.com/a/32785014/232619
+  #     - .:/app
+  #     - /app/node_modules
+  #   command: ls
+  #   ports:
+  #     - 3000:3000
+
+  django:
+    image: hfla-django
+    container_name: hfla-django
     build:
       context: .
-      dockerfile: Dockerfile-node
+      dockerfile: Dockerfile-django
     volumes:
       # https://stackoverflow.com/a/32785014/232619
       - .:/app
-      - /app/node_modules
-    command: node gdocs2md/scripts/start-express.js
+    command: ./start.sh
     ports:
-      - 3000:3000
+      - 8000:8000
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+volumes:
+  postgres_data:

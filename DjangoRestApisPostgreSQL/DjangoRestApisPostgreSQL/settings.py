@@ -83,6 +83,7 @@ WSGI_APPLICATION = 'DjangoRestApisPostgreSQL.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databasescr
 DJANGO_SUPERUSER_PASSWORD = 'admin'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -95,7 +96,7 @@ DATABASES = {
 }
 
 
-# Password validation
+# ƒ validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
