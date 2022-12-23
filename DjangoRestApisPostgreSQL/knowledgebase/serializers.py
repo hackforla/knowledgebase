@@ -1,11 +1,11 @@
 from rest_framework import serializers 
-from knowledgebase.models import Tutorial
+from knowledgebase.models import Gdoc
  
  
-class TutorialSerializer(serializers.ModelSerializer):
+class GdocSerializer(serializers.ModelSerializer):
  
     class Meta:
-        model = Tutorial
+        model = Gdoc
         fields = ('id',
                   'title',
                   'description',

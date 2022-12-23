@@ -4,29 +4,29 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
-from knowledgebase.models import Tutorial
-from knowledgebase.serializers import TutorialSerializer
+from knowledgebase.models import Gdoc
+from knowledgebase.serializers import GdocSerializer
 from rest_framework.decorators import api_view
 
 
 @api_view(['GET', 'POST', 'DELETE'])
-def tutorial_list(request):
-    # GET list of tutorials, POST a new tutorial, DELETE all tutorials
-    print("tutorial_list")
+def gdoc_list(request):
+    # GET list of gdocs, POST a new gdoc, DELETE all gdocs
+    print("gdoc_list")
  
  
 @api_view(['GET', 'PUT', 'DELETE'])
-def tutorial_detail(request, pk):
-    # find tutorial by pk (id)
+def gdoc_detail(request, pk):
+    # find gdoc by pk (id)
     try: 
-        tutorial = Tutorial.objects.get(pk=pk) 
-    except Tutorial.DoesNotExist: 
-        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+        gdoc = Gdoc.objects.get(pk=pk) 
+    except Gdoc.DoesNotExist: 
+        return JsonResponse({'message': 'The gdoc does not exist'}, status=status.HTTP_404_NOT_FOUND) 
  
-    # GET / PUT / DELETE tutorial
+    # GET / PUT / DELETE gdoc
     
         
 @api_view(['GET'])
-def tutorial_list_published(request):
-    # GET all published tutorials
-    print("tutorial_list_published")
+def gdoc_list_published(request):
+    # GET all published gdocs
+    print("gdoc_list_published")
