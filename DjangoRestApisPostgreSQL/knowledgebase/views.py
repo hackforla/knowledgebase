@@ -27,6 +27,6 @@ def gdoc_detail(request, pk):
     
         
 @api_view(['GET'])
-def gdoc_list_published(request):
+def list_gdoc_published(request):
     # GET all published gdocs
     print("gdoc_list_published")
