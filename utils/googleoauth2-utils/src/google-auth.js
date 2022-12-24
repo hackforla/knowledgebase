@@ -4,9 +4,14 @@ const fs = require("fs");
 const GoogleOAuth2 = require("google-oauth2-env-vars");
 
 const refreshExpiredTokenVar = async () => {
+  console.log("refreshing token");
   let oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_OAUTH_CLIENT_ID,
     process.env.GOOGLE_OAUTH_CLIENT_SECRET
+  );
+  console.log(
+    process.env.GOOGLE_OAUTH_CLIENT_ID,
+    process.env.WEBSITE_GDRIVE_ROOT_ID
   );
   const currentToken = JSON.parse(process.env[ENV_TOKEN_VAR]);
   const expiry_date = currentToken.expiry_date;

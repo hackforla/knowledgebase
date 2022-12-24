@@ -26,6 +26,7 @@ const setObjectValuesFromParamValues = (obj) => {
 };
 
 const jekyllifyDocs = async (pluginOptions) => {
+  console.log("jekyllifyDocs start");
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   if (!options.folder) {
     throw new Error("Must provide a folder");
@@ -102,7 +103,6 @@ function writeContent({ content, filename, target, suffix, extension }) {
     target,
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
-  // console.log("writing", file, "x", filename);
   const dir = path.dirname(file);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(file, content);

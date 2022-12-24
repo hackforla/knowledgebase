@@ -53,6 +53,7 @@ const getTreeMetadata = (tree, file) => {
 
   tree.forEach((item) => {
     const nameSlugified = _kebabCase(item.name);
+    console.log("nameSlugified", nameSlugified, "item.name", item.name);
 
     path += `/${item.name}`;
 

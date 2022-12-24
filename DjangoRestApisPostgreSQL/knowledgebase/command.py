@@ -1,10 +1,10 @@
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE, STDOUT
 from django.http import JsonResponse
 
 command = ["node","./gdocs2md/scripts/generate-markdown-files.js"]
 result = {}
 try:
-        process = Popen(command, stdout=PIPE, stderr=PIPE)
+        process = Popen(command, stdout=STDOUT, stderr=PIPE)
         print("ok")
         output = process.stdout.read()
         err = process.stderr.read()
