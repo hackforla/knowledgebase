@@ -16,7 +16,7 @@ def list_gdoc_json(self):
 
 def generate_gdoc_markdown(self):
     from subprocess import Popen, PIPE
-    command = ["node","./gdocs2md/scripts/generate-markdown-files.js"]
+    command = ["node","knowledgebase/gdocs2md/scripts/generate-markdown-files.js"]
     result = {}
     try:
         process = Popen(command, stdout=PIPE, stderr=PIPE)
