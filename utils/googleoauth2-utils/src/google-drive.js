@@ -45,22 +45,22 @@ const getMetadataFromDescription = (description) => {
   return metadata;
 };
 
-const getTreeMetadata = (tree, file) => {
+const getTreeMetadata = (folderTree, file) => {
   let name = file.name;
   let breadcrumb = [];
   let slug = "";
   let path = "";
 
-  tree.forEach((item) => {
-    const nameSlugified = _kebabCase(item.name);
-    console.log("nameSlugified", nameSlugified, "item.name", item.name);
+  folderTree.forEach((folder) => {
+    const nameSlugified = _kebabCase(folder.name);
+    console.log("nameSlugified", nameSlugified, "item.name", folder.name);
 
-    path += `/${item.name}`;
+    path += `/${folder.name}`;
 
-    if (item.skip !== true) {
+    if (folder.skip !== true) {
       slug += `/${nameSlugified}`;
       breadcrumb.push({
-        name: item.name,
+        name: folder.name,
         slug,
       });
     }
