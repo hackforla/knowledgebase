@@ -71,6 +71,9 @@ const jekyllifyFrontMatter = async (gdoc, markdown) => {
       method: "GET",
     });
     dataJson = response.data;
+    const messageStart =
+      Object.keys(dataJson).length === 0 ? "No data" : "Data";
+    console.log(`${messageStart} found for ${gdoc.document.title}`);
   } catch (error) {
     // todo: not connected, replicate and handle [index] error, table error
     console.log(

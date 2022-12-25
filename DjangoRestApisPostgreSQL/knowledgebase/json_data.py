@@ -6,7 +6,7 @@ from django.core import serializers
 def get_gdoc_json(self, google_id):
 
     data = list(Gdoc.objects.filter(google_id=google_id).values())
-    if data.__len__() <= 1:
+    if data.__len__() == 1:
         data_json = data[0]
     else:
         data_json = {}
