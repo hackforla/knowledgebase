@@ -4,9 +4,12 @@ from django.http import JsonResponse
 from django.core import serializers
 
 def get_gdoc_json(self, google_id):
-    print("get_gdoc_json: google_id = " + google_id)
-    data = Gdoc.objects.filter(google_id=google_id).values()
-    data_json = json.dumps(list(data)[0])
+
+    data = list(Gdoc.objects.filter(google_id=google_id).values())
+    if data.__len__() <= 1:
+        data_json = data[0]
+    else:
+        data_json = {}
     return JsonResponse(data_json, safe=False)
 
 def list_gdoc_json(self):

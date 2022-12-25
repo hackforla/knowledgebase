@@ -53,7 +53,6 @@ const getTreeMetadata = (folderTree, file) => {
 
   folderTree.forEach((folder) => {
     const nameSlugified = _kebabCase(folder.name);
-    console.log("nameSlugified", nameSlugified, "item.name", folder.name);
 
     path += `/${folder.name}`;
 

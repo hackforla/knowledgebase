@@ -1,5 +1,6 @@
 const { get } = require("lodash");
 const yamljs = require("yamljs");
+const axios = require("axios");
 
 const getExistingFrontMatter = (markdown) => {
   const startPos = markdown.indexOf("---");
@@ -25,29 +26,64 @@ const checkFrontMatterAttribute = (
     : "";
 };
 
-const jekyllifyFrontMatter = (gdoc, markdown) => {
+const jekyllifyFrontMatter = async (gdoc, markdown) => {
   let { frontMatter: existingFrontMatter, markdownBody } =
     getExistingFrontMatter(markdown);
-  const attributeValuePairs = [
-    ["title", gdoc.document.title],
-    ["description", gdoc.document.description || ""],
-    ["short-description", ""],
-    ["card-type", "guide-page"],
-    ["status", "active"],
-    ["display", "true"],
-    ["category", "Development"],
+  // const attributeValuePairs = [
+  //   ["title", gdoc.document.title],
+  //   ["description", gdoc.document.description || ""],
+  //   ["short-description", ""],
+  //   ["card-type", "guide-page"],
+  //   ["status", "active"],
+  //   ["display", "true"],
+  //   ["category", "Development"],
+  //   // todo: change below to be dyname
+  //   ["svg", "svg/2FA.svg"],
+  //   ["provider-link", gdoc.properties.slug + gdoc.options.suffix],
+  // ];
+  // attributeValuePairs.forEach(([attributeName, value]) => {
+  // frontMatter += checkFrontMatterAttribute(
+  //   existingFrontMatter,
+  //   attributeName,
+  //   value
+
+  const defaultData = {
+    title: gdoc.document.title,
+    description: gdoc.document.description || "",
+    "short-description": "",
+    "card-type": "guide-page",
+    status: "active",
+    display: "true",
+    category: "Development",
     // todo: change below to be dyname
-    ["svg", "svg/2FA.svg"],
-    ["provider-link", gdoc.properties.slug + gdoc.options.suffix],
-  ];
+    svg: "svg/2FA.svg",
+    "provider-link": gdoc.properties.slug + gdoc.options.suffix,
+  };
   frontMatter = "";
-  attributeValuePairs.forEach(([attributeName, value]) => {
-    frontMatter += checkFrontMatterAttribute(
-      existingFrontMatter,
-      attributeName,
-      value
+  // todo: change below to be dynamic
+  // todo: consider lookinvg at existingFrontMatter
+  const url = `http://localhost:8000/gdocs/get/${gdoc.document.documentId}`;
+  console.log("**start**", gdoc.document.title, url);
+  let dataJson = {};
+  try {
+    response = await axios({
+      url,
+      method: "GET",
+    });
+    dataJson = response.data;
+  } catch (error) {
+    // todo: not connected, replicate and handle [index] error, table error
+    console.log(
+      "*** Error ***",
+      error.stack?.substring(0, 150) || error.message || error
     );
-  });
+  }
+  const json = { ...defaultData, ...dataJson };
+  for (key in json) {
+    frontMatter += `${key}: ${json[key]}\n`;
+  }
+
+  // todo: return retVal and on receiving side, use it to update the frontmatter
   return "---\n" + frontMatter + existingFrontMatter + "---\n" + markdownBody;
 };
 

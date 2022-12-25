@@ -43,7 +43,8 @@ const jekyllifyDocs = async (pluginOptions) => {
     if (options.saveGdoc) writeGdoc(options, filename, gdoc);
     if (!options.saveMarkdown) return;
     let markdown = await convertElements2MD(googleDocObj.elements);
-    markdown = jekyllifyFrontMatter(googleDocObj, markdown);
+    // todo: remove markdown from parameters
+    markdown = await jekyllifyFrontMatter(googleDocObj, markdown);
     writeMarkdown(options, filename, markdown);
   }
 
