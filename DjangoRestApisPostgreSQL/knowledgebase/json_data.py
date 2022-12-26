@@ -1,13 +1,16 @@
 import json
-from knowledgebase.models import Gdoc
+from knowledgebase.models import Gdoc, GdocAuthor
 from django.http import JsonResponse
 from django.core import serializers
 
 def get_gdoc_json(self, google_id):
-
-    data = list(Gdoc.objects.filter(google_id=google_id).values())
-    if data.__len__() == 1:
-        data_json = data[0]
+    # todo: do the below in a single query by including authors in gdoc object
+    gdocResultSet = Gdoc.objects.filter(google_id=google_id)
+    if gdocResultSet.__len__() == 1:
+        gdocValues = list(gdocResultSet.values())
+        gdocAuthorValues = list(gdocResultSet[0].gdocauthor_set.all().values('author__name', 'author__email'))
+        data_json = gdocValues[0]
+        data_json.update({"authors": gdocAuthorValues})
     else:
         data_json = {}
     return JsonResponse(data_json, safe=False)
