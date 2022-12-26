@@ -99,6 +99,8 @@ const jsonifyDocs = async (pluginOptions) => {
 };
 
 function writeContent({ content, filename, target, suffix, extension }) {
+  // todo: make location to write dependent on status (draft, etc)
+  // todo: create a map for status to google folder id
   console.log("writing markdown", target, filename, suffix, extension);
   const file = path.join(
     target,

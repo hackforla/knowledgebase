@@ -29,6 +29,7 @@ const checkFrontMatterAttribute = (
 const jekyllifyFrontMatter = async (gdoc, markdown) => {
   let { frontMatter: existingFrontMatter, markdownBody } =
     getExistingFrontMatter(markdown);
+  // todo: consider making this into a separate method
   // const attributeValuePairs = [
   //   ["title", gdoc.document.title],
   //   ["description", gdoc.document.description || ""],
@@ -61,7 +62,6 @@ const jekyllifyFrontMatter = async (gdoc, markdown) => {
   };
   frontMatter = "";
   // todo: change below to be dynamic
-  // todo: consider lookinvg at existingFrontMatter
   const url = `http://localhost:8000/gdocs/get/${gdoc.document.documentId}`;
   console.log("**start**", gdoc.document.title, url);
   let dataJson = {};
