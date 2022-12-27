@@ -63,7 +63,7 @@ const jekyllifyFrontMatter = async (gdoc, markdown) => {
   frontMatter = "";
   // todo: change below to be dynamic
   const url = `http://localhost:8000/gdocs/get/${gdoc.document.documentId}`;
-  console.log("**start**", gdoc.document.title, url);
+  console.log("Getting metadata", gdoc.document.title, url);
   let dataJson = {};
   try {
     response = await axios({

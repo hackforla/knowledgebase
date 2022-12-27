@@ -9,8 +9,10 @@ def get_gdoc_json(self, google_id):
     if gdocResultSet.__len__() == 1:
         gdocValues = list(gdocResultSet.values())
         gdocAuthorValues = list(gdocResultSet[0].gdocauthor_set.all().values('author__name', 'author__email'))
+        gdocPracticeAreaValues = list(gdocResultSet[0].practiceAreas.all().values())
         data_json = gdocValues[0]
-        data_json.update({"authors": gdocAuthorValues})
+        data_json.update(
+            {"authors": gdocAuthorValues, "practiceAreas": gdocPracticeAreaValues})
     else:
         data_json = {}
     return JsonResponse(data_json, safe=False)

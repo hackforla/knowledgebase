@@ -11,6 +11,9 @@ class Gdoc(models.Model):
     slug = models.CharField(max_length=200,blank=False, default='')
     status = models.CharField(max_length=10, default='draft')
     published = models.BooleanField(default=False)
+    practiceAreas = models.ManyToManyField('PracticeArea', blank=True)
+    tools = models.ManyToManyField('Tool', blank=True)
+    technologies = models.ManyToManyField('Technology', blank=True)
 
     class Meta:
         unique_together = ('slug', 'status',)
@@ -54,4 +57,17 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = ('name', 'email')
     search_fields = ['name', 'email']
 
-    
+class PracticeArea(models.Model):
+    name = models.CharField(max_length=70, blank=False, unique = True, )
+    def __str__(self):
+        return self.name
+
+class Technology(models.Model):
+    name = models.CharField(max_length=70, blank=False, unique = True, )
+    def __str__(self):
+        return self.name
+
+class Tool(models.Model):
+    name = models.CharField(max_length=70, blank=False, unique = True, )
+    def __str__(self):
+        return self.name
