@@ -18,6 +18,20 @@ class Gdoc(models.Model):
     class Meta:
         unique_together = ('slug', 'status',)
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'google_id': self.google_id,
+            'title': self.title,
+            'description': self.description,
+            'slug': self.slug,
+            'status': self.status,
+            'published': self.published,
+            'practiceAreas': [pa.name for pa in self.practiceAreas.all()],
+            'tools': [t.name for t in self.tools.all()],
+            'technologies': [t.name for t in self.technologies.all()],
+        }   
+        
     def __str__(self):
         return self.title + "(" + self.slug + ") " + self.status
 
@@ -34,12 +48,12 @@ class GdocAuthor(models.Model):
     gdoc = models.ForeignKey(Gdoc, on_delete=models.CASCADE)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     role = models.CharField(max_length=20, default='author')
-    author_name = author.name
     class Meta:
         unique_together = ('gdoc', 'author',)
 
     def __str__(self):
         return self.gdoc.__str__() + " / " + self.author.__str__()
+        
 
 class GdocAuthorInline(admin.TabularInline):
     model = GdocAuthor

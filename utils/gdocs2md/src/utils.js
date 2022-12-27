@@ -29,7 +29,7 @@ const checkFrontMatterAttribute = (
 const jekyllifyFrontMatter = async (gdoc, markdown) => {
   let { frontMatter: existingFrontMatter, markdownBody } =
     getExistingFrontMatter(markdown);
-  // todo: consider making this into a separate method
+  // todo: consider making this into a separate method, inject function for generating front matter
   // const attributeValuePairs = [
   //   ["title", gdoc.document.title],
   //   ["description", gdoc.document.description || ""],
@@ -56,7 +56,7 @@ const jekyllifyFrontMatter = async (gdoc, markdown) => {
     status: "active",
     display: "true",
     category: "Development",
-    // todo: change below to be dyname
+    // todo: change below to be dynamic
     svg: "svg/2FA.svg",
     "provider-link": gdoc.properties.slug + gdoc.options.suffix,
   };

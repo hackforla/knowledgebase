@@ -8,8 +8,7 @@ const {
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert.js");
 const { jekyllifyFrontMatter } = require("./utils.js");
 const { DEFAULT_OPTIONS } = require("./constants.js");
-const { now } = require("lodash");
-// TODO: add to constants
+
 function debugLog() {
   console.log("debug args", Date.now().toString().substring(9), ...arguments);
 }
@@ -44,6 +43,7 @@ const jekyllifyDocs = async (pluginOptions) => {
     if (!options.saveMarkdown) return;
     let markdown = await convertElements2MD(googleDocObj.elements);
     // todo: remove markdown from parameters
+    // todo: inject jekliffyFrontMatter function
     markdown = await jekyllifyFrontMatter(googleDocObj, markdown);
     writeMarkdown(options, filename, markdown);
   }
@@ -80,7 +80,7 @@ function writeGdoc(options, filename, gdoc) {
 
 async function filterGoogleDocs(options) {
   let gdocs = await fetchGoogleDocObjs(options);
-  // TODO: change to use more standard -- prefix (--var value) instead of split =
+  // ?? TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
     gdocs = gdocs.filter(({ document }) => {
       return document.title.toLowerCase().includes(matchPattern.toLowerCase());

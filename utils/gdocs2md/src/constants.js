@@ -12,7 +12,6 @@ module.exports = {
     debug: false,
     demoteHeadings: true,
     folder: folderId,
-    // TODO: change to assets/images/(subdir), change to go up a level
     imagesTarget: path.join(root, "assets/images"),
     keepDefaultStyle: false,
     matchPattern: "",
