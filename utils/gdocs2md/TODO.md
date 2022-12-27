@@ -5,6 +5,7 @@ Tasks
 # PENDING
 
 - [ ] **_ +++ NEXT _**
+  - [ ] Restore contributors in json
   - [ ] Refactor from start to finish
   - [ ] +++ Incubator
   - [ ] +++ Write to github, provide option to write to file
@@ -13,6 +14,7 @@ Tasks
   - [ ] +++ Check if anything missing from frontmatter in schema
   - [ ] Look at a markdown file for how contributing section works
   - [ ] Figure out gdoc2mdv2 executable
+  - [ ] Auto generate contributing section
 - [ ] **_ +++ DOCUMENTATION _**
   - [x] (obsoleted) Explain linkDir.sh
   - [ ] History of fork
