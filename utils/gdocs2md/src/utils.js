@@ -2,23 +2,16 @@ const { get } = require("lodash");
 const yamljs = require("yamljs");
 const axios = require("axios");
 
-const getExistingFrontMatter = (markdown) => {
-  const startPos = markdown.indexOf("---");
-  if (startPos === -1) {
-    return { frontMatter: "", markdownBody: markdown };
-  }
-  const endPos = markdown.indexOf("\n---", startPos + 3);
-  if (endPos === -1) {
-    return { frontMatter: "", markdownBody: markdown };
-  }
-  let frontMatter = markdown.substring(startPos + 4, endPos) + "\n";
-  let markdownBody = markdown.substring(endPos + 4, markdown.length);
-  return { frontMatter, markdownBody };
-};
-
+/**
+ * Compare the frontmatter in the gdoc with default frontmatter and return frontmatter
+ * merged with markdown
+ * @param {*} gdoc
+ * @param {*} markdown
+ * @returns
+ */
 const jekyllifyFrontMatter = async (gdoc, markdown) => {
-  let { frontMatter: existingFrontMatter, markdownBody } =
-    getExistingFrontMatter(markdown);
+  // let { frontMatter: existingFrontMatter, markdownBody } =
+  //   getExistingFrontMatter(markdown);
 
   const defaultData = {
     title: gdoc.document.title,
@@ -59,7 +52,7 @@ const jekyllifyFrontMatter = async (gdoc, markdown) => {
   }
 
   // todo: return retVal and on receiving side, use it to update the frontmatter
-  return "---\n" + frontMatter + existingFrontMatter + "---\n" + markdownBody;
+  return "---\n" + frontMatter + "---\n" + markdown;
 };
 
 const getFrontMatterFromGdoc = (gdoc) => {
@@ -73,6 +66,20 @@ const getFrontMatterFromGdoc = (gdoc) => {
       : "";
   return markdownFrontmatter;
 };
+
+// const getExistingFrontMatter = (markdown) => {
+//   const startPos = markdown.indexOf("---");
+//   if (startPos === -1) {
+//     return { frontMatter: "", markdownBody: markdown };
+//   }
+//   const endPos = markdown.indexOf("\n---", startPos + 3);
+//   if (endPos === -1) {
+//     return { frontMatter: "", markdownBody: markdown };
+//   }
+//   let frontMatter = markdown.substring(startPos + 4, endPos) + "\n";
+//   let markdownBody = markdown.substring(endPos + 4, markdown.length);
+//   return { frontMatter, markdownBody };
+// };
 
 // todo: consider making this into a separate method, inject function for generating front matter
 // const attributeValuePairs = [

@@ -13,6 +13,11 @@ function debugLog() {
   console.log("debug args", Date.now().toString().substring(9), ...arguments);
 }
 
+/**
+ * Update the keyValuePairs object with values from the command line
+ *
+ * @param {*} keyValuePairs
+ */
 const setObjectValuesFromParamValues = (keyValuePairs) => {
   const { argv } = process;
   const paramValues = argv.slice(2);
@@ -24,6 +29,32 @@ const setObjectValuesFromParamValues = (keyValuePairs) => {
   });
 };
 
+/**
+ * Convert a google doc object to markdown and save
+ * @param {*} gdoc
+ * @returns
+ */
+async function processGdoc(gdoc, options) {
+  let googleDocObj = {};
+  const { properties } = gdoc;
+  const filename = properties.path;
+  googleDocObj = await convertGDoc2ElementsObj({
+    ...gdoc,
+  });
+  if (options.saveGdoc) writeGdoc(options, filename, gdoc);
+  if (!options.saveMarkdown) return;
+  let markdown = await convertElements2MD(googleDocObj.elements);
+  // todo: remove markdown from parameters
+  // todo: inject jekliffyFrontMatter function
+  markdown = await jekyllifyFrontMatter(googleDocObj, markdown);
+  writeMarkdown(options, filename, markdown);
+}
+
+/**
+ * Based on the options, filter google docs from specified folder and process them,
+ * with final product being markdown files
+ * @param {*} pluginOptions
+ */
 const jekyllifyDocs = async (pluginOptions) => {
   console.log("jekyllifyDocs start");
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
@@ -32,35 +63,25 @@ const jekyllifyDocs = async (pluginOptions) => {
   }
   const gdocs = await filterGoogleDocs(options);
 
-  async function processGdoc(gdoc) {
-    let googleDocObj = {};
-    const { properties } = gdoc;
-    const filename = properties.path;
-    googleDocObj = await convertGDoc2ElementsObj({
-      ...gdoc,
-    });
-    if (options.saveGdoc) writeGdoc(options, filename, gdoc);
-    if (!options.saveMarkdown) return;
-    let markdown = await convertElements2MD(googleDocObj.elements);
-    // todo: remove markdown from parameters
-    // todo: inject jekliffyFrontMatter function
-    markdown = await jekyllifyFrontMatter(googleDocObj, markdown);
-    writeMarkdown(options, filename, markdown);
-  }
-
   // using "for" loop to avoid async issues
   // otherwise second document will start before everything is done with first
   // end results are fine with "forEach" but cleaner to have all activites done
   // before starting next
   // *** READ ABOVE BEFORE CHANGING TO "forEach" ***
   for (let i = 0; i < gdocs.length; i++) {
-    await processGdoc(gdocs[i]);
+    await processGdoc(gdocs[i], options);
   }
 };
 
+/**
+ * Writes markdown to a file
+ * @param {*} options
+ * @param {*} filename
+ * @param {*} markdown
+ */
 function writeMarkdown(options, filename, markdown) {
   writeContent({
-    target: options.targetMarkdownDir,
+    targetDir: options.targetMarkdownDir,
     suffix: options.suffix,
     filename,
     extension: "md",
@@ -68,9 +89,15 @@ function writeMarkdown(options, filename, markdown) {
   });
 }
 
+/**
+ * Converts googledoc to json and saves to file
+ * @param {*} options
+ * @param {*} filename
+ * @param {*} gdoc
+ */
 function writeGdoc(options, filename, gdoc) {
   writeContent({
-    target: options.targetGdocJson,
+    targetDir: options.targetGdocJson,
     suffix: options.suffix,
     filename,
     extension: "json",
@@ -78,6 +105,11 @@ function writeGdoc(options, filename, gdoc) {
   });
 }
 
+/**
+ * Filter google docs based on options
+ * @param {*} options
+ * @returns
+ */
 async function filterGoogleDocs(options) {
   let gdocs = await fetchGoogleDocObjs(options);
   // ?? TODO: change to use more standard -- prefix (--var value) instead of split =
@@ -89,6 +121,11 @@ async function filterGoogleDocs(options) {
   return gdocs;
 }
 
+/**
+ * Saves google docs as json to use for testing.  Does not save markdown.
+ * Calls jeklifyDocs with saveMarkdown set to false, saveGdoc set to true
+ * @param {*} pluginOptions
+ */
 const jsonifyDocs = async (pluginOptions) => {
   const options = _merge(
     { saveMarkdown: false, saveGdoc: true },
@@ -98,12 +135,16 @@ const jsonifyDocs = async (pluginOptions) => {
   await jekyllifyDocs(options);
 };
 
-function writeContent({ content, filename, target, suffix, extension }) {
+/**
+ * Saves contentto a local file.
+ * @param { content, filename, target, suffix, extension }
+ */
+function writeContent({ content, targetDir, filename, suffix, extension }) {
   // todo: make location to write dependent on status (draft, etc)
   // todo: create a map for status to google folder id
-  console.log("writing markdown", target, filename, suffix, extension);
+  console.log("writing markdown", targetDir, filename, suffix, extension);
   const file = path.join(
-    target,
+    targetDir,
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
   const dir = path.dirname(file);

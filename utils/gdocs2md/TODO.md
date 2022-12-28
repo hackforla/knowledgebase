@@ -6,6 +6,7 @@ Tasks
 
 - [ ] **_ +++ NEXT _**
   - [ ] Restore contributors in json
+  - [ ] Document all js functions
   - [ ] Refactor from start to finish
   - [ ] +++ Incubator
   - [ ] +++ Write to github, provide option to write to file

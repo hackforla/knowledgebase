@@ -530,7 +530,7 @@ class ElementsOfGoogleDocument {
     this.headings.forEach((heading) => {
       const levelevel = Number(heading.tag.substring(1));
       const newLevel = levelevel < 6 ? levelevel + 1 : levelevel;
-      this.elements[heading.index] = {
+      this.elements[heading.indexPos] = {
         type: "h" + newLevel,
         value: heading.text,
       };
@@ -623,6 +623,7 @@ class ElementsOfGoogleDocument {
     const markdownFrontmatter = this.getFrontMatter();
 
     return `${markdownFrontmatter}${markdownContent}`;
+    // return `${markdownFrontmatter}${markdownContent}`;
   }
 
   getFrontMatter() {
