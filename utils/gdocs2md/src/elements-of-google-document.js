@@ -328,8 +328,11 @@ class ElementsOfGoogleDocument {
       TITLE: "h1",
     };
     const namedStyleType = paragraph.paragraphStyle.namedStyleType;
-    const tag = tags[namedStyleType];
+    let tag = tags[namedStyleType];
     const isHeading = tag.startsWith("h");
+    if (isHeading && this.options.demoteHeadings) {
+      tag = "h" + (parseInt(tag[1]) + 1);
+    }
 
     // Lists
     if (paragraph.bullet) {
@@ -606,13 +609,7 @@ class ElementsOfGoogleDocument {
       }
     );
 
-    // Footnotes
     this.processFootnotes();
-
-    // h1 -> h2, h2 -> h3, ...
-    if (this.options.demoteHeadings === true) {
-      this.processDemoteHeadings();
-    }
 
     this.processInternalLinks();
   }
