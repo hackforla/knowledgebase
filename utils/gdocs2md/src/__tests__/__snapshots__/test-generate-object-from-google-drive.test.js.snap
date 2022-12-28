@@ -37,7 +37,7 @@ exports[`Document "Bold italic" to Objects 1`] = `
   "cover": null,
   "elements": [
     {
-      "type": "h2",
+      "type": "h1",
       "value": "**Bold** and **_Bold, Italic Heading_**",
     },
     {
@@ -190,7 +190,7 @@ exports[`Document "Headings" to Objects 1`] = `
   "cover": null,
   "elements": [
     {
-      "type": "h2",
+      "type": "h1",
       "value": "Most Important Topic (Heading 1)",
     },
     {
@@ -198,7 +198,7 @@ exports[`Document "Headings" to Objects 1`] = `
       "value": "Description of important topic",
     },
     {
-      "type": "h3",
+      "type": "h2",
       "value": "Important Subtopic (Heading 2)",
     },
     {
@@ -206,7 +206,7 @@ exports[`Document "Headings" to Objects 1`] = `
       "value": "Description of subtopic",
     },
     {
-      "type": "h4",
+      "type": "h3",
       "value": "Buried Info (Heading 3)",
     },
     {
@@ -222,7 +222,7 @@ exports[`Document "Images" to Objects 1`] = `
   "cover": null,
   "elements": [
     {
-      "type": "h2",
+      "type": "h1",
       "value": "The below is a small image <img src="/assets/images/images-kix.z1ebyhut5s2j-gdoc.png" title="" alt="img" height="26PT" width="29PT">embedded in the sentence",
     },
     {
@@ -234,7 +234,7 @@ exports[`Document "Images" to Objects 1`] = `
       "value": "<img src="/assets/images/images-kix.gj9e7st5rdpn-gdoc.png" title="" alt="img" height="116PT" width="163PT">",
     },
     {
-      "type": "h2",
+      "type": "h1",
       "value": "Big screenshot",
     },
     {
@@ -246,7 +246,7 @@ exports[`Document "Images" to Objects 1`] = `
       "value": "===============================",
     },
     {
-      "type": "h2",
+      "type": "h1",
       "value": "Image with title and description",
     },
     {
@@ -258,7 +258,7 @@ exports[`Document "Images" to Objects 1`] = `
       "value": "====================================================================",
     },
     {
-      "type": "h2",
+      "type": "h1",
       "value": "An image with a link ",
     },
     {
@@ -270,7 +270,7 @@ exports[`Document "Images" to Objects 1`] = `
       "value": "====================================================================",
     },
     {
-      "type": "h2",
+      "type": "h1",
       "value": "An image with a title, description, and link",
     },
     {
@@ -282,7 +282,7 @@ exports[`Document "Images" to Objects 1`] = `
       "value": "====================================================================",
     },
     {
-      "type": "h2",
+      "type": "h1",
       "value": "An image inserted with a link",
     },
     {
@@ -298,7 +298,7 @@ exports[`Document "Images" to Objects 1`] = `
       "value": "====================================================================",
     },
     {
-      "type": "h2",
+      "type": "h1",
       "value": "An image inserted with a link and resized",
     },
     {
@@ -310,7 +310,7 @@ exports[`Document "Images" to Objects 1`] = `
       "value": "====================================================================",
     },
     {
-      "type": "h2",
+      "type": "h1",
       "value": "Centered Image",
     },
     {
@@ -330,7 +330,7 @@ exports[`Document "Images" to Objects 1`] = `
       "value": "====================================================================",
     },
     {
-      "type": "h2",
+      "type": "h1",
       "value": "Right Justified Image",
     },
   ],

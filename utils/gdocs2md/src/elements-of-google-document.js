@@ -327,12 +327,9 @@ class ElementsOfGoogleDocument {
       SUBTITLE: "h2",
       TITLE: "h1",
     };
-    const namedStyleType = paragraph.paragraphStyle.namedStyleType;
-    let tag = tags[namedStyleType];
+    const getHeadingTag = paragraph.paragraphStyle.namedStyleType;
+    const tag = tags[getHeadingTag];
     const isHeading = tag.startsWith("h");
-    if (isHeading && this.options.demoteHeadings) {
-      tag = "h" + (parseInt(tag[1]) + 1);
-    }
 
     // Lists
     if (paragraph.bullet) {
@@ -366,7 +363,7 @@ class ElementsOfGoogleDocument {
         if (this.options.skipHeadings) return;
 
         const text = this.formatText(el, {
-          namedStyleType,
+          namedStyleType: getHeadingTag,
         });
 
         if (text) {
@@ -533,10 +530,11 @@ class ElementsOfGoogleDocument {
     this.headings.forEach((heading) => {
       const levelevel = Number(heading.tag.substring(1));
       const newLevel = levelevel < 6 ? levelevel + 1 : levelevel;
-      this.elements[heading.indexPos] = {
+      this.elements[heading.index] = {
         type: "h" + newLevel,
         value: heading.text,
       };
+      console.log(this.elements[heading.index]);
     });
   }
 
@@ -609,7 +607,13 @@ class ElementsOfGoogleDocument {
       }
     );
 
+    // Footnotes
     this.processFootnotes();
+
+    // h1 -> h2, h2 -> h3, ...
+    if (this.options.demoteHeadings === true) {
+      this.processDemoteHeadings();
+    }
 
     this.processInternalLinks();
   }
