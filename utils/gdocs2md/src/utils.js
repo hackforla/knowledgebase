@@ -16,37 +16,9 @@ const getExistingFrontMatter = (markdown) => {
   return { frontMatter, markdownBody };
 };
 
-const checkFrontMatterAttribute = (
-  existingFrontMatter,
-  attributeName,
-  value
-) => {
-  return !existingFrontMatter.includes(attributeName + ":")
-    ? `${attributeName}: ${value}\n`
-    : "";
-};
-
 const jekyllifyFrontMatter = async (gdoc, markdown) => {
   let { frontMatter: existingFrontMatter, markdownBody } =
     getExistingFrontMatter(markdown);
-  // todo: consider making this into a separate method, inject function for generating front matter
-  // const attributeValuePairs = [
-  //   ["title", gdoc.document.title],
-  //   ["description", gdoc.document.description || ""],
-  //   ["short-description", ""],
-  //   ["card-type", "guide-page"],
-  //   ["status", "active"],
-  //   ["display", "true"],
-  //   ["category", "Development"],
-  //   // todo: change below to be dyname
-  //   ["svg", "svg/2FA.svg"],
-  //   ["provider-link", gdoc.properties.slug + gdoc.options.suffix],
-  // ];
-  // attributeValuePairs.forEach(([attributeName, value]) => {
-  // frontMatter += checkFrontMatterAttribute(
-  //   existingFrontMatter,
-  //   attributeName,
-  //   value
 
   const defaultData = {
     title: gdoc.document.title,
@@ -101,5 +73,35 @@ const getFrontMatterFromGdoc = (gdoc) => {
       : "";
   return markdownFrontmatter;
 };
+
+// todo: consider making this into a separate method, inject function for generating front matter
+// const attributeValuePairs = [
+//   ["title", gdoc.document.title],
+//   ["description", gdoc.document.description || ""],
+//   ["short-description", ""],
+//   ["card-type", "guide-page"],
+//   ["status", "active"],
+//   ["display", "true"],
+//   ["category", "Development"],
+//   // todo: change below to be dyname
+//   ["svg", "svg/2FA.svg"],
+//   ["provider-link", gdoc.properties.slug + gdoc.options.suffix],
+// ];
+// attributeValuePairs.forEach(([attributeName, value]) => {
+// frontMatter += checkFrontMatterAttribute(
+//   existingFrontMatter,
+//   attributeName,
+//   value
+// return "---\n" + frontMatter + existingFrontMatter + "---\n" + markdownBody;
+
+// const checkFrontMatterAttribute = (
+//   existingFrontMatter,
+//   attributeName,
+//   value
+// ) => {
+//   return !existingFrontMatter.includes(attributeName + ":")
+//     ? `${attributeName}: ${value}\n`
+//     : "";
+// };
 
 module.exports = { getFrontMatterFromGdoc, jekyllifyFrontMatter };

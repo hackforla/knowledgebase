@@ -13,14 +13,14 @@ function debugLog() {
   console.log("debug args", Date.now().toString().substring(9), ...arguments);
 }
 
-const setObjectValuesFromParamValues = (obj) => {
+const setObjectValuesFromParamValues = (keyValuePairs) => {
   const { argv } = process;
   const paramValues = argv.slice(2);
   paramValues.forEach((paramValue) => {
     let [key, value] = paramValue.split("=");
     if (value.toLowerCase() == "true") value = true;
     if (value.toLowerCase() == "false") value = false;
-    obj[key] = value;
+    keyValuePairs[key] = value;
   });
 };
 
