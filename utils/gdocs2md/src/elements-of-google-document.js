@@ -316,20 +316,8 @@ class ElementsOfGoogleDocument {
   }
 
   processParagraph(paragraph, index) {
-    const tags = {
-      HEADING_1: "h1",
-      HEADING_2: "h2",
-      HEADING_3: "h3",
-      HEADING_4: "h4",
-      HEADING_5: "h5",
-      HEADING_6: "h6",
-      NORMAL_TEXT: "p",
-      SUBTITLE: "h2",
-      TITLE: "h1",
-    };
-    const getHeadingTag = paragraph.paragraphStyle.namedStyleType;
-    const tag = tags[getHeadingTag];
-    const isHeading = tag.startsWith("h");
+    const headingTag = paragraph.paragraphStyle.namedStyleType;
+    const { isHeading, tag } = this.getTag(headingTag);
 
     // Lists
     if (paragraph.bullet) {
@@ -363,7 +351,7 @@ class ElementsOfGoogleDocument {
         if (this.options.skipHeadings) return;
 
         const text = this.formatText(el, {
-          namedStyleType: getHeadingTag,
+          namedStyleType: headingTag,
         });
 
         if (text) {
@@ -416,6 +404,26 @@ class ElementsOfGoogleDocument {
         indexPos,
       });
     }
+  }
+
+  getTag(headingTag) {
+    const tags = {
+      HEADING_1: "h1",
+      HEADING_2: "h2",
+      HEADING_3: "h3",
+      HEADING_4: "h4",
+      HEADING_5: "h5",
+      HEADING_6: "h6",
+      NORMAL_TEXT: "p",
+      SUBTITLE: "h2",
+      TITLE: "h1",
+    };
+    const tag = tags[headingTag];
+    const isHeading = tag.startsWith("h");
+    if (this.options.demoteHeadings === true) {
+      this.processDemoteHeadings();
+    }
+    return { isHeading, tag };
   }
 
   htmlFormatter({ paragraph, type, value }) {
@@ -530,11 +538,10 @@ class ElementsOfGoogleDocument {
     this.headings.forEach((heading) => {
       const levelevel = Number(heading.tag.substring(1));
       const newLevel = levelevel < 6 ? levelevel + 1 : levelevel;
-      this.elements[heading.index] = {
+      this.elements[heading.indexPos] = {
         type: "h" + newLevel,
         value: heading.text,
       };
-      console.log(this.elements[heading.index]);
     });
   }
 
@@ -609,11 +616,6 @@ class ElementsOfGoogleDocument {
 
     // Footnotes
     this.processFootnotes();
-
-    // h1 -> h2, h2 -> h3, ...
-    if (this.options.demoteHeadings === true) {
-      this.processDemoteHeadings();
-    }
 
     this.processInternalLinks();
   }
