@@ -12,6 +12,14 @@ const testMarkdownPluginOptions = getPluginOptions({
   saveMarkdown: true,
 });
 
+const mockPluginOptions = getPluginOptions({
+  folderId: process.env.MOCK_GDRIVE_ROOT_ID,
+  root: process.env.MOCK_LOCAL_ROOT_DIR,
+  suffix: process.env.MOCK_SUFFIX,
+  saveGdoc: true,
+  saveMarkdown: false,
+});
+
 function getPluginOptions({ folderId, root, suffix, saveGdoc, saveMarkdown }) {
   return {
     folder: folderId,
@@ -31,6 +39,7 @@ const root = process.env.WEBSITE_LOCAL_ROOT;
 const suffix = process.env.WEBSITE_SUFFIX;
 module.exports = {
   ENV_TOKEN_VAR: "GOOGLE_DOCS_TOKEN",
+  mockPluginOptions,
   testMarkdownPluginOptions,
   DEFAULT_OPTIONS: {
     debug: false,
