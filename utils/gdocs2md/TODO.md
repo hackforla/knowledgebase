@@ -5,7 +5,8 @@ Tasks
 # PENDING
 
 - [ ] **_ +++ NEXT _**
-  - [ ] Restore contributors in json
+  - [x] Restore contributors in json
+  - [ ] Add custom formatting to test with mock
   - [ ] Document all js functions
   - [ ] Refactor from start to finish
   - [ ] +++ Incubator

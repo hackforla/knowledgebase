@@ -4,5 +4,5 @@ import { config } from "dotenv";
 // Read .env file from directory where command is issued
 config({ path: path.resolve(process.cwd(), ".env") });
 import pkg from "../src/constants.js";
-const { testMarkdownPluginOptions } = pkg;
-jekyllifyDocs(testMarkdownPluginOptions);
+const { mockPluginOptions } = pkg;
+jekyllifyDocs(mockPluginOptions);
