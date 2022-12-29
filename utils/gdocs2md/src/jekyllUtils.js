@@ -57,6 +57,7 @@ async function processGdoc(gdoc, options) {
  */
 const jekyllifyDocs = async (pluginOptions) => {
   console.log("jekyllifyDocs start");
+  // todo: extract to a function
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
   if (!options.folder) {
     throw new Error("Must provide a folder");
