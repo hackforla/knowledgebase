@@ -418,10 +418,10 @@ class ElementsOfGoogleDocument {
       SUBTITLE: "h2",
       TITLE: "h1",
     };
-    let tag = tags[headingTag];
+    const tag = tags[headingTag];
     const isHeading = tag.startsWith("h");
-    if (isHeading && this.options.demoteHeadings === true) {
-      tag = this.demoteHeading(tag);
+    if (this.options.demoteHeadings === true) {
+      this.processDemoteHeadings();
     }
     return { isHeading, tag };
   }
@@ -534,10 +534,15 @@ class ElementsOfGoogleDocument {
     this.elements.push(...footnotes);
   }
 
-  demoteHeading(tag) {
-    const levelevel = Number(tag.substring(1));
-    const newLevel = levelevel < 6 ? levelevel + 1 : levelevel;
-    return "h" + newLevel;
+  processDemoteHeadings() {
+    this.headings.forEach((heading) => {
+      const levelevel = Number(heading.tag.substring(1));
+      const newLevel = levelevel < 6 ? levelevel + 1 : levelevel;
+      this.elements[heading.indexPos] = {
+        type: "h" + newLevel,
+        value: heading.text,
+      };
+    });
   }
 
   processInternalLinks() {
