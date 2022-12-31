@@ -1,4 +1,5 @@
 {
   "jest.jestCommandLine": "yarn jest",
   "jest.enableSnapshotUpdateMessages": false,
+  "python.formatting.provider": "black",
 }
