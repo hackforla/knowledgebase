@@ -30,22 +30,25 @@ const jekyllifyFrontMatter = async (gdoc, markdown) => {
   const url = `http://localhost:8000/gdocs/get/${gdoc.document.documentId}`;
   console.log("Getting metadata", gdoc.document.title, url);
   let dataJson = {};
-  try {
-    response = await axios({
-      url,
-      method: "GET",
-    });
-    dataJson = response.data;
-    const messageStart =
-      Object.keys(dataJson).length === 0 ? "No data" : "Data";
-    console.log(`${messageStart} found for ${gdoc.document.title}`);
-  } catch (error) {
-    // todo: not connected, replicate and handle [index] error, table error
+  response = await axios({
+    url,
+    method: "GET",
+  }).catch((error) => {
     console.log(
-      "*** Error ***",
-      error.stack?.substring(0, 150) || error.message || error
+      gdoc.document.title,
+      gdoc.document.documentId,
+      "not registered"
     );
-  }
+  });
+  dataJson = response.data;
+  const messageStart = Object.keys(dataJson).length === 0 ? "No data" : "Data";
+  console.log(`${messageStart} found for ${gdoc.document.title}`);
+  // // todo: not connected, replicate and handle [index] error, table error
+  // console.log(
+  //   "*** Error ***",
+  //   error.stack?.substring(0, 150) || error.message || error
+  // );
+  // }
   const json = { ...defaultData, ...dataJson };
   for (key in json) {
     frontMatter += `${key}: ${json[key]}\n`;

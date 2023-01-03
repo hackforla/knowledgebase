@@ -1,13 +1,15 @@
 const fs = require("fs");
 const path = require("path");
 const pkg = require("lodash");
+const axios = require("axios");
+const { writeToFile } = require("./githubWrite.js");
 const { merge: _merge } = pkg;
 const {
   fetchGoogleDocObjs,
 } = require("../../googleoauth2-utils/src/google-docs.js");
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert.js");
 const { jekyllifyFrontMatter } = require("./utils.js");
-const { DEFAULT_OPTIONS } = require("./constants.js");
+const { DEFAULT_OPTIONS, GITHUB_OWNER, GITHUB_REPO,GITHUB_EMAIL } = require("./constants.js");
 
 function debugLog() {
   console.log("debug args", Date.now().toString().substring(9), ...arguments);
@@ -47,7 +49,7 @@ async function processGdoc(gdoc, options) {
   // todo: remove markdown from parameters
   // todo: inject jekliffyFrontMatter function
   markdown = await jekyllifyFrontMatter(googleDocObj, markdown);
-  writeMarkdown(options, filename, markdown);
+  await writeMarkdown(options, filename, markdown);
 }
 
 /**
@@ -70,7 +72,9 @@ const jekyllifyDocs = async (pluginOptions) => {
   // before starting next
   // *** READ ABOVE BEFORE CHANGING TO "forEach" ***
   for (let i = 0; i < gdocs.length; i++) {
-    await processGdoc(gdocs[i], options);
+    await processGdoc(gdocs[i], options).catch((err) => {
+      console.log("Error", err);
+    });
   }
 };
 
@@ -80,8 +84,8 @@ const jekyllifyDocs = async (pluginOptions) => {
  * @param {*} filename
  * @param {*} markdown
  */
-function writeMarkdown(options, filename, markdown) {
-  writeContent({
+async function writeMarkdown(options, filename, markdown) {
+  await writeContent({
     targetDir: options.targetMarkdownDir,
     suffix: options.suffix,
     filename,
@@ -96,8 +100,8 @@ function writeMarkdown(options, filename, markdown) {
  * @param {*} filename
  * @param {*} gdoc
  */
-function writeGdoc(options, filename, gdoc) {
-  writeContent({
+async function writeGdoc(options, filename, gdoc) {
+  await writeContent({
     targetDir: options.targetGdocJson,
     suffix: options.suffix,
     filename,
@@ -140,15 +144,34 @@ const jsonifyDocs = async (pluginOptions) => {
  * Saves contentto a local file.
  * @param { content, filename, target, suffix, extension }
  */
-function writeContent({ content, targetDir, filename, suffix, extension }) {
+async function writeContent({
+  content,
+  targetDir,
+  filename,
+  suffix,
+  extension,
+}) {
   // todo: make location to write dependent on status (draft, etc)
   // todo: create a map for status to google folder id
+  //${targetDir}/${filename}${suffix}.${extension
+  let githubFile = `${filename ? filename : "index"}${suffix}.${extension}`;
+  if (githubFile.startsWith("/")) githubFile = githubFile.substring(1);
+  console.log("debug githubFile", githubFile);
+
   console.log("writing markdown", targetDir, filename, suffix, extension);
   const file = path.join(
     targetDir,
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
   const dir = path.dirname(file);
+  await writeToFile({
+    owner: GITHUB_OWNER,
+    repo: GITHUB_REPO,,
+    path: githubFile,
+    message: "Automated commit",
+    content: content,
+  });
+
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(file, content);
 }

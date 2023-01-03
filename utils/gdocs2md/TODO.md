@@ -5,15 +5,22 @@ Tasks
 # PENDING
 
 - [ ] **_ +++ NEXT _**
-  - [x] Restore contributors in json
-  - [ ] Add custom formatting to test with mock
-  - [ ] Document all js functions
-  - [ ] Refactor from start to finish
+  - [ ] +++ Write to github, provide option to write to file Mon
+    - [x] +++ Update file
+    - [x] +++ Put in real file
+    - [ ] +++ Clean up console.log
+    - [ ] +++ Commit
+    - [ ] +++ Put different places depending on status
+  - [ ] ++ Figure out .catch Tue
+  - [ ] +++ Add custom icon to json_data Tue
   - [ ] +++ Incubator
-  - [ ] +++ Write to github, provide option to write to file
-  - [ ] +++ Verify Reminders
-  - [ ] +++ Make default svg on frontmatter a constant env variable
+  - [ ] +++ Auto generate provider link Tue
+  - [ ] +++ Verify Reminders Tue
+  - [ ] +++ Make default svg on frontmatter a constant env variable Ti
   - [ ] +++ Check if anything missing from frontmatter in schema
+  - [ ] ++ Add custom formatting to test. Mock
+  - [ ] ++ Document all js functions
+  - [ ] ++ Refactor from start to finish
   - [ ] Look at a markdown file for how contributing section works
   - [ ] Figure out gdoc2mdv2 executable
   - [ ] Auto generate contributing section
@@ -47,7 +54,7 @@ Tasks
   - [ ] Improve error message if token not set up
   - [ ] Don't prompt for certificate if already exists
 - [x] **_ FRONT MATTER _**
-  - [ ] Autogenerate provider-link
+  - [ ] +++ Autogenerate provider-link
   - [ ] Autogenerate contributors, with flag
 - [ ] **_ CREATE NPMJS PACKAGE _**
   - [ ] Token + fetch google docs

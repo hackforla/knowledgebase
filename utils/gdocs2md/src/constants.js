@@ -7,7 +7,18 @@ process.env.ENV_PATH = envPath;
 const folderId = process.env.WEBSITE_GDRIVE_ROOT_ID;
 const root = process.env.WEBSITE_LOCAL_ROOT;
 const suffix = process.env.WEBSITE_SUFFIX;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_NAME = process.env.GITHUB_NAME;
+const GITHUB_EMAIL = process.env.GITHUB_EMAIL;
+const GITHUB_OWNER = process.env.GITHUB_OWNER;
+const GITHUB_REPO = process.env.GITHUB_REPO;
+
 module.exports = {
+  GITHUB_TOKEN,
+  GITHUB_NAME,
+  GITHUB_EMAIL,
+  GITHUB_OWNER,
+  GITHUB_REPO,
   ENV_TOKEN_VAR: "GOOGLE_DOCS_TOKEN",
   DEFAULT_OPTIONS: {
     debug: false,
