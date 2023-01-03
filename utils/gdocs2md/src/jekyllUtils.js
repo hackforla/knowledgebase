@@ -9,7 +9,12 @@ const {
 } = require("../../googleoauth2-utils/src/google-docs.js");
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert.js");
 const { jekyllifyFrontMatter } = require("./utils.js");
-const { DEFAULT_OPTIONS, GITHUB_OWNER, GITHUB_REPO,GITHUB_EMAIL } = require("./constants.js");
+const {
+  DEFAULT_OPTIONS,
+  GITHUB_OWNER,
+  GITHUB_REPO,
+  GITHUB_EMAIL,
+} = require("./constants.js");
 
 function debugLog() {
   console.log("debug args", Date.now().toString().substring(9), ...arguments);
@@ -166,7 +171,7 @@ async function writeContent({
   const dir = path.dirname(file);
   await writeToFile({
     owner: GITHUB_OWNER,
-    repo: GITHUB_REPO,,
+    repo: GITHUB_REPO,
     path: githubFile,
     message: "Automated commit",
     content: content,

@@ -30,7 +30,6 @@ async function writeToFile({ owner, repo, path, message, content }) {
   if (existingCommit) {
     octokitValues.sha = existingCommit.data.sha;
   }
-  console.log("debug octokitValues", octokitValues);
 
   const { data } = await octokit.repos.createOrUpdateFileContents(
     octokitValues
