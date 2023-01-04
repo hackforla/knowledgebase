@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const pkg = require("lodash");
 const axios = require("axios");
-const { writeToFile } = require("./githubWrite.js");
+const { writeToGitHub } = require("./githubWrite.js");
 const { merge: _merge } = pkg;
 const {
   fetchGoogleDocObjs,
@@ -14,6 +14,8 @@ const {
   GITHUB_OWNER,
   GITHUB_REPO,
   GITHUB_EMAIL,
+  GITHUB_NAME,
+  GITHUB_COMMIT_MESSAGE,
 } = require("./constants.js");
 
 /**
@@ -162,11 +164,13 @@ async function writeContent({
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
   const dir = path.dirname(file);
-  await writeToFile({
+  await writeToGitHub({
     owner: GITHUB_OWNER,
     repo: GITHUB_REPO,
+    email: GITHUB_EMAIL,
+    githubName: GITHUB_NAME,
     path: githubFile,
-    message: "Automated commit",
+    message: GITHUB_COMMIT_MESSAGE,
     content: content,
   });
 

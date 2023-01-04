@@ -12,6 +12,16 @@ const GITHUB_NAME = process.env.GITHUB_NAME;
 const GITHUB_EMAIL = process.env.GITHUB_EMAIL;
 const GITHUB_OWNER = process.env.GITHUB_OWNER;
 const GITHUB_REPO = process.env.GITHUB_REPO;
+const GITHUB_COMMIT_MESSAGE =
+  process.env.GITHUB_COMMIT_MESSAGE || "Update from Google Docs";
+console.log(
+  "env debug",
+  GITHUB_REPO,
+  "x",
+  GITHUB_COMMIT_MESSAGE,
+  "x",
+  process.env
+);
 
 module.exports = {
   GITHUB_TOKEN,
@@ -19,6 +29,7 @@ module.exports = {
   GITHUB_EMAIL,
   GITHUB_OWNER,
   GITHUB_REPO,
+  GITHUB_COMMIT_MESSAGE,
   ENV_TOKEN_VAR: "GOOGLE_DOCS_TOKEN",
   DEFAULT_OPTIONS: {
     debug: false,

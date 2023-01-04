@@ -10,11 +10,14 @@ Tasks
     - [x] +++ Put in real file
     - [x] +++ Clean up console.log
     - [x] +++ Commit
-    - [ ] +++ Put different places depending on status
-    - [ ] ++ Add more parameters to writeToFile, including comment
+    - [ ] ++ Add more parameters to writeToGitHub, including comment
     - [ ] ++ Make message an env variable
+    - [ ] +++ Option to save to drive and/or github
+    - [ ] +++ Put different places depending on status
     - [ ] +++ Change filename based on slug
-  - [ ] ++ Figure out why .env.EXAMPLE gets updated
+    - [ ] Refactor: pass optipons around
+  - [ ] +++ Change auth so authorized from browser and variables cached
+  - [x] ++ Figure out why .env.EXAMPLE gets updated
   - [ ] ++ Figure out .catch Tue
   - [ ] +++ Add custom icon to json_data Tue
   - [ ] +++ Incubator

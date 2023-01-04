@@ -4,8 +4,8 @@ out/
 tests
 node_modules
 .env
-*.bkup
-*.backup
+*.bkup*
+*.backup*
 _site
 .DS_STORE
 actual-results

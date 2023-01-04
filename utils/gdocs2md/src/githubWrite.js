@@ -1,12 +1,24 @@
 const { Octokit } = require("@octokit/rest");
 const { Base64 } = require("js-base64");
 const { GITHUB_TOKEN, GITHUB_NAME, GITHUB_EMAIL } = require("./constants.js");
+console.log("GITHUB_TOKEN 2", GITHUB_TOKEN);
 
 const octokit = new Octokit({
   auth: GITHUB_TOKEN,
 });
 
-async function writeToFile({ owner, repo, path, message, content }) {
+console.log("GITHUB_TOKEN 3", GITHUB_TOKEN);
+
+async function writeToGitHub({
+  owner,
+  repo,
+  path,
+  githubName,
+  email,
+  message,
+  content,
+}) {
+  console.log("GITHUB_NAME", GITHUB_NAME, githubName, "x", GITHUB_TOKEN);
   const octokitValues = {
     owner: owner,
     repo: repo,
@@ -14,8 +26,8 @@ async function writeToFile({ owner, repo, path, message, content }) {
     message: message,
     content: Base64.encode(content),
     committer: {
-      name: GITHUB_NAME,
-      email: GITHUB_EMAIL,
+      name: githubName,
+      email: email,
     },
   };
   const existingCommit = await octokit.repos
@@ -36,4 +48,4 @@ async function writeToFile({ owner, repo, path, message, content }) {
   console.log("data", data);
 }
 
-module.exports = { writeToFile };
+module.exports = { writeToGitHub };
