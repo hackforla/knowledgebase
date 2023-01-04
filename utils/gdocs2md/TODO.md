@@ -8,9 +8,13 @@ Tasks
   - [ ] +++ Write to github, provide option to write to file Mon
     - [x] +++ Update file
     - [x] +++ Put in real file
-    - [ ] +++ Clean up console.log
-    - [ ] +++ Commit
+    - [x] +++ Clean up console.log
+    - [x] +++ Commit
     - [ ] +++ Put different places depending on status
+    - [ ] ++ Add more parameters to writeToFile, including comment
+    - [ ] ++ Make message an env variable
+    - [ ] +++ Change filename based on slug
+  - [ ] ++ Figure out why .env.EXAMPLE gets updated
   - [ ] ++ Figure out .catch Tue
   - [ ] +++ Add custom icon to json_data Tue
   - [ ] +++ Incubator
