@@ -16,10 +16,6 @@ const {
   GITHUB_EMAIL,
 } = require("./constants.js");
 
-function debugLog() {
-  console.log("debug args", Date.now().toString().substring(9), ...arguments);
-}
-
 /**
  * Update the keyValuePairs object with values from the command line
  *
@@ -161,9 +157,6 @@ async function writeContent({
   //${targetDir}/${filename}${suffix}.${extension
   let githubFile = `${filename ? filename : "index"}${suffix}.${extension}`;
   if (githubFile.startsWith("/")) githubFile = githubFile.substring(1);
-  console.log("debug githubFile", githubFile);
-
-  console.log("writing markdown", targetDir, filename, suffix, extension);
   const file = path.join(
     targetDir,
     `${filename ? filename : "index"}${suffix}.${extension}`

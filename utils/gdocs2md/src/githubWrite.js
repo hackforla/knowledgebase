@@ -12,7 +12,7 @@ async function writeToFile({ owner, repo, path, message, content }) {
     repo: repo,
     path: path,
     message: message,
-    content: Base64.encode(content + " " + Date.now()),
+    content: Base64.encode(content),
     committer: {
       name: GITHUB_NAME,
       email: GITHUB_EMAIL,
@@ -25,17 +25,15 @@ async function writeToFile({ owner, repo, path, message, content }) {
       path: path,
     })
     .catch((error) => {
-      console.log("debug error2", error);
+      console.log("Creating new file");
     });
   if (existingCommit) {
+    console.log("Updating existing file");
     octokitValues.sha = existingCommit.data.sha;
   }
 
-  const { data } = await octokit.repos.createOrUpdateFileContents(
-    octokitValues
-  );
-
-  console.log(data);
+  const data = await octokit.repos.createOrUpdateFileContents(octokitValues);
+  console.log("data", data);
 }
 
 module.exports = { writeToFile };
