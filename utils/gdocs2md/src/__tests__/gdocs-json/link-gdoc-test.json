@@ -347,6 +347,6 @@
     "suffix": "-gdoc-test",
     "extension": "json",
     "savejson": "true",
-    "savemarkdown": "false"
+    "saveMarkdownToFile": "false"
   }
 }

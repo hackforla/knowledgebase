@@ -7,7 +7,7 @@ const { merge: _merge } = pkg;
 const {
   fetchGoogleDocObjs,
 } = require("../../googleoauth2-utils/src/google-docs.js");
-const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert.js");
+const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert");
 const { jekyllifyFrontMatter } = require("./utils.js");
 const {
   DEFAULT_OPTIONS,
@@ -47,12 +47,17 @@ async function processGdoc(gdoc, options) {
     ...gdoc,
   });
   if (options.saveGdoc) writeGdoc(options, filename, gdoc);
-  if (!options.saveMarkdown) return;
+  if (!options.saveMarkdownToFile && !options.saveMarkdownToGitHub) return;
   let markdown = await convertElements2MD(googleDocObj.elements);
   // todo: remove markdown from parameters
   // todo: inject jekliffyFrontMatter function
   markdown = await jekyllifyFrontMatter(googleDocObj, markdown);
-  await writeMarkdown(options, filename, markdown);
+  if (options.saveMarkdownToFile) {
+    await writeMarkdown(options, filename, markdown);
+  }
+  if (options.saveMarkdownToGitHub) {
+    let markdown = await writeToGitHub();
+  }
 }
 
 /**
@@ -131,12 +136,12 @@ async function filterGoogleDocs(options) {
 
 /**
  * Saves google docs as json to use for testing.  Does not save markdown.
- * Calls jeklifyDocs with saveMarkdown set to false, saveGdoc set to true
+ * Calls jeklifyDocs with saveMarkdownToFile set to false, saveGdoc set to true
  * @param {*} pluginOptions
  */
 const jsonifyDocs = async (pluginOptions) => {
   const options = _merge(
-    { saveMarkdown: false, saveGdoc: true },
+    { saveMarkdownToFile: false, saveGdoc: true },
     DEFAULT_OPTIONS,
     pluginOptions
   );

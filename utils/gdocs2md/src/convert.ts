@@ -2,13 +2,13 @@ const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
 const json2md = require("json2md");
 const { normalizeElement } = require("./normalize-element");
 
-const convertGDoc2ElementsObj = (gdoc) => {
+const convertGDoc2ElementsObj = (gdoc: any) => {
   const obj = new ElementsOfGoogleDocument({ ...gdoc });
   obj.process();
   return obj;
 };
 
-const convertElements2MD = (elements) => {
+const convertElements2MD = (elements: any) => {
   const json = elements.map(normalizeElement);
   let markdown = json2md(json);
   markdown =
@@ -33,7 +33,7 @@ const convertElements2MD = (elements) => {
 //   return lines.join("\n");
 // };
 
-const formatHeading2MarkdownSections = (markdown) => {
+const formatHeading2MarkdownSections = (markdown: string) => {
   let markdownLines = markdown.split("\n");
   let heading1Created = false;
   const divStart = '<div class="section-container" markdown="1">';
@@ -58,14 +58,14 @@ const formatHeading2MarkdownSections = (markdown) => {
   return markdownLines.join("\n");
 };
 
-const insertElement = (elements, element, x) => {
+const insertElement = (elements: any, element: any, x: any) => {
   let newLines = Array.isArray(element) ? [...element] : [element];
   newLines = elements[x - 1] ? ["", ...newLines, ""] : [...newLines, ""];
   elements.splice(x, 0, ...newLines);
   return { counter: x + newLines.length };
 };
 
-const removeBlankLines = (markdown) => {
+const removeBlankLines = (markdown: string) => {
   let reachedEnd = false;
   let countTripleDashes = 0;
   let index = 0;
@@ -78,7 +78,7 @@ const removeBlankLines = (markdown) => {
     ) {
       markdownLines.splice(index, 1);
     }
-    element = markdownLines[index];
+    const element = markdownLines[index];
     if (element === "---") {
       countTripleDashes++;
     }

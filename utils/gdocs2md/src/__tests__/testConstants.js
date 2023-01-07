@@ -1,3 +1,4 @@
+const path = require("path");
 const { config } = require("dotenv");
 const envPath = path.resolve(process.cwd(), ".env");
 config({ path: envPath });
@@ -8,7 +9,7 @@ const testMarkdownPluginOptions = getPluginOptions({
   root: process.env.TEST_LOCAL_ROOT_DIR,
   suffix: process.env.TEST_SUFFIX,
   saveGdoc: false,
-  saveMarkdown: true,
+  saveMarkdownToFile: true,
 });
 
 const mockPluginOptions = getPluginOptions({
@@ -16,10 +17,16 @@ const mockPluginOptions = getPluginOptions({
   root: process.env.MOCK_LOCAL_ROOT_DIR,
   suffix: process.env.MOCK_SUFFIX,
   saveGdoc: true,
-  saveMarkdown: false,
+  saveMarkdownToFile: false,
 });
 
-function getPluginOptions({ folderId, root, suffix, saveGdoc, saveMarkdown }) {
+function getPluginOptions({
+  folderId,
+  root,
+  suffix,
+  saveGdoc,
+  saveMarkdownToFile,
+}) {
   return {
     folder: folderId,
     targetMarkdownDir: path.join(
@@ -29,7 +36,7 @@ function getPluginOptions({ folderId, root, suffix, saveGdoc, saveMarkdown }) {
     suffix: suffix,
     extension: "md",
     saveGdoc,
-    saveMarkdown,
+    saveMarkdownToFile,
   };
 }
 module.exports = {

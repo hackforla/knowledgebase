@@ -12,3 +12,5 @@ actual-results
 **.local
 venv
 __pycache__
+dist/
+

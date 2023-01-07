@@ -40,7 +40,7 @@ module.exports = {
     matchPattern: "",
     pageContext: [],
     saveGdoc: false,
-    saveMarkdown: true,
+    saveMarkdownToFile: true,
     skipCodes: false,
     skipFootnotes: false,
     skipHeadings: false,

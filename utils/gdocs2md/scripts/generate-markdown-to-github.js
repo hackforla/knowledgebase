@@ -9,5 +9,5 @@ if (process.env.ENV_PATH) {
   process.env.ENV_PATH = envPath;
 }
 
-// default options saveGdoc is false, saveMarkdownToFile is true
-jekyllifyDocs({});
+// default options saveGdoc is false
+jekyllifyDocs({ saveMarkdownToGitHub: true, saveMarkdownToFile: false });

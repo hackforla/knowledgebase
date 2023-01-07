@@ -10,8 +10,8 @@ Tasks
     - [x] +++ Put in real file
     - [x] +++ Clean up console.log
     - [x] +++ Commit
-    - [ ] ++ Add more parameters to writeToGitHub, including comment
-    - [ ] ++ Make message an env variable
+    - [x] ++ Add more parameters to writeToGitHub, including comment
+    - [x] ++ Make message an env variable
     - [ ] +++ Option to save to drive and/or github
     - [ ] +++ Put different places depending on status
     - [ ] +++ Change filename based on slug
@@ -40,7 +40,7 @@ Tasks
   - [ ] +++ How to test (check)
   - [ ] +++ Front matter
   - [ ] +++ Dir structure
-  - [ ] savejson and savemarkdown parameters
+  - [ ] savejson and saveMarkdownToFile parameters
 - [ ] **_ IMAGES _**
 - [ ] **_ +++ DOCKER _** - [ ] Get to work locally
 - [ ] Prod env variables
