@@ -29,6 +29,7 @@ async function writeToGitHub({
       name: githubName,
       email: email,
     },
+    branch: "experiment2",
   };
   const existingCommit = await octokit.repos
     .getContent({

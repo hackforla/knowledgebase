@@ -12,7 +12,7 @@ Tasks
     - [x] +++ Commit
     - [x] ++ Add more parameters to writeToGitHub, including comment
     - [x] ++ Make message an env variable
-    - [ ] +++ Option to save to drive and/or github
+    - [x] +++ Option to save to drive and/or github
     - [ ] +++ Put different places depending on status
     - [ ] +++ Change filename based on slug
     - [ ] Refactor: pass optipons around
