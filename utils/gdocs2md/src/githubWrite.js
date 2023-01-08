@@ -17,7 +17,7 @@ async function writeToGitHub({
   email,
   message,
   content,
-  branch = "experiment2",
+  branch,
 }) {
   console.log("GITHUB_NAME", GITHUB_NAME, githubName, "x", GITHUB_TOKEN);
   const octokitValues = {

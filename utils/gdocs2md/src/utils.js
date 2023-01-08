@@ -9,59 +9,6 @@ const axios = require("axios");
  * @param {*} markdown
  * @returns
  */
-const jekyllifyFrontMatter = async (gdoc, markdown) => {
-  // let { frontMatter: existingFrontMatter, markdownBody } =
-  //   getExistingFrontMatter(markdown);
-
-  const defaultData = {
-    title: gdoc.document.title,
-    description: gdoc.document.description || "",
-    "short-description": "",
-    "card-type": "guide-page",
-    status: "active",
-    display: "true",
-    category: "Development",
-    // todo: change below to be dynamic
-    svg: "svg/2FA.svg",
-    "provider-link": gdoc.properties.slug + gdoc.options.suffix,
-  };
-  frontMatter = "";
-  // todo: change below to be dynamic
-  const url = `http://localhost:8000/gdocs/get/${gdoc.document.documentId}`;
-  console.log("Getting metadata", gdoc.document.title, url);
-  let dataJson = {};
-  response = await axios({
-    url,
-    method: "GET",
-  }).catch((error) => {
-    console.log(
-      gdoc.document.title,
-      gdoc.document.documentId,
-      "not registered"
-    );
-    return markdown;
-  });
-  if (!response.data) {
-    return markdown;
-  }
-  console.log("dataJson", dataJson);
-  dataJson = response.data;
-  const messageStart = Object.keys(dataJson).length === 0 ? "No data" : "Data";
-  console.log(`${messageStart} found for ${gdoc.document.title}`);
-  // // todo: not connected, replicate and handle [index] error, table error
-  // console.log(
-  //   "*** Error ***",
-  //   error.stack?.substring(0, 150) || error.message || error
-  // );
-  // }
-  const json = { ...defaultData, ...dataJson };
-  for (key in json) {
-    frontMatter += `${key}: ${json[key]}\n`;
-  }
-
-  // todo: return retVal and on receiving side, use it to update the frontmatter
-  return "---\n" + frontMatter + "---\n" + markdown;
-};
 
 const getFrontMatterFromGdoc = (gdoc) => {
   const frontMatter = {
@@ -119,4 +66,4 @@ const getFrontMatterFromGdoc = (gdoc) => {
 //     : "";
 // };
 
-module.exports = { getFrontMatterFromGdoc, jekyllifyFrontMatter };
+module.exports = { getFrontMatterFromGdoc };

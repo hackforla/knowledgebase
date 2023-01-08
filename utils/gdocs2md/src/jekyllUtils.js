@@ -8,7 +8,6 @@ const {
   fetchGoogleDocObjs,
 } = require("../../googleoauth2-utils/src/google-docs.js");
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert");
-const { jekyllifyFrontMatter } = require("./utils.js");
 const {
   DEFAULT_OPTIONS,
   GITHUB_OWNER,
@@ -52,7 +51,7 @@ async function processGdoc(gdoc, options) {
   let markdown = await convertElements2MD(googleDocObj.elements, options);
   // todo: remove markdown from parameters
   // todo: inject jekliffyFrontMatter function
-  markdown = await jekyllifyFrontMatter(googleDocObj, markdown);
+  markdown = (await gdoc.jekyllifyFrontMatter()) + markdown;
   await writeMarkdown(options, filename, markdown);
 }
 

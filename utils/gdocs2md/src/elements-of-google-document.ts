@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // const yamljs = require("yamljs");
 const _get = require("lodash/get");
 const _repeat = require("lodash/repeat");
@@ -187,6 +189,62 @@ class ElementsOfGoogleDocument {
     }
 
     return before + text + after;
+  }
+
+  jekyllifyFrontMatter = async () => {
+    // let { frontMatter: existingFrontMatter, markdownBody } =
+    //   getExistingFrontMatter(markdown);
+
+    const defaultData = {
+      title: this.document.title,
+      description: this.document.description || "",
+      "short-description": "",
+      "card-type": "guide-page",
+      status: "active",
+      display: "true",
+      category: "Development",
+      // todo: change below to be dynamic
+      svg: "svg/2FA.svg",
+      "provider-link": this.properties.slug + this.options.suffix,
+    };
+    let frontMatter = "";
+    // todo: change below to be dynamic
+    const dataJson = await this.getData();
+
+    console.log("dataJson", dataJson);
+    const messageStart =
+      Object.keys(dataJson).length === 0 ? "No data" : "Data";
+    console.log(`${messageStart} found for ${this.document.title}`);
+    // // todo: not connected, replicate and handle [index] error, table error
+    // console.log(
+    //   "*** Error ***",
+    //   error.stack?.substring(0, 150) || error.message || error
+    // );
+    // }
+    const json = { ...defaultData, ...dataJson };
+    for (const key in json) {
+      frontMatter += `${key}: ${json[key]}\n`;
+    }
+
+    // todo: return retVal and on receiving side, use it to update the frontmatter
+    return "---\n" + frontMatter + "---\n";
+  };
+
+  private async getData() {
+    const url = `http://localhost:8000/gdocs/get/${gdoc.document.documentId}`;
+    console.log("Getting metadata", gdoc.document.title, url);
+    const response = await axios({
+      url,
+      method: "GET",
+    }).catch((error) => {
+      console.log(
+        this.document.title,
+        this.document.documentId,
+        "not registered"
+      );
+      return {};
+    });
+    return response.data || ({} as any);
   }
 
   getTextStyle(type: string) {
