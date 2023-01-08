@@ -17,6 +17,7 @@ async function writeToGitHub({
   email,
   message,
   content,
+  branch = "experiment2",
 }) {
   console.log("GITHUB_NAME", GITHUB_NAME, githubName, "x", GITHUB_TOKEN);
   const octokitValues = {
@@ -29,22 +30,25 @@ async function writeToGitHub({
       name: githubName,
       email: email,
     },
-    branch: "experiment2",
+    branch,
   };
   const existingCommit = await octokit.repos
     .getContent({
       owner: owner,
       repo: repo,
       path: path,
+      ref: branch,
     })
     .catch((error) => {
       console.log("Creating new file");
     });
   if (existingCommit) {
-    console.log("Updating existing file");
+    console.log("Updating existing file", existingCommit);
     octokitValues.sha = existingCommit.data.sha;
+    // octokitValues.sha = "fe0cc115c62c0d21439725b4020ad6fe64838d9b";
   }
 
+  console.log("octokitValues", octokitValues);
   const data = await octokit.repos.createOrUpdateFileContents(octokitValues);
   console.log("data", data);
 }

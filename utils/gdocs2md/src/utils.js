@@ -39,7 +39,12 @@ const jekyllifyFrontMatter = async (gdoc, markdown) => {
       gdoc.document.documentId,
       "not registered"
     );
+    return markdown;
   });
+  if (!response.data) {
+    return markdown;
+  }
+  console.log("dataJson", dataJson);
   dataJson = response.data;
   const messageStart = Object.keys(dataJson).length === 0 ? "No data" : "Data";
   console.log(`${messageStart} found for ${gdoc.document.title}`);

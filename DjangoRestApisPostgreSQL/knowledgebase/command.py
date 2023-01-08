@@ -1,7 +1,7 @@
 from subprocess import Popen, PIPE, STDOUT
 from django.http import JsonResponse
 
-command = ["node","./gdocs2md/scripts/generate-markdown-files.js"]
+command = ["ts-node","./gdocs2md/scripts/generate-markdown-files.js"]
 result = {}
 try:
         process = Popen(command, stdout=STDOUT, stderr=PIPE)

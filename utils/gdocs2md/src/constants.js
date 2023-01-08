@@ -37,7 +37,7 @@ module.exports = {
     folder: folderId,
     imagesTarget: path.join(root, "assets/images"),
     keepDefaultStyle: false,
-    matchPattern: "",
+    matchPattern: "bold",
     pageContext: [],
     saveGdoc: false,
     saveMarkdownToFile: true,

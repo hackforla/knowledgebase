@@ -52,12 +52,7 @@ async function processGdoc(gdoc, options) {
   // todo: remove markdown from parameters
   // todo: inject jekliffyFrontMatter function
   markdown = await jekyllifyFrontMatter(googleDocObj, markdown);
-  if (options.saveMarkdownToFile) {
-    await writeMarkdown(options, filename, markdown);
-  }
-  if (options.saveMarkdownToGitHub) {
-    let markdown = await writeToGitHub();
-  }
+  await writeMarkdown(options, filename, markdown);
 }
 
 /**
@@ -99,6 +94,7 @@ async function writeMarkdown(options, filename, markdown) {
     filename,
     extension: "md",
     content: markdown,
+    options: options,
   });
 }
 
@@ -128,7 +124,9 @@ async function filterGoogleDocs(options) {
   // ?? TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
     gdocs = gdocs.filter(({ document }) => {
-      return document.title.toLowerCase().includes(matchPattern.toLowerCase());
+      return document.title
+        .toLowerCase()
+        .includes(options.matchPattern.toLowerCase());
     });
   }
   return gdocs;
@@ -158,6 +156,7 @@ async function writeContent({
   filename,
   suffix,
   extension,
+  options,
 }) {
   // todo: make location to write dependent on status (draft, etc)
   // todo: create a map for status to google folder id
@@ -169,18 +168,22 @@ async function writeContent({
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
   const dir = path.dirname(file);
-  await writeToGitHub({
-    owner: GITHUB_OWNER,
-    repo: GITHUB_REPO,
-    email: GITHUB_EMAIL,
-    githubName: GITHUB_NAME,
-    path: githubFile,
-    message: GITHUB_COMMIT_MESSAGE,
-    content: content,
-  });
+  if (options.saveMarkdownToGitHub) {
+    await writeToGitHub({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      email: GITHUB_EMAIL,
+      githubName: GITHUB_NAME,
+      path: githubFile,
+      message: GITHUB_COMMIT_MESSAGE,
+      content: content,
+    });
+  }
 
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(file, content);
+  if (options.saveMarkdownToFile) {
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(file, content);
+  }
 }
 
 module.exports = { setObjectValuesFromParamValues, jekyllifyDocs, jsonifyDocs };
