@@ -13,9 +13,31 @@ const { downloadImageFromURL } = require("./download-image");
 
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
+type ConstructorValues = {
+  document: any;
+  properties: any;
+  options: any;
+  links: any;
+};
 
 class ElementsOfGoogleDocument {
-  constructor({ document, properties = {}, options = {}, links = {} }) {
+  document: any;
+  links: any;
+  properties: any;
+  options: any;
+  elements: any;
+  cover: any;
+  headings: any;
+  footnotes: any;
+  related: any;
+  bodyFontSize: any;
+
+  constructor({
+    document,
+    properties = {},
+    options = {},
+    links = {},
+  }: ConstructorValues) {
     this.document = document;
     this.links = links;
     this.properties = properties;
@@ -23,11 +45,17 @@ class ElementsOfGoogleDocument {
   }
 
   formatText(
-    el,
+    el: {
+      inlineObjectElement: {
+        inlineObjectId: any;
+        textStyle: { link: { url: any } };
+      };
+      textRun: { content: string; textStyle: any };
+    },
     { inlineImages = false, namedStyleType = "NORMAL_TEXT" } = {}
   ) {
     if (el.inlineObjectElement) {
-      const image = this.getImage(el);
+      const image = this.getImage(el) as any;
       if (image) {
         image.alt = image.alt || image.title || "img";
         const relativeFilename = path.join(
@@ -69,7 +97,7 @@ class ElementsOfGoogleDocument {
     let text = el.textRun.content
       .replace(/\n$/, "") // Remove new lines
       .replace(/“|”/g, '"'); // Replace smart quotes by double quotes
-    const contentMatch = text.match(/^(\s*)(\S+(?:[ \t\v]*\S+)*)(\s*)$/); // Match "text", "before" and "after"
+    const contentMatch = text.match(/^(\s*)(\S+(?:[ \t\v]*\S+)*)(\s*)$/) as any; // Match "text", "before" and "after"
     const before = contentMatch[1];
     const after = contentMatch[3];
     text = contentMatch[2];
@@ -90,7 +118,7 @@ class ElementsOfGoogleDocument {
       link,
       strikethrough,
       underline,
-      weightedFontFamily: { fontFamily } = {},
+      weightedFontFamily: { fontFamily } = { fontFamily: "" },
     } = style;
 
     const isInlineCode = fontFamily === "Consolas";
@@ -165,16 +193,18 @@ class ElementsOfGoogleDocument {
     return before + text + after;
   }
 
-  getTextStyle(type) {
+  getTextStyle(type: string) {
     const documentStyles = _get(this.document, ["namedStyles", "styles"]);
 
     if (!documentStyles) return {};
 
-    const style = documentStyles.find((style) => style.namedStyleType === type);
+    const style = documentStyles.find(
+      (style: { namedStyleType: any }) => style.namedStyleType === type
+    );
     return style.textStyle;
   }
 
-  getImage(el) {
+  getImage(el: { inlineObjectElement: { inlineObjectId: string | number } }) {
     if (this.options.skipImages) return;
 
     const { inlineObjects } = this.document;
@@ -223,22 +253,22 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  getTableCellContent(content) {
+  getTableCellContent(content: { paragraph: any }[]) {
     return content
       .map(({ paragraph }) => paragraph.elements.map(this.formatText).join(""))
       .join("")
       .replace(/\n/g, "<br/>"); // Replace newline characters by <br/> to avoid multi-paragraphs
   }
 
-  indentText(text, level) {
+  indentText(text: any, level: number) {
     return `${_repeat(HORIZONTAL_TAB_CHAR, level)}${text}`;
   }
 
-  stringifyContent(tagContent) {
+  stringifyContent(tagContent: any[]) {
     return tagContent.join("").replace(/\n$/, "");
   }
 
-  appendToList({ list, listItem, elementLevel, level }) {
+  appendToList({ list, listItem, elementLevel, level }: any) {
     const lastItem = list[list.length - 1];
 
     if (listItem.level > level) {
@@ -260,7 +290,7 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  getListTag(listId, level) {
+  getListTag(listId: any, level: number) {
     const glyph = _get(this.document, [
       "lists",
       listId,
@@ -273,7 +303,13 @@ class ElementsOfGoogleDocument {
     return glyph ? "ol" : "ul";
   }
 
-  processList(paragraph, index) {
+  processList(
+    paragraph: {
+      bullet: { listId?: any; nestingLevel?: any };
+      elements: any[];
+    },
+    index: number
+  ) {
     if (this.options.skipLists) return;
 
     const prevListId = _get(this.document, [
@@ -286,7 +322,7 @@ class ElementsOfGoogleDocument {
     ]);
     const isPrevList = prevListId === paragraph.bullet.listId;
     const prevList = _get(this.elements, [this.elements.length - 1, "value"]);
-    const textArray = paragraph.elements.map((el) => {
+    const textArray = paragraph.elements.map((el: any) => {
       return this.formatText(el, { inlineImages: true });
     });
     const text = this.stringifyContent(textArray);
@@ -315,7 +351,14 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  processParagraph(paragraph, index) {
+  processParagraph(
+    paragraph: {
+      paragraphStyle: { namedStyleType: any; indentStart: { magnitude: any } };
+      bullet: any;
+      elements: any[];
+    },
+    index: any
+  ) {
     const headingTag = paragraph.paragraphStyle.namedStyleType;
     const { isHeading, tag } = this.getTag(headingTag);
 
@@ -325,49 +368,55 @@ class ElementsOfGoogleDocument {
       return;
     }
 
-    let tagContentArray = [];
+    let tagContentArray: string[] = [];
 
-    paragraph.elements.forEach((el) => {
-      if (el.pageBreak) {
-        return;
-      }
+    paragraph.elements.forEach(
+      (el: {
+        pageBreak: any;
+        horizontalRule: any;
+        footnoteReference: { footnoteNumber: any; footnoteId: string | number };
+      }) => {
+        if (el.pageBreak) {
+          return;
+        }
 
-      // <hr />
-      else if (el.horizontalRule) {
-        tagContentArray.push("<hr/>");
-      }
+        // <hr />
+        else if (el.horizontalRule) {
+          tagContentArray.push("<hr/>");
+        }
 
-      // Footnotes
-      else if (el.footnoteReference) {
-        if (this.options.skipFootnotes) return;
+        // Footnotes
+        else if (el.footnoteReference) {
+          if (this.options.skipFootnotes) return;
 
-        tagContentArray.push(`[^${el.footnoteReference.footnoteNumber}]`);
-        this.footnotes[el.footnoteReference.footnoteId] =
-          el.footnoteReference.footnoteNumber;
-      }
+          tagContentArray.push(`[^${el.footnoteReference.footnoteNumber}]`);
+          this.footnotes[el.footnoteReference.footnoteId] =
+            el.footnoteReference.footnoteNumber;
+        }
 
-      // Headings
-      else if (isHeading) {
-        if (this.options.skipHeadings) return;
+        // Headings
+        else if (isHeading) {
+          if (this.options.skipHeadings) return;
 
-        const text = this.formatText(el, {
-          namedStyleType: headingTag,
-        });
+          const text = this.formatText(el as any, {
+            namedStyleType: headingTag,
+          });
 
-        if (text) {
-          tagContentArray.push(text);
+          if (text) {
+            tagContentArray.push(text);
+          }
+        }
+
+        // Texts
+        else {
+          const text = this.formatText(el as any);
+
+          if (text) {
+            tagContentArray.push(text);
+          }
         }
       }
-
-      // Texts
-      else {
-        const text = this.formatText(el);
-
-        if (text) {
-          tagContentArray.push(text);
-        }
-      }
-    });
+    );
 
     if (tagContentArray.length === 0) return;
 
@@ -406,7 +455,18 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  getTag(headingTag) {
+  getTag(
+    headingTag:
+      | "HEADING_1"
+      | "HEADING_2"
+      | "HEADING_3"
+      | "HEADING_4"
+      | "HEADING_5"
+      | "HEADING_6"
+      | "NORMAL_TEXT"
+      | "SUBTITLE"
+      | "TITLE"
+  ) {
     const tags = {
       HEADING_1: "h1",
       HEADING_2: "h2",
@@ -418,7 +478,7 @@ class ElementsOfGoogleDocument {
       SUBTITLE: "h2",
       TITLE: "h1",
     };
-    const tag = tags[headingTag];
+    const tag = tags[headingTag] as any;
     const isHeading = tag.startsWith("h");
     if (this.options.demoteHeadings === true) {
       this.processDemoteHeadings();
@@ -426,7 +486,7 @@ class ElementsOfGoogleDocument {
     return { isHeading, tag };
   }
 
-  htmlFormatter({ paragraph, type, value }) {
+  htmlFormatter({ paragraph, type, value }: any) {
     const alignment = paragraph.paragraphStyle.alignment;
     if (alignment === "CENTER") {
       return [
@@ -441,7 +501,7 @@ class ElementsOfGoogleDocument {
     return [{ type, value }];
   }
 
-  processQuote(table) {
+  processQuote(table: { tableRows: any[] }) {
     if (this.options.skipQuotes) return;
 
     const firstRow = table.tableRows[0];
@@ -452,14 +512,16 @@ class ElementsOfGoogleDocument {
     this.elements.push({ type: "blockquote", value: blockquote });
   }
 
-  processCode(codeBlock) {
+  processCode(codeBlock: { tableRows: any[] }) {
     if (this.options.skipCodes) return;
 
     const firstRow = codeBlock.tableRows[0];
     const firstCell = firstRow.tableCells[0];
     const codeContent = firstCell.content
-      .map(({ paragraph }) =>
-        paragraph.elements.map((el) => el.textRun.content).join("")
+      .map(({ paragraph }: any) =>
+        paragraph.elements
+          .map((el: { textRun: { content: any } }) => el.textRun.content)
+          .join("")
       )
       .join("")
       .replace(/\x0B/g, "\n") //eslint-disable-line no-control-regex
@@ -486,7 +548,7 @@ class ElementsOfGoogleDocument {
     });
   }
 
-  processTable(table) {
+  processTable(table: { tableRows: [any, ...any[]] }) {
     if (this.options.skipTables) return;
 
     const [thead, ...tbody] = table.tableRows;
@@ -494,10 +556,10 @@ class ElementsOfGoogleDocument {
     this.elements.push({
       type: "table",
       value: {
-        headers: thead.tableCells.map(({ content }) =>
+        headers: thead.tableCells.map(({ content }: any) =>
           this.getTableCellContent(content)
         ),
-        rows: tbody.map((row) =>
+        rows: tbody.map((row: { tableCells: { content: any }[] }) =>
           row.tableCells.map(({ content }) => this.getTableCellContent(content))
         ),
       },
@@ -507,20 +569,20 @@ class ElementsOfGoogleDocument {
   processFootnotes() {
     if (this.options.skipFootnotes) return;
 
-    const footnotes = [];
+    const footnotes: { type: string; value: { number: any; text: any } }[] = [];
     const documentFootnotes = this.document.footnotes;
 
     if (!documentFootnotes) return;
 
     Object.entries(documentFootnotes).forEach(([, value]) => {
-      const paragraphElements = value.content[0].paragraph.elements;
+      const paragraphElements = (value as any).content[0].paragraph.elements;
       const tagContentArray = paragraphElements.map(this.formatText);
       const tagContentString = this.stringifyContent(tagContentArray);
 
       footnotes.push({
         type: "footnote",
         value: {
-          number: this.footnotes[value.footnoteId],
+          number: this.footnotes[(value as any).footnoteId],
           text: tagContentString,
         },
       });
@@ -535,14 +597,16 @@ class ElementsOfGoogleDocument {
   }
 
   processDemoteHeadings() {
-    this.headings.forEach((heading) => {
-      const levelevel = Number(heading.tag.substring(1));
-      const newLevel = levelevel < 6 ? levelevel + 1 : levelevel;
-      this.elements[heading.indexPos] = {
-        type: "h" + newLevel,
-        value: heading.text,
-      };
-    });
+    this.headings.forEach(
+      (heading: { tag: string; indexPos: string | number; text: any }) => {
+        const levelevel = Number(heading.tag.substring(1));
+        const newLevel = levelevel < 6 ? levelevel + 1 : levelevel;
+        this.elements[heading.indexPos] = {
+          type: "h" + newLevel,
+          value: heading.text,
+        };
+      }
+    );
   }
 
   processInternalLinks() {
@@ -584,7 +648,7 @@ class ElementsOfGoogleDocument {
     this.processCover();
 
     this.document.body.content.forEach(
-      ({ paragraph, table, sectionBreak, tableOfContents }, i) => {
+      ({ paragraph, table, sectionBreak, tableOfContents }: any, i: any) => {
         // Unsupported elements
         if (sectionBreak || tableOfContents) {
           return;
@@ -635,10 +699,11 @@ class ElementsOfGoogleDocument {
 }
 
 // Add extra converter for footnotes
-json2md.converters.footnote = function (footnote) {
+json2md.converters.footnote = function (footnote: any) {
   return `[^${footnote.number}]:${footnote.text}`;
 };
 
-module.exports = {
-  ElementsOfGoogleDocument,
-};
+export { ElementsOfGoogleDocument };
+// module.exports = {
+//   ElementsOfGoogleDocument,
+// };

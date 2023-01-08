@@ -6,14 +6,14 @@
     "sourceMap": true,
     "strict": true,
     "baseUrl": "./",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "./utils/gdocs2md/dist",
+    "rootDir": "./utils/gdocs2md/src",
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
     "skipLibCheck": true
   },
   "include": [
-    "./src", 
+    "./utils/gdocs2md/src", 
   ],
   "exclude": [
     "./test",
