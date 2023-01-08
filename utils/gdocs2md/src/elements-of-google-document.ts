@@ -17,12 +17,14 @@ type ConstructorValues = {
   document?: any;
   properties?: any;
   links?: any;
+  options?: any;
 };
 
 class ElementsOfGoogleDocument {
   document: any;
   links: any = {};
   properties: any = {};
+  options: any = {};
   elements: any;
   cover: any;
   headings: any;
@@ -30,8 +32,11 @@ class ElementsOfGoogleDocument {
   related: any;
   bodyFontSize: any;
 
-  constructor({ document }: ConstructorValues) {
+  constructor({ document, links, properties, options }: ConstructorValues) {
     this.document = document;
+    this.links = links || {};
+    this.properties = properties || {};
+    this.options = _merge({}, DEFAULT_OPTIONS, options);
   }
 
   formatText(
@@ -409,7 +414,11 @@ class ElementsOfGoogleDocument {
 
         // Texts
         else {
-          const text = this.formatText(el as any);
+          const text = this.formatText(
+            el as any,
+            { inlineImages: true },
+            options
+          );
 
           if (text) {
             tagContentArray.push(text);
