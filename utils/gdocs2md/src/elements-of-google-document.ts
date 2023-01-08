@@ -191,7 +191,7 @@ class ElementsOfGoogleDocument {
     return before + text + after;
   }
 
-  jekyllifyFrontMatter = async () => {
+  jekyllifyFrontMatter = async (dataJson: any) => {
     // let { frontMatter: existingFrontMatter, markdownBody } =
     //   getExistingFrontMatter(markdown);
 
@@ -209,7 +209,6 @@ class ElementsOfGoogleDocument {
     };
     let frontMatter = "";
     // todo: change below to be dynamic
-    const dataJson = await this.getData();
 
     console.log("dataJson", dataJson);
     const messageStart =
@@ -230,9 +229,9 @@ class ElementsOfGoogleDocument {
     return "---\n" + frontMatter + "---\n";
   };
 
-  private async getData() {
+  async getData() {
     const url = `http://localhost:8000/gdocs/get/${gdoc.document.documentId}`;
-    console.log("Getting metadata", gdoc.document.title, url);
+    console.log("Getting metadata", this.document.title, url);
     const response = await axios({
       url,
       method: "GET",

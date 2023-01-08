@@ -51,7 +51,8 @@ async function processGdoc(gdoc, options) {
   let markdown = await convertElements2MD(googleDocObj.elements, options);
   // todo: remove markdown from parameters
   // todo: inject jekliffyFrontMatter function
-  markdown = (await gdoc.jekyllifyFrontMatter()) + markdown;
+  jsonData = await gdoc.getData();
+  markdown = (await gdoc.jekyllifyFrontMatter(jsonData)) + markdown;
   await writeMarkdown(options, filename, markdown);
 }
 
