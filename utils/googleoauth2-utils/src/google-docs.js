@@ -34,7 +34,6 @@ async function fetchGoogleDocObjs(options) {
       const gdoc = new GoogleDocumentObj({
         document,
         properties: gdocProperties,
-        options,
         links,
       });
       return gdoc;

@@ -6,7 +6,9 @@ const documentLists = require("./documents/lists.json");
 const documentQuotes = require("./documents/quotes.json");
 const documentCodes = require("./documents/codes.json");
 const documentTables = require("./documents/tables.json");
-const { ElementsOfGoogleDocument } = require("../elements-of-google-document");
+import { loadOptions } from "@babel/core";
+import { ElementsOfGoogleDocument } from "../elements-of-google-document";
+// const { ElementsOfGoogleDocument } = require("../elements-of-google-document");
 
 test.skip(`"KeepDefaultStyle" option`, () => {
   const options = { keepDefaultStyle: true };
@@ -14,7 +16,7 @@ test.skip(`"KeepDefaultStyle" option`, () => {
     document: documentTexts,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   expect(googleDocument.toMarkdown()).toMatchSnapshot();
 });
 
@@ -24,7 +26,7 @@ test.skip(`"DemoteHeading" option enabled`, () => {
     document: documentTexts,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   expect(googleDocument.toMarkdown()).toMatchSnapshot();
 });
 
@@ -34,7 +36,7 @@ test(`"DemoteHeading" option disabled`, () => {
     document: documentTexts,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   expect(googleDocument.toMarkdown()).toMatchSnapshot();
 });
 
@@ -48,7 +50,7 @@ test(`Crosslinks between documents`, () => {
     document: documentLinks,
     links,
   });
-  googleDocument.process();
+  googleDocument.process({});
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });
@@ -61,7 +63,7 @@ test(`Skip headings`, () => {
     document: documentTexts,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });
@@ -74,7 +76,7 @@ test(`Skip images`, () => {
     document: documentImages,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });
@@ -87,7 +89,7 @@ test(`Skip footnotes`, () => {
     document: documentFootnotes,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });
@@ -100,7 +102,7 @@ test(`Skip lists`, () => {
     document: documentLists,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });
@@ -113,7 +115,7 @@ test(`Skip quotes`, () => {
     document: documentQuotes,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });
@@ -126,7 +128,7 @@ test(`Skip codes`, () => {
     document: documentCodes,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });
@@ -139,7 +141,7 @@ test(`Skip tables`, () => {
     document: documentTables,
     options,
   });
-  googleDocument.process();
+  googleDocument.process(options);
   const documentObject = googleDocument.toMarkdown();
   expect(documentObject).toMatchSnapshot();
 });

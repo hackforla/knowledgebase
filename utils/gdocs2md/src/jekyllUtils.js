@@ -45,10 +45,11 @@ async function processGdoc(gdoc, options) {
   const filename = properties.path;
   googleDocObj = await convertGDoc2ElementsObj({
     ...gdoc,
+    options,
   });
   if (options.saveGdoc) writeGdoc(options, filename, gdoc);
   if (!options.saveMarkdownToFile && !options.saveMarkdownToGitHub) return;
-  let markdown = await convertElements2MD(googleDocObj.elements);
+  let markdown = await convertElements2MD(googleDocObj.elements, options);
   // todo: remove markdown from parameters
   // todo: inject jekliffyFrontMatter function
   markdown = await jekyllifyFrontMatter(googleDocObj, markdown);

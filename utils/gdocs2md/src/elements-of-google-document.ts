@@ -14,34 +14,24 @@ const { downloadImageFromURL } = require("./download-image");
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
 type ConstructorValues = {
-  document: any;
-  properties: any;
-  options: any;
-  links: any;
+  document?: any;
+  properties?: any;
+  links?: any;
 };
 
 class ElementsOfGoogleDocument {
   document: any;
-  links: any;
-  properties: any;
-  options: any;
+  links: any = {};
+  properties: any = {};
   elements: any;
   cover: any;
   headings: any;
-  footnotes: any;
+  footnotes: any = {};
   related: any;
   bodyFontSize: any;
 
-  constructor({
-    document,
-    properties = {},
-    options = {},
-    links = {},
-  }: ConstructorValues) {
+  constructor({ document }: ConstructorValues) {
     this.document = document;
-    this.links = links;
-    this.properties = properties;
-    this.options = _merge({}, DEFAULT_OPTIONS, options);
   }
 
   formatText(
@@ -52,10 +42,11 @@ class ElementsOfGoogleDocument {
       };
       textRun: { content: string; textStyle: any };
     },
-    { inlineImages = false, namedStyleType = "NORMAL_TEXT" } = {}
+    { inlineImages = false, namedStyleType = "NORMAL_TEXT" } = {},
+    options: any = {}
   ) {
     if (el.inlineObjectElement) {
-      const image = this.getImage(el) as any;
+      const image = this.getImage(el, options) as any;
       if (image) {
         image.alt = image.alt || image.title || "img";
         const relativeFilename = path.join(
@@ -65,7 +56,7 @@ class ElementsOfGoogleDocument {
         );
         const relativeTargetUrl = `${this.properties.slug}-${el.inlineObjectElement.inlineObjectId}-gdoc.png`;
         const filename = path.join(
-          this.options.imagesTarget || this.options.targetMarkdownDir,
+          options.imagesTarget || options.targetMarkdownDir,
           relativeTargetUrl
         );
         // todo: change to have separate var for slug path and slug
@@ -104,7 +95,7 @@ class ElementsOfGoogleDocument {
 
     const defaultStyle = this.getTextStyle(namedStyleType);
     const textStyle = el.textRun.textStyle;
-    const style = this.options.keepDefaultStyle
+    const style = options.keepDefaultStyle
       ? _merge({}, defaultStyle, textStyle)
       : textStyle;
 
@@ -123,7 +114,7 @@ class ElementsOfGoogleDocument {
 
     const isInlineCode = fontFamily === "Consolas";
     if (isInlineCode) {
-      if (this.options.skipCodes) return text;
+      if (options.skipCodes) return text;
 
       return "`" + text + "`";
     }
@@ -204,8 +195,11 @@ class ElementsOfGoogleDocument {
     return style.textStyle;
   }
 
-  getImage(el: { inlineObjectElement: { inlineObjectId: string | number } }) {
-    if (this.options.skipImages) return;
+  getImage(
+    el: { inlineObjectElement: { inlineObjectId: string | number } },
+    options: { skipImages: any }
+  ) {
+    if (options.skipImages) return;
 
     const { inlineObjects } = this.document;
 
@@ -226,7 +220,7 @@ class ElementsOfGoogleDocument {
     };
   }
 
-  processCover() {
+  processCover(options: any) {
     const { headers, documentStyle } = this.document;
     const firstPageHeaderId = _get(documentStyle, ["firstPageHeaderId"]);
 
@@ -242,7 +236,7 @@ class ElementsOfGoogleDocument {
       0,
     ]);
 
-    const image = this.getImage(headerElement);
+    const image = this.getImage(headerElement, options);
 
     if (image) {
       this.cover = {
@@ -308,9 +302,10 @@ class ElementsOfGoogleDocument {
       bullet: { listId?: any; nestingLevel?: any };
       elements: any[];
     },
-    index: number
+    index: number,
+    options: { skipLists: any }
   ) {
-    if (this.options.skipLists) return;
+    if (options.skipLists) return;
 
     const prevListId = _get(this.document, [
       "body",
@@ -323,7 +318,7 @@ class ElementsOfGoogleDocument {
     const isPrevList = prevListId === paragraph.bullet.listId;
     const prevList = _get(this.elements, [this.elements.length - 1, "value"]);
     const textArray = paragraph.elements.map((el: any) => {
-      return this.formatText(el, { inlineImages: true });
+      return this.formatText(el, { inlineImages: true }, options);
     });
     const text = this.stringifyContent(textArray);
 
@@ -357,14 +352,15 @@ class ElementsOfGoogleDocument {
       bullet: any;
       elements: any[];
     },
-    index: any
+    index: any,
+    options: any
   ) {
     const headingTag = paragraph.paragraphStyle.namedStyleType;
-    const { isHeading, tag } = this.getTag(headingTag);
+    const { isHeading, tag } = this.getTag(headingTag, options);
 
     // Lists
     if (paragraph.bullet) {
-      this.processList(paragraph, index);
+      this.processList(paragraph, index, options);
       return;
     }
 
@@ -387,7 +383,7 @@ class ElementsOfGoogleDocument {
 
         // Footnotes
         else if (el.footnoteReference) {
-          if (this.options.skipFootnotes) return;
+          if (options.skipFootnotes) return;
 
           tagContentArray.push(`[^${el.footnoteReference.footnoteNumber}]`);
           this.footnotes[el.footnoteReference.footnoteId] =
@@ -396,11 +392,15 @@ class ElementsOfGoogleDocument {
 
         // Headings
         else if (isHeading) {
-          if (this.options.skipHeadings) return;
+          if (options.skipHeadings) return;
 
-          const text = this.formatText(el as any, {
-            namedStyleType: headingTag,
-          });
+          const text = this.formatText(
+            el as any,
+            {
+              namedStyleType: headingTag,
+            },
+            options
+          );
 
           if (text) {
             tagContentArray.push(text);
@@ -465,7 +465,8 @@ class ElementsOfGoogleDocument {
       | "HEADING_6"
       | "NORMAL_TEXT"
       | "SUBTITLE"
-      | "TITLE"
+      | "TITLE",
+    options: { demoteHeadings: boolean }
   ) {
     const tags = {
       HEADING_1: "h1",
@@ -480,7 +481,7 @@ class ElementsOfGoogleDocument {
     };
     const tag = tags[headingTag] as any;
     const isHeading = tag.startsWith("h");
-    if (this.options.demoteHeadings === true) {
+    if (options.demoteHeadings === true) {
       this.processDemoteHeadings();
     }
     return { isHeading, tag };
@@ -501,8 +502,8 @@ class ElementsOfGoogleDocument {
     return [{ type, value }];
   }
 
-  processQuote(table: { tableRows: any[] }) {
-    if (this.options.skipQuotes) return;
+  processQuote(table: { tableRows: any[] }, options: any) {
+    if (options.skipQuotes) return;
 
     const firstRow = table.tableRows[0];
     const firstCell = firstRow.tableCells[0];
@@ -512,8 +513,8 @@ class ElementsOfGoogleDocument {
     this.elements.push({ type: "blockquote", value: blockquote });
   }
 
-  processCode(codeBlock: { tableRows: any[] }) {
-    if (this.options.skipCodes) return;
+  processCode(codeBlock: { tableRows: any[] }, options: any) {
+    if (options.skipCodes) return;
 
     const firstRow = codeBlock.tableRows[0];
     const firstCell = firstRow.tableCells[0];
@@ -548,8 +549,8 @@ class ElementsOfGoogleDocument {
     });
   }
 
-  processTable(table: { tableRows: [any, ...any[]] }) {
-    if (this.options.skipTables) return;
+  processTable(table: { tableRows: [any, ...any[]] }, options: any) {
+    if (options.skipTables) return;
 
     const [thead, ...tbody] = table.tableRows;
 
@@ -566,8 +567,8 @@ class ElementsOfGoogleDocument {
     });
   }
 
-  processFootnotes() {
-    if (this.options.skipFootnotes) return;
+  processFootnotes(options: any) {
+    if (options.skipFootnotes) return;
 
     const footnotes: { type: string; value: { number: any; text: any } }[] = [];
     const documentFootnotes = this.document.footnotes;
@@ -629,12 +630,13 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  process() {
+  process(pluginOptions: any) {
     this.cover = null;
     this.elements = [];
     this.headings = [];
     this.footnotes = {};
     this.related = [];
+    const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
 
     // Keep the class scope in loops
     this.formatText = this.formatText.bind(this);
@@ -645,7 +647,7 @@ class ElementsOfGoogleDocument {
       "fontSize.magnitude"
     );
 
-    this.processCover();
+    this.processCover(options);
 
     this.document.body.content.forEach(
       ({ paragraph, table, sectionBreak, tableOfContents }: any, i: any) => {
@@ -657,29 +659,29 @@ class ElementsOfGoogleDocument {
         if (table) {
           // Quotes
           if (isQuote(table)) {
-            this.processQuote(table);
+            this.processQuote(table, options);
           }
 
           // Code Blocks
           else if (isCodeBlocks(table)) {
-            this.processCode(table);
+            this.processCode(table, options);
           }
 
           // Tables
           else {
-            this.processTable(table);
+            this.processTable(table, options);
           }
         }
 
         // Paragraphs
         else {
-          this.processParagraph(paragraph, i);
+          this.processParagraph(paragraph, i, options);
         }
       }
     );
 
     // Footnotes
-    this.processFootnotes();
+    this.processFootnotes(options);
 
     this.processInternalLinks();
   }

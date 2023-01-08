@@ -1,10 +1,10 @@
-const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
+import { ElementsOfGoogleDocument } from "./elements-of-google-document";
 const json2md = require("json2md");
 const { normalizeElement } = require("./normalize-element");
 
-const convertGDoc2ElementsObj = (gdoc: any) => {
+const convertGDoc2ElementsObj = (gdoc: any, options: any) => {
   const obj = new ElementsOfGoogleDocument({ ...gdoc });
-  obj.process();
+  obj.process(options);
   return obj;
 };
 
