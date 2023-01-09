@@ -12,6 +12,7 @@ const GITHUB_NAME = process.env.GITHUB_NAME;
 const GITHUB_EMAIL = process.env.GITHUB_EMAIL;
 const GITHUB_OWNER = process.env.GITHUB_OWNER;
 const GITHUB_REPO = process.env.GITHUB_REPO;
+const GITHUB_BRANCH = JSON.parse(process.env.GITHUB_BRANCH);
 const GITHUB_COMMIT_MESSAGE =
   process.env.GITHUB_COMMIT_MESSAGE || "Update from Google Docs";
 console.log(
@@ -30,6 +31,7 @@ module.exports = {
   GITHUB_OWNER,
   GITHUB_REPO,
   GITHUB_COMMIT_MESSAGE,
+  GITHUB_BRANCH,
   ENV_TOKEN_VAR: "GOOGLE_DOCS_TOKEN",
   DEFAULT_OPTIONS: {
     debug: false,

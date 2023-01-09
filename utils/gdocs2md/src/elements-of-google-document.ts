@@ -230,7 +230,7 @@ class ElementsOfGoogleDocument {
   };
 
   async getData() {
-    const url = `http://localhost:8000/gdocs/get/${gdoc.document.documentId}`;
+    const url = `http://localhost:8000/gdocs/get/${this.document.documentId}`;
     console.log("Getting metadata", this.document.title, url);
     const response = await axios({
       url,
@@ -243,7 +243,8 @@ class ElementsOfGoogleDocument {
       );
       return {};
     });
-    return response.data || ({} as any);
+    const response2 = response as any;
+    return response2.data || {};
   }
 
   getTextStyle(type: string) {

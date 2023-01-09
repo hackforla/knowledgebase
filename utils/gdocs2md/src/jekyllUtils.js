@@ -51,9 +51,25 @@ async function processGdoc(gdoc, options) {
   let markdown = await convertElements2MD(googleDocObj.elements, options);
   // todo: remove markdown from parameters
   // todo: inject jekliffyFrontMatter function
-  jsonData = await gdoc.getData();
-  markdown = (await gdoc.jekyllifyFrontMatter(jsonData)) + markdown;
-  await writeMarkdown(options, filename, markdown);
+  jsonData = await googleDocObj.getData();
+  markdown = (await googleDocObj.jekyllifyFrontMatter(jsonData)) + markdown;
+  if (options.saveMarkdownToFile) {
+    await writeMarkdown(options, filename, markdown);
+  }
+  if (options.saveMarkdownToGitHub) {
+    let githubFile = `${filename ? filename : "index"}${options.suffix}.md`;
+    if (githubFile.startsWith("/")) githubFile = githubFile.substring(1);
+    await writeToGitHub({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      email: GITHUB_EMAIL,
+      githubName: GITHUB_NAME,
+      path: githubFile,
+      message: GITHUB_COMMIT_MESSAGE,
+      content: markdown,
+      category: gdoc.category,
+    });
+  }
 }
 
 /**
@@ -162,29 +178,14 @@ async function writeContent({
   // todo: make location to write dependent on status (draft, etc)
   // todo: create a map for status to google folder id
   //${targetDir}/${filename}${suffix}.${extension
-  let githubFile = `${filename ? filename : "index"}${suffix}.${extension}`;
-  if (githubFile.startsWith("/")) githubFile = githubFile.substring(1);
   const file = path.join(
     targetDir,
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
   const dir = path.dirname(file);
-  if (options.saveMarkdownToGitHub) {
-    await writeToGitHub({
-      owner: GITHUB_OWNER,
-      repo: GITHUB_REPO,
-      email: GITHUB_EMAIL,
-      githubName: GITHUB_NAME,
-      path: githubFile,
-      message: GITHUB_COMMIT_MESSAGE,
-      content: content,
-    });
-  }
 
-  if (options.saveMarkdownToFile) {
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(file, content);
-  }
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(file, content);
 }
 
 module.exports = { setObjectValuesFromParamValues, jekyllifyDocs, jsonifyDocs };

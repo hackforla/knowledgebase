@@ -1,6 +1,6 @@
 const { Octokit } = require("@octokit/rest");
 const { Base64 } = require("js-base64");
-const { GITHUB_TOKEN, GITHUB_NAME, GITHUB_EMAIL } = require("./constants.js");
+const { GITHUB_TOKEN, GITHUB_NAME, GITHUB_BRANCH } = require("./constants.js");
 console.log("GITHUB_TOKEN 2", GITHUB_TOKEN);
 
 const octokit = new Octokit({
@@ -17,9 +17,21 @@ async function writeToGitHub({
   email,
   message,
   content,
-  branch,
+  category = "default",
 }) {
-  console.log("GITHUB_NAME", GITHUB_NAME, githubName, "x", GITHUB_TOKEN);
+  const branch = GITHUB_BRANCH.hasOwnProperty(category)
+    ? GITHUB_BRANCH[category.toLowerCase()]
+    : GITHUB_BRANCH.default;
+  console.log(
+    "GITHUB_NAME",
+    GITHUB_NAME,
+    githubName,
+    "x",
+    GITHUB_TOKEN,
+    "x",
+    GITHUB_BRANCH,
+    category
+  );
   const octokitValues = {
     owner: owner,
     repo: repo,
