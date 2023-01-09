@@ -9,12 +9,15 @@ def get_gdoc_json(self, google_id):
     gdocResultSet = Gdoc.objects.filter(google_id=google_id)
     if gdocResultSet.__len__() == 1:
         gdocValues = list(gdocResultSet.values())
+
+        print("debug: gdocValues: ", json.dumps(gdocValues, indent=4))
         gdocAuthorValues = list(
             gdocResultSet[0]
             .gdocauthor_set.all()
             .values("author__name", "author__email")
         )
         data_json = gdocValues[0]
+        data_json.update({"phase_name": gdocResultSet[0].phase.name})
         data_json.update({"authors": gdocAuthorValues})
     else:
         data_json = {}

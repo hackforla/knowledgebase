@@ -67,7 +67,7 @@ async function processGdoc(gdoc, options) {
       path: githubFile,
       message: GITHUB_COMMIT_MESSAGE,
       content: markdown,
-      category: gdoc.category,
+      phase_name: jsonData?.phase_name,
     });
   }
 }
@@ -175,7 +175,7 @@ async function writeContent({
   extension,
   options,
 }) {
-  // todo: make location to write dependent on status (draft, etc)
+  // todo: make location to write dependent on phase (draft, etc)
   // todo: create a map for status to google folder id
   //${targetDir}/${filename}${suffix}.${extension
   const file = path.join(

@@ -15,10 +15,9 @@ Tasks
     - [x] +++ Option to save to drive and/or github
     - [ ] +++ Put different places depending on status
       - [x] Get one file to work
-      - [ ] Add debug option for adding to content
-      - [ ] Try all files (one should go to dev)
+      - [x] Try all files (one should go to dev)
+    - [ ] ++ Add debug option for adding to content
     - [ ] +++ Change filename based on slug
-    - [ ] +++ Modify write to github sh so does all files
     - [ ] +++ Create Flask application to generate all files
     - [ ] ++ Create google docs plug in to populate table
     - [ ] Refactor
@@ -28,10 +27,14 @@ Tasks
       - [ ] Consider taking functions from utils and moving to ElementsOfGoogleDocument
       - [ ] Look at level of abstraction in process and next level down
   - [ ] +++ Change auth so authorized from browser and variables cached
-  - [ ] +++ Show other tables
+  - [x] +++ Show other tables
   - [x] ++ Figure out why .env.EXAMPLE gets updated
   - [ ] ++ Figure out .catch Tue
   - [ ] +++ Add custom icon to json_data Tue
+  - [ ] +++ Make activity boolean
+  - [ ] +++ Make phase a one to many
+  - [ ] ++ Console.log whether commit happened
+  - [ ] ++ Add param to generate scripts for matchPattern
   - [ ] +++ Incubator
   - [ ] +++ Auto generate provider link Tue
   - [ ] +++ Verify Reminders Tue

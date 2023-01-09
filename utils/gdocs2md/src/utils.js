@@ -15,6 +15,7 @@ const getFrontMatterFromGdoc = (gdoc) => {
     ...gdoc.properties,
     ...(gdoc.cover ? { cover: gdoc.cover } : {}),
   };
+  frontMatter.status = frontMatter.active ? "active" : "inactive";
   const markdownFrontmatter =
     Object.keys(frontMatter).length > 0
       ? `---\n${yamljs.stringify(frontMatter)}---\n`
@@ -44,7 +45,7 @@ const getFrontMatterFromGdoc = (gdoc) => {
 //   ["card-type", "guide-page"],
 //   ["status", "active"],
 //   ["display", "true"],
-//   ["category", "Development"],
+//   ["phase", "Development"],
 //   // todo: change below to be dyname
 //   ["svg", "svg/2FA.svg"],
 //   ["provider-link", gdoc.properties.slug + gdoc.options.suffix],

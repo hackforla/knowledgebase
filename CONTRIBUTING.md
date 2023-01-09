@@ -48,7 +48,7 @@ source ./activate.sh
 ## Regenerating Migration Scripts
 
 1. Kill server started with ./start-dev.sh
-1. From postgres using postgres db: `delete from migrations where app='knowledgebase'
+1. From postgres using postgres db: `delete from django_migrations where app='knowledgebase'
 1. From postgres IDE: drop any tables that begin with postgres
 1. Remove knowledgebase/migrations directory using gui or with command `rm -rf knowledgebase/migrations`
 1. `./start-dev.sh` will automatically regenerate migrate scripts.

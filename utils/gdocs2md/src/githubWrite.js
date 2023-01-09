@@ -17,27 +17,31 @@ async function writeToGitHub({
   email,
   message,
   content,
-  category = "default",
+  phase_name,
 }) {
-  const branch = GITHUB_BRANCH.hasOwnProperty(category)
-    ? GITHUB_BRANCH[category.toLowerCase()]
+  const branch = GITHUB_BRANCH.hasOwnProperty(phase_name)
+    ? GITHUB_BRANCH[phase_name.toLowerCase()]
     : GITHUB_BRANCH.default;
   console.log(
     "GITHUB_NAME",
     GITHUB_NAME,
     githubName,
+    GITHUB_BRANCH.hasOwnProperty(phase_name || "default"),
     "x",
     GITHUB_TOKEN,
     "x",
     GITHUB_BRANCH,
-    category
+    "x",
+    phase_name,
+    "x",
+    branch
   );
   const octokitValues = {
     owner: owner,
     repo: repo,
     path: path,
     message: message,
-    content: Base64.encode(content),
+    content: Base64.encode(content + " " + new Date().toISOString()),
     committer: {
       name: githubName,
       email: email,

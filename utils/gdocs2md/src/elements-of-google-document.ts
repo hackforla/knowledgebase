@@ -202,7 +202,7 @@ class ElementsOfGoogleDocument {
       "card-type": "guide-page",
       status: "active",
       display: "true",
-      category: "Development",
+      phase: "dev",
       // todo: change below to be dynamic
       svg: "svg/2FA.svg",
       "provider-link": this.properties.slug + this.options.suffix,
