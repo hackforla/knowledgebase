@@ -1,6 +1,20 @@
-const { get } = require("lodash");
 const yamljs = require("yamljs");
 const axios = require("axios");
+
+async function getData(documentId, title) {
+  const url = `http://localhost:8000/gdocs/get/${documentId}`;
+  console.log("Getting metadata", title, url);
+  const response = await axios({
+    url,
+    method: "GET",
+  }).catch((error) => {
+    console.log("error", JSON.stringify(error));
+    console.log(title, documentId, "not registered");
+    return {};
+  });
+  const response2 = response;
+  return response2.data || {};
+}
 
 /**
  * Compare the frontmatter in the gdoc with default frontmatter and return frontmatter
@@ -67,4 +81,4 @@ const getFrontMatterFromGdoc = (gdoc) => {
 //     : "";
 // };
 
-module.exports = { getFrontMatterFromGdoc };
+module.exports = { getFrontMatterFromGdoc, getData };

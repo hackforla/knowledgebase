@@ -1,0 +1,140 @@
+env debug website x Update from Google Docs x {
+  NVM_INC: '/Users/ethanadmin/.nvm/versions/node/v16.15.1/include/node',
+  rvm_bin_path: '/Users/ethanadmin/.rvm/bin',
+  TERM_PROGRAM: 'vscode',
+  GEM_HOME: '/Users/ethanadmin/.rvm/gems/ruby-3.1.2',
+  PYENV_ROOT: '/Users/ethanadmin/.pyenv',
+  NVM_CD_FLAGS: '',
+  SHELL: '/bin/bash',
+  TERM: 'xterm-256color',
+  TMPDIR: '/var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/',
+  IRBRC: '/Users/ethanadmin/.rvm/rubies/ruby-3.1.2/.irbrc',
+  TERM_PROGRAM_VERSION: '1.74.2',
+  MallocNanoZone: '0',
+  ORIGINAL_XDG_CURRENT_DESKTOP: 'undefined',
+  MY_RUBY_HOME: '/Users/ethanadmin/.rvm/rubies/ruby-3.1.2',
+  USER: 'ethanadmin',
+  NVM_DIR: '/Users/ethanadmin/.nvm',
+  COMMAND_MODE: 'unix2003',
+  rvm_path: '/Users/ethanadmin/.rvm',
+  SSH_AUTH_SOCK: '/private/tmp/com.apple.launchd.tYhQw8qYTn/Listeners',
+  __CF_USER_TEXT_ENCODING: '0x1F6:0x0:0x0',
+  BASH_SILENCE_DEPRECATION_WARNING: '1',
+  rvm_prefix: '/Users/ethanadmin',
+  PATH: '/Users/ethanadmin/.rvm/gems/ruby-3.1.2/bin:/Users/ethanadmin/.rvm/gems/ruby-3.1.2@global/bin:/Users/ethanadmin/.rvm/rubies/ruby-3.1.2/bin:/Users/ethanadmin/.pyenv/bin:/Users/ethanadmin/.pyenv/bin:/Users/ethanadmin/.pyenv/shims:/Users/ethanadmin/.nvm/versions/node/v16.15.1/bin:/Users/ethanadmin/.nvm/versions/node/v16.15.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/ethanadmin/.rvm/gems/ruby-3.1.2/bin:/Users/ethanadmin/.rvm/gems/ruby-3.1.2@global/bin:/Users/ethanadmin/.rvm/rubies/ruby-3.1.2/bin:/Users/ethanadmin/.pyenv/bin:/Users/ethanadmin/.nvm/versions/node/v16.15.1/bin:/Users/ethanadmin/.rvm/bin:/Users/ethanadmin/.rvm/bin:/Users/ethanadmin/.rvm/bin',
+  _: '/usr/local/bin/ts-node',
+  __CFBundleIdentifier: 'com.microsoft.VSCode',
+  PWD: '/Users/ethanadmin/projects/hfla-utils',
+  EDITOR: 'atom --wait',
+  LANG: 'en_US.UTF-8',
+  XPC_FLAGS: '0x0',
+  VSCODE_GIT_ASKPASS_EXTRA_ARGS: '--ms-enable-electron-run-as-node',
+  XPC_SERVICE_NAME: '0',
+  rvm_version: '1.29.12-next (master)',
+  HOME: '/Users/ethanadmin',
+  PYENV_SHELL: 'bash',
+  SHLVL: '3',
+  VSCODE_GIT_ASKPASS_MAIN: '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js',
+  LOGNAME: 'ethanadmin',
+  GEM_PATH: '/Users/ethanadmin/.rvm/gems/ruby-3.1.2:/Users/ethanadmin/.rvm/gems/ruby-3.1.2@global',
+  VSCODE_GIT_IPC_HANDLE: '/var/folders/3b/z9pn5ly160s4jygzz3zlznz80000gp/T/vscode-git-c3fa93e943.sock',
+  NVM_BIN: '/Users/ethanadmin/.nvm/versions/node/v16.15.1/bin',
+  GIT_ASKPASS: '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh',
+  VSCODE_GIT_ASKPASS_NODE: '/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper.app/Contents/MacOS/Code Helper',
+  RUBY_VERSION: 'ruby-3.1.2',
+  COLORTERM: 'truecolor',
+  GOOGLE_OAUTH_CLIENT_ID: '318840295706-ek9gvdcgrv5smmot4m6i4avd4rn0t7bb.apps.googleusercontent.com',
+  GOOGLE_OAUTH_CLIENT_SECRET: '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',
+  WEBSITE_GDRIVE_ROOT_ID: '1nnQhhhwk_OS1z_O9qPC-NT1z7BY2ugdr',
+  WEBSITE_LOCAL_ROOT: '/Users/ethanadmin/projects/hackforla-website',
+  WEBSITE_SUFFIX: '-gdoc',
+  TEST_GDRIVE_ROOT_ID: '1LVMHsrFozAj_MniCOd7CtibYRM3uNUwR',
+  TEST_LOCAL_ROOT_DIR: '/Users/ethanadmin/projects//hfla-utils/utils/gdocs2md/src/__tests__',
+  TEST_SUFFIX: '-gdoc-test',
+  MOCK_GDRIVE_ROOT_ID: '1LVMHsrFozAj_MniCOd7CtibYRM3uNUwR',
+  MOCK_LOCAL_ROOT_DIR: '/Users/ethanadmin/projects//hfla-utils/utils/gdocs2md/src/__tests__/mocks',
+  MOCK_SUFFIX: '-gdoc-mock',
+  GITHUB_NAME: 'Ethan Strominger',
+  GITHUB_EMAIL: 'ethanstrominger2@gmail.com',
+  GITHUB_OWNER: 'ethanstrominger',
+  GITHUB_REPO: 'website',
+  GITHUB_TOKEN: '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',
+  GITHUB_COMMENT: 'Automated google docs to markdown update',
+  GITHUB_BRANCH: '{"default": "pending","dev": "dev","draft": "draft","production": "gh-pages" }',
+  FILE_PREFIX: '__',
+  GOOGLE_DOCS_TOKEN: '{"access_token":"ya29.a0AX9GBdUyBszeiL7Wgs7zhKSZyjleSZ23sbHGQ8S3IoyI2bG8TaxAZ-YWoKdGW_q0_UTz_-38aqCoswEWavKOkfwtvdF7BcUTig6zMorFlRuH2ChceLL0fq3uXW8QuEX7zRWdYRhMJwCre8XlNHDSu-omj4fmaCgYKASgSARISFQHUCsbCyeK4MPyssHJrw737SaCUuA0163","refresh_token":"1//01YiArvEelaCyCgYIARAAGAESNwF-L9IrIfZx93f741j-TwsqlwDV_waa-blrJ5Iv_-gtMNYtt2fMTcQ8PnhT00x7Z4egjutSuKI","scope":"https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/documents.readonly","token_type":"Bearer","expiry_date":1673361225767}',
+  ENV_PATH: '/Users/ethanadmin/projects/hfla-utils/.env'
+}
+GITHUB_TOKEN 2 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
+GITHUB_TOKEN 3 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
+jekyllifyDocs start
+refreshing token
+318840295706-ek9gvdcgrv5smmot4m6i4avd4rn0t7bb.apps.googleusercontent.com 1nnQhhhwk_OS1z_O9qPC-NT1z7BY2ugdr
+1673361225767 1673357636711
+token refreshed a 1673361225767
+new expire date 1673361235928
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)
+Error TypeError: Cannot read properties of undefined (reading 'title')
+    at getData (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/utils.js:6:49)
+    at processGdoc (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:49:20)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async jekyllifyDocs (/Users/ethanadmin/projects/hfla-utils/utils/gdocs2md/src/jekyllUtils.js:102:5)

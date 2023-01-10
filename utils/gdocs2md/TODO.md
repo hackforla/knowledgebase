@@ -5,7 +5,9 @@ Tasks
 # PENDING
 
 - [ ] **_ +++ NEXT _**
+
   - [ ] +++ Write to github, provide option to write to file Mon
+
     - [x] +++ Update file
     - [x] +++ Put in real file
     - [x] +++ Clean up console.log
@@ -13,9 +15,11 @@ Tasks
     - [x] ++ Add more parameters to writeToGitHub, including comment
     - [x] ++ Make message an env variable
     - [x] +++ Option to save to drive and/or github
+
     - [ ] +++ Put different places depending on status
       - [x] Get one file to work
       - [x] Try all files (one should go to dev)
+    - [ ] +++ Regenerate results for doing comparison actual results
     - [ ] ++ Add debug option for adding to content
     - [ ] +++ Change filename based on slug
     - [ ] +++ Create Flask application to generate all files
@@ -26,6 +30,7 @@ Tasks
       - [ ] Create writeMarkdownToFile and writeJsonToFile to call writeContent or writeToFile
       - [ ] Consider taking functions from utils and moving to ElementsOfGoogleDocument
       - [ ] Look at level of abstraction in process and next level down
+
   - [ ] +++ Change auth so authorized from browser and variables cached
   - [x] +++ Show other tables
   - [x] ++ Figure out why .env.EXAMPLE gets updated
@@ -34,7 +39,8 @@ Tasks
   - [ ] +++ Make activity boolean
   - [ ] +++ Make phase a one to many
   - [ ] ++ Console.log whether commit happened
-  - [ ] ++ Add param to generate scripts for matchPattern
+  - [ ] ++ Add option for debugModifyContent to modify content
+  - [ ] ++ Add param to generate scripts for matchPattern, debugModifyContent
   - [ ] +++ Incubator
   - [ ] +++ Auto generate provider link Tue
   - [ ] +++ Verify Reminders Tue
@@ -46,6 +52,7 @@ Tasks
   - [ ] Look at a markdown file for how contributing section works
   - [ ] Figure out gdoc2mdv2 executable
   - [ ] Auto generate contributing section
+
 - [ ] **_ +++ DOCUMENTATION _**
   - [x] (obsoleted) Explain linkDir.sh
   - [ ] History of fork

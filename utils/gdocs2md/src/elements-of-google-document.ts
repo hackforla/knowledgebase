@@ -229,24 +229,6 @@ class ElementsOfGoogleDocument {
     return "---\n" + frontMatter + "---\n";
   };
 
-  async getData() {
-    const url = `http://localhost:8000/gdocs/get/${this.document.documentId}`;
-    console.log("Getting metadata", this.document.title, url);
-    const response = await axios({
-      url,
-      method: "GET",
-    }).catch((error) => {
-      console.log(
-        this.document.title,
-        this.document.documentId,
-        "not registered"
-      );
-      return {};
-    });
-    const response2 = response as any;
-    return response2.data || {};
-  }
-
   getTextStyle(type: string) {
     const documentStyles = _get(this.document, ["namedStyles", "styles"]);
 

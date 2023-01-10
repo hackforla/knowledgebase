@@ -1,14 +1,15 @@
 const fs = require("fs");
 const path = require("path");
 const pkg = require("lodash");
-const axios = require("axios");
 const { writeToGitHub } = require("./githubWrite.js");
+const { getData } = require("./utils.js");
 const { merge: _merge } = pkg;
 const {
   fetchGoogleDocObjs,
 } = require("../../googleoauth2-utils/src/google-docs.js");
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert");
 const {
+  FILE_PREFIX,
   DEFAULT_OPTIONS,
   GITHUB_OWNER,
   GITHUB_REPO,
@@ -41,17 +42,23 @@ const setObjectValuesFromParamValues = (keyValuePairs) => {
 async function processGdoc(gdoc, options) {
   let googleDocObj = {};
   const { properties } = gdoc;
-  const filename = properties.path;
   googleDocObj = await convertGDoc2ElementsObj({
     ...gdoc,
     options,
   });
+  jsonData = await getData(
+    googleDocObj.document.documentId,
+    googleDocObj.document.title
+  );
+  let filename = jsonData.slug || properties.path;
+  const prefix =
+    FILE_PREFIX && !filename.startsWith(FILE_PREFIX) ? FILE_PREFIX : "";
+  filename = prefix + filename;
   if (options.saveGdoc) writeGdoc(options, filename, gdoc);
   if (!options.saveMarkdownToFile && !options.saveMarkdownToGitHub) return;
   let markdown = await convertElements2MD(googleDocObj.elements, options);
   // todo: remove markdown from parameters
   // todo: inject jekliffyFrontMatter function
-  jsonData = await googleDocObj.getData();
   markdown = (await googleDocObj.jekyllifyFrontMatter(jsonData)) + markdown;
   if (options.saveMarkdownToFile) {
     await writeMarkdown(options, filename, markdown);
