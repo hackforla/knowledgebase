@@ -21,7 +21,7 @@ async function main() {
   );
   const filenames = fs.readdirSync(expectedDocumentsPath);
 
-  filenames.forEach(function (filename) {
+  filenames.forEach(function (filename: string) {
     test(`Document "${filename}" converted to Markdown`, () => {
       const actualMarkdown = fs.readFileSync(
         path.join(actualDocumentsPath, filename),

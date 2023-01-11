@@ -6,30 +6,20 @@ Tasks
 
 - [ ] **_ +++ NEXT _**
 
-  - [ ] +++ Write to github, provide option to write to file Mon
+  - [ ] ++ Why actual?
+  - [ ] +++ Regenerate results for doing comparison actual results
+  - [ ] +++ Create option to not lookup Django
+  - [ ] ++ Add debug option for adding to content
+  - [ ] +++ Create Flask application to generate all files
+  - [ ] ++ Create google docs plug in to populate table
+  - [ ] +++ Look at tests - why exception not caught?
+  - [ ] Refactor
 
-    - [x] +++ Update file
-    - [x] +++ Put in real file
-    - [x] +++ Clean up console.log
-    - [x] +++ Commit
-    - [x] ++ Add more parameters to writeToGitHub, including comment
-    - [x] ++ Make message an env variable
-    - [x] +++ Option to save to drive and/or github
-
-    - [ ] +++ Put different places depending on status
-      - [x] Get one file to work
-      - [x] Try all files (one should go to dev)
-    - [ ] +++ Regenerate results for doing comparison actual results
-    - [ ] ++ Add debug option for adding to content
-    - [ ] +++ Change filename based on slug
-    - [ ] +++ Create Flask application to generate all files
-    - [ ] ++ Create google docs plug in to populate table
-    - [ ] Refactor
-      - [ ] Distinguish gdocPlain vs gdocWithElelments
-      - [ ] Put all write functionality together
-      - [ ] Create writeMarkdownToFile and writeJsonToFile to call writeContent or writeToFile
-      - [ ] Consider taking functions from utils and moving to ElementsOfGoogleDocument
-      - [ ] Look at level of abstraction in process and next level down
+    - [ ] Distinguish gdocPlain vs gdocWithElelments
+    - [ ] Put all write functionality together
+    - [ ] Create writeMarkdownToFile and writeJsonToFile to call writeContent or writeToFile
+    - [ ] Consider taking functions from utils and moving to ElementsOfGoogleDocument
+    - [ ] Look at level of abstraction in process and next level down
 
   - [ ] +++ Change auth so authorized from browser and variables cached
   - [x] +++ Show other tables
@@ -76,8 +66,6 @@ Tasks
   - [ ] Change test packages to async and troubleshoot async related warning
   - [ ] Change object test to have a before/after
   - [ ] Add test that starts with downloaded json files
-- [x] **_ +++ TEST TOC (ALYSSA'S PULL REQUEST) _**
-  - [x] Test out TOC.html
 - [ ] **_ +++ TOKEN _**
   - [ ] +++ Auto renew token
   - [ ] Improve error message if token not set up
@@ -98,7 +86,6 @@ Tasks
   - [ ] Implement filter methods
 - [ ] **_ MISC _**
 
-  - [x] +++ Propose and implement dir structure
   - [ ] +++ Verify output for Slack reminders
   - [ ] ?? +++ Add document style to template
   - [ ] ?? +++ Remove document style from template
@@ -133,6 +120,24 @@ Tasks
   - [ ] ?? Change to functional rather than object based for process procedures
 
 # Completed
+
+- [x] **_ +++ TEST TOC (ALYSSA'S PULL REQUEST) _**
+
+  - [x] Test out TOC.html
+  - [x] +++ Write to github, provide option to write to file Mon
+
+    - [x] +++ Update file
+    - [x] +++ Put in real file
+    - [x] +++ Clean up console.log
+    - [x] +++ Commit
+    - [x] ++ Add more parameters to writeToGitHub, including comment
+    - [x] ++ Make message an env variable
+    - [x] +++ Option to save to drive and/or github
+
+    - [x] +++ Put different places depending on status
+      - [x] Get one file to work
+      - [x] Try all files (one should go to dev)
+    - [x] +++ Change filename based on slug
 
 - [x] Misc
   - [x] Create directory with some Google doc guides

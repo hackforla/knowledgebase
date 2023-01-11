@@ -1,6 +1,3 @@
-import axios from "axios";
-
-// const yamljs = require("yamljs");
 const _get = require("lodash/get");
 const _repeat = require("lodash/repeat");
 const _merge = require("lodash/merge");
@@ -679,13 +676,13 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  process(pluginOptions: any) {
+  process(pluginOptions?: any) {
     this.cover = null;
     this.elements = [];
     this.headings = [];
     this.footnotes = {};
     this.related = [];
-    const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
+    const options = _merge(DEFAULT_OPTIONS, pluginOptions || {});
 
     // Keep the class scope in loops
     this.formatText = this.formatText.bind(this);
@@ -735,17 +732,16 @@ class ElementsOfGoogleDocument {
     this.processInternalLinks();
   }
 
-  toMarkdown() {
-    const json = this.elements.map(normalizeElement);
-    const markdownContent = json2md(json);
-    const markdownFrontmatter = this.getFrontMatter();
+  // todo: try this out see if no value provided FrontMatter is added
+  toMarkdown({ includeFrontMatter = true, includeJsonData = true } = {}) {
+    const markdownFrontMatter = this.elements.map(normalizeElement);
+    const markdownContent = json2md(markdownFrontMatter);
+    const markdownFrontmatter = includeFrontMatter
+      ? getFrontMatterFromGdoc(this)
+      : "";
 
     return `${markdownFrontmatter}${markdownContent}`;
     // return `${markdownFrontmatter}${markdownContent}`;
-  }
-
-  getFrontMatter() {
-    return getFrontMatterFromGdoc(this);
   }
 }
 

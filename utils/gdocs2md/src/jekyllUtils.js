@@ -40,26 +40,26 @@ const setObjectValuesFromParamValues = (keyValuePairs) => {
  * @returns
  */
 async function processGdoc(gdoc, options) {
-  let googleDocObj = {};
   const { properties } = gdoc;
-  googleDocObj = await convertGDoc2ElementsObj({
+  const gdocWithElements = await convertGDoc2ElementsObj({
     ...gdoc,
     options,
   });
-  jsonData = await getData(
-    googleDocObj.document.documentId,
-    googleDocObj.document.title
-  );
+  const jsonData = options.getData
+    ? await getData(
+        gdocWithElements.document.documentId,
+        gdocWithElements.document.title
+      )
+    : {};
+  gdoc.properties = { ...gdoc.properties, ...jsonData };
   let filename = jsonData.slug || properties.path;
   const prefix =
     FILE_PREFIX && !filename.startsWith(FILE_PREFIX) ? FILE_PREFIX : "";
+  console.log("file previx", FILE_PREFIX, filename, prefix);
   filename = prefix + filename;
   if (options.saveGdoc) writeGdoc(options, filename, gdoc);
   if (!options.saveMarkdownToFile && !options.saveMarkdownToGitHub) return;
-  let markdown = await convertElements2MD(googleDocObj.elements, options);
-  // todo: remove markdown from parameters
-  // todo: inject jekliffyFrontMatter function
-  markdown = (await googleDocObj.jekyllifyFrontMatter(jsonData)) + markdown;
+  const markdown = gdocWithElements.toMarkdown();
   if (options.saveMarkdownToFile) {
     await writeMarkdown(options, filename, markdown);
   }
@@ -91,7 +91,7 @@ const jekyllifyDocs = async (pluginOptions) => {
   if (!options.folder) {
     throw new Error("Must provide a folder");
   }
-  const gdocs = await filterGoogleDocs(options);
+  const gdocs = await getBasicGdocsFromDrive(options);
 
   // using "for" loop to avoid async issues
   // otherwise second document will start before everything is done with first
@@ -143,7 +143,7 @@ async function writeGdoc(options, filename, gdoc) {
  * @param {*} options
  * @returns
  */
-async function filterGoogleDocs(options) {
+async function getBasicGdocsFromDrive(options) {
   let gdocs = await fetchGoogleDocObjs(options);
   // ?? TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
