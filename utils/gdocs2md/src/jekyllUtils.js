@@ -5,7 +5,7 @@ const { writeToGitHub } = require("./githubWrite.js");
 const { getData } = require("./utils.js");
 const { merge: _merge } = pkg;
 const {
-  fetchGoogleDocObjs,
+  fetchBasicGdocsFromDrive,
 } = require("../../googleoauth2-utils/src/google-docs.js");
 const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert");
 const {
@@ -55,7 +55,7 @@ async function processGdoc(gdoc, options) {
   let filename = jsonData.slug || properties.path;
   const prefix =
     FILE_PREFIX && !filename.startsWith(FILE_PREFIX) ? FILE_PREFIX : "";
-  console.log("file previx", FILE_PREFIX, filename, prefix);
+  console.log("file prefix", FILE_PREFIX, filename, prefix);
   filename = prefix + filename;
   if (options.saveGdoc) writeGdoc(options, filename, gdoc);
   if (!options.saveMarkdownToFile && !options.saveMarkdownToGitHub) return;
@@ -144,7 +144,7 @@ async function writeGdoc(options, filename, gdoc) {
  * @returns
  */
 async function getBasicGdocsFromDrive(options) {
-  let gdocs = await fetchGoogleDocObjs(options);
+  let gdocs = await fetchBasicGdocsFromDrive(options);
   // ?? TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
     gdocs = gdocs.filter(({ document }) => {

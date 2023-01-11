@@ -26,6 +26,7 @@ console.log(
 );
 
 module.exports = {
+  FILE_PREFIX,
   GITHUB_TOKEN,
   GITHUB_NAME,
   GITHUB_EMAIL,

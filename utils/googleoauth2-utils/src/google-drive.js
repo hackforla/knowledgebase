@@ -149,7 +149,12 @@ const BATCH_SIZE = 100;
  * @param {import('../..').Options & fetchGoogleDocumentsObjOptions} options
  * @returns {Promise<(import('../..').DocumentFile & { path: string })[]>}
  */
-async function fetchFoldersAndFilesInSubfolders({ drive, parents, options }) {
+async function fetchFoldersAndFilesInSubfolders({
+  drive,
+  parents,
+  folder,
+  debug,
+}) {
   if (parents.length > BATCH_SIZE) {
     return _flatten(
       await Promise.all(
@@ -157,7 +162,8 @@ async function fetchFoldersAndFilesInSubfolders({ drive, parents, options }) {
           fetchFoldersAndFilesInSubfolders({
             drive,
             parents,
-            options,
+            folder,
+            debug,
           })
         )
       )
@@ -165,7 +171,7 @@ async function fetchFoldersAndFilesInSubfolders({ drive, parents, options }) {
   }
 
   const waited = await rateLimit();
-  if (options.debug && waited > 1000) {
+  if (debug && waited > 1000) {
     const waitingTime = (waited / 1000).toFixed(1);
     console.info(`source-gdocs2md: rate limit reach. waiting ${waitingTime}s`);
   }
@@ -245,7 +251,8 @@ async function fetchFoldersAndFilesInSubfolders({ drive, parents, options }) {
     const documentsInFolders = await fetchFoldersAndFilesInSubfolders({
       drive,
       parents: nextParents,
-      options,
+      folder,
+      debug,
     });
     return [...documents, ...documentsInFolders];
   }
@@ -260,7 +267,8 @@ async function fetchFoldersAndFilesInSubfolders({ drive, parents, options }) {
     const results = await fetchFoldersAndFilesInSubfolders({
       drive,
       parents: parentBatch,
-      options,
+      folder,
+      debug,
     });
     documentsInFolders = [...documentsInFolders, ...results];
   };
@@ -282,7 +290,8 @@ async function fetchFoldersAndFilesInSubfolders({ drive, parents, options }) {
       const finalDocumentsInFolders = await fetchFoldersAndFilesInSubfolders({
         drive,
         parents: nextParents,
-        options,
+        folder,
+        debug,
       });
       return [...documents, ...documentsInFolders, ...finalDocumentsInFolders];
     }
@@ -297,7 +306,7 @@ async function fetchFoldersAndFilesInSubfolders({ drive, parents, options }) {
 }
 
 /** @param {import('../..').Options} pluginOptions */
-async function fetchFoldersAndFilesInFolder({ folder, ...options }) {
+async function fetchFoldersAndFilesInDrive({ folder, debug }) {
   const drive = await getGoogleDrive();
 
   const res = await drive.files.get({
@@ -315,12 +324,13 @@ async function fetchFoldersAndFilesInFolder({ folder, ...options }) {
         metadata: getMetadataFromDescription(res.data.description),
       },
     ],
-    options,
+    folder,
+    debug,
   });
 
   return documentsFiles;
 }
 
 module.exports = {
-  fetchFoldersAndFilesInFolder,
+  fetchFoldersAndFilesInDrive,
 };

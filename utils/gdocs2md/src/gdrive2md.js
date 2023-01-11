@@ -3,7 +3,7 @@ const path = require("path");
 const _merge = require("lodash/merge");
 
 const {
-  fetchGoogleDocObjs,
+  fetchBasicGdocsFromDrive,
 } = require("../../googleoauth2-utils/src/google-docs");
 const { DEFAULT_OPTIONS } = require("./constants");
 const { ElementsOfGoogleDocument } = require("./elements-of-google-document");
@@ -16,7 +16,10 @@ exports.gdrive2md = async ({ actions: { reporter } }, pluginOptions) => {
   timer.start();
 
   try {
-    const gdocs = await fetchGoogleDocObjs(options);
+    const gdocs = await fetchBasicGdocsFromDrive({
+      folder: options.folder,
+      debug: options.debug,
+    });
     let x = 0;
     for (let gdoc of gdocs) {
       gdocs[x] = new ElementsOfGoogleDocument({
