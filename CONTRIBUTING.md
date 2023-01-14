@@ -17,9 +17,13 @@ source ./activate.sh
 pip install -r requirements.txt
 ```
 
+## Install Postgres
+
+## Start Postgres
+
 ## Start Server
 
-From terminal:
+Postgres must be started. From terminal:
 
 ```
 source ./start-dev.sh

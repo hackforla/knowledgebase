@@ -1,8 +1,11 @@
 const fs = require("fs");
+const json2md = require("json2md");
 const path = require("path");
 const pkg = require("lodash");
+const { getFrontMatter } = require("./utils.js");
 const { writeToGitHub } = require("./githubWrite.js");
 const { getData } = require("./utils.js");
+const { normalizeElement } = require("./normalize-element");
 const { merge: _merge } = pkg;
 const {
   fetchBasicGdocsFromDrive,
@@ -39,45 +42,6 @@ const setObjectValuesFromParamValues = (keyValuePairs) => {
  * @param {*} gdoc
  * @returns
  */
-async function processGdoc(gdoc, options) {
-  const { properties } = gdoc;
-  const gdocWithElements = await convertGDoc2ElementsObj({
-    ...gdoc,
-    options,
-  });
-  const jsonData = options.getData
-    ? await getData(
-        gdocWithElements.document.documentId,
-        gdocWithElements.document.title
-      )
-    : {};
-  gdoc.properties = { ...gdoc.properties, ...jsonData };
-  let filename = jsonData.slug || properties.path;
-  const prefix =
-    FILE_PREFIX && !filename.startsWith(FILE_PREFIX) ? FILE_PREFIX : "";
-  console.log("file prefix", FILE_PREFIX, filename, prefix);
-  filename = prefix + filename;
-  if (options.saveGdoc) writeGdoc(options, filename, gdoc);
-  if (!options.saveMarkdownToFile && !options.saveMarkdownToGitHub) return;
-  const markdown = gdocWithElements.toMarkdown();
-  if (options.saveMarkdownToFile) {
-    await writeMarkdown(options, filename, markdown);
-  }
-  if (options.saveMarkdownToGitHub) {
-    let githubFile = `${filename ? filename : "index"}${options.suffix}.md`;
-    if (githubFile.startsWith("/")) githubFile = githubFile.substring(1);
-    await writeToGitHub({
-      owner: GITHUB_OWNER,
-      repo: GITHUB_REPO,
-      email: GITHUB_EMAIL,
-      githubName: GITHUB_NAME,
-      path: githubFile,
-      message: GITHUB_COMMIT_MESSAGE,
-      content: markdown,
-      phase_name: jsonData?.phase_name,
-    });
-  }
-}
 
 /**
  * Based on the options, filter google docs from specified folder and process them,
@@ -99,11 +63,75 @@ const jekyllifyDocs = async (pluginOptions) => {
   // before starting next
   // *** READ ABOVE BEFORE CHANGING TO "forEach" ***
   for (let i = 0; i < gdocs.length; i++) {
-    await processGdoc(gdocs[i], options).catch((err) => {
-      console.log("Error", err);
+    const gdocWithElements = convertGDoc2ElementsObj({
+      ...gdocs[i],
+      options,
     });
+    console.log("debug 1");
+    const { filename, markdown, phase_name } = await getMarkdownPlus(
+      gdocWithElements,
+      options
+    );
+    console.log("debug 2", markdown);
+    await saveMarkdown(filename, options, markdown, phase_name);
   }
 };
+
+async function saveMarkdown(filename, options, markdown, phase_name) {
+  console.log("1 filename", filename);
+  filename = filename.startsWith("/")
+    ? filename.substring(1) // remove leading slash
+    : filename || "";
+  console.log("2 filename", filename);
+  filename = filename.startsWith(FILE_PREFIX)
+    ? filename
+    : FILE_PREFIX + filename; // add leading underscore
+
+  // filename = gdocWithElements.document.title;
+  console.log("3 filename", filename);
+  if (options.saveMarkdownToFile) {
+    await writeMarkdown(options, filename, markdown);
+  }
+  if (options.saveMarkdownToGitHub) {
+    let githubFile = `${filename ? filename : "index"}${options.suffix}.md`;
+    await writeToGitHub({
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      email: GITHUB_EMAIL,
+      githubName: GITHUB_NAME,
+      path: githubFile,
+      message: GITHUB_COMMIT_MESSAGE,
+      content: markdown,
+      phase_name,
+    });
+  }
+}
+
+async function getMarkdownPlus(gdocWithElements, options) {
+  const jsonOfElements = gdocWithElements.elements.map(normalizeElement);
+  let markdown = addDiv(json2md(jsonOfElements));
+  const jsonData = options.getData
+    ? await getData(
+        gdocWithElements.document.documentId,
+        gdocWithElements.document.title
+      )
+    : {};
+  const properties = { ...gdocWithElements.properties, ...jsonData };
+  const frontMatter = getFrontMatter(properties, gdocWithElements.cover);
+  console.log("debug frontMatter", frontMatter);
+  markdown = frontMatter + markdown;
+  console.log("debug plus markdown", markdown);
+  let filename = properties.slug || properties.path;
+  return { filename, markdown, phase_name: properties.phase_name };
+}
+
+function addDiv(markdown) {
+  return (
+    '<div class="content-section">\n<div class="section-container" markdown="1">\n' +
+    markdown +
+    "</div>\n</div>"
+  );
+}
 
 /**
  * Writes markdown to a file
@@ -119,22 +147,6 @@ async function writeMarkdown(options, filename, markdown) {
     extension: "md",
     content: markdown,
     options: options,
-  });
-}
-
-/**
- * Converts googledoc to json and saves to file
- * @param {*} options
- * @param {*} filename
- * @param {*} gdoc
- */
-async function writeGdoc(options, filename, gdoc) {
-  await writeContent({
-    targetDir: options.targetGdocJson,
-    suffix: options.suffix,
-    filename,
-    extension: "json",
-    content: JSON.stringify(gdoc),
   });
 }
 

@@ -6,7 +6,7 @@ const path = require("path");
 const json2md = require("./json2md-extended");
 const { isCodeBlocks, isQuote } = require("./google-document-types");
 const { DEFAULT_OPTIONS } = require("./constants");
-const { getFrontMatterFromGdoc } = require("./utils.js");
+const { getFrontMatter } = require("./utils.js");
 const { normalizeElement } = require("./normalize-element");
 const { downloadImageFromURL } = require("./download-image");
 
@@ -736,9 +736,7 @@ class ElementsOfGoogleDocument {
   toMarkdown({ includeFrontMatter = true, includeJsonData = true } = {}) {
     const markdownFrontMatter = this.elements.map(normalizeElement);
     const markdownContent = json2md(markdownFrontMatter);
-    const markdownFrontmatter = includeFrontMatter
-      ? getFrontMatterFromGdoc(this)
-      : "";
+    const markdownFrontmatter = includeFrontMatter ? getFrontMatter(this) : "";
 
     return `${markdownFrontmatter}${markdownContent}`;
     // return `${markdownFrontmatter}${markdownContent}`;

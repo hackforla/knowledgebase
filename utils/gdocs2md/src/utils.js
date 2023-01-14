@@ -23,17 +23,26 @@ async function getData(documentId, title) {
  * @param {*} markdown
  * @returns
  */
+const objectToJson = (object) => {
+  return JSON.parse(JSON.stringify(object));
+};
 
-const getFrontMatterFromGdoc = (gdoc) => {
-  const frontMatter = {
-    ...gdoc.properties,
-    ...(gdoc.cover ? { cover: gdoc.cover } : {}),
-  };
-  frontMatter.status = frontMatter.active ? "active" : "inactive";
+const getFrontMatter = (gdocProperties, cover) => {
+  gdocProperties.status = gdocProperties.active ? "active" : "inactive";
+  console.log("debug gdocProperties", gdocProperties);
+  coverProperty = cover ? { cover } : {};
+  properties = { ...objectToJson(gdocProperties), coverProperty };
+  console.log("debug properties", properties);
+  console.log(
+    "debug yamljs.stringify(properties)",
+    yamljs.stringify(properties)
+  );
+
   const markdownFrontmatter =
-    Object.keys(frontMatter).length > 0
-      ? `---\n${yamljs.stringify(frontMatter)}---\n`
+    Object.keys(gdocProperties).length > 0
+      ? `---\n${yamljs.stringify(properties)}---\n`
       : "";
+  console.log("debug markdownFrontmatter", markdownFrontmatter);
   return markdownFrontmatter;
 };
 
@@ -81,4 +90,4 @@ const getFrontMatterFromGdoc = (gdoc) => {
 //     : "";
 // };
 
-module.exports = { getFrontMatterFromGdoc, getData };
+module.exports = { getFrontMatter, getData };
