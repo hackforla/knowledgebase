@@ -3,7 +3,6 @@ const axios = require("axios");
 
 async function getData(documentId, title) {
   const url = `http://localhost:8000/gdocs/get/${documentId}`;
-  console.log("Getting metadata", title, url);
   const response = await axios({
     url,
     method: "GET",
@@ -27,23 +26,41 @@ const objectToJson = (object) => {
   return JSON.parse(JSON.stringify(object));
 };
 
-const getFrontMatter = (gdocProperties, cover) => {
-  gdocProperties.status = gdocProperties.active ? "active" : "inactive";
-  console.log("debug gdocProperties", gdocProperties);
-  coverProperty = cover ? { cover } : {};
-  properties = { ...objectToJson(gdocProperties), coverProperty };
-  console.log("debug properties", properties);
-  console.log(
-    "debug yamljs.stringify(properties)",
-    yamljs.stringify(properties)
-  );
+const getFrontMatter = ({ gdoc, jsonData }) => {
+  const isActive = jsonData.active || jsonData.active === undefined;
+  gdoc.properties.status = isActive ? "active" : "inactive";
+  // todo: all hard coded scripts should be dynamic
+  const frontmatterJson = {
+    title: jsonData.title || gdoc.document.title,
+    description: jsonData.description || gdoc.document.description || "",
+    "short-description": jsonData.short_description || "",
+    "card-type": jsonData.card_type || "guide-page",
+    status: jsonData.status || "active",
+    display: "true",
+    "provider-link": gdoc.properties.slug + gdoc.options.suffix,
+    phase: jsonData.phase || "dev",
+    svg: jsonData.svg || "svg/2FA.svg",
+  };
 
-  const markdownFrontmatter =
-    Object.keys(gdocProperties).length > 0
-      ? `---\n${yamljs.stringify(properties)}---\n`
-      : "";
-  console.log("debug markdownFrontmatter", markdownFrontmatter);
-  return markdownFrontmatter;
+  const attributeValuePairs = [
+    ["title", frontmatterJson.title],
+    ["description", frontmatterJson.description || ""],
+    ["short-description", frontmatterJson.short_description, ""],
+    ["card-type", frontmatterJson.card_type || "guide-page"],
+    ["status", "active"],
+    ["display", "true"],
+    ["phase", "pending"],
+    // todo: change below to be dyname
+    ["svg", "svg/2FA.svg"],
+    ["provider-link", gdoc.properties.slug + gdoc.options.suffix],
+    ["cover", gdoc.cover || false],
+  ];
+  let frontMatter = "";
+  attributeValuePairs.forEach(([attributeName, value]) => {
+    frontMatter += checkFrontMatterAttribute(attributeName, value);
+  });
+
+  return `---\n${frontMatter}---\n`;
 };
 
 // const getExistingFrontMatter = (markdown) => {
@@ -60,34 +77,8 @@ const getFrontMatter = (gdocProperties, cover) => {
 //   return { frontMatter, markdownBody };
 // };
 
-// todo: consider making this into a separate method, inject function for generating front matter
-// const attributeValuePairs = [
-//   ["title", gdoc.document.title],
-//   ["description", gdoc.document.description || ""],
-//   ["short-description", ""],
-//   ["card-type", "guide-page"],
-//   ["status", "active"],
-//   ["display", "true"],
-//   ["phase", "Development"],
-//   // todo: change below to be dyname
-//   ["svg", "svg/2FA.svg"],
-//   ["provider-link", gdoc.properties.slug + gdoc.options.suffix],
-// ];
-// attributeValuePairs.forEach(([attributeName, value]) => {
-// frontMatter += checkFrontMatterAttribute(
-//   existingFrontMatter,
-//   attributeName,
-//   value
-// return "---\n" + frontMatter + existingFrontMatter + "---\n" + markdownBody;
-
-// const checkFrontMatterAttribute = (
-//   existingFrontMatter,
-//   attributeName,
-//   value
-// ) => {
-//   return !existingFrontMatter.includes(attributeName + ":")
-//     ? `${attributeName}: ${value}\n`
-//     : "";
-// };
+const checkFrontMatterAttribute = (attributeName, value) => {
+  return `${attributeName}: ${value || ""}\n`;
+};
 
 module.exports = { getFrontMatter, getData };

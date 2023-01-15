@@ -67,28 +67,22 @@ const jekyllifyDocs = async (pluginOptions) => {
       ...gdocs[i],
       options,
     });
-    console.log("debug 1");
-    const { filename, markdown, phase_name } = await getMarkdownPlus(
+    const { filename, markdown, phase_name } = await getMarkdownPlus({
       gdocWithElements,
-      options
-    );
-    console.log("debug 2", markdown);
+      options: gdocWithElements.options,
+    });
     await saveMarkdown(filename, options, markdown, phase_name);
   }
 };
 
 async function saveMarkdown(filename, options, markdown, phase_name) {
-  console.log("1 filename", filename);
   filename = filename.startsWith("/")
     ? filename.substring(1) // remove leading slash
     : filename || "";
-  console.log("2 filename", filename);
   filename = filename.startsWith(FILE_PREFIX)
     ? filename
     : FILE_PREFIX + filename; // add leading underscore
 
-  // filename = gdocWithElements.document.title;
-  console.log("3 filename", filename);
   if (options.saveMarkdownToFile) {
     await writeMarkdown(options, filename, markdown);
   }
@@ -107,22 +101,24 @@ async function saveMarkdown(filename, options, markdown, phase_name) {
   }
 }
 
-async function getMarkdownPlus(gdocWithElements, options) {
+async function getMarkdownPlus({ gdocWithElements, options }) {
   const jsonOfElements = gdocWithElements.elements.map(normalizeElement);
   let markdown = addDiv(json2md(jsonOfElements));
-  const jsonData = options.getData
-    ? await getData(
-        gdocWithElements.document.documentId,
-        gdocWithElements.document.title
-      )
-    : {};
-  const properties = { ...gdocWithElements.properties, ...jsonData };
-  const frontMatter = getFrontMatter(properties, gdocWithElements.cover);
-  console.log("debug frontMatter", frontMatter);
+  let jsonData = {};
+  if (options.getData) {
+    jsonData = await getData(
+      gdocWithElements.document.documentId,
+      gdocWithElements.document.title
+    ).catch((error) => (jsonData = {}));
+  }
+  const frontMatter = getFrontMatter({
+    gdoc: gdocWithElements,
+    cover: gdocWithElements.cover,
+    jsonData,
+  });
   markdown = frontMatter + markdown;
-  console.log("debug plus markdown", markdown);
-  let filename = properties.slug || properties.path;
-  return { filename, markdown, phase_name: properties.phase_name };
+  let filename = jsonData.slug || gdocWithElements.properties.path;
+  return { filename, markdown, phase_name: jsonData.phase_name || "" };
 }
 
 function addDiv(markdown) {

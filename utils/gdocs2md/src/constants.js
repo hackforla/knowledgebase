@@ -16,14 +16,6 @@ const GITHUB_BRANCH = JSON.parse(process.env.GITHUB_BRANCH);
 const GITHUB_COMMIT_MESSAGE =
   process.env.GITHUB_COMMIT_MESSAGE || "Update from Google Docs";
 const FILE_PREFIX = process.env.FILE_PREFIX || "";
-console.log(
-  "env debug",
-  GITHUB_REPO,
-  "x",
-  GITHUB_COMMIT_MESSAGE,
-  "x",
-  process.env
-);
 
 module.exports = {
   FILE_PREFIX,
