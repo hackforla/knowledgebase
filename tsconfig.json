@@ -13,8 +13,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "./utils/gdocs2md/src", 
-  ],
+    "./utils/gdocs2md/src", "./utils/gdocs2md/scripts"  ],
   "exclude": [
     "./test",
     "./src/client",

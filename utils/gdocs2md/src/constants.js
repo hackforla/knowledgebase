@@ -1,5 +1,6 @@
 const path = require("path");
 const { config } = require("dotenv");
+const { env } = require("process");
 const envPath = path.resolve(process.cwd(), ".env");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
@@ -12,6 +13,7 @@ const GITHUB_NAME = process.env.GITHUB_NAME;
 const GITHUB_EMAIL = process.env.GITHUB_EMAIL;
 const GITHUB_OWNER = process.env.GITHUB_OWNER;
 const GITHUB_REPO = process.env.GITHUB_REPO;
+console.log("GITHUB_BRANCH", process.env.GITHUB_BRANCH, process.env);
 const GITHUB_BRANCH = JSON.parse(process.env.GITHUB_BRANCH);
 const GITHUB_COMMIT_MESSAGE =
   process.env.GITHUB_COMMIT_MESSAGE || "Update from Google Docs";

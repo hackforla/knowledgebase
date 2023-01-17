@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 const json2md = require("json2md");
 const path = require("path");
 const pkg = require("lodash");
@@ -10,7 +10,7 @@ const { merge: _merge } = pkg;
 const {
   fetchBasicGdocsFromDrive,
 } = require("../../googleoauth2-utils/src/google-docs.js");
-const { convertGDoc2ElementsObj, convertElements2MD } = require("./convert");
+const { convertGDoc2ElementsObj } = require("./convert");
 const {
   FILE_PREFIX,
   DEFAULT_OPTIONS,
@@ -26,14 +26,18 @@ const {
  *
  * @param {*} keyValuePairs
  */
-const setObjectValuesFromParamValues = (keyValuePairs) => {
+const setObjectValuesFromParamValues = (keyValuePairs: any) => {
   const { argv } = process;
   const paramValues = argv.slice(2);
   paramValues.forEach((paramValue) => {
     let [key, value] = paramValue.split("=");
-    if (value.toLowerCase() == "true") value = true;
-    if (value.toLowerCase() == "false") value = false;
-    keyValuePairs[key] = value;
+    let finalValue =
+      value.toLowerCase() === "true"
+        ? true
+        : value.toLowerCase() === "false"
+        ? false
+        : value;
+    keyValuePairs[key] = finalValue;
   });
 };
 
@@ -48,7 +52,7 @@ const setObjectValuesFromParamValues = (keyValuePairs) => {
  * with final product being markdown files
  * @param {*} pluginOptions
  */
-const jekyllifyDocs = async (pluginOptions) => {
+const jekyllifyDocs = async (pluginOptions: any) => {
   console.log("jekyllifyDocs start");
   // todo: extract to a function
   const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
@@ -63,19 +67,32 @@ const jekyllifyDocs = async (pluginOptions) => {
   // before starting next
   // *** READ ABOVE BEFORE CHANGING TO "forEach" ***
   for (let i = 0; i < gdocs.length; i++) {
-    const gdocWithElements = convertGDoc2ElementsObj({
-      ...gdocs[i],
+    const { filename, markdown, phase_name } = await getMarkdownPlusGdoc({
+      gdoc: gdocs[i],
       options,
     });
-    const { filename, markdown, phase_name } = await getMarkdownPlus({
-      gdocWithElements,
-      options: gdocWithElements.options,
-    });
+
     await saveMarkdown(filename, options, markdown, phase_name);
   }
 };
 
-async function saveMarkdown(filename, options, markdown, phase_name) {
+async function getMarkdownPlusGdoc({ gdoc, options }: any) {
+  const gdocWithElements = convertGDoc2ElementsObj({
+    ...gdoc,
+    options,
+  });
+  const { filename, markdown, phase_name } = await getMarkdownPlus({
+    gdocWithElements,
+    options,
+  });
+  return { filename, markdown, phase_name };
+}
+async function saveMarkdown(
+  filename: string,
+  options: { saveMarkdownToFile: any; saveMarkdownToGitHub: any; suffix: any },
+  markdown: string,
+  phase_name: any
+) {
   filename = filename.startsWith("/")
     ? filename.substring(1) // remove leading slash
     : filename || "";
@@ -101,15 +118,21 @@ async function saveMarkdown(filename, options, markdown, phase_name) {
   }
 }
 
-async function getMarkdownPlus({ gdocWithElements, options }) {
+async function getMarkdownPlus({
+  gdocWithElements,
+  options,
+}: {
+  gdocWithElements: any;
+  options: any;
+}) {
   const jsonOfElements = gdocWithElements.elements.map(normalizeElement);
   let markdown = addDiv(json2md(jsonOfElements));
-  let jsonData = {};
+  let jsonData = {} as any;
   if (options.getData) {
     jsonData = await getData(
       gdocWithElements.document.documentId,
       gdocWithElements.document.title
-    ).catch((error) => (jsonData = {}));
+    ).catch((error: any) => (jsonData = {}));
   }
   const frontMatter = getFrontMatter({
     gdoc: gdocWithElements,
@@ -121,7 +144,7 @@ async function getMarkdownPlus({ gdocWithElements, options }) {
   return { filename, markdown, phase_name: jsonData.phase_name || "" };
 }
 
-function addDiv(markdown) {
+function addDiv(markdown: string) {
   return (
     '<div class="content-section">\n<div class="section-container" markdown="1">\n' +
     markdown +
@@ -135,7 +158,7 @@ function addDiv(markdown) {
  * @param {*} filename
  * @param {*} markdown
  */
-async function writeMarkdown(options, filename, markdown) {
+async function writeMarkdown(options: any, filename: any, markdown: any) {
   await writeContent({
     targetDir: options.targetMarkdownDir,
     suffix: options.suffix,
@@ -151,11 +174,11 @@ async function writeMarkdown(options, filename, markdown) {
  * @param {*} options
  * @returns
  */
-async function getBasicGdocsFromDrive(options) {
+async function getBasicGdocsFromDrive(options: any) {
   let gdocs = await fetchBasicGdocsFromDrive(options);
   // ?? TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
-    gdocs = gdocs.filter(({ document }) => {
+    gdocs = gdocs.filter(({ document }: any) => {
       return document.title
         .toLowerCase()
         .includes(options.matchPattern.toLowerCase());
@@ -169,7 +192,7 @@ async function getBasicGdocsFromDrive(options) {
  * Calls jeklifyDocs with saveMarkdownToFile set to false, saveGdoc set to true
  * @param {*} pluginOptions
  */
-const jsonifyDocs = async (pluginOptions) => {
+const jsonifyDocs = async (pluginOptions: any) => {
   const options = _merge(
     { saveMarkdownToFile: false, saveGdoc: true },
     DEFAULT_OPTIONS,
@@ -188,8 +211,7 @@ async function writeContent({
   filename,
   suffix,
   extension,
-  options,
-}) {
+}: any) {
   // todo: make location to write dependent on phase (draft, etc)
   // todo: create a map for status to google folder id
   //${targetDir}/${filename}${suffix}.${extension
@@ -203,4 +225,9 @@ async function writeContent({
   fs.writeFileSync(file, content);
 }
 
-module.exports = { setObjectValuesFromParamValues, jekyllifyDocs, jsonifyDocs };
+export {
+  setObjectValuesFromParamValues,
+  jekyllifyDocs,
+  jsonifyDocs,
+  getMarkdownPlusGdoc,
+};
