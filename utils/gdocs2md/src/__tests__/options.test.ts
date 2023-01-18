@@ -6,142 +6,109 @@ const documentLists = require("./documents/lists.json");
 const documentQuotes = require("./documents/quotes.json");
 const documentCodes = require("./documents/codes.json");
 const documentTables = require("./documents/tables.json");
-import { loadOptions } from "@babel/core";
+
+import { getMarkdownPlusGdoc } from "../jekyllUtils";
 import { ElementsOfGoogleDocument } from "../elements-of-google-document";
-// const { ElementsOfGoogleDocument } = require("../elements-of-google-document");
+const optionsForTests = { skipFrontMatter: true, skipDiv: true };
 
-test.skip(`"KeepDefaultStyle" option`, () => {
-  const options = { keepDefaultStyle: true };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentTexts,
+test(`"KeepDefaultStyle" option`, async () => {
+  const options = { keepDefaultStype: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentTexts },
     options,
   });
-  googleDocument.process(options);
-  expect(googleDocument.toMarkdown()).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test.skip(`"DemoteHeading" option enabled`, () => {
-  const options = { demoteHeadings: true };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentTexts,
+test(`"DemoteHeading" option enabled`, async () => {
+  const options = { demoteHeadings: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentTexts },
     options,
   });
-  googleDocument.process(options);
-  expect(googleDocument.toMarkdown()).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`"DemoteHeading" option disabled`, () => {
-  const options = { demoteHeadings: false };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentTexts,
+test(`"DemoteHeading" option disabled`, async () => {
+  const options = { demoteHeadings: false, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentTexts },
     options,
   });
-  googleDocument.process(options);
-  expect(googleDocument.toMarkdown()).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`Crosslinks between documents`, () => {
+test(`Crosslinks between documents`, async () => {
   const links = {
     [documentLinks.documentId]: "/relative-path",
     ["unknow"]: "/404",
   };
-
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentLinks,
-    links,
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentLinks, links },
+    options: { ...optionsForTests },
   });
-  googleDocument.process({});
-  const documentObject = googleDocument.toMarkdown();
-  expect(documentObject).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`Skip headings`, () => {
-  const options = {
-    skipHeadings: true,
-  };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentTexts,
+test(`Skip headings`, async () => {
+  const options = { skipHeadings: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentTexts },
     options,
   });
-  googleDocument.process(options);
-  const documentObject = googleDocument.toMarkdown();
-  expect(documentObject).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`Skip images`, () => {
-  const options = {
-    skipImages: true,
-  };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentImages,
+test(`Skip images`, async () => {
+  const options = { skipImages: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentImages },
     options,
   });
-  googleDocument.process(options);
-  const documentObject = googleDocument.toMarkdown();
-  expect(documentObject).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`Skip footnotes`, () => {
-  const options = {
-    skipFootnotes: true,
-  };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentFootnotes,
+test(`Skip footnotes`, async () => {
+  const options = { skipFootnotes: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentFootnotes },
     options,
   });
-  googleDocument.process(options);
-  const documentObject = googleDocument.toMarkdown();
-  expect(documentObject).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`Skip lists`, () => {
-  const options = {
-    skipLists: true,
-  };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentLists,
+test(`Skip lists`, async () => {
+  const options = { skipLists: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentLists },
     options,
   });
-  googleDocument.process(options);
-  const documentObject = googleDocument.toMarkdown();
-  expect(documentObject).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`Skip quotes`, () => {
-  const options = {
-    skipQuotes: true,
-  };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentQuotes,
+test(`Skip quotes`, async () => {
+  const options = { skipQuotes: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentQuotes },
     options,
   });
-  googleDocument.process(options);
-  const documentObject = googleDocument.toMarkdown();
-  expect(documentObject).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`Skip codes`, () => {
-  const options = {
-    skipCodes: true,
-  };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentCodes,
+test(`Skip codes`, async () => {
+  const options = { skipCodes: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentCodes },
     options,
   });
-  googleDocument.process(options);
-  const documentObject = googleDocument.toMarkdown();
-  expect(documentObject).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });
 
-test(`Skip tables`, () => {
-  const options = {
-    skipTables: true,
-  };
-  const googleDocument = new ElementsOfGoogleDocument({
-    document: documentTables,
+test(`Skip tables`, async () => {
+  const options = { skipTables: true, ...optionsForTests };
+  const { markdown } = await getMarkdownPlusGdoc({
+    gdoc: { document: documentTables },
     options,
   });
-  googleDocument.process(options);
-  const documentObject = googleDocument.toMarkdown();
-  expect(documentObject).toMatchSnapshot();
+  expect(markdown).toMatchSnapshot();
 });

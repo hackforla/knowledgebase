@@ -21,6 +21,12 @@ const {
   GITHUB_COMMIT_MESSAGE,
 } = require("./constants.js");
 
+function getRoot() {
+  let root = process.argv[1];
+  root = root.substring(0, root.lastIndexOf("/gdocs2md")) + "/gdocs2md";
+  return root;
+}
+
 /**
  * Update the keyValuePairs object with values from the command line
  *
@@ -77,10 +83,8 @@ const jekyllifyDocs = async (pluginOptions: any) => {
 };
 
 async function getMarkdownPlusGdoc({ gdoc, options }: any) {
-  const gdocWithElements = convertGDoc2ElementsObj({
-    ...gdoc,
-    options,
-  });
+  const gdocWithElements = convertGDoc2ElementsObj({ gdoc, options });
+  console.log("options", options);
   const { filename, markdown, phase_name } = await getMarkdownPlus({
     gdocWithElements,
     options,
@@ -96,9 +100,11 @@ async function saveMarkdown(
   filename = filename.startsWith("/")
     ? filename.substring(1) // remove leading slash
     : filename || "";
-  filename = filename.startsWith(FILE_PREFIX)
-    ? filename
-    : FILE_PREFIX + filename; // add leading underscore
+  if (filename.indexOf("/") > -1) {
+    filename = filename.startsWith(FILE_PREFIX)
+      ? filename
+      : FILE_PREFIX + filename; // add leading underscore
+  }
 
   if (options.saveMarkdownToFile) {
     await writeMarkdown(options, filename, markdown);
@@ -125,8 +131,10 @@ async function getMarkdownPlus({
   gdocWithElements: any;
   options: any;
 }) {
+  gdocWithElements.options = { ...gdocWithElements.options, ...options };
   const jsonOfElements = gdocWithElements.elements.map(normalizeElement);
-  let markdown = addDiv(json2md(jsonOfElements));
+  let markdown = json2md(jsonOfElements);
+  markdown = addDiv(markdown, options);
   let jsonData = {} as any;
   if (options.getData) {
     jsonData = await getData(
@@ -134,22 +142,25 @@ async function getMarkdownPlus({
       gdocWithElements.document.title
     ).catch((error: any) => (jsonData = {}));
   }
-  const frontMatter = getFrontMatter({
-    gdoc: gdocWithElements,
-    cover: gdocWithElements.cover,
-    jsonData,
-  });
+
+  const frontMatter = options.skipFrontMatter
+    ? ""
+    : getFrontMatter({
+        gdoc: gdocWithElements,
+        cover: gdocWithElements.cover,
+        jsonData,
+      });
   markdown = frontMatter + markdown;
   let filename = jsonData.slug || gdocWithElements.properties.path;
   return { filename, markdown, phase_name: jsonData.phase_name || "" };
 }
 
-function addDiv(markdown: string) {
-  return (
-    '<div class="content-section">\n<div class="section-container" markdown="1">\n' +
-    markdown +
-    "</div>\n</div>"
-  );
+function addDiv(markdown: string, options: any) {
+  return options.skipDiv
+    ? markdown
+    : '<div class="content-section">\n<div class="section-container" markdown="1">\n' +
+        markdown +
+        "</div>\n</div>";
 }
 
 /**
@@ -215,10 +226,14 @@ async function writeContent({
   // todo: make location to write dependent on phase (draft, etc)
   // todo: create a map for status to google folder id
   //${targetDir}/${filename}${suffix}.${extension
-  const file = path.join(
+  let file = path.join(
     targetDir,
     `${filename ? filename : "index"}${suffix}.${extension}`
   );
+  if (file.startsWith("<root>")) {
+    file = file.replace("<root>", getRoot());
+  }
+  console.log("saving", file);
   const dir = path.dirname(file);
 
   fs.mkdirSync(dir, { recursive: true });

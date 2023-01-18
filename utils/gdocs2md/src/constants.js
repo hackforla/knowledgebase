@@ -39,6 +39,7 @@ module.exports = {
     pageContext: [],
     saveGdoc: false,
     saveMarkdownToFile: true,
+    skipDiv: false,
     skipCodes: false,
     skipFootnotes: false,
     skipHeadings: false,
@@ -48,6 +49,6 @@ module.exports = {
     skipTables: false,
     suffix: suffix,
     testFolderGoogleId: "1w4pvs1_bBiu_hvC-lZQR1zw-h-GdRLP3",
-    targetMarkdownDir: root,
+    markdownDir: root,
   },
 };

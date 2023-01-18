@@ -27,19 +27,20 @@ const objectToJson = (object) => {
 };
 
 const getFrontMatter = ({ gdoc, jsonData }) => {
-  const isActive = jsonData.active || jsonData.active === undefined;
+  const metaData = jsonData || {};
+  const isActive = metaData.active || metaData.active === undefined;
   gdoc.properties.status = isActive ? "active" : "inactive";
   // todo: all hard coded scripts should be dynamic
   const frontmatterJson = {
-    title: jsonData.title || gdoc.document.title,
-    description: jsonData.description || gdoc.document.description || "",
-    "short-description": jsonData.short_description || "",
-    "card-type": jsonData.card_type || "guide-page",
-    status: jsonData.status || "active",
+    title: metaData.title || gdoc.document.title,
+    description: metaData.description || gdoc.document.description || "",
+    "short-description": metaData.short_description || "",
+    "card-type": metaData.card_type || "guide-page",
+    status: metaData.status || "active",
     display: "true",
     "provider-link": gdoc.properties.slug + gdoc.options.suffix,
-    phase: jsonData.phase || "dev",
-    svg: jsonData.svg || "svg/2FA.svg",
+    phase: metaData.phase || "dev",
+    svg: metaData.svg || "svg/2FA.svg",
   };
 
   const attributeValuePairs = [
@@ -48,12 +49,13 @@ const getFrontMatter = ({ gdoc, jsonData }) => {
     ["short-description", frontmatterJson.short_description, ""],
     ["card-type", frontmatterJson.card_type || "guide-page"],
     ["status", "active"],
-    ["display", "true"],
-    ["phase", "pending"],
+    ["display", true],
+    ["category", frontmatterJson.category || "Development"],
+    // ["phase", "pending"],
     // todo: change below to be dyname
     ["svg", "svg/2FA.svg"],
     ["provider-link", gdoc.properties.slug + gdoc.options.suffix],
-    ["cover", gdoc.cover || false],
+    gdoc.cover ? ["cover", gdoc.cover] : [],
   ];
   let frontMatter = "";
   attributeValuePairs.forEach(([attributeName, value]) => {
@@ -78,6 +80,9 @@ const getFrontMatter = ({ gdoc, jsonData }) => {
 // };
 
 const checkFrontMatterAttribute = (attributeName, value) => {
+  if (!attributeName) {
+    return "";
+  }
   return `${attributeName}: ${value || ""}\n`;
 };
 
