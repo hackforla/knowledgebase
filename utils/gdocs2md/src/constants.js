@@ -48,7 +48,6 @@ module.exports = {
     skipQuotes: false,
     skipTables: false,
     suffix: suffix,
-    testFolderGoogleId: "1w4pvs1_bBiu_hvC-lZQR1zw-h-GdRLP3",
     markdownDir: root,
   },
 };

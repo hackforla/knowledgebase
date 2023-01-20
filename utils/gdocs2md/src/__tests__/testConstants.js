@@ -1,5 +1,6 @@
 const path = require("path");
 const { config } = require("dotenv");
+const { getPluginOptions } = require("../utils");
 const envPath = path.resolve(process.cwd(), ".env");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
@@ -20,25 +21,6 @@ const mockPluginOptions = getPluginOptions({
   saveMarkdownToFile: false,
 });
 
-function getPluginOptions({
-  folderId,
-  root,
-  suffix,
-  saveGdoc,
-  saveMarkdownToFile,
-}) {
-  return {
-    folder: folderId,
-    targetMarkdownDir: path.join(
-      root,
-      "actual-results/markdowns-generated-from-google-drive"
-    ),
-    suffix: suffix,
-    extension: "md",
-    saveGdoc,
-    saveMarkdownToFile,
-  };
-}
 module.exports = {
   mockPluginOptions,
   testMarkdownPluginOptions,

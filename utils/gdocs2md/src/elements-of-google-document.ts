@@ -60,7 +60,7 @@ class ElementsOfGoogleDocument {
         );
         const relativeTargetUrl = `${this.properties.slug}-${el.inlineObjectElement.inlineObjectId}-gdoc.png`;
         const filename = path.join(
-          options.imagesTarget || options.targetMarkdownDir,
+          options.imagesTarget || options.markdownDir,
           relativeTargetUrl
         );
         // todo: change to have separate var for slug path and slug
@@ -289,9 +289,15 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  getTableCellContent(content: { paragraph: any }[]) {
+  getTableCellContent(content: { paragraph: any }[], options: any) {
     return content
-      .map(({ paragraph }) => paragraph.elements.map(this.formatText).join(""))
+      .map(({ paragraph }) =>
+        paragraph.elements
+          .map((el: any) => {
+            this.formatText(el, { inlineImages: true }, options);
+          })
+          .join("")
+      )
       .join("")
       .replace(/\n/g, "<br/>"); // Replace newline characters by <br/> to avoid multi-paragraphs
   }
@@ -553,7 +559,7 @@ class ElementsOfGoogleDocument {
 
     const firstRow = table.tableRows[0];
     const firstCell = firstRow.tableCells[0];
-    const quote = this.getTableCellContent(firstCell.content);
+    const quote = this.getTableCellContent(firstCell.content, options);
     const blockquote = quote.replace(/“|”/g, ""); // Delete smart-quotes
 
     this.elements.push({ type: "blockquote", value: blockquote });
@@ -604,10 +610,12 @@ class ElementsOfGoogleDocument {
       type: "table",
       value: {
         headers: thead.tableCells.map(({ content }: any) =>
-          this.getTableCellContent(content)
+          this.getTableCellContent(content, options)
         ),
         rows: tbody.map((row: { tableCells: { content: any }[] }) =>
-          row.tableCells.map(({ content }) => this.getTableCellContent(content))
+          row.tableCells.map(({ content }) =>
+            this.getTableCellContent(content, options)
+          )
         ),
       },
     });
@@ -623,7 +631,9 @@ class ElementsOfGoogleDocument {
 
     Object.entries(documentFootnotes).forEach(([, value]) => {
       const paragraphElements = (value as any).content[0].paragraph.elements;
-      const tagContentArray = paragraphElements.map(this.formatText);
+      const tagContentArray = paragraphElements.map((el: any) => {
+        this.formatText(el, { inlineImages: true }, options);
+      });
       const tagContentString = this.stringifyContent(tagContentArray);
 
       footnotes.push({

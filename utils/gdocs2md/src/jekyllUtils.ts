@@ -171,7 +171,7 @@ function addDiv(markdown: string, options: any) {
  */
 async function writeMarkdown(options: any, filename: any, markdown: any) {
   await writeContent({
-    targetDir: options.targetMarkdownDir,
+    targetDir: options.markdownDir,
     suffix: options.suffix,
     filename,
     extension: "md",

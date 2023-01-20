@@ -1,7 +1,5 @@
 var fs = require("fs"),
-  axios = require("axios"),
-  http = require("http"),
-  https = require("https");
+  axios = require("axios");
 
 var path = require("path");
 

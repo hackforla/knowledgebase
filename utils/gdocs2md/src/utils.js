@@ -1,5 +1,5 @@
-const yamljs = require("yamljs");
 const axios = require("axios");
+const path = require("path");
 
 async function getData(documentId, title) {
   const url = `http://localhost:8000/gdocs/get/${documentId}`;
@@ -86,4 +86,23 @@ const checkFrontMatterAttribute = (attributeName, value) => {
   return `${attributeName}: ${value || ""}\n`;
 };
 
-module.exports = { getFrontMatter, getData };
+function getPluginOptions({
+  folderId,
+  root,
+  suffix,
+  saveGdoc,
+  saveMarkdownToFile,
+}) {
+  return {
+    folder: folderId,
+    markdownDir: path.join(
+      root,
+      "actual-results/markdowns-generated-from-google-drive"
+    ),
+    suffix: suffix,
+    extension: "md",
+    saveGdoc,
+    saveMarkdownToFile,
+  };
+}
+module.exports = { getFrontMatter, getData, getPluginOptions };
