@@ -1,1 +1,1 @@
-See [CONTRIBUTING wiki](./wiki/CONTRIBUTING) for details.
+See [CONTRIBUTING wiki](../../wiki/CONTRIBUTING) for details.
