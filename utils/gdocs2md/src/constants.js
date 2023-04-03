@@ -1,6 +1,5 @@
 const path = require("path");
 const { config } = require("dotenv");
-const { env } = require("process");
 const envPath = path.resolve(process.cwd(), ".env");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
@@ -46,6 +45,7 @@ module.exports = {
     skipImages: false,
     skipLists: false,
     skipQuotes: false,
+    skipStyles: false,
     skipTables: false,
     suffix: suffix,
     markdownDir: root,

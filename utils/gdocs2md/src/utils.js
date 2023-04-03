@@ -89,16 +89,14 @@ const checkFrontMatterAttribute = (attributeName, value) => {
 function getPluginOptions({
   folderId,
   root,
+  subdir,
   suffix,
   saveGdoc,
   saveMarkdownToFile,
 }) {
   return {
     folder: folderId,
-    markdownDir: path.join(
-      root,
-      "actual-results/markdowns-generated-from-google-drive"
-    ),
+    markdownDir: path.join(root, subdir || ""),
     suffix: suffix,
     extension: "md",
     saveGdoc,

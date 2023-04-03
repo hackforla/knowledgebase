@@ -177,7 +177,7 @@ class ElementsOfGoogleDocument {
       styles.push(`background-color:rgb(${red}, ${green}, ${blue})`);
     }
 
-    if (styles.length > 0) {
+    if (styles.length > 0 && !options.skipStyles) {
       text = `<span style='${styles.join(";")}'>${text}</span>`;
     }
 
