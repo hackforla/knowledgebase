@@ -294,7 +294,7 @@ class ElementsOfGoogleDocument {
       .map(({ paragraph }) =>
         paragraph.elements
           .map((el: any) => {
-            this.formatText(el, { inlineImages: true }, options);
+            return this.formatText(el, { inlineImages: true }, options);
           })
           .join("")
       )
