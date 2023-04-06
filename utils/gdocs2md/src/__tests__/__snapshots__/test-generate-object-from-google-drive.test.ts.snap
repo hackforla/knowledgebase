@@ -178,7 +178,7 @@ exports[`Document "Footnotes" to Objects 1`] = `
       "type": "footnote",
       "value": {
         "number": "1",
-        "text": " "This information is so tangential it needs to go into a footnote",
+        "text": " <span style='font-size:0.91em'>This information is so tangential it needs to go into a footnote</span>",
       },
     },
   ],
