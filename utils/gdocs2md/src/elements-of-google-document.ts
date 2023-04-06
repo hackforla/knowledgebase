@@ -505,6 +505,7 @@ class ElementsOfGoogleDocument {
         indexPos,
       });
     }
+    // todo: write to file
   }
 
   getTag(
@@ -632,7 +633,9 @@ class ElementsOfGoogleDocument {
     Object.entries(documentFootnotes).forEach(([, value]) => {
       const paragraphElements = (value as any).content[0].paragraph.elements;
       const tagContentArray = paragraphElements.map((el: any) => {
-        this.formatText(el, { inlineImages: true }, options);
+        // todo: refactor this
+        const text = this.formatText(el, { inlineImages: true }, options);
+        return text;
       });
       const tagContentString = this.stringifyContent(tagContentArray);
 

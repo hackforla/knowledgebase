@@ -10,10 +10,12 @@ filenames.forEach(function (filename: any) {
   const filepath = path.join(documentsPath, filename);
   const file = fs.readFileSync(filepath, "utf8");
   const parsedGdoc = JSON.parse(file);
+  const options = { skipStyles: false };
   const googleDocument = new ElementsOfGoogleDocument({
     ...parsedGdoc,
+    options,
   });
-  googleDocument.process();
+  googleDocument.process(googleDocument.options);
 
   test(`Document "${googleDocument.document.title}" to Objects`, () => {
     const { cover, elements } = googleDocument;
