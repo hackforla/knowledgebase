@@ -13,6 +13,7 @@ class Gdoc(models.Model):
     phase = models.ForeignKey("Phase", on_delete=models.PROTECT, blank=False)
     published = models.BooleanField(default=False)
     practiceAreas = models.ManyToManyField("PracticeArea", blank=True)
+    programAreas = models.ManyToManyField("ProgramArea", blank=True)
     tools = models.ManyToManyField("Tool", blank=True)
     technologies = models.ManyToManyField("Technology", blank=True)
 
@@ -31,6 +32,7 @@ class Gdoc(models.Model):
             "slug": self.slug,
             "published": self.published,
             "practiceAreas": [pa.name for pa in self.practiceAreas.all()],
+            "programAreas": [pa.name for pa in self.programAreas.all()],
             "tools": [t.name for t in self.tools.all()],
             "technologies": [t.name for t in self.technologies.all()],
         }
@@ -98,6 +100,19 @@ class PracticeArea(models.Model):
         blank=False,
         unique=True,
     )
+
+    def __str__(self):
+        return self.name
+
+class ProgramArea(models.Model):
+    name = models.CharField(
+        max_length=70,
+        blank=False,
+        unique=True,
+    )
+    
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name

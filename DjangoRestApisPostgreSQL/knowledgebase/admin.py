@@ -10,6 +10,7 @@ from .models import (
     AuthorAdmin,
     Phase,
     PracticeArea,
+    ProgramArea,
     Technology,
     Tool,
 )
@@ -19,5 +20,6 @@ admin.site.register(Author, AuthorAdmin)
 admin.site.register(GdocAuthor)
 admin.site.register(Phase)
 admin.site.register(PracticeArea)
+admin.site.register(ProgramArea)
 admin.site.register(Tool)
 admin.site.register(Technology)
