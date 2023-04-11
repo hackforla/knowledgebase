@@ -6,6 +6,7 @@ Tasks
 
 ## +++ NEXT \_\*\*
 
+- [ ] Populate using list-data.txt
 - [ ] Switch from snapshot to file
 - [ ] - Create option to not lookup Django
 - [ ] - Add debug option for adding to content

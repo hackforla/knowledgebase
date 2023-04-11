@@ -2,6 +2,7 @@ const { google } = require("googleapis");
 const { ENV_TOKEN_VAR } = require("./constants");
 const fs = require("fs");
 const GoogleOAuth2 = require("google-oauth2-env-vars");
+const privatekey = require("./privatekey.json");
 
 const refreshExpiredTokenVar = async () => {
   console.log("refreshing token");
@@ -35,6 +36,24 @@ const getAuth = async () => {
   });
   const auth = await googleOAuth2.getAuth();
   return auth;
+};
+
+const getAuth2 = async () => {
+  let jwtClient = new google.auth.JWT(
+    privatekey.client_email,
+    null,
+    privatekey.private_key,
+    ["https://www.googleapis.com/auth/spreadsheets"]
+  );
+  //authenticate request
+  jwtClient.authorize(function (err, tokens) {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      console.log("Successfully connected!");
+    }
+  });
 };
 
 module.exports = { getAuth };
