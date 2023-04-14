@@ -6,8 +6,6 @@ const octokit = new Octokit({
   auth: GITHUB_TOKEN,
 });
 
-console.log("GITHUB_TOKEN 3", GITHUB_TOKEN);
-
 async function writeToGitHub({
   owner,
   repo,
