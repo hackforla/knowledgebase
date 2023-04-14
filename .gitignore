@@ -13,4 +13,6 @@ actual-results
 venv
 __pycache__
 dist/
+privatekey.json
+keys.json
 
