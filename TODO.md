@@ -4,6 +4,16 @@ Tasks
 
 # PENDING
 
+## Use service account
+
+- [x] Check privileges
+- [x] Regenerate token and get existing code to work
+- [x] Search for example "service account" google drive get
+- [x] Search github google drive get
+- [x] Change .env for new google drive id for test
+- [ ] subdir - print out the list
+- [ ] Try google drive list
+
 ## +++ NEXT \_\*\*
 
 - [ ] Populate using list-data.txt

@@ -30,23 +30,14 @@ const refreshExpiredTokenVar = async () => {
 };
 
 const getAuth = async () => {
-  await refreshExpiredTokenVar();
-  const googleOAuth2 = new GoogleOAuth2({
-    token: ENV_TOKEN_VAR,
-  });
-  const auth = await googleOAuth2.getAuth();
-  return auth;
-};
-
-const getAuth2 = async () => {
   let jwtClient = new google.auth.JWT(
     privatekey.client_email,
     null,
     privatekey.private_key,
-    ["https://www.googleapis.com/auth/spreadsheets"]
+    ["https://www.googleapis.com/auth/drive"]
   );
   //authenticate request
-  jwtClient.authorize(function (err, tokens) {
+  await jwtClient.authorize(function (err, tokens) {
     if (err) {
       console.log(err);
       return;
@@ -54,9 +45,18 @@ const getAuth2 = async () => {
       console.log("Successfully connected!");
     }
   });
+  return jwtClient; // await refreshExpiredTokenVar();
 };
 
-module.exports = { getAuth };
+const getAuthWithToken = async () => {
+  const googleOAuth2 = new GoogleOAuth2({
+    token: ENV_TOKEN_VAR,
+  });
+  const auth = await googleOAuth2.getAuth();
+  return auth;
+};
+
+module.exports = { getAuth, getAuthWithToken };
 async function getRefreshToken(oauth2Client) {
   return await new Promise((resolve, reject) => {
     oauth2Client.refreshAccessToken((error, tokens) => {

@@ -308,10 +308,9 @@ async function fetchFoldersAndFilesInSubfolders({
 /** @param {import('../..').Options} pluginOptions */
 async function fetchFoldersAndFilesInDrive({ folder, debug }) {
   const drive = await getGoogleDrive();
-
   const res = await drive.files.get({
     fileId: folder,
-    fields: "description",
+    fields: "name,description", // name is for debugging
     supportsAllDrives: true,
   });
 

@@ -84,7 +84,6 @@ const jekyllifyDocs = async (pluginOptions: any) => {
 
 async function getMarkdownPlusGdoc({ gdoc, options }: any) {
   const gdocWithElements = convertGDoc2ElementsObj({ gdoc, options });
-  console.log("options", options);
   const { filename, markdown, phase_name } = await getMarkdownPlus({
     gdocWithElements,
     options,
