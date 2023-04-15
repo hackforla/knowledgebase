@@ -31,9 +31,8 @@ class ElementsOfGoogleDocument {
   related: any;
   bodyFontSize: any;
 
-  constructor({ document, links, properties, options }: ConstructorValues) {
+  constructor({ document, properties }: ConstructorValues) {
     this.document = document;
-    this.links = links || {};
     this.properties = properties || {};
   }
 
@@ -668,16 +667,16 @@ class ElementsOfGoogleDocument {
     );
   }
 
-  processInternalLinks() {
-    if (Object.keys(this.links).length > 0) {
+  processInternalLinks(links: any = {}) {
+    if (Object.keys(links).length > 0) {
       const elementsStringified = JSON.stringify(this.elements);
 
       const elementsStringifiedWithRelativePaths = elementsStringified.replace(
         /https:\/\/docs.google.com\/document\/(?:u\/\d+\/)?d\/([a-zA-Z0-9_-]+)(?:\/edit|\/preview)?/g,
         (match, id) => {
-          if (this.links[id]) {
+          if (links[id]) {
             this.related.push(id);
-            return this.links[id];
+            return links[id];
           }
 
           return match;
@@ -688,7 +687,7 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  process(customOptions?: any) {
+  process(customOptions?: any, links: any = {}) {
     this.cover = null;
     this.elements = [];
     this.headings = [];
@@ -741,7 +740,7 @@ class ElementsOfGoogleDocument {
     // Footnotes
     this.processFootnotes(options);
 
-    this.processInternalLinks();
+    this.processInternalLinks(links);
   }
 
   // todo: try this out see if no value provided FrontMatter is added

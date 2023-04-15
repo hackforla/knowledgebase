@@ -44,8 +44,9 @@ test(`Crosslinks between documents`, async () => {
     ["unknow"]: "/404",
   };
   const { markdown } = await getMarkdown({
-    gdoc: { document: documentLinks, links },
+    gdoc: { document: documentLinks },
     options: { ...optionsForTests },
+    links,
   });
   expect(markdown).toMatchSnapshot();
 });

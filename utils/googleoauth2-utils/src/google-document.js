@@ -3,9 +3,8 @@ const _merge = require("lodash/merge");
 
 const { DEFAULT_OPTIONS } = require("./constants");
 class GoogleDocumentObj {
-  constructor({ document, properties = {}, links = {} }) {
+  constructor({ document, properties = {} }) {
     this.document = document;
-    this.links = links;
     this.properties = properties;
   }
 }
