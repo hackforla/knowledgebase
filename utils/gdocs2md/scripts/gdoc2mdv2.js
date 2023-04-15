@@ -3,6 +3,6 @@ import {
   setObjectValuesFromParamValues,
 } from "../src/jekyllUtils.js";
 // default options saveGdoc is false, saveMarkdownToFile is true
-const pluginOptions = {};
-setObjectValuesFromParamValues(pluginOptions);
-jekyllifyDocs(pluginOptions);
+const customOptions = {};
+setObjectValuesFromParamValues(customOptions);
+jekyllifyDocs(customOptions);

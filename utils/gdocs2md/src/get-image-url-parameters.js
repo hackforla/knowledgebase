@@ -2,8 +2,8 @@ const numberMax = 16384;
 const isSizeValid = (number) =>
   number && Number.isInteger(number) && number > 0 && number < numberMax;
 
-const getImageUrlParameters = (pluginOptions) => {
-  const { imagesOptions } = pluginOptions;
+const getImageUrlParameters = (customOptions) => {
+  const { imagesOptions } = customOptions;
 
   if (!imagesOptions) return "";
 

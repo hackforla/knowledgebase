@@ -35,7 +35,6 @@ class ElementsOfGoogleDocument {
     this.document = document;
     this.links = links || {};
     this.properties = properties || {};
-    this.options = _merge({}, DEFAULT_OPTIONS, options);
   }
 
   formatText(
@@ -188,7 +187,7 @@ class ElementsOfGoogleDocument {
     return before + text + after;
   }
 
-  jekyllifyFrontMatter = async (dataJson: any) => {
+  jekyllifyFrontMatter = async (dataJson: any, options: any = {}) => {
     // let { frontMatter: existingFrontMatter, markdownBody } =
     //   getExistingFrontMatter(markdown);
 
@@ -202,7 +201,7 @@ class ElementsOfGoogleDocument {
       phase: "dev",
       // todo: change below to be dynamic
       svg: "svg/2FA.svg",
-      "provider-link": this.properties.slug + this.options.suffix,
+      "provider-link": this.properties.slug + options.suffix,
     };
     let frontMatter = "";
     // todo: change below to be dynamic
@@ -689,13 +688,13 @@ class ElementsOfGoogleDocument {
     }
   }
 
-  process(pluginOptions?: any) {
+  process(customOptions?: any) {
     this.cover = null;
     this.elements = [];
     this.headings = [];
     this.footnotes = {};
     this.related = [];
-    const options = _merge(DEFAULT_OPTIONS, pluginOptions || {});
+    const options = _merge(DEFAULT_OPTIONS, customOptions || {});
 
     // Keep the class scope in loops
     this.formatText = this.formatText.bind(this);

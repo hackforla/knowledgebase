@@ -300,7 +300,7 @@ async function fetchFromSubfolders({ drive, parents, folder, debug }) {
   return fetchNextPage(filesAndFolders.data.nextPageToken);
 }
 
-/** @param {import('../..').Options} pluginOptions */
+/** @param {import('../..').Options} customOptions */
 async function fetchFromTopFolder({ folder, debug }) {
   const drive = await getGoogleDriveApi();
   const topFolderInfo = await drive.files.get({

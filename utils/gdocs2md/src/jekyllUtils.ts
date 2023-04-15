@@ -56,12 +56,12 @@ const setObjectValuesFromParamValues = (keyValuePairs: any) => {
 /**
  * Based on the options, filter google docs from specified folder and process them,
  * with final product being markdown files
- * @param {*} pluginOptions
+ * @param {*} customOptions
  */
-const jekyllifyDocs = async (pluginOptions: any) => {
+const jekyllifyDocs = async (customOptions: any) => {
   console.log("jekyllifyDocs start");
   // todo: extract to a function
-  const options = _merge({}, DEFAULT_OPTIONS, pluginOptions);
+  const options = _merge({}, DEFAULT_OPTIONS, customOptions);
   if (!options.folder) {
     throw new Error("Must provide a folder");
   }
@@ -200,13 +200,13 @@ async function getGdocsDetailsAndFilter(options: any) {
 /**
  * Saves google docs as json to use for testing.  Does not save markdown.
  * Calls jeklifyDocs with saveMarkdownToFile set to false, saveGdoc set to true
- * @param {*} pluginOptions
+ * @param {*} customOptions
  */
-const jsonifyDocs = async (pluginOptions: any) => {
+const jsonifyDocs = async (customOptions: any) => {
   const options = _merge(
     { saveMarkdownToFile: false, saveGdoc: true },
     DEFAULT_OPTIONS,
-    pluginOptions
+    customOptions
   );
   await jekyllifyDocs(options);
 };
