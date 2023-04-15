@@ -48,6 +48,7 @@ const getAuth = async () => {
   return jwtClient; // await refreshExpiredTokenVar();
 };
 
+// todo: not used, useful utility?
 const getAuthWithToken = async () => {
   const googleOAuth2 = new GoogleOAuth2({
     token: ENV_TOKEN_VAR,

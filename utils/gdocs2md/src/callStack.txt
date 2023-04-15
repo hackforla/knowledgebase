@@ -2,9 +2,9 @@
 ++++ filterGoogleDocs jekyllUtils
 ++++++ fetchGoogleDocObjs google-docs.js
 ++++++++ fetchFoldersAndFilesInFolder google-drive.js
-++++++++++ getGoogleDrive google-drive.js
+++++++++++ getGoogleDriveApi google-drive.js
 ++++++++++++ getAuth google-auth.js
-++++++++++ fetchFoldersAndFilesInSubfolders(recursive) google-drive.js
+++++++++++ fetchFromSubfolders(recursive) google-drive.js
 ++++++++++ getMetadataFromDescription google-drive.js
 ++++++++ fetchGoogleDocJson google-docs.js
 ++++ processGdoc jekyllUtils.js

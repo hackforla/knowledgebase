@@ -120,7 +120,7 @@ const updateFile = ({ file, folder }) => {
   return file;
 };
 
-async function getGoogleDrive() {
+async function getGoogleDriveApi() {
   // const googleOAuth2 = new GoogleOAuth2({
   //   token: ENV_TOKEN_VAR,
   // });
@@ -149,17 +149,12 @@ const BATCH_SIZE = 100;
  * @param {import('../..').Options & fetchGoogleDocumentsObjOptions} options
  * @returns {Promise<(import('../..').DocumentFile & { path: string })[]>}
  */
-async function fetchFoldersAndFilesInSubfolders({
-  drive,
-  parents,
-  folder,
-  debug,
-}) {
+async function fetchFromSubfolders({ drive, parents, folder, debug }) {
   if (parents.length > BATCH_SIZE) {
     return _flatten(
       await Promise.all(
         evenlyChunk(parents, BATCH_SIZE).map((parents) =>
-          fetchFoldersAndFilesInSubfolders({
+          fetchFromSubfolders({
             drive,
             parents,
             folder,
@@ -190,9 +185,9 @@ async function fetchFoldersAndFilesInSubfolders({
     fields: `nextPageToken,files(id, mimeType, name, description, createdTime, modifiedTime, starred, parents)`,
   };
 
-  const res = await drive.files.list(query);
+  const filesAndFolders = await drive.files.list(query);
 
-  /** @param {typeof res.data.files} files */
+  /** @param {typeof filesAndFolders.data.files} files */
   const collectDocuments = (files) =>
     files
       .filter(
@@ -208,9 +203,9 @@ async function fetchFoldersAndFilesInSubfolders({
         });
       })
       .filter((file) => !file.exclude);
-  let documents = collectDocuments(res.data.files);
+  let documents = collectDocuments(filesAndFolders.data.files);
 
-  /** @param {typeof res.data.files} files */
+  /** @param {typeof filesAndFolders.data.files} files */
   const collectParents = (files) => {
     return files
       .filter((file) => file.mimeType === MIME_TYPE_FOLDER)
@@ -242,13 +237,13 @@ async function fetchFoldersAndFilesInSubfolders({
       })
       .filter((folder) => !folder.exclude);
   };
-  let nextParents = collectParents(res.data.files);
+  let nextParents = collectParents(filesAndFolders.data.files);
 
-  if (!res.data.nextPageToken) {
+  if (!filesAndFolders.data.nextPageToken) {
     if (nextParents.length === 0) {
       return documents;
     }
-    const documentsInFolders = await fetchFoldersAndFilesInSubfolders({
+    const documentsInFolders = await fetchFromSubfolders({
       drive,
       parents: nextParents,
       folder,
@@ -264,7 +259,7 @@ async function fetchFoldersAndFilesInSubfolders({
     // process one batch of children while continuing on with pages
     const parentBatch = nextParents.slice(0, BATCH_SIZE);
     nextParents = nextParents.slice(BATCH_SIZE);
-    const results = await fetchFoldersAndFilesInSubfolders({
+    const results = await fetchFromSubfolders({
       drive,
       parents: parentBatch,
       folder,
@@ -287,7 +282,7 @@ async function fetchFoldersAndFilesInSubfolders({
       if (nextParents.length === 0) {
         return documents;
       }
-      const finalDocumentsInFolders = await fetchFoldersAndFilesInSubfolders({
+      const finalDocumentsInFolders = await fetchFromSubfolders({
         drive,
         parents: nextParents,
         folder,
@@ -302,25 +297,25 @@ async function fetchFoldersAndFilesInSubfolders({
     }
     return (await Promise.all([nextPagePromise, fetchOneParentsBatch()]))[0];
   };
-  return fetchNextPage(res.data.nextPageToken);
+  return fetchNextPage(filesAndFolders.data.nextPageToken);
 }
 
 /** @param {import('../..').Options} pluginOptions */
-async function fetchFoldersAndFilesInDrive({ folder, debug }) {
-  const drive = await getGoogleDrive();
-  const res = await drive.files.get({
+async function fetchFromTopFolder({ folder, debug }) {
+  const drive = await getGoogleDriveApi();
+  const topFolderInfo = await drive.files.get({
     fileId: folder,
     fields: "name,description", // name is for debugging
     supportsAllDrives: true,
   });
 
-  const documentsFiles = await fetchFoldersAndFilesInSubfolders({
+  const documentsFiles = await fetchFromSubfolders({
     drive,
     parents: [
       {
         id: folder,
         tree: [],
-        metadata: getMetadataFromDescription(res.data.description),
+        metadata: getMetadataFromDescription(topFolderInfo.data.description),
       },
     ],
     folder,
@@ -331,5 +326,5 @@ async function fetchFoldersAndFilesInDrive({ folder, debug }) {
 }
 
 module.exports = {
-  fetchFoldersAndFilesInDrive,
+  fetchFromTopFolder,
 };

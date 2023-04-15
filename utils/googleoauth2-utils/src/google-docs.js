@@ -1,16 +1,19 @@
 const { google } = require("googleapis");
-const GoogleOAuth2 = require("google-oauth2-env-vars");
-const { ENV_TOKEN_VAR } = require("./constants");
 const { GoogleDocumentObj } = require("./google-document");
-const { fetchFoldersAndFilesInDrive } = require("./google-drive");
+const { fetchFromTopFolder } = require("./google-drive");
+const { getAuth } = require("./google-auth");
+
+async function getGoogleDocsApi() {
+  // const googleOAuth2 = new GoogleOAuth2({
+  //   token: ENV_TOKEN_VAR,
+  // });
+  const auth = await getAuth();
+  return google.docs({ version: "v1", auth });
+}
 
 async function fetchGoogleDocJson(id) {
-  const googleOAuth2 = new GoogleOAuth2({
-    token: ENV_TOKEN_VAR,
-  });
-  const auth = await googleOAuth2.getAuth();
-
-  const res = await google.docs({ version: "v1", auth }).documents.get({
+  const googleDocsApi = await getGoogleDocsApi();
+  const res = await googleDocsApi.documents.get({
     documentId: id,
   });
 
@@ -22,7 +25,7 @@ async function fetchGoogleDocJson(id) {
 }
 
 async function fetchBasicGdocsFromDrive({ folder, debug }) {
-  const gdocsProperties = await fetchFoldersAndFilesInDrive({ folder, debug });
+  const gdocsProperties = await fetchFromTopFolder({ folder, debug });
   const links = gdocsProperties.reduce(
     (acc, properties) => ({ ...acc, [properties.id]: properties.slug }),
     {}
