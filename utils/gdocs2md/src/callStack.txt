@@ -1,23 +1,11 @@
-++ jekyllifyDocs jekyllUtils
-++++ filterGoogleDocs jekyllUtils
-++++++ fetchGoogleDocObjs google-docs.js
-++++++++ fetchFoldersAndFilesInFolder google-drive.js
-++++++++++ getGoogleDriveApi google-drive.js
-++++++++++++ getAuth google-auth.js
-++++++++++ fetchFromSubfolders(recursive) google-drive.js
-++++++++++ getMetadataFromDescription google-drive.js
-++++++++ fetchGoogleDocJson google-docs.js
-++++ processGdoc jekyllUtils.js
-++++++ convertGDoc2ElementsObj convert.js
-++++++++ elementsOfGoogleDocument.process elements-of-google-doc.js
-++++++ writeGdoc  jekyllUtils.js
-++++++++ writeContent jekyllUtils.js
-++++++ convertElements2MD convert.js
-++++++++ json2md
-++++++++ removeBlankLines convert.js
-++++++ jekyllifyFrontMatter utils.js
-++++++ writeMarkDown jekyllUtils
-++++++++ writeContent jekyllUtils
++ jekyllifyDocs jekyllUtils
+++ getBasicGdocsFromDrive => gdocs jekyllUtils
++++ fetchAnd
++++ fetchGdocsDetails => gdocs
+++++ fetchGoogleDocJson => 
+++ getMarkdown => filename,markdown,phase_name <= gdoc (from gdocs)
+++ saveMarkdown <= filename, markdown, phase_name
+
 
 
 

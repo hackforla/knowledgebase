@@ -7,13 +7,13 @@ const documentQuotes = require("./documents/quotes.json");
 const documentCodes = require("./documents/codes.json");
 const documentTables = require("./documents/tables.json");
 
-import { getMarkdownPlusGdoc } from "../jekyllUtils";
+import { getMarkdown } from "../jekyllUtils";
 import { ElementsOfGoogleDocument } from "../elements-of-google-document";
 const optionsForTests = { skipFrontMatter: true, skipDiv: true };
 
 test(`"KeepDefaultStyle" option`, async () => {
   const options = { keepDefaultStype: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentTexts },
     options,
   });
@@ -22,7 +22,7 @@ test(`"KeepDefaultStyle" option`, async () => {
 
 test(`"DemoteHeading" option enabled`, async () => {
   const options = { demoteHeadings: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentTexts },
     options,
   });
@@ -31,7 +31,7 @@ test(`"DemoteHeading" option enabled`, async () => {
 
 test(`"DemoteHeading" option disabled`, async () => {
   const options = { demoteHeadings: false, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentTexts },
     options,
   });
@@ -43,7 +43,7 @@ test(`Crosslinks between documents`, async () => {
     [documentLinks.documentId]: "/relative-path",
     ["unknow"]: "/404",
   };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentLinks, links },
     options: { ...optionsForTests },
   });
@@ -52,7 +52,7 @@ test(`Crosslinks between documents`, async () => {
 
 test(`Skip headings`, async () => {
   const options = { skipHeadings: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentTexts },
     options,
   });
@@ -61,7 +61,7 @@ test(`Skip headings`, async () => {
 
 test(`Skip images`, async () => {
   const options = { skipImages: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentImages },
     options,
   });
@@ -70,7 +70,7 @@ test(`Skip images`, async () => {
 
 test(`Skip footnotes`, async () => {
   const options = { skipFootnotes: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentFootnotes },
     options,
   });
@@ -79,7 +79,7 @@ test(`Skip footnotes`, async () => {
 
 test(`Skip lists`, async () => {
   const options = { skipLists: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentLists },
     options,
   });
@@ -88,7 +88,7 @@ test(`Skip lists`, async () => {
 
 test(`Skip quotes`, async () => {
   const options = { skipQuotes: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentQuotes },
     options,
   });
@@ -97,7 +97,7 @@ test(`Skip quotes`, async () => {
 
 test(`Skip codes`, async () => {
   const options = { skipCodes: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentCodes },
     options,
   });
@@ -106,7 +106,7 @@ test(`Skip codes`, async () => {
 
 test(`Skip tables`, async () => {
   const options = { skipTables: true, ...optionsForTests };
-  const { markdown } = await getMarkdownPlusGdoc({
+  const { markdown } = await getMarkdown({
     gdoc: { document: documentTables },
     options,
   });

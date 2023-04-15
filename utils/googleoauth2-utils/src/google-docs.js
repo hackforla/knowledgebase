@@ -1,6 +1,8 @@
 const { google } = require("googleapis");
 const { GoogleDocumentObj } = require("./google-document");
-const { fetchFromTopFolder } = require("./google-drive");
+const {
+  fetchFromTopFolder: fetchGdocsPropertiesFromTopFolder,
+} = require("./google-drive");
 const { getAuth } = require("./google-auth");
 
 async function getGoogleDocsApi() {
@@ -24,12 +26,12 @@ async function fetchGoogleDocJson(id) {
   return res.data;
 }
 
-async function fetchBasicGdocsFromDrive({ folder, debug }) {
-  const gdocsProperties = await fetchFromTopFolder({ folder, debug });
-  const links = gdocsProperties.reduce(
-    (acc, properties) => ({ ...acc, [properties.id]: properties.slug }),
-    {}
-  );
+async function fetchGdocsDetails({ folder, debug }) {
+  const gdocsProperties = await fetchGdocsPropertiesFromTopFolder({
+    folder,
+    debug,
+  });
+  const gdocsSlugs = _getSlugs(gdocsProperties);
 
   const gdocs = await Promise.all(
     gdocsProperties.map(async (gdocProperties) => {
@@ -37,7 +39,7 @@ async function fetchBasicGdocsFromDrive({ folder, debug }) {
       const gdoc = new GoogleDocumentObj({
         document,
         properties: gdocProperties,
-        links,
+        links: gdocsSlugs,
       });
       return gdoc;
     })
@@ -47,5 +49,13 @@ async function fetchBasicGdocsFromDrive({ folder, debug }) {
 }
 
 module.exports = {
-  fetchBasicGdocsFromDrive,
+  fetchAndFilterGdocs: fetchGdocsDetails,
 };
+
+// return a map for each gdoc to the slug for each gdoc
+function _getSlugs(gdocsProperties) {
+  return gdocsProperties.reduce(
+    (acc, gdoc) => ({ ...acc, [gdoc.id]: gdoc.slug }),
+    {}
+  );
+}

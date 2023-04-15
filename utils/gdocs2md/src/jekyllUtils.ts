@@ -8,7 +8,7 @@ const { getData } = require("./utils.js");
 const { normalizeElement } = require("./normalize-element");
 const { merge: _merge } = pkg;
 const {
-  fetchBasicGdocsFromDrive,
+  fetchAndFilterGdocs,
 } = require("../../googleoauth2-utils/src/google-docs.js");
 const { convertGDoc2ElementsObj } = require("./convert");
 const {
@@ -73,7 +73,7 @@ const jekyllifyDocs = async (pluginOptions: any) => {
   // before starting next
   // *** READ ABOVE BEFORE CHANGING TO "forEach" ***
   for (let i = 0; i < gdocs.length; i++) {
-    const { filename, markdown, phase_name } = await getMarkdownPlusGdoc({
+    const { filename, markdown, phase_name } = await getMarkdown({
       gdoc: gdocs[i],
       options,
     });
@@ -82,7 +82,7 @@ const jekyllifyDocs = async (pluginOptions: any) => {
   }
 };
 
-async function getMarkdownPlusGdoc({ gdoc, options }: any) {
+async function getMarkdown({ gdoc, options }: any) {
   const gdocWithElements = convertGDoc2ElementsObj({ gdoc, options });
   const { filename, markdown, phase_name } = await getMarkdownPlus({
     gdocWithElements,
@@ -185,7 +185,7 @@ async function writeMarkdown(options: any, filename: any, markdown: any) {
  * @returns
  */
 async function getBasicGdocsFromDrive(options: any) {
-  let gdocs = await fetchBasicGdocsFromDrive(options);
+  let gdocs = await fetchAndFilterGdocs(options);
   // ?? TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
     gdocs = gdocs.filter(({ document }: any) => {
@@ -243,5 +243,5 @@ export {
   setObjectValuesFromParamValues,
   jekyllifyDocs,
   jsonifyDocs,
-  getMarkdownPlusGdoc,
+  getMarkdown,
 };
