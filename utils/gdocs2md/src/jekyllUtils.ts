@@ -130,7 +130,6 @@ async function getMarkdownPlus({
   gdocWithElements: any;
   options: any;
 }) {
-  gdocWithElements.options = { ...gdocWithElements.options, ...options };
   const jsonOfElements = gdocWithElements.elements.map(normalizeElement);
   let markdown = json2md(jsonOfElements);
   markdown = addDiv(markdown, options);
@@ -144,11 +143,14 @@ async function getMarkdownPlus({
 
   const frontMatter = options.skipFrontMatter
     ? ""
-    : getFrontMatter({
-        gdoc: gdocWithElements,
-        cover: gdocWithElements.cover,
-        jsonData,
-      });
+    : getFrontMatter(
+        {
+          gdoc: gdocWithElements,
+          cover: gdocWithElements.cover,
+          jsonData,
+        },
+        options
+      );
   markdown = frontMatter + markdown;
   let filename = jsonData.slug || gdocWithElements.properties.path;
   return { filename, markdown, phase_name: jsonData.phase_name || "" };

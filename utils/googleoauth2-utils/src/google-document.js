@@ -7,7 +7,6 @@ class GoogleDocumentObj {
     this.document = document;
     this.links = links;
     this.properties = properties;
-    // this.options = _merge({}, DEFAULT_OPTIONS, options);
   }
 }
 

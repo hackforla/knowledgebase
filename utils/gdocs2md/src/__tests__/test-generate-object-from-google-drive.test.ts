@@ -15,7 +15,7 @@ filenames.forEach(function (filename: any) {
     ...parsedGdoc,
     options,
   });
-  googleDocument.process(googleDocument.options);
+  googleDocument.process(options);
 
   test(`Document "${googleDocument.document.title}" to Objects`, () => {
     const { cover, elements } = googleDocument;

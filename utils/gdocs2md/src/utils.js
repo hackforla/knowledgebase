@@ -26,7 +26,7 @@ const objectToJson = (object) => {
   return JSON.parse(JSON.stringify(object));
 };
 
-const getFrontMatter = ({ gdoc, jsonData }) => {
+const getFrontMatter = ({ gdoc, jsonData }, options) => {
   const metaData = jsonData || {};
   const isActive = metaData.active || metaData.active === undefined;
   gdoc.properties.status = isActive ? "active" : "inactive";
@@ -38,7 +38,7 @@ const getFrontMatter = ({ gdoc, jsonData }) => {
     "card-type": metaData.card_type || "guide-page",
     status: metaData.status || "active",
     display: "true",
-    "provider-link": gdoc.properties.slug + gdoc.options.suffix,
+    "provider-link": gdoc.properties.slug + options.suffix,
     phase: metaData.phase || "dev",
     svg: metaData.svg || "svg/2FA.svg",
   };
@@ -54,7 +54,7 @@ const getFrontMatter = ({ gdoc, jsonData }) => {
     // ["phase", "pending"],
     // todo: change below to be dyname
     ["svg", "svg/2FA.svg"],
-    ["provider-link", gdoc.properties.slug + gdoc.options.suffix],
+    ["provider-link", gdoc.properties.slug + options.suffix],
     gdoc.cover ? ["cover", gdoc.cover] : [],
   ];
   let frontMatter = "";

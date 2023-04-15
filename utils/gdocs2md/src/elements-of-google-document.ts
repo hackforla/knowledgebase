@@ -745,10 +745,16 @@ class ElementsOfGoogleDocument {
   }
 
   // todo: try this out see if no value provided FrontMatter is added
-  toMarkdown({ includeFrontMatter = true, includeJsonData = true } = {}) {
+  toMarkdown({
+    includeFrontMatter = true,
+    includeJsonData = true,
+    options = {},
+  } = {}) {
     const markdownFrontMatter = this.elements.map(normalizeElement);
     const markdownContent = json2md(markdownFrontMatter);
-    const markdownFrontmatter = includeFrontMatter ? getFrontMatter(this) : "";
+    const markdownFrontmatter = includeFrontMatter
+      ? getFrontMatter(this, options)
+      : "";
 
     return `${markdownFrontmatter}${markdownContent}`;
     // return `${markdownFrontmatter}${markdownContent}`;
