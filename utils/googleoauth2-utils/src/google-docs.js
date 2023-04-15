@@ -49,7 +49,7 @@ async function fetchGdocsDetails({ folder, debug }) {
 }
 
 module.exports = {
-  fetchAndFilterGdocs: fetchGdocsDetails,
+  fetchGdocsDetails,
 };
 
 // return a map for each gdoc to the slug for each gdoc

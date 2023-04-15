@@ -1,11 +1,17 @@
 + jekyllifyDocs jekyllUtils
-++ getBasicGdocsFromDrive => gdocs jekyllUtils
-+++ fetchAnd
-+++ fetchGdocsDetails => gdocs
-++++ fetchGoogleDocJson => 
+++ getGdocsDetailsAndFilter => gdocs jekyllUtils: gets gdocs with json
+==> loop
 ++ getMarkdown => filename,markdown,phase_name <= gdoc (from gdocs)
 ++ saveMarkdown <= filename, markdown, phase_name
+==> end loop
 
++++ getGdocsDetailsAndFilter
++++ fetchGdocsDetails => gdocs
+++++ fetchGdocsPropertiesFromTopFolder 
+==> loop
+++++ fetchGoogleDocJson
+==> end loop
+    
 
 
 

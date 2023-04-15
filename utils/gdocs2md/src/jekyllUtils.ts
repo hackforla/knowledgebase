@@ -8,7 +8,7 @@ const { getData } = require("./utils.js");
 const { normalizeElement } = require("./normalize-element");
 const { merge: _merge } = pkg;
 const {
-  fetchAndFilterGdocs,
+  fetchGdocsDetails,
 } = require("../../googleoauth2-utils/src/google-docs.js");
 const { convertGDoc2ElementsObj } = require("./convert");
 const {
@@ -65,7 +65,7 @@ const jekyllifyDocs = async (pluginOptions: any) => {
   if (!options.folder) {
     throw new Error("Must provide a folder");
   }
-  const gdocs = await getBasicGdocsFromDrive(options);
+  const gdocs = await getGdocsDetailsAndFilter(options);
 
   // using "for" loop to avoid async issues
   // otherwise second document will start before everything is done with first
@@ -184,8 +184,8 @@ async function writeMarkdown(options: any, filename: any, markdown: any) {
  * @param {*} options
  * @returns
  */
-async function getBasicGdocsFromDrive(options: any) {
-  let gdocs = await fetchAndFilterGdocs(options);
+async function getGdocsDetailsAndFilter(options: any) {
+  let gdocs = await fetchGdocsDetails(options);
   // ?? TODO: change to use more standard -- prefix (--var value) instead of split =
   if (options.matchPattern) {
     gdocs = gdocs.filter(({ document }: any) => {
