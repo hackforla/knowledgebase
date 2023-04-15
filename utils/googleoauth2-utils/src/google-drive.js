@@ -327,4 +327,7 @@ async function fetchFromTopFolder({ folder, debug }) {
 
 module.exports = {
   fetchFromTopFolder,
+  getGoogleDriveApi,
+  fetchFromSubfolders,
+  getMetadataFromDescription,
 };

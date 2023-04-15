@@ -69,6 +69,7 @@ const jekyllifyDocs = async (customOptions: any) => {
   // const gdocs = fetchGdocsFromTopFolder(options); <= this will also filter
   // const links = getLinksFromGdocs(gdocs);
   // fetchAndSetGdocsDetails(gdocs, options);
+  // deriveAndSaveMarkdown(gdocs, options);
 
   // using "for" loop to avoid async issues
   // otherwise second document will start before everything is done with first

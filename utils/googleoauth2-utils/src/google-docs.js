@@ -1,8 +1,6 @@
 const { google } = require("googleapis");
 const { GoogleDocumentObj } = require("./google-document");
-const {
-  fetchFromTopFolder: fetchGdocsPropertiesFromTopFolder,
-} = require("./google-drive");
+const { fetchFromTopFolder } = require("./google-drive");
 const { getAuth } = require("./google-auth");
 
 async function getGoogleDocsApi() {
@@ -27,7 +25,7 @@ async function fetchGoogleDocJson(id) {
 }
 
 async function fetchGdocsDetails({ folder, debug }) {
-  const gdocsProperties = await fetchGdocsPropertiesFromTopFolder({
+  const gdocsProperties = await fetchFromTopFolder({
     folder,
     debug,
   });
@@ -39,6 +37,7 @@ async function fetchGdocsDetails({ folder, debug }) {
       const gdoc = new GoogleDocumentObj({
         document,
         properties: gdocProperties,
+        // todo: remove this
         links: gdocsSlugs,
       });
       return gdoc;
