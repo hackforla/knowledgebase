@@ -66,16 +66,21 @@ const jekyllifyDocs = async (customOptions: any) => {
     throw new Error("Must provide a folder");
   }
   const gdocs = await getGdocsDetailsAndFilter(options);
+  // const gdocs = fetchGdocsFromTopFolder(options); <= this will also filter
+  // const links = getLinksFromGdocs(gdocs);
+  // fetchAndSetGdocsDetails(gdocs, options);
 
   // using "for" loop to avoid async issues
   // otherwise second document will start before everything is done with first
   // end results are fine with "forEach" but cleaner to have all activites done
   // before starting next
   // *** READ ABOVE BEFORE CHANGING TO "forEach" ***
+  const links = gdocs.links;
   for (let i = 0; i < gdocs.length; i++) {
     const { filename, markdown, phase_name } = await getMarkdown({
       gdoc: gdocs[i],
       options,
+      links,
     });
 
     await saveMarkdown(filename, options, markdown, phase_name);
