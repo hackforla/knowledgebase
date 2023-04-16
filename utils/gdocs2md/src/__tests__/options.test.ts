@@ -8,7 +8,6 @@ const documentCodes = require("./documents/codes.json");
 const documentTables = require("./documents/tables.json");
 
 import { getMarkdown } from "../jekyllUtils";
-import { ElementsOfGoogleDocument } from "../elements-of-google-document";
 const optionsForTests = { skipFrontMatter: true, skipDiv: true };
 
 test(`"KeepDefaultStyle" option`, async () => {

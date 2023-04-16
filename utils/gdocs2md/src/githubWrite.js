@@ -1,6 +1,6 @@
 const { Octokit } = require("@octokit/rest");
 const { Base64 } = require("js-base64");
-const { GITHUB_TOKEN, GITHUB_NAME, GITHUB_BRANCH } = require("./constants.js");
+const { GITHUB_TOKEN, GITHUB_NAME, GITHUB_BRANCH } = require("./constants");
 
 const octokit = new Octokit({
   auth: GITHUB_TOKEN,

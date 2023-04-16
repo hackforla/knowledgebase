@@ -49,6 +49,7 @@ async function fetchGdocsDetails({ folder, debug }) {
 
 module.exports = {
   fetchGdocsDetails,
+  fetchGoogleDocJson,
 };
 
 // return a map for each gdoc to the slug for each gdoc

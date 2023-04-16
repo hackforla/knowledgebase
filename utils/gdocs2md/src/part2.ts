@@ -1,3 +1,13 @@
+import {
+  getGoogleDriveApi,
+  fetchFromSubfolders,
+  getMetadataFromDescription,
+} from "./google-drive";
+
+const {
+  fetchGoogleDocJson,
+} = require("../../googleoauth2-utils/src/google-docs.js");
+
 // async function deriveAndSaveMarkdown({ gdoc, options, links = {} }: any) {
 //   const gdocWithElements = convertGDoc2ElementsObj({ gdoc, options, links });
 //   const { filename, markdown, phase_name } = await getMarkdownPlus({
@@ -7,19 +17,24 @@
 //   return { filename, markdown, phase_name };
 // }
 
-// function getLinks(gdocsProperties) {
-//   return gdocsProperties.reduce(
-//     (acc, gdoc) => ({ ...acc, [gdoc.id]: gdoc.slug }),
-//     {}
-//   );
-const {
-  getGoogleDriveApi,
-  fetchFromSubfolders,
-  getMetadataFromDescription,
-} = require("../../googleoauth2-utils/src/google-drive.js");
+function arrayToHash(array: any, keyField: string, valueField?: string) {
+  return array.reduce(
+    (acc: any, item: any) => ({
+      ...acc,
+      [item["id"]]: valueField ? item[valueField] : item,
+    }),
+    {}
+  );
+}
+
+function getSlugsForGdocs(gdocsProperties: any) {
+  return gdocsProperties.reduce(
+    (acc: any, gdoc: any) => ({ ...acc, [gdoc.id]: gdoc.slug }),
+    {}
+  );
+}
 
 async function fetchGdocsFromTopFolder({ folder, matchPattern }: any) {
-  console.log("fetchGdocsFromTopFolder", folder, matchPattern);
   const drive = await getGoogleDriveApi();
   const topFolderInfo = await drive.files.get({
     fileId: folder,
@@ -46,14 +61,15 @@ async function fetchGdocsFromTopFolder({ folder, matchPattern }: any) {
   return gdocs;
 }
 
-// async function fetchGdocsContent(gdocProperties: any) {
-//   const gdocConent = await Promise.all(
-//     gdocProperties.map(async (gdocProperties) => {
-//       return await fetchGoogleDocJson(gdocProperties.id);
-//     })
-//   );
+async function fetchGdocsContent(gdocIds: any) {
+  const gdocsContent = await Promise.all(
+    gdocIds.map(async (gdoc: any) => {
+      return await fetchGoogleDocJson(gdoc.id);
+    })
+  );
+  const hash = arrayToHash(gdocsContent, "id");
+  console.log(hash[gdocsContent[0].id]);
+  return hash;
+}
 
-//   return gdocs;
-// }
-
-export { fetchGdocsFromTopFolder };
+export { fetchGdocsFromTopFolder, getSlugsForGdocs, fetchGdocsContent };
