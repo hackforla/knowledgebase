@@ -6,6 +6,7 @@ import {
 const json2md = require("json2md");
 const { normalizeElement } = require("./normalize-element");
 
+import { writeMarkdown } from "./part1-write";
 const {
   fetchGoogleDocJson,
 } = require("../../googleoauth2-utils/src/google-docs.js");
@@ -104,6 +105,7 @@ async function deriveAndSaveMarkdowns(gdocObjs: any, options: any) {
           "phase_name",
           phase_name
         );
+        await writeMarkdown(options, filename, markdown);
       }
     })
   );
