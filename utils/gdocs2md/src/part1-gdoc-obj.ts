@@ -700,14 +700,18 @@ class GdocObj {
     );
   }
 
-  processInternalLinks(links: any = {}) {
-    if (Object.keys(links).length > 0) {
+  processInternalLinks(slugs: any = {}) {
+    if (Object.keys(slugs).length > 0) {
       const elementsStringified = JSON.stringify(this.elements);
 
       const elementsStringifiedWithRelativePaths = elementsStringified.replace(
         /https:\/\/docs.google.com\/document\/(?:u\/\d+\/)?d\/([a-zA-Z0-9_-]+)(?:\/edit|\/preview)?/g,
-        (match, id) => {
-          return match;
+        (foundString, idPortion) => {
+          const slug = slugs[idPortion];
+          if (slug) {
+            return slug;
+          }
+          return foundString;
         }
       );
 
@@ -715,7 +719,7 @@ class GdocObj {
     }
   }
 
-  process(customOptions?: any, links: any = {}) {
+  setElements(customOptions?: any, slugs: any = {}) {
     this.cover = null;
     this.elements = [];
     this.headings = [];
@@ -767,7 +771,7 @@ class GdocObj {
     // Footnotes
     this.processFootnotes(options);
 
-    this.processInternalLinks(links);
+    this.processInternalLinks(slugs);
   }
 
   // todo: try this out see if no value provided FrontMatter is added
