@@ -1,3 +1,4 @@
+import { ElementsOfGoogleDocument } from "./elements-of-google-document";
 import {
   getGoogleDriveApi,
   fetchFromSubfolders,
@@ -16,15 +17,19 @@ const {
 //   });
 //   return { filename, markdown, phase_name };
 // }
-
-function arrayToHash(array: any, keyField: string, valueField?: string) {
-  return array.reduce(
-    (acc: any, item: any) => ({
-      ...acc,
-      [item["id"]]: valueField ? item[valueField] : item,
-    }),
-    {}
-  );
+type arrayTypeHash = {
+  array: any[];
+  keyProperty: string;
+  valueProperty?: string;
+  hashProperty?: string;
+};
+function arrayToHash({ array, keyProperty }: arrayTypeHash) {
+  const hash = {} as any;
+  array.forEach((item) => {
+    const key = item[keyProperty];
+    hash[key] = item;
+  });
+  return hash;
 }
 
 function getSlugsForGdocs(gdocsProperties: any) {
@@ -61,15 +66,19 @@ async function fetchGdocsFromTopFolder({ folder, matchPattern }: any) {
   return gdocs;
 }
 
-async function fetchGdocsContent(gdocIds: any) {
-  const gdocsContent = await Promise.all(
-    gdocIds.map(async (gdoc: any) => {
-      return await fetchGoogleDocJson(gdoc.id);
+async function fetchAndSetContent(gdocObjs: any) {
+  const keys = Object.keys(gdocObjs);
+  await Promise.all(
+    keys.map(async (key) => {
+      const content = await fetchGoogleDocJson(key);
+      gdocObjs[key].content = content;
     })
   );
-  const hash = arrayToHash(gdocsContent, "id");
-  console.log(hash[gdocsContent[0].id]);
-  return hash;
 }
 
-export { fetchGdocsFromTopFolder, getSlugsForGdocs, fetchGdocsContent };
+export {
+  arrayToHash,
+  fetchGdocsFromTopFolder,
+  getSlugsForGdocs,
+  fetchAndSetContent,
+};
