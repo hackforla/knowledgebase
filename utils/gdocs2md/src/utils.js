@@ -1,14 +1,14 @@
 const axios = require("axios");
 const path = require("path");
 
-async function getData(documentId, title) {
-  const url = `http://localhost:8000/gdocs/get/${documentId}`;
+async function getData(id, title) {
+  const url = `http://localhost:8000/gdocs/get/${id}`;
   const response = await axios({
     url,
     method: "GET",
   }).catch((error) => {
     console.log("error", JSON.stringify(error));
-    console.log(title, documentId, "not registered");
+    console.log(title, id, "not registered");
     return {};
   });
   const response2 = response;

@@ -719,7 +719,7 @@ class GdocObj {
     }
   }
 
-  setElements(customOptions?: any, slugs: any = {}) {
+  setElements(slugs: any = {}, customOptions: any = {}) {
     this.cover = null;
     this.elements = [];
     this.headings = [];

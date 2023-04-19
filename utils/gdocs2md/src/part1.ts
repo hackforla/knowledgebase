@@ -4,9 +4,11 @@ import { merge } from "lodash";
 import {
   arrayToHash,
   fetchGdocsFromTopFolder,
-  getSlugsForGdocs,
   fetchAndSetContent,
   deriveAndSaveMarkdowns,
+  fetchAndSetGdocsCustomProperties,
+  setGdocsElements,
+  getSlugsForGdocs,
 } from "./part2";
 import { GdocObj } from "./part1-gdoc-obj";
 
@@ -26,25 +28,16 @@ const convertGdocs = async (customOptions: any) => {
 
   for (let i = 0; i < gdocs.length; i++) {
     const gdoc = new GdocObj({ id: gdocs[i].id });
-    console.log("gdoc loop", gdoc.setElements);
     gdoc.properties = { ...gdocs[i] };
     gdocs[i] = gdoc;
   }
-  console.log("a", gdocs[0].process);
 
-  const gdocObjs = arrayToHash({
-    array: gdocs,
-    keyProperty: "id",
-  });
-  await fetchAndSetContent(gdocObjs);
-  // await fetchAndSetCustomProperties(gdocObjs);
-  // await replaceInternalLinks(gdocObjs);
-  const gdocObjsValues = Object.values(gdocObjs) as GdocObj[];
-  gdocObjsValues.forEach((gdoc: GdocObj) => {
-    gdoc.setElements();
-    console.log("elements", gdoc.elements);
-  });
-  deriveAndSaveMarkdowns(gdocObjsValues, options);
+  const gdocSlugs = getSlugsForGdocs(gdocs);
+
+  await fetchAndSetContent(gdocs);
+  await fetchAndSetGdocsCustomProperties(gdocs);
+  setGdocsElements(gdocs, gdocSlugs, options);
+  deriveAndSaveMarkdowns(gdocs, options);
   // const gdocsElements = deriveGdocsMdObjs({
 
   // deriveAndSaveMarkdown(gdocs, options);

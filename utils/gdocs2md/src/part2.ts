@@ -3,10 +3,13 @@ import {
   fetchFromSubfolders,
   getMetadataFromDescription,
 } from "./google-drive";
+import { GdocObj } from "./part1-gdoc-obj";
 const json2md = require("json2md");
 const { normalizeElement } = require("./normalize-element");
 
 import { writeMarkdown } from "./part1-write";
+import axios from "axios";
+
 const {
   fetchGoogleDocJson,
 } = require("../../googleoauth2-utils/src/google-docs.js");
@@ -35,11 +38,12 @@ function arrayToHash({ array, keyProperty }: arrayTypeHash) {
 }
 
 function addDiv(markdown: string, options: any) {
-  return options.skipDiv
+  const a = options.skipDiv
     ? markdown
     : '<div class="content-section">\n<div class="section-container" markdown="1">\n' +
-        markdown +
-        "</div>\n</div>";
+      markdown +
+      "</div>\n</div>";
+  return a;
 }
 
 function getSlugsForGdocs(gdocs: any) {
@@ -76,22 +80,18 @@ async function fetchGdocsFromTopFolder({ folder, matchPattern }: any) {
   return gdocs;
 }
 
-async function fetchAndSetContent(gdocObjs: any) {
-  const keys = Object.keys(gdocObjs);
+async function fetchAndSetContent(gdocs: any) {
   await Promise.all(
-    keys.map(async (key) => {
-      const content = await fetchGoogleDocJson(key);
-      gdocObjs[key].content = content;
+    gdocs.map(async (gdoc: GdocObj) => {
+      gdoc.content = await fetchGoogleDocJson(gdoc.id);
     })
   );
 }
 
-async function deriveAndSaveMarkdowns(gdocObjs: any, options: any) {
-  const keys = Object.keys(gdocObjs);
+async function deriveAndSaveMarkdowns(gdocs: GdocObj[], options: any) {
   console.log("options", options);
   await Promise.all(
-    keys.map(async (key) => {
-      const gdoc = gdocObjs[key];
+    gdocs.map(async (gdoc) => {
       if (options.saveMarkdownToFile) {
         const { filename, markdown, phase_name } = deriveMarkdown(
           gdoc,
@@ -109,6 +109,41 @@ async function deriveAndSaveMarkdowns(gdocObjs: any, options: any) {
       }
     })
   );
+}
+
+export function setGdocsElements(gdocs: any, gdocSlugs: any, options: any) {
+  gdocs.forEach((gdoc: GdocObj) => {
+    gdoc.setElements(gdocSlugs, options);
+    console.log("elements", gdoc.elements);
+  });
+}
+
+export async function fetchAndSetGdocsCustomProperties(gdocs: GdocObj[]) {
+  gdocs.map(async (gdoc) => {
+    const customProperties = await fetchGdocCustomProperties(
+      gdoc.id,
+      gdoc.properties.name
+    );
+    gdoc.properties = combineProperties(gdoc.properties, customProperties);
+  });
+}
+
+export async function fetchGdocCustomProperties(id: string, name: string) {
+  const url = `http://localhost:8000/gdocs/get/${id}`;
+  const response = (await axios({
+    url,
+    method: "GET",
+  }).catch((error) => {
+    console.warn(
+      "*** WARNING ***",
+      name,
+      id,
+      "not registered.  Error:",
+      error.message
+    );
+    return {};
+  })) as any;
+  return response.data || {};
 }
 
 const getFrontMatter = ({ gdoc, jsonData }: any, options: any) => {
@@ -189,3 +224,9 @@ export {
   getSlugsForGdocs,
   deriveAndSaveMarkdowns,
 };
+function combineProperties(properties: any, customProperties: any): any {
+  return {
+    ...properties,
+    ...customProperties,
+  };
+}
