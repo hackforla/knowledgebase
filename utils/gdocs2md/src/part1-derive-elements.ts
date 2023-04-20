@@ -6,7 +6,7 @@ import path from "path";
 import json2md from "./json2md-extended";
 import { isCodeBlocks, isQuote } from "./google-document-types";
 import { DEFAULT_OPTIONS } from "./importants";
-import { getFrontMatter } from "./utils.js";
+import { getFrontMatter } from "./archive/utils.js";
 import { normalizeElement } from "./normalize-element";
 import { downloadImageFromURL } from "./download-image";
 
