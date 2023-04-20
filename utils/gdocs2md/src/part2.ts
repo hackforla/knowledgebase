@@ -2,17 +2,15 @@ import {
   getGoogleDriveApi,
   fetchFromSubfolders,
   getMetadataFromDescription,
-} from "./google-drive";
+} from "./part1-google-funcs";
 import { GdocObj } from "./part1-gdoc-obj";
-const json2md = require("json2md");
-const { normalizeElement } = require("./normalize-element");
+import * as json2md from "./part1-json2md-extended";
+import { normalizeElement } from "./part1-misc");
 
 import { writeMarkdown } from "./part1-write";
 import axios from "axios";
 
-const {
-  fetchGoogleDocJson,
-} = require("../../googleoauth2-utils/src/google-docs.js");
+import { fetchGoogleDocJson } from "./part1-google-docs-funcs";
 
 // async function deriveAndSaveMarkdown({ gdoc, options, links = {} }: any) {
 //   const gdocWithElements = convertGDoc2ElementsObj({ gdoc, options, links });
@@ -223,6 +221,7 @@ export {
   fetchGdocsFromTopFolder,
   getSlugsForGdocs,
   deriveAndSaveMarkdowns,
+  getFrontMatter,
 };
 function combineProperties(properties: any, customProperties: any): any {
   return {

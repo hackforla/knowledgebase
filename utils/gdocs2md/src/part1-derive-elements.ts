@@ -1,14 +1,14 @@
-const _get = require("lodash/get");
-const _repeat = require("lodash/repeat");
-const _merge = require("lodash/merge");
-const path = require("path");
+import _get from "lodash/get";
+import _repeat from "lodash/repeat";
+import _merge from "lodash/merge";
+import path from "path";
 
-const json2md = require("./json2md-extended");
-const { isCodeBlocks, isQuote } = require("./google-document-types");
-const { DEFAULT_OPTIONS } = require("./constants");
-const { getFrontMatter } = require("./utils.js");
-const { normalizeElement } = require("./normalize-element");
-const { downloadImageFromURL } = require("./download-image");
+import json2md from "./json2md-extended";
+import { isCodeBlocks, isQuote } from "./google-document-types";
+import { DEFAULT_OPTIONS } from "./importants";
+import { getFrontMatter } from "./utils.js";
+import { normalizeElement } from "./normalize-element";
+import { downloadImageFromURL } from "./download-image";
 
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
