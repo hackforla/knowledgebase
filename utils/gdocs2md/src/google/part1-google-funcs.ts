@@ -4,7 +4,7 @@ import _chunk from "lodash/chunk";
 import _flatten from "lodash/flatten";
 import yamljs from "yamljs";
 
-import { wait } from "./part1-wait";
+const { wait } = require("./part1-wait");
 import { getAuth } from "./part1-google-auth";
 
 const MIME_TYPE_DOCUMENT = "application/vnd.google-apps.document";

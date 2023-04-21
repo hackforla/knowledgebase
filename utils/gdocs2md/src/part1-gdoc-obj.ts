@@ -3,13 +3,13 @@ import _repeat from "lodash/repeat";
 import _merge from "lodash/merge";
 import path from "path";
 
-import * as json2md from "./part1-json2md-extended";
-import { isCodeBlocks, isQuote } from "./part1-google-document-types";
-import { DEFAULT_OPTIONS } from "./cilsonstants";
-import { getFrontMatter } from "./part2.js";
+import { json2mdExtended } from "./part1-json2md-extended";
+import { isCodeBlocks, isQuote } from "./google/part1-google-document-types";
+import { DEFAULT_OPTIONS } from "./part1-constants";
+import { getFrontMatter } from "./part2";
 // todo: review the code below
-import { normalizeElement } from "./normalize-element";
-import { downloadImageFromURL } from "./download-image";
+import { normalizeElement } from "./part1-misc";
+import { downloadImageFromURL } from "./single-gdoc";
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;
 
@@ -782,7 +782,7 @@ class GdocObj {
     options = {},
   } = {}) {
     const markdownFrontMatter = this.elements.map(normalizeElement);
-    const markdownContent = json2md(markdownFrontMatter);
+    const markdownContent = json2mdExtended(markdownFrontMatter);
     const markdownFrontmatter = includeFrontMatter
       ? getFrontMatter(this, options)
       : "";

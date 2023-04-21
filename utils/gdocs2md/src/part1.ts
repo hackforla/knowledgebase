@@ -2,9 +2,8 @@ import { DEFAULT_OPTIONS } from "./part1-constants";
 import { merge } from "lodash";
 
 import {
-  arrayToHash,
   fetchGdocsFromTopFolder,
-  fetchAndSetContent,
+  fetchAndSetGdocsContent,
   deriveAndSaveMarkdowns,
   fetchAndSetGdocsCustomProperties,
   setGdocsElements,
@@ -34,7 +33,7 @@ const convertGdocs = async (customOptions: any) => {
 
   const gdocSlugs = getSlugsForGdocs(gdocs);
 
-  await fetchAndSetContent(gdocs);
+  await fetchAndSetGdocsContent(gdocs);
   await fetchAndSetGdocsCustomProperties(gdocs);
   setGdocsElements(gdocs, gdocSlugs, options);
   deriveAndSaveMarkdowns(gdocs, options);

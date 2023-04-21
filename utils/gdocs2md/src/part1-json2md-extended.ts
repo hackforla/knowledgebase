@@ -2,7 +2,6 @@ import json2mdExtended from "json2md";
 json2mdExtended.converters.footnote = function (footnote: any) {
   return `[^${footnote.number}]:${footnote.text}`;
 };
-
 json2mdExtended.converters.html = function (html: any) {
   return html;
 };
@@ -16,4 +15,4 @@ json2mdExtended.converters.imgextension = (input: any) => {
   return markdown;
 };
 
-module.exports = json2mdExtended;
+export { json2mdExtended };

@@ -3,11 +3,11 @@ import _repeat from "lodash/repeat";
 import _merge from "lodash/merge";
 import path from "path";
 
-import json2md from "./json2md-extended";
-import { isCodeBlocks, isQuote } from "./google-document-types";
-import { DEFAULT_OPTIONS } from "./importants";
-import { getFrontMatter } from "./archive/utils.js";
-import { normalizeElement } from "./normalize-element";
+import * as json2md from "./part1-json2md-extended";
+import { isCodeBlocks, isQuote } from "./google/part1-google-document-types";
+import { DEFAULT_OPTIONS } from "./part1-constants";
+import { getFrontMatter } from "./single-gdoc";
+import { normalizeElement } from "./part1-misc";
 import { downloadImageFromURL } from "./download-image";
 
 const HORIZONTAL_TAB_CHAR = "\x09";
