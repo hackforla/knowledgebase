@@ -11,41 +11,34 @@ Tasks
 - [x] Search for example "service account" google drive get
 - [x] Search github google drive get
 - [x] Change .env for new google drive id for test
-- [ ] subdir - print out the list
-- [ ] Try google drive list
+- [x] subdir - print out the list
+- [x] Try google drive list
 
 ## +++ NEXT \_\*\*
 
-- [ ] Populate using list-data.txt
-- [ ] Switch from snapshot to file
-- [ ] - Create option to not lookup Django
-- [ ] - Add debug option for adding to content
+- [x] Try saving to github
+- [ ] Fix title issue
+- [ ] Try getting data from knowledgebase database
+- [ ] Verify reminders
+- [ ] Provide option to ignore specific html styling
+- [ ] Run tests
+- [ ] Document env variables
+- [ ] Have generating file be automatic for tests
+- [ ] Switch from snapshot to file for tests
+- [ ] Create/test option to not lookup Django
 - [ ] +++ Create Flask application to generate all files
-- [ ] - Create google docs plug in to populate table
 - [ ] ++ Look at tests - why exception not caught?
-- [ ] Refactor
-
-  - [ ] Distinguish gdocPlain vs gdocWithElelments
-  - [ ] Put all write functionality together
-  - [ ] Create writeMarkdownToFile and writeJsonToFile to call writeContent or writeToFile
-  - [ ] Consider taking functions from utils and moving to ElementsOfGoogleDocument
-  - [ ] Look at level of abstraction in process and next level down
+- [ ] Look at code for writing google doc to json
 
 - [ ] +++ Change auth so authorized from browser and variables cached
-- [ ] +++ Add custom icon to json_data ???
-- [ ] +++ Make activity boolean
-- [ ] +++ Make phase a one to many
-- [ ] - Add option for debugModifyContent to modify content??
-- [ ] - Add param to generate scripts for matchPattern, debugModifyContent??
+- [ ] Add option for debugModifyContent to modify content??
+- [ ] Add param to generate scripts for matchPattern
 - [ ] +++ Incubator
 - [ ] ++ Auto generate provider link
-- [ ] +++ Verify Reminders ??
 - [ ] +++ Make default svg on frontmatter a constant env variable
 - [ ] +++ Check if anything missing from frontmatter in schema
 - [ ] +++ Add custom formatting to test. Mock
 - [ ] ++ Document all js functions
-- [ ] - Refactor from start to finish
-- [ ] Look at a markdown file for how contributing section works
 - [ ] Figure out gdoc2mdv2 executable
 - [ ] Auto generate contributing section
 

@@ -13,7 +13,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "./src", "./scripts", 
+    "./src", "./scripts", "archive/part1-generate-markdown-files.js", "archive/part1-save-markdown-github.js", 
   ],
   "exclude": [
     "./test",

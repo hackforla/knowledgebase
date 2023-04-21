@@ -56,18 +56,10 @@ async function fetchAndSetGdocsContent(gdocs: any) {
 }
 
 async function deriveAndSaveMarkdowns(gdocs: GdocObj[], options: any) {
-  console.log("options", options);
   await Promise.all(
     gdocs.map(async (gdoc) => {
       const { filename, markdown, phase_name } = deriveMarkdown(gdoc, options);
-      console.log(
-        "filename",
-        filename,
-        "markdown",
-        markdown,
-        "phase_name",
-        phase_name
-      );
+      console.log("filename", filename, "phase_name", phase_name);
       await saveMarkdown(filename, options, markdown, phase_name);
     })
   );
@@ -76,7 +68,7 @@ async function deriveAndSaveMarkdowns(gdocs: GdocObj[], options: any) {
 export function setGdocsElements(gdocs: any, gdocSlugs: any, options: any) {
   gdocs.forEach((gdoc: GdocObj) => {
     gdoc.setElements(gdocSlugs, options);
-    console.log("elements", gdoc.elements);
+    console.log("set elements", gdoc.id);
   });
 }
 

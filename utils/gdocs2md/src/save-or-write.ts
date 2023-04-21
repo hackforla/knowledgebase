@@ -39,6 +39,7 @@ export async function saveMarkdown(
   markdown: string,
   phase_name: any
 ) {
+  console.log("saveMarkdown", filename);
   filename = filename.startsWith("/")
     ? filename.substring(1) // remove leading slash
     : filename || "";
@@ -53,6 +54,7 @@ export async function saveMarkdown(
   }
   if (options.saveMarkdownToGitHub) {
     let githubFile = `${filename ? filename : "index"}${options.suffix}.md`;
+    console.log("about to save to github", githubFile);
     await saveToGitHub({
       owner: GITHUB_OWNER,
       repo: GITHUB_REPO,
@@ -76,6 +78,10 @@ async function saveToGitHub({
   content,
   phase_name,
 }: any) {
+  if (path.includes("subdir")) {
+    console.log("skipping subdir");
+    return;
+  }
   const branch = GITHUB_BRANCH.hasOwnProperty(phase_name)
     ? GITHUB_BRANCH[phase_name.toLowerCase()]
     : GITHUB_BRANCH.default;
@@ -91,23 +97,28 @@ async function saveToGitHub({
     },
     branch,
   };
-  // const existingCommit = await octokit.repos
-  //   .getContent({
-  //     owner: owner,
-  //     repo: repo,
-  //     path: path,
-  //     ref: branch,
-  //   })
-  //   .catch(() => {
-  //     console.log("Creating new file");
-  //   });
-  // if (existingCommit) {
-  //   console.log("Updating existing file", existingCommit);
-  //   octokitValues.sha = existingCommit.data.sha;
-  //   // octokitValues.sha = "fe0cc115c62c0d21439725b4020ad6fe64838d9b";
-  // }
-
+  const existingCommit = await octokit.repos
+    .getContent({
+      owner: owner,
+      repo: repo,
+      path: path,
+      ref: branch,
+    })
+    .catch(() => {
+      console.log("Creating new file");
+    });
+  if (existingCommit) {
+    console.log("Updating existing file", existingCommit);
+    const existingData = existingCommit.data as any;
+    // @ts-ignore
+    octokitValues.sha = existingCommit.data.sha;
+    // octokitValues.sha = "fe0cc115c62c0d21439725b4020ad6fe64838d9b";
+  }
+  // @ts-ignore
+  console.log("octokit start", path, octokitValues.sha);
+  console.log("GITHUB_TOKEN", GITHUB_TOKEN);
   await octokit.repos.createOrUpdateFileContents(octokitValues);
+  console.log("octokit end", path);
 }
 
 async function writeContentToFile({

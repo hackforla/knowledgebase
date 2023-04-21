@@ -48,13 +48,15 @@ export function getPluginOptions({
   suffix,
   saveGdoc,
   saveMarkdownToFile,
+  saveMarkdownToGitHub,
 }: any) {
   return {
     folder: folderId,
-    markdownDir: path.join(root, subdir || ""),
+    markdownDir: path.join(root || "", subdir || ""),
     suffix: suffix,
     extension: "md",
     saveGdoc,
     saveMarkdownToFile,
+    saveMarkdownToGitHub,
   };
 }
