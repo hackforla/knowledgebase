@@ -3,14 +3,15 @@ import {
   fetchFromSubfolders,
   getMetadataFromDescription,
 } from "./google/google-drive";
-import { deriveMarkdown, getFrontMatter } from "./single-gdoc";
+import {
+  fetchGdocCustomProperties,
+  deriveMarkdown,
+  getFrontMatter,
+} from "./single-gdoc";
 import { GdocObj } from "./gdoc-obj";
-import { fetchGdocCustomProperties } from "./single-gdoc";
-import { writeMarkdown } from "./write";
+import { saveMarkdown } from "./save-or-write";
 
 import { fetchGoogleDocJson } from "./google/google-docs";
-
-import {} from "./single-gdoc";
 
 function getSlugsForGdocs(gdocs: any) {
   return gdocs.reduce(
@@ -58,21 +59,16 @@ async function deriveAndSaveMarkdowns(gdocs: GdocObj[], options: any) {
   console.log("options", options);
   await Promise.all(
     gdocs.map(async (gdoc) => {
-      if (options.saveMarkdownToFile) {
-        const { filename, markdown, phase_name } = deriveMarkdown(
-          gdoc,
-          options
-        );
-        console.log(
-          "filename",
-          filename,
-          "markdown",
-          markdown,
-          "phase_name",
-          phase_name
-        );
-        await writeMarkdown(options, filename, markdown);
-      }
+      const { filename, markdown, phase_name } = deriveMarkdown(gdoc, options);
+      console.log(
+        "filename",
+        filename,
+        "markdown",
+        markdown,
+        "phase_name",
+        phase_name
+      );
+      await saveMarkdown(filename, options, markdown, phase_name);
     })
   );
 }

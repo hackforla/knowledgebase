@@ -17,8 +17,6 @@ import { GdocObj } from "./gdoc-obj";
  * @param {*} customOptions
  */
 const convertGdocs = async (customOptions: any) => {
-  console.log("jekyllifyDocs start");
-  // todo: extract to a function
   const options = merge({}, DEFAULT_OPTIONS, customOptions);
   if (!options.folder) {
     throw new Error("Must provide a folder");
