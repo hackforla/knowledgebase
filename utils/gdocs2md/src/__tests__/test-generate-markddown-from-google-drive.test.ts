@@ -1,6 +1,5 @@
-const fs = require("fs");
-const path = require(`path`);
-const { jekyllifyDocs } = require("../jekyllUtils");
+import * as fs from "fs";
+import * as path from "path";
 const { config } = require("dotenv");
 config({ path: path.resolve(__dirname, "./.env") });
 

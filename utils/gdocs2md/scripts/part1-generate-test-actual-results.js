@@ -1,5 +1,5 @@
 const path = require("path");
-const { jekyllifyDocs } = require("../src/jekyllUtils");
+const { convertGdocs } = require("../src/convert-gdocs");
 const { config } = require("dotenv");
 const envPath = path.resolve(process.cwd(), ".env");
 config({ path: envPath }); // specifies the path to your .env file
@@ -10,4 +10,4 @@ if (process.env.ENV_PATH) {
 } else {
   process.env.ENV_PATH = envPath;
 }
-jekyllifyDocs(testMarkdownPluginOptions);
+convertGdocs(testMarkdownPluginOptions);
