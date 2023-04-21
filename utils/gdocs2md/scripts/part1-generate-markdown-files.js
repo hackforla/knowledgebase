@@ -1,7 +1,7 @@
 const path = require("path");
-const { convertGdocs } = require("../src/part1");
+const { convertGdocs } = require("../src/convert-gdocs");
 const { config } = require("dotenv");
-const { getPluginOptions } = require("../src/part1-misc");
+const { getPluginOptions } = require("../src/utils");
 
 const envPath = path.resolve(process.cwd(), ".env");
 console.log("debug process.cwd()", process.cwd());

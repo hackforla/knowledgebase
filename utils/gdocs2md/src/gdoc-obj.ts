@@ -3,12 +3,12 @@ import _repeat from "lodash/repeat";
 import _merge from "lodash/merge";
 import path from "path";
 
-import { json2mdExtended } from "./part1-json2md-extended";
-import { isCodeBlocks, isQuote } from "./google/part1-google-document-types";
-import { DEFAULT_OPTIONS } from "./part1-constants";
-import { getFrontMatter } from "./part2";
+import { json2mdExtended } from "./json2md-extended";
+import { isCodeBlocks, isQuote } from "./google/google-document-types";
+import { DEFAULT_OPTIONS } from "./constants";
+import { getFrontMatter } from "./multi-gdocs";
 // todo: review the code below
-import { normalizeElement } from "./part1-misc";
+import { normalizeElement } from "./utils";
 import { downloadImageFromURL } from "./single-gdoc";
 const HORIZONTAL_TAB_CHAR = "\x09";
 const GOOGLE_DOCS_INDENT = 18;

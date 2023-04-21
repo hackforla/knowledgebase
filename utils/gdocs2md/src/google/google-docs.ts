@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { getAuth } from "./part1-google-auth";
+import { getAuth } from "./google-auth";
 
 async function getGoogleDocsApi() {
   // const googleOAuth2 = new GoogleOAuth2({

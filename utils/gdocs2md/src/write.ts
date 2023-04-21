@@ -1,4 +1,4 @@
-import { getRoot } from "./part1-misc";
+import { getRoot } from "./utils";
 import path from "path";
 import fs from "fs";
 

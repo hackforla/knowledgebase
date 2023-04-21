@@ -2,13 +2,13 @@ import {
   getGoogleDriveApi,
   fetchFromSubfolders,
   getMetadataFromDescription,
-} from "./google/part1-google-funcs";
+} from "./google/google-drive";
 import { deriveMarkdown, getFrontMatter } from "./single-gdoc";
-import { GdocObj } from "./part1-gdoc-obj";
+import { GdocObj } from "./gdoc-obj";
 import { fetchGdocCustomProperties } from "./single-gdoc";
-import { writeMarkdown } from "./part1-write";
+import { writeMarkdown } from "./write";
 
-import { fetchGoogleDocJson } from "./google/part1-google-docs-funcs";
+import { fetchGoogleDocJson } from "./google/google-docs";
 
 import {} from "./single-gdoc";
 

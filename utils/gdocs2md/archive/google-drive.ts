@@ -4,7 +4,7 @@ const _chunk = require("lodash/chunk");
 const _flatten = require("lodash/flatten");
 const yamljs = require("yamljs");
 
-const { wait } = require("./part1-wait");
+const { wait } = require("./wait");
 const { getAuth } = require("./google-auth");
 
 const MIME_TYPE_DOCUMENT = "application/vnd.google-apps.document";

@@ -1,6 +1,6 @@
 import json2md from "json2md";
 import axios from "axios";
-import { addDiv, normalizeElement } from "./part1-misc";
+import { addDiv, normalizeElement } from "./utils";
 import fs from "fs";
 import path from "path";
 

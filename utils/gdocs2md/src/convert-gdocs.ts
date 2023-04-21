@@ -1,4 +1,4 @@
-import { DEFAULT_OPTIONS } from "./part1-constants";
+import { DEFAULT_OPTIONS } from "./constants";
 import { merge } from "lodash";
 
 import {
@@ -8,8 +8,8 @@ import {
   fetchAndSetGdocsCustomProperties,
   setGdocsElements,
   getSlugsForGdocs,
-} from "./part2";
-import { GdocObj } from "./part1-gdoc-obj";
+} from "./multi-gdocs";
+import { GdocObj } from "./gdoc-obj";
 
 /**
  * Based on the options, filter google docs from specified folder and process them,

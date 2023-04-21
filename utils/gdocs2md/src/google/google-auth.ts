@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { ENV_TOKEN_VAR } from "../part1-constants";
+import { ENV_TOKEN_VAR } from "../constants";
 import fs from "fs";
 import { OAuth2Client } from "google-auth-library";
 const GoogleOAuth2 = require("google-oauth2-env-vars");
