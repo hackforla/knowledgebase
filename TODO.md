@@ -17,6 +17,7 @@ Tasks
 ## +++ NEXT \_\*\*
 
 - [x] Try saving to github
+- [ ] Get tests to work
 - [ ] Create option to generate a single file (matchPattern?)
 - [ ] Fix title issue
 - [ ] Try getting data from knowledgebase database

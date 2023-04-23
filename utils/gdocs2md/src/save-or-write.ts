@@ -65,6 +65,7 @@ export async function saveMarkdown(
       content: markdown,
       phase_name,
     });
+    console.log("done saving to github");
   }
 }
 
@@ -82,6 +83,7 @@ async function saveToGitHub({
     console.log("skipping subdir");
     return;
   }
+  console.log("saveToGitHub start", path);
   const branch = GITHUB_BRANCH.hasOwnProperty(phase_name)
     ? GITHUB_BRANCH[phase_name.toLowerCase()]
     : GITHUB_BRANCH.default;
@@ -107,18 +109,20 @@ async function saveToGitHub({
     .catch(() => {
       console.log("Creating new file");
     });
+  console.log("here");
   if (existingCommit) {
-    console.log("Updating existing file", existingCommit);
     const existingData = existingCommit.data as any;
     // @ts-ignore
     octokitValues.sha = existingCommit.data.sha;
-    // octokitValues.sha = "fe0cc115c62c0d21439725b4020ad6fe64838d9b";
+    // @ts-ignore
+    console.log("Updating existing file", octokitValues.sha);
   }
   // @ts-ignore
   console.log("octokit start", path, octokitValues.sha);
   console.log("GITHUB_TOKEN", GITHUB_TOKEN);
   await octokit.repos.createOrUpdateFileContents(octokitValues);
   console.log("octokit end", path);
+  console.log("okay");
 }
 
 async function writeContentToFile({

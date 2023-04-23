@@ -4,6 +4,7 @@ import fs from "fs";
 import { OAuth2Client } from "google-auth-library";
 const GoogleOAuth2 = require("google-oauth2-env-vars");
 const privatekey = require("./privatekey.json");
+let jwtClient: any;
 
 const refreshExpiredTokenVar = async () => {
   console.log("refreshing token");
@@ -31,14 +32,18 @@ const refreshExpiredTokenVar = async () => {
 };
 
 export const getAuth = async () => {
-  let jwtClient = new google.auth.JWT(
+  if (jwtClient) {
+    return jwtClient;
+  }
+
+  jwtClient = new google.auth.JWT(
     privatekey.client_email,
     undefined,
     privatekey.private_key,
     ["https://www.googleapis.com/auth/drive"]
   );
   //authenticate request
-  await jwtClient.authorize(function (err) {
+  await jwtClient.authorize(function (err: any) {
     if (err) {
       console.log(err);
       return;

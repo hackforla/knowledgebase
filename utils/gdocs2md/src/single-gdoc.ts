@@ -62,7 +62,7 @@ export const getFrontMatter = ({ gdoc, jsonData }: any, options: any) => {
   gdoc.properties.status = isActive ? "active" : "inactive";
   // todo: all hard coded scripts should be dynamic
   const frontmatterJson = {
-    title: metaData.title || gdoc.properties.title,
+    title: metaData.title || gdoc.content.title,
     description: metaData.description || gdoc.properties.description || "",
     "short-description": metaData.short_description || "",
     "card-type": metaData.card_type || "guide-page",

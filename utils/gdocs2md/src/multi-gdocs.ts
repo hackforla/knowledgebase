@@ -20,7 +20,10 @@ function getSlugsForGdocs(gdocs: any) {
   );
 }
 
-async function fetchGdocsFromTopFolder({ folder, matchPattern }: any) {
+async function fetchGdocsPropertiesFromTopFolder({
+  folder,
+  matchPattern,
+}: any) {
   const drive = await getGoogleDriveApi();
   const topFolderInfo = await drive.files.get({
     fileId: folder,
@@ -44,6 +47,10 @@ async function fetchGdocsFromTopFolder({ folder, matchPattern }: any) {
       return document.title.toLowerCase().includes(matchPattern.toLowerCase());
     });
   }
+
+  for (let i = 0; i < gdocs.length; i++) {
+    gdocs[i] = { id: gdocs[i].id, properties: { ...gdocs[i] } };
+  }
   return gdocs;
 }
 
@@ -56,13 +63,15 @@ async function fetchAndSetGdocsContent(gdocs: any) {
 }
 
 async function deriveAndSaveMarkdowns(gdocs: GdocObj[], options: any) {
-  await Promise.all(
-    gdocs.map(async (gdoc) => {
-      const { filename, markdown, phase_name } = deriveMarkdown(gdoc, options);
-      console.log("filename", filename, "phase_name", phase_name);
-      await saveMarkdown(filename, options, markdown, phase_name);
-    })
-  );
+  for (let i = 0; i < gdocs.length; i++) {
+    // DO NOT USE MAP OR FOREACH HERE: will not wait for async function to finish
+    const { filename, markdown, phase_name } = deriveMarkdown(
+      gdocs[i],
+      options
+    );
+    console.log("filename is", filename, "phase_name", phase_name);
+    await saveMarkdown(filename, options, markdown, phase_name);
+  }
 }
 
 export function setGdocsElements(gdocs: any, gdocSlugs: any, options: any) {
@@ -85,7 +94,7 @@ export async function fetchAndSetGdocsCustomProperties(gdocs: GdocObj[]) {
 export {
   deriveMarkdown,
   fetchAndSetGdocsContent,
-  fetchGdocsFromTopFolder,
+  fetchGdocsPropertiesFromTopFolder,
   getSlugsForGdocs,
   deriveAndSaveMarkdowns,
   getFrontMatter,
