@@ -16,21 +16,32 @@ import { GdocObj } from "./gdoc-obj";
  * with final product being markdown files
  * @param {*} customOptions
  */
-export const convertGdocs = async (customOptions: any) => {
+
+export async function convertGdocs(customOptions: any) {
   const options = merge({}, DEFAULT_OPTIONS, customOptions);
   if (!options.folder) {
     throw new Error("Must provide a folder");
   }
-  const gdocs = await fetchGdocsPropertiesFromTopFolder(options);
+  const gdocs = await fetchGdocs(options);
   await fetchAndSetGdocsCustomProperties(gdocs);
+  await processGdocsArray(gdocs, options);
+  await deriveAndSaveMarkdowns(gdocs, options);
+}
+
+export async function fetchGdocs(customOptions: any) {
+  const options = merge({}, DEFAULT_OPTIONS, customOptions);
+  const gdocs = await fetchGdocsPropertiesFromTopFolder(options);
   await fetchAndSetGdocsContent(gdocs);
-  await convertGdocsArray(gdocs, options);
-  // const gdocsElements = deriveGdocsMdObjs({
+  return gdocs;
+}
 
-  // deriveAndSaveMarkdown(gdocs, options);
-};
+export async function processGdocsArray(gdocs: any, options: any) {
+  convertGdocsToObjs(gdocs);
+  const gdocSlugs = getSlugsForGdocs(gdocs);
+  setGdocsElements(gdocs, gdocSlugs, options);
+}
 
-export async function convertGdocsArray(gdocs: any, options: any) {
+function convertGdocsToObjs(gdocs: any) {
   for (let i = 0; i < gdocs.length; i++) {
     const gdoc = new GdocObj({
       id: gdocs[i].id,
@@ -39,8 +50,4 @@ export async function convertGdocsArray(gdocs: any, options: any) {
     });
     gdocs[i] = gdoc;
   }
-
-  const gdocSlugs = getSlugsForGdocs(gdocs);
-  setGdocsElements(gdocs, gdocSlugs, options);
-  deriveAndSaveMarkdowns(gdocs, options);
 }

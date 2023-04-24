@@ -17,6 +17,10 @@ Tasks
 ## +++ NEXT \_\*\*
 
 - [x] Try saving to github
+- [ ] Get script that creates mock google docs to work 
+- [ ] Run mock google docs script to have new mock google docs
+- [ ] Create test that it works
+- [ ] Change google drive to markdown test to start from files on google drive
 - [ ] Get tests to work
 - [ ] Create option to generate a single file (matchPattern?)
 - [ ] Fix title issue

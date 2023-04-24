@@ -1,6 +1,8 @@
 {
-  "title": "Quotes",
-  "body": {
+  "properties": {
+     "title": "Quotes"},
+  "content": {
+     "body": {
     "content": [
       {
         "endIndex": 1,
