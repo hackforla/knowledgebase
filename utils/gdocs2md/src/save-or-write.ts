@@ -125,7 +125,7 @@ async function saveToGitHub({
   console.log("okay");
 }
 
-async function writeContentToFile({
+export async function writeContentToFile({
   content,
   targetDir,
   filename,
