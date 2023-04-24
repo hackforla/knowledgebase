@@ -142,7 +142,7 @@ export async function writeContentToFile({
   if (file.startsWith("<root>")) {
     file = file.replace("<root>", getRoot());
   }
-  console.log("saving", file);
+  console.log("writing", file);
   const dir = path.dirname(file);
 
   fs.mkdirSync(dir, { recursive: true });

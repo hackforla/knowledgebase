@@ -8,32 +8,23 @@ config({ path: path.resolve(process.cwd(), ".env") });
 // TODO: read parameters from command line
 // Read parameters from command line
 const [, , ...args] = process.argv;
-const [outputDir] = args;
+const [outputDir, suffix] = args;
 
 if (!outputDir) {
   throw new Error("No output directory specified");
 }
 
-const customOptions = {
-  gdocDir: outputDir,
-  saveGdoc: false,
-  saveMarkdownToFile: false,
-};
-console.log("customOptions", customOptions);
+saveGdocs({ targetDir: outputDir, suffix: suffix || "" });
 
-saveGdocs();
-
-async function saveGdocs() {
-  const gdocs = await fetchGdocs(customOptions);
-  console.log("here");
+async function saveGdocs(options) {
+  const gdocs = await fetchGdocs(options);
   for (const gdoc of gdocs) {
     writeContentToFile({
-      targetDir: "./gdocs",
-      suffix: "",
       filename: gdoc.properties.name,
+      targetDir: options.targetDir,
       extension: "json",
       content: JSON.stringify(gdoc),
-      options: customOptions,
+      suffix: options.suffix,
     });
   }
 }
