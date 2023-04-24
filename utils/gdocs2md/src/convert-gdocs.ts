@@ -35,6 +35,10 @@ export async function fetchGdocs(customOptions: any) {
   return gdocs;
 }
 
+export function processDeriveAndSaveMarkdowns(gdocs: any, options: any) {
+  processGdocsArray(gdocs, options);
+  deriveAndSaveMarkdowns(gdocs, options);
+}
 export async function processGdocsArray(gdocs: any, options: any) {
   convertGdocsToObjs(gdocs);
   const gdocSlugs = getSlugsForGdocs(gdocs);

@@ -22,10 +22,10 @@ Tasks
 - [ ] Create test that it works
 - [ ] Change google drive to markdown test to start from files on google drive
 - [ ] Get tests to work
-- [ ] Create option to generate a single file (matchPattern?)
 - [ ] Fix title issue
-- [ ] Try getting data from knowledgebase database
 - [ ] Verify reminders
+
+- [ ] Try getting data from knowledgebase database
 - [ ] Provide option to ignore specific html styling
 - [ ] Run tests
 - [ ] Document env variables
