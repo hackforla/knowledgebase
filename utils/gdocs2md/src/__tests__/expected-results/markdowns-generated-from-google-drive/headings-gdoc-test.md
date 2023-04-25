@@ -25,5 +25,3 @@ Description of subtopic
 
 
 Description of buried info
-</div>
-</div>

@@ -233,7 +233,7 @@ class GdocObj {
       phase: "dev",
       // todo: change below to be dynamic
       svg: "svg/2FA.svg",
-      "provider-link": this.properties.slug + options.suffix,
+      "provider-link": this.properties.slug + (options.suffix || ""),
     };
     let frontMatter = "";
     // todo: change below to be dynamic

@@ -9,8 +9,6 @@ category: Development
 svg: svg/2FA.svg
 provider-link: /images-gdoc-test
 ---
-<div class="content-section">
-<div class="section-container" markdown="1">
 ## The below is a small image <img src="/assets/images/images-kix.z1ebyhut5s2j-gdoc.png" title="" alt="img" height="26PT" width="29PT">embedded in the sentence
 
 
@@ -83,5 +81,3 @@ This image is from https://www.codeforboston.org/img/cfb-logo/cfb-logo-stacked-d
 ====================================================================
 
 ## Right Justified Image
-</div>
-</div>

@@ -9,9 +9,6 @@ category: Development
 svg: svg/2FA.svg
 provider-link: /table-gdoc-test
 ---
-<div class="content-section">
-<div class="section-container" markdown="1">
-
 Here is a table
 
 | Animal | What I like about the animal | Age |
@@ -32,5 +29,3 @@ Text in a one cell table will be treated as a code block
 | **Bold**, _italic_ |
 | **_Bold & Italic_** |
 | **_<ins>Bold, Italic, and Underline</ins>_** |
-</div>
-</div>

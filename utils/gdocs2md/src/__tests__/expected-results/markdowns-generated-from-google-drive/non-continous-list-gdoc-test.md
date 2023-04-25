@@ -9,9 +9,6 @@ category: Development
 svg: svg/2FA.svg
 provider-link: /non-continous-list-gdoc-test
 ---
-<div class="content-section">
-<div class="section-container" markdown="1">
-
  - 
 
 
@@ -34,5 +31,3 @@ This is a numbered list
 
  1. Really will never have
  2. Really really
-</div>
-</div>

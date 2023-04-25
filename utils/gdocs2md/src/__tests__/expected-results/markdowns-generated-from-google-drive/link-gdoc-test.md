@@ -9,9 +9,4 @@ category: Development
 svg: svg/2FA.svg
 provider-link: /link-gdoc-test
 ---
-<div class="content-section">
-<div class="section-container" markdown="1">
-
 [Google](https://google.com)
-</div>
-</div>

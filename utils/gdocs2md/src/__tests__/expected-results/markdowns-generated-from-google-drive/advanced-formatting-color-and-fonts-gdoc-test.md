@@ -9,9 +9,6 @@ category: Development
 svg: svg/2FA.svg
 provider-link: /advanced-formatting-color-and-fonts-gdoc-test
 ---
-<div class="content-section">
-<div class="section-container" markdown="1">
-
 Times New Roman
 
 
@@ -28,5 +25,3 @@ Impact
 
 
 <span style='color:rgb(255, 255, 255);background-color:rgb(255, 0, 255)'>White text with pink bangrounds</span>
-</div>
-</div>

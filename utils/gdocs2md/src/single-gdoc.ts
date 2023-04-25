@@ -68,7 +68,7 @@ export const getFrontMatter = ({ gdoc, jsonData }: any, options: any) => {
     "card-type": metaData.card_type || "guide-page",
     status: metaData.status || "active",
     display: "true",
-    "provider-link": gdoc.properties.slug + options.suffix,
+    "provider-link": gdoc.properties.slug + (options.suffix || ""),
     phase: metaData.phase || "dev",
     svg: metaData.svg || "svg/2FA.svg",
     category: "",
@@ -85,7 +85,7 @@ export const getFrontMatter = ({ gdoc, jsonData }: any, options: any) => {
     // ["phase", "pending"],
     // todo: change below to be dyname
     ["svg", "svg/2FA.svg"],
-    ["provider-link", gdoc.properties.slug + options.suffix],
+    ["provider-link", gdoc.properties.slug + (options.suffix || "")],
     gdoc.cover ? ["cover", gdoc.cover] : [],
   ];
   let frontMatter = "";

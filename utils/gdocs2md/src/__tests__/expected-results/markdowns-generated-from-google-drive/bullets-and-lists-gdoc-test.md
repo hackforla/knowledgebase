@@ -9,9 +9,6 @@ category: Development
 svg: svg/2FA.svg
 provider-link: /bullets-and-lists-gdoc-test
 ---
-<div class="content-section">
-<div class="section-container" markdown="1">
-
 this is a bulleted list:
 
 
@@ -48,5 +45,3 @@ This is a numbered list
      3. Non-critical feature 3
     
  4. Won't Have
-</div>
-</div>
