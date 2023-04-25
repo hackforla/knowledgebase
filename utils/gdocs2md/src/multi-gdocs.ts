@@ -97,7 +97,6 @@ export {
   fetchGdocsPropertiesFromTopFolder,
   getSlugsForGdocs,
   deriveAndSaveMarkdowns,
-  getFrontMatter,
 };
 function combineProperties(properties: any, customProperties: any): any {
   return {

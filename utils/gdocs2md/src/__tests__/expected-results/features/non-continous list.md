@@ -10,7 +10,6 @@ svg: svg/2FA.svg
 provider-link: /non-continous-list
 ---
 
-
 This is a numbered list
 
 
