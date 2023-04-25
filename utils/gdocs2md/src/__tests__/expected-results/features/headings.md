@@ -7,10 +7,8 @@ status: active
 display: true
 category: Development
 svg: svg/2FA.svg
-provider-link: /headings-gdoc-test
+provider-link: /headings
 ---
-<div class="content-section">
-<div class="section-container" markdown="1">
 ## Most Important Topic (Heading 1)
 
 

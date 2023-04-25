@@ -7,9 +7,8 @@ status: active
 display: true
 category: Development
 svg: svg/2FA.svg
-provider-link: /non-continous-list-gdoc-test
+provider-link: /non-continous-list
 ---
- - 
 
 
 This is a numbered list

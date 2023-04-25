@@ -7,8 +7,9 @@ status: active
 display: true
 category: Development
 svg: svg/2FA.svg
-provider-link: /table-gdoc-test
+provider-link: /table
 ---
+
 Here is a table
 
 | Animal | What I like about the animal | Age |

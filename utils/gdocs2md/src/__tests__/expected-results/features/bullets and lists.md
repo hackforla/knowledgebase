@@ -7,15 +7,13 @@ status: active
 display: true
 category: Development
 svg: svg/2FA.svg
-provider-link: /bullets-and-lists-gdoc-test
+provider-link: /bullets-and-lists
 ---
 this is a bulleted list:
 
-
- - item1
+item1
      - subitem 1.1
-    
- - item 2
+    item 2
      - item 2.1
      - item 2.2
          - item 2.2.1

@@ -7,6 +7,7 @@ status: active
 display: true
 category: Development
 svg: svg/2FA.svg
-provider-link: /link-gdoc-test
+provider-link: /link
 ---
+
 [Google](https://google.com)

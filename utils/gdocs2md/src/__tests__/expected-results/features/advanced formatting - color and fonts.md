@@ -7,8 +7,9 @@ status: active
 display: true
 category: Development
 svg: svg/2FA.svg
-provider-link: /advanced-formatting-color-and-fonts-gdoc-test
+provider-link: /advanced-formatting-color-and-fonts
 ---
+
 Times New Roman
 
 
