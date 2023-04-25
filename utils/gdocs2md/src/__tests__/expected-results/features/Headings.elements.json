@@ -1,0 +1,8 @@
+[
+  { "type": "h2", "value": "Most Important Topic (Heading 1)" },
+  { "type": "p", "value": "Description of important topic" },
+  { "type": "h3", "value": "Important Subtopic (Heading 2)" },
+  { "type": "p", "value": "Description of subtopic" },
+  { "type": "h4", "value": "Buried Info (Heading 3)" },
+  { "type": "p", "value": "Description of buried info" }
+]

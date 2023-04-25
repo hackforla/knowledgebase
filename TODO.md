@@ -17,33 +17,60 @@ Tasks
 ## +++ NEXT \_\*\*
 
 - [x] Try saving to github
-- [ ] Get script that creates mock google docs to work 
-- [ ] Run mock google docs script to have new mock google docs
-- [ ] Create test that it works
-- [ ] Change google drive to markdown test to start from files on google drive
-- [ ] Get tests to work
-- [ ] Fix title issue
+- [x] Get script that creates mock google docs to work 
+- [x] Run mock google docs script to have new mock google docs
+- [x] Create test that it works
+- [x] Change google drive to markdown test to start from files on google drive
+THIS WEEK
+- [ ] Get tests to work - 
+- [ ] Get all scripts to work
+- [ ] Add parameters to script
+- [x] Fix title issue
 - [ ] Verify reminders
+NEXT WEEK
+- [ ] ++ Auto generate provider link
+- [ ] +++ DOC: Make default svg on frontmatter a constant env variable
+- [ ] +++ DOC: Check if anything missing from frontmatter in schema
+- [ ] +++ DOC: Add custom formatting to test. Mock
+- [ ] +++ DOC: Generate certificate and token
+- [ ] +++ DOC: Env vars
+- [ ] DOC: Check documentation for service account
+- [ ] +++ DOC: How to test (check)
+- [ ] +++ Verify output for Slack reminders
+- [ ] +++ DOC: Front matter
+
+LATER
+- [ ] +++ Incubator
+
+- [ ] +++ Create Flask application to generate all files
+- [ ] DOC: parameters
+- [ ] +++ Dir structure
+- [ ] +++ AUTH: Change auth so authorized from browser and variables cached
+- [ ] +++ Add document style to template
+- [ ] +++ ?? Remove document style from template
+- [ ] ?? Style using hfla css
+- [ ] +++ ?? Autogenerate image name - if svg exists use it, else configured default
+- [ ] Document scripts
+
+
+PHASE 2
+- [ ] +++ Auto renew token
+
+
+
 
 - [ ] Try getting data from knowledgebase database
 - [ ] Provide option to ignore specific html styling
 - [ ] Run tests
-- [ ] Document env variables
 - [ ] Have generating file be automatic for tests
 - [ ] Switch from snapshot to file for tests
 - [ ] Create/test option to not lookup Django
-- [ ] +++ Create Flask application to generate all files
 - [ ] ++ Look at tests - why exception not caught?
 - [ ] Look at code for writing google doc to json
 
-- [ ] +++ Change auth so authorized from browser and variables cached
 - [ ] Add option for debugModifyContent to modify content??
 - [ ] Add param to generate scripts for matchPattern
-- [ ] +++ Incubator
-- [ ] ++ Auto generate provider link
-- [ ] +++ Make default svg on frontmatter a constant env variable
-- [ ] +++ Check if anything missing from frontmatter in schema
-- [ ] +++ Add custom formatting to test. Mock
+
 - [ ] ++ Document all js functions
 - [ ] Figure out gdoc2mdv2 executable
 - [ ] Auto generate contributing section
@@ -53,11 +80,6 @@ Tasks
 - [x] (obsoleted) Explain linkDir.sh
 - [ ] History of fork
 - [ ] Copy and customize extensive documentation on package
-- [ ] +++ Generate certificate and token
-- [ ] +++ Env vars
-- [ ] +++ How to test (check)
-- [ ] +++ Front matter
-- [ ] +++ Dir structure
 - [ ] savejson and saveMarkdownToFile parameters
 
 ## IMAGES \_\*\*
@@ -79,11 +101,9 @@ Tasks
 
 ## +++ TOKEN \_\*\*
 
-- [ ] +++ Auto renew token
 - [ ] Improve error message if token not set up
 - [ ] Don't prompt for certificate if already exists
 - [x] **_ FRONT MATTER _**
-  - [ ] +++ Autogenerate provider-link
   - [ ] Autogenerate contributors, with flag
 
 ## CREATE NPMJS PACKAGE \_\*\*
@@ -104,12 +124,6 @@ Tasks
 - [ ] Implement filter methods
 
 ## MISC \_\*\*
-
-- [ ] +++ Verify output for Slack reminders
-- [ ] +++ Add document style to template
-- [ ] +++ ?? Remove document style from template
-- [ ] ?? Style using hfla css
-- [ ] +++ ?? Autogenerate image name - if svg exists use it, else configured default
 
 - [x] +++ Center
   - [x] +++ Make a div
