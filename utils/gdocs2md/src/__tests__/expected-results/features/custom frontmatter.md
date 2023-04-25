@@ -24,5 +24,3 @@ category: development
 
 
 Front matter looks like:
-</div>
-</div>
