@@ -3,5 +3,5 @@ if [ -z "$outputDir" ]; then
   echo "Usage: $0 <outputDir>"
   exit 1
 fi
-ts-node utils/gdocs2md/scripts/generate-gdocs-from-gdrive $outputDir
+ts-node utils/gdocs2md/scripts/generate-gdocs-json $outputDir
 
