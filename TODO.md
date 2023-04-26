@@ -42,6 +42,8 @@ NEXT WEEK
 - [ ] +++ DOC: Front matter
 
 LATER
+- [ ] Move scripts
+- [ ] Separate into separate script
 - [ ] Add options (e.g, -skipDiv true) to scripts
 - [ ] Add option to indicate where to get docs from (file or Google Drive)
 - [ ] Test for getting data from KB
