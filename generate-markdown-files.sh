@@ -1,1 +1,1 @@
-ts-node utils/gdocs2md/scripts/generate-markdown-files.js
+ts-node utils/gdocs2md/scripts/part1-generate-markdown-files.js

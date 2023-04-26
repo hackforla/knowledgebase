@@ -63,6 +63,7 @@ LATER
 PHASE 2
 - [ ] +++ Auto renew token
 
+- [ ] Custom frontmatter from doc?
 
 
 
