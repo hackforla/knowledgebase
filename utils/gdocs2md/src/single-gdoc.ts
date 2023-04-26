@@ -1,4 +1,4 @@
-import json2md from "json2md";
+const json2mdExtended = require("./json2md-extended");
 import axios from "axios";
 import { addDiv, normalizeElement } from "./utils";
 import fs from "fs";
@@ -123,7 +123,7 @@ export function deriveMarkdown(gdoc: any, options: any) {
   const jsonOfElements = gdoc.elements.map((element: any) =>
     normalizeElement(element)
   );
-  let markdown = json2md(jsonOfElements);
+  let markdown = json2mdExtended(jsonOfElements);
   markdown = addDiv(markdown, options);
   let jsonData = {} as any;
 

@@ -3,7 +3,7 @@ import _repeat from "lodash/repeat";
 import _merge from "lodash/merge";
 import path from "path";
 
-import { json2mdExtended } from "./json2md-extended";
+const json2mdExtended = require("./json2md-extended");
 import { isCodeBlocks, isQuote } from "./google/google-document-types";
 import { DEFAULT_OPTIONS } from "./constants";
 import { getFrontMatter } from "./single-gdoc";

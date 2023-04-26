@@ -1,12 +1,12 @@
-import json2mdExtended from "json2md";
-json2mdExtended.converters.footnote = function (footnote: any) {
+const json2mdExtended = require("json2md");
+json2mdExtended.converters.footnote = function (footnote) {
   return `[^${footnote.number}]:${footnote.text}`;
 };
-json2mdExtended.converters.html = function (html: any) {
+json2mdExtended.converters.html = function (html) {
   return html;
 };
 
-json2mdExtended.converters.imgextension = (input: any) => {
+json2mdExtended.converters.imgextension = (input) => {
   if (Array.isArray(input)) {
     return json2mdExtended(input, "");
   }
@@ -15,4 +15,4 @@ json2mdExtended.converters.imgextension = (input: any) => {
   return markdown;
 };
 
-export { json2mdExtended };
+module.exports = json2mdExtended;

@@ -22,8 +22,10 @@ Tasks
 - [x] Create test that it works
 - [x] Change google drive to markdown test to start from files on google drive
 THIS WEEK
-- [ ] Get tests to work - 
 - [ ] Get all scripts to work
+- [ ] Get tests to work
+  - [ ] Elements test
+  - [ ] Options tests
 - [ ] Add parameters to script
 - [x] Fix title issue
 - [ ] Verify reminders
@@ -40,6 +42,11 @@ NEXT WEEK
 - [ ] +++ DOC: Front matter
 
 LATER
+- [ ] Add options (e.g, -skipDiv true) to scripts
+- [ ] Add option to indicate where to get docs from (file or Google Drive)
+- [ ] Test for getting data from KB
+- [ ] Test for github
+- [ ] Test for google drive
 - [ ] +++ Incubator
 
 - [ ] +++ Create Flask application to generate all files
