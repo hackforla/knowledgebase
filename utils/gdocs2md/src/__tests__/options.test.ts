@@ -3,7 +3,7 @@ import { GdocObj } from "../gdoc-obj";
 import { deriveMarkdown } from "../single-gdoc";
 import path from "path";
 
-const mockPath = path.join(__dirname, "mock/skip-features");
+const mockPath = path.join(__dirname, "mock/options");
 
 const testArray = [
   [`"KeepDefaultStyle" option`, { keepDefaultStype: true }, "texts"],
