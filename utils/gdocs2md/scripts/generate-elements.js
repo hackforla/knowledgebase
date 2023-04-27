@@ -7,13 +7,13 @@ const { GdocObj } = require("../src/gdoc-obj");
 config({ path: path.resolve(process.cwd(), ".env") });
 // TODO: read parameters from command line
 const [, , ...args] = process.argv;
-const [outputDir, suffix] = args;
+const [outputdir, suffix] = args;
 
-if (!outputDir) {
+if (!outputdir) {
   throw new Error("No output directory specified");
 }
 
-saveElements({ targetDir: outputDir, suffix: suffix || "" });
+saveElements({ targetDir: outputdir, suffix: suffix || "" });
 
 async function saveElements(options) {
   const gdocs = await fetchGdocs(options);

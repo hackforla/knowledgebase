@@ -1,6 +1,6 @@
 import path from "path";
 export function addDiv(markdown: string, options: any) {
-  const a = options.skipDiv
+  const a = options.skipdiv
     ? markdown
     : '<div class="content-section">\n<div class="section-container" markdown="1">\n' +
       markdown +
@@ -42,7 +42,7 @@ export const normalizeElement: any = (element: any) => {
 };
 
 export function getPluginOptions({
-  folderId,
+  folderid,
   root,
   subdir,
   suffix,
@@ -51,8 +51,8 @@ export function getPluginOptions({
   saveMarkdownToGitHub,
 }: any) {
   return {
-    folder: folderId,
-    markdownDir: path.join(root || "", subdir || ""),
+    folder: folderid,
+    outputdir: path.join(root || "", subdir || ""),
     suffix: suffix,
     extension: "md",
     saveGdoc,

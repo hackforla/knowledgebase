@@ -22,7 +22,7 @@ function getSlugsForGdocs(gdocs: any) {
 
 async function fetchGdocsPropertiesFromTopFolder({
   folder,
-  matchPattern,
+  matchpattern,
 }: any) {
   const drive = await getGoogleDriveApi();
   const topFolderInfo = await drive.files.get({
@@ -42,9 +42,9 @@ async function fetchGdocsPropertiesFromTopFolder({
     folder,
   });
 
-  if (matchPattern) {
+  if (matchpattern) {
     gdocs = gdocs.filter(({ document }: any) => {
-      return document.title.toLowerCase().includes(matchPattern.toLowerCase());
+      return document.title.toLowerCase().includes(matchpattern.toLowerCase());
     });
   }
 

@@ -159,17 +159,17 @@ You also can add metadata (`locale`, `date` ...) to your documents.
 | ---------------- | -------- | ------- | ----------- | -------------- |
 | folder           | `true`   | String  | `null`      | `"1Tn1dCbIc"`  |
 | target           | `false`  | String  | `src/pages` | `"src/gdocs"`  |
-| pageContext      | `false`  | Array   | `[]`        | `["locale"]`   |
-| demoteHeadings   | `false`  | Boolean | `true`      | `false`        |
+| pagecontext      | `false`  | Array   | `[]`        | `["locale"]`   |
+| demoteheadings   | `false`  | Boolean | `true`      | `false`        |
 | imagesOptions    | `false`  | Object  | `null`      | `{width: 512}` |
-| keepDefaultStyle | `false`  | Boolean | `false`     | `true`         |
-| skipCodes        | `false`  | Boolean | `false`     | `true`         |
-| skipFootnotes    | `false`  | Boolean | `false`     | `true`         |
-| skipHeadings     | `false`  | Boolean | `false`     | `true`         |
-| skipImages       | `false`  | Boolean | `false`     | `true`         |
-| skipLists        | `false`  | Boolean | `false`     | `true`         |
-| skipQuotes       | `false`  | Boolean | `false`     | `true`         |
-| skipTables       | `false`  | Boolean | `false`     | `true`         |
+| keepdefaultstyle | `false`  | Boolean | `false`     | `true`         |
+| skipcodes        | `false`  | Boolean | `false`     | `true`         |
+| skipfootnotes    | `false`  | Boolean | `false`     | `true`         |
+| skipheadings     | `false`  | Boolean | `false`     | `true`         |
+| skipimages       | `false`  | Boolean | `false`     | `true`         |
+| skiplists        | `false`  | Boolean | `false`     | `true`         |
+| skipquotes       | `false`  | Boolean | `false`     | `true`         |
+| skiptables       | `false`  | Boolean | `false`     | `true`         |
 | debug            | `false`  | Boolean | `false`     | `true`         |
 
 ```js

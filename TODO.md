@@ -30,6 +30,7 @@ THIS WEEK
 - [x] Fix title issue
 - [ ] Verify reminders
 NEXT WEEK
+- [ ] Add parameters for output dir to generate-markdown-files.sh and generate-markdown-to-github.sh
 - [ ] ++ Auto generate provider link
 - [ ] Make default svg on frontmatter a constant env variable
 - [ ] +++ DOC: Env vars
@@ -37,12 +38,13 @@ NEXT WEEK
 - [ ] +++ DOC: How to test (check)
 - [ ] +++ Verify output for Slack reminders
 - [ ] +++ DOC: Front matter
+- [ ] Add crosslinks test (maybe)
 
 LATER
 - [ ] +++ DOC: Generate certificate and token
 - [ ] Move scripts
 - [ ] Separate into separate script
-- [ ] Add options (e.g, -skipDiv true) to scripts
+- [ ] Add options (e.g, -skipdiv true) to scripts
 - [ ] Add option to indicate where to get docs from (file or Google Drive)
 - [ ] Test for getting data from KB
 - [ ] Test for github
@@ -77,7 +79,7 @@ PHASE 2
 - [ ] Look at code for writing google doc to json
 
 - [ ] Add option for debugModifyContent to modify content??
-- [ ] Add param to generate scripts for matchPattern
+- [ ] Add param to generate scripts for matchpattern
 
 - [ ] ++ Document all js functions
 - [ ] Figure out gdoc2mdv2 executable

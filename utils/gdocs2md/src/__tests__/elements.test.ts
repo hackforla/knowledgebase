@@ -15,13 +15,12 @@ filenames.forEach(function (fullname: any) {
       "utf8"
     );
     const gdoc = JSON.parse(gdocString);
-    const skipStyles = filename.toLowerCase().includes("font") ? false : true;
+    const skipstyles = filename.toLowerCase().includes("font") ? false : true;
     const options = {
       saveMarkdownToGitHub: false,
-      saveGdoc: false,
       saveMarkdownToFile: true,
-      skipStyles,
-      skipDiv: true,
+      skipstyles,
+      skipdiv: true,
     };
     const gdocObj = new GdocObj(gdoc);
     gdocObj.setElements({}, options);

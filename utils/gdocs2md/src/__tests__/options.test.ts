@@ -7,17 +7,17 @@ const mockPath = path.join(__dirname, "mock/options");
 
 const testArray = [
   [`"KeepDefaultStyle" option`, { keepDefaultStype: true }, "texts"],
-  [`"DemoteHeading" option enabled`, { demoteHeadings: true }, "texts"],
-  [`"DemoteHeading" option disabled`, { demoteHeadings: false }, "texts"],
-  [`Skip headings`, { skipHeadings: true }, "texts"],
-  [`Skip images`, { skipImages: true }, "images"],
-  [`Skip footnotes`, { skipFootnotes: true }, "footnotes"],
-  [`Skip lists`, { skipLists: true }, "lists"],
-  [`Skip quotes`, { skipQuotes: true }, "quotes"],
-  [`Skip codes`, { skipCodes: true }, "codes"],
-  [`Skip tables`, { skipTables: true }, "tables"],
+  [`"DemoteHeading" option enabled`, { demoteheadings: true }, "texts"],
+  [`"DemoteHeading" option disabled`, { demoteheadings: false }, "texts"],
+  [`Skip headings`, { skipheadings: true }, "texts"],
+  [`Skip images`, { skipimages: true }, "images"],
+  [`Skip footnotes`, { skipfootnotes: true }, "footnotes"],
+  [`Skip lists`, { skiplists: true }, "lists"],
+  [`Skip quotes`, { skipquotes: true }, "quotes"],
+  [`Skip codes`, { skipcodes: true }, "codes"],
+  [`Skip tables`, { skiptables: true }, "tables"],
 ];
-const optionsForTests = { skipFrontMatter: true, skipDiv: true };
+const optionsForTests = { skipFrontMatter: true, skipdiv: true };
 
 for (const testValues of testArray) {
   const testname = testValues[0] as string;
@@ -42,7 +42,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`"DemoteHeading" option enabled`, async () => {
-//   xx options = { demoteHeadings: true, ...optionsForTests };
+//   xx options = { demoteheadings: true, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentTexts },
 //     options,
@@ -51,7 +51,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`"DemoteHeading" option disabled`, async () => {
-//   xx options = { demoteHeadings: false, ...optionsForTests };
+//   xx options = { demoteheadings: false, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentTexts },
 //     options,
@@ -73,7 +73,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`Skip headings`, async () => {
-//   xx options = { skipHeadings: true, ...optionsForTests };
+//   xx options = { skipheadings: true, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentTexts },
 //     options,
@@ -82,7 +82,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`Skip images`, async () => {
-//   xx options = { skipImages: true, ...optionsForTests };
+//   xx options = { skipimages: true, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentImages },
 //     options,
@@ -91,7 +91,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`Skip footnotes`, async () => {
-//   xx options = { skipFootnotes: true, ...optionsForTests };
+//   xx options = { skipfootnotes: true, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentFootnotes },
 //     options,
@@ -100,7 +100,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`Skip lists`, async () => {
-//   xx options = { skipLists: true, ...optionsForTests };
+//   xx options = { skiplists: true, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentLists },
 //     options,
@@ -109,7 +109,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`Skip quotes`, async () => {
-//   xx options = { skipQuotes: true, ...optionsForTests };
+//   xx options = { skipquotes: true, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentQuotes },
 //     options,
@@ -118,7 +118,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`Skip codes`, async () => {
-//   xx options = { skipCodes: true, ...optionsForTests };
+//   xx options = { skipcodes: true, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentCodes },
 //     options,
@@ -127,7 +127,7 @@ for (const testValues of testArray) {
 // });
 
 // xx test(`Skip tables`, async () => {
-//   xx options = { skipTables: true, ...optionsForTests };
+//   xx options = { skiptables: true, ...optionsForTests };
 //   const { markdown } = await getMarkdown({
 //     xx gdoc: { document: documentTables },
 //     options,

@@ -20,7 +20,7 @@ export async function writeMarkdown(
   markdown: any
 ) {
   await writeContentToFile({
-    targetDir: options.markdownDir,
+    targetDir: options.outputdir,
     suffix: options.suffix,
     filename,
     extension: "md",

@@ -6,13 +6,13 @@ const { config } = require("dotenv");
 config({ path: path.resolve(process.cwd(), ".env") });
 // TODO: read parameters from command line
 const [, , ...args] = process.argv;
-const [outputDir, suffix] = args;
+const [outputdir, suffix] = args;
 
-if (!outputDir) {
+if (!outputdir) {
   throw new Error("No output directory specified");
 }
 
-saveGdocs({ targetDir: outputDir, suffix: suffix || "" });
+saveGdocs({ targetDir: outputdir, suffix: suffix || "" });
 
 async function saveGdocs(options) {
   const gdocs = await fetchGdocs(options);

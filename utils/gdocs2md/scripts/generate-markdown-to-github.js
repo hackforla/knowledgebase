@@ -13,7 +13,7 @@ if (process.env.ENV_PATH) {
 }
 
 const options = getPluginOptions({
-  folderId: process.env.WEBSITE_GDRIVE_ROOT_ID,
+  folderid: process.env.WEBSITE_GDRIVE_ROOT_ID,
   root: process.env.WEBSITE_LOCAL_ROOT,
   suffix: process.env.WEBSITE_SUFFIX,
   saveGdoc: false,

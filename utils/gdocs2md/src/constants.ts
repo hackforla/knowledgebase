@@ -5,7 +5,7 @@ const envPath = path.resolve(process.cwd(), ".env");
 config({ path: envPath });
 process.env.ENV_PATH = envPath;
 
-const folderId = process.env.WEBSITE_GDRIVE_ROOT_ID || "";
+const folderid = process.env.WEBSITE_GDRIVE_ROOT_ID || "";
 const root = process.env.WEBSITE_LOCAL_ROOT || "";
 const suffix = process.env.WEBSITE_SUFFIX || "";
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
@@ -20,27 +20,25 @@ const FILE_PREFIX = process.env.FILE_PREFIX || "";
 const ENV_TOKEN_VAR = "GOOGLE_DOCS_TOKEN";
 const DEFAULT_OPTIONS = {
   debug: false,
-  demoteHeadings: true,
-  folder: folderId,
-  gdocFolder: "",
-  imagesTarget: path.join(root || "", "assets/images"),
-  keepDefaultStyle: false,
-  matchPattern: "",
-  pageContext: [],
-  saveGdoc: false,
+  demoteheadings: true,
+  folder: folderid,
+  imagestarget: path.join(root || "", "assets/images"),
+  keepdefaultstyle: false,
+  matchpattern: "",
+  pagecontext: [],
   saveMarkdownToFile: true,
   saveMarkdownToGitHub: false,
-  skipDiv: false,
-  skipCodes: false,
-  skipFootnotes: false,
-  skipHeadings: false,
-  skipImages: false,
-  skipLists: false,
-  skipQuotes: false,
-  skipStyles: false,
-  skipTables: false,
+  skipdiv: false,
+  skipcodes: false,
+  skipfootnotes: false,
+  skipheadings: false,
+  skipimages: false,
+  skiplists: false,
+  skipquotes: false,
+  skipstyles: false,
+  skiptables: false,
   suffix: suffix,
-  markdownDir: root,
+  outputdir: root,
 };
 export {
   DEFAULT_OPTIONS,

@@ -1,4 +1,4 @@
-const optionsForTests = { skipFrontMatter: true, skipDiv: true };
+const optionsForTests = { skipFrontMatter: true, skipdiv: true };
 import * as fs from "fs";
 import * as path from "path";
 import { GdocObj } from "../gdoc-obj";
@@ -19,14 +19,13 @@ fullnamesJson.forEach(function (fullname: string) {
       "utf8"
     );
     const gdoc = JSON.parse(gdocString);
-    const skipStyles = filename.toLowerCase().includes("font") ? false : true;
+    const skipstyles = filename.toLowerCase().includes("font") ? false : true;
     const options = {
       saveMarkdownToGitHub: false,
-      saveGdoc: false,
       saveMarkdownToFile: true,
       saveMarkdownToArray: true,
-      skipStyles,
-      skipDiv: true,
+      skipstyles,
+      skipdiv: true,
     };
     const gdocObj = new GdocObj(gdoc);
     gdocObj.setElements({}, options);

@@ -91,7 +91,7 @@ class GdocObj {
         );
         const relativeTargetUrl = `${this.properties.slug}-${el.inlineObjectElement.inlineObjectId}-gdoc.png`;
         const filename = path.join(
-          options.imagesTarget || options.markdownDir,
+          options.imagestarget || options.outputdir,
           relativeTargetUrl
         );
         // todo: change to have separate var for slug path and slug
@@ -130,7 +130,7 @@ class GdocObj {
 
     const defaultStyle = this.getTextStyle(namedStyleType);
     const textStyle = el.textRun.textStyle;
-    const style = options.keepDefaultStyle
+    const style = options.keepdefaultstyle
       ? _merge({}, defaultStyle, textStyle)
       : textStyle;
 
@@ -149,7 +149,7 @@ class GdocObj {
 
     const isInlineCode = fontFamily === "Consolas";
     if (isInlineCode) {
-      if (options.skipCodes) return text;
+      if (options.skipcodes) return text;
 
       return "`" + text + "`";
     }
@@ -208,7 +208,7 @@ class GdocObj {
       styles.push(`background-color:rgb(${red}, ${green}, ${blue})`);
     }
 
-    if (styles.length > 0 && !options.skipStyles) {
+    if (styles.length > 0 && !options.skipstyles) {
       text = `<span style='${styles.join(";")}'>${text}</span>`;
     }
 
@@ -270,9 +270,9 @@ class GdocObj {
 
   getImage(
     el: { inlineObjectElement: { inlineObjectId: string | number } },
-    options: { skipImages: any }
+    options: { skipimages: any }
   ) {
-    if (options.skipImages) return;
+    if (options.skipimages) return;
 
     const { inlineObjects } = this.content;
 
@@ -383,9 +383,9 @@ class GdocObj {
       elements: any[];
     },
     index: number,
-    options: { skipLists: any }
+    options: { skiplists: any }
   ) {
-    if (options.skipLists) return;
+    if (options.skiplists) return;
 
     const prevListId = _get(this.content, [
       "body",
@@ -463,7 +463,7 @@ class GdocObj {
 
         // Footnotes
         else if (el.footnoteReference) {
-          if (options.skipFootnotes) return;
+          if (options.skipfootnotes) return;
 
           tagContentArray.push(`[^${el.footnoteReference.footnoteNumber}]`);
           this.footnotes[el.footnoteReference.footnoteId] =
@@ -472,7 +472,7 @@ class GdocObj {
 
         // Headings
         else if (isHeading) {
-          if (options.skipHeadings) return;
+          if (options.skipheadings) return;
 
           const text = this.formatText(
             el as any,
@@ -551,7 +551,7 @@ class GdocObj {
       | "NORMAL_TEXT"
       | "SUBTITLE"
       | "TITLE",
-    options: { demoteHeadings: boolean }
+    options: { demoteheadings: boolean }
   ) {
     const tags = {
       HEADING_1: "h1",
@@ -566,7 +566,7 @@ class GdocObj {
     };
     const tag = tags[headingTag] as any;
     const isHeading = tag.startsWith("h");
-    if (options.demoteHeadings === true) {
+    if (options.demoteheadings === true) {
       this.processDemoteHeadings();
     }
     return { isHeading, tag };
@@ -588,7 +588,7 @@ class GdocObj {
   }
 
   processQuote(table: { tableRows: any[] }, options: any) {
-    if (options.skipQuotes) return;
+    if (options.skipquotes) return;
 
     const firstRow = table.tableRows[0];
     const firstCell = firstRow.tableCells[0];
@@ -599,7 +599,7 @@ class GdocObj {
   }
 
   processCode(codeBlock: { tableRows: any[] }, options: any) {
-    if (options.skipCodes) return;
+    if (options.skipcodes) return;
 
     const firstRow = codeBlock.tableRows[0];
     const firstCell = firstRow.tableCells[0];
@@ -635,7 +635,7 @@ class GdocObj {
   }
 
   processTable(table: { tableRows: [any, ...any[]] }, options: any) {
-    if (options.skipTables) return;
+    if (options.skiptables) return;
 
     const [thead, ...tbody] = table.tableRows;
 
@@ -655,7 +655,7 @@ class GdocObj {
   }
 
   processFootnotes(options: any) {
-    if (options.skipFootnotes) return;
+    if (options.skipfootnotes) return;
 
     const footnotes: { type: string; value: { number: any; text: any } }[] = [];
     const documentFootnotes = this.content.footnotes;

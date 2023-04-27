@@ -1,7 +1,7 @@
-outputDir=$1
-if [ -z "$outputDir" ]; then
-  echo "Usage: $0 <outputDir>"
+outputdir=$1
+if [ -z "$outputdir" ]; then
+  echo "Usage: $0 <outputdir>"
   exit 1
 fi
-ts-node utils/gdocs2md/scripts/generate-elements $outputDir
+ts-node utils/gdocs2md/scripts/generate-elements $@
 
