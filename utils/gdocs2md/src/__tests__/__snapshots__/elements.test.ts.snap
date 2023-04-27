@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Document "Advanced Formatting - color and fonts" to Objects 1`] = `
+exports[`"Advanced Formatting - color and fonts" markdown 1`] = `
 {
   "cover": null,
   "elements": [
@@ -32,7 +32,7 @@ exports[`Document "Advanced Formatting - color and fonts" to Objects 1`] = `
 }
 `;
 
-exports[`Document "Bold italic" to Objects 1`] = `
+exports[`"Bold italic" markdown 1`] = `
 {
   "cover": null,
   "elements": [
@@ -48,7 +48,7 @@ exports[`Document "Bold italic" to Objects 1`] = `
 }
 `;
 
-exports[`Document "Bullets and Lists" to Objects 1`] = `
+exports[`"Bullets and Lists" markdown 1`] = `
 {
   "cover": null,
   "elements": [
@@ -134,39 +134,7 @@ exports[`Document "Bullets and Lists" to Objects 1`] = `
 }
 `;
 
-exports[`Document "Custom Frontmatter" to Objects 1`] = `
-{
-  "cover": null,
-  "elements": [
-    {
-      "type": "p",
-      "value": "---",
-    },
-    {
-      "type": "p",
-      "value": "id: 134",
-    },
-    {
-      "type": "p",
-      "value": "title: Custom Title ",
-    },
-    {
-      "type": "p",
-      "value": "category: development",
-    },
-    {
-      "type": "p",
-      "value": "---",
-    },
-    {
-      "type": "p",
-      "value": "Front matter looks like:",
-    },
-  ],
-}
-`;
-
-exports[`Document "Footnotes" to Objects 1`] = `
+exports[`"Footnotes" markdown 1`] = `
 {
   "cover": null,
   "elements": [
@@ -178,14 +146,14 @@ exports[`Document "Footnotes" to Objects 1`] = `
       "type": "footnote",
       "value": {
         "number": "1",
-        "text": " <span style='font-size:0.91em'>This information is so tangential it needs to go into a footnote</span>",
+        "text": " This information is so tangential it needs to go into a footnote",
       },
     },
   ],
 }
 `;
 
-exports[`Document "Headings" to Objects 1`] = `
+exports[`"Headings" markdown 1`] = `
 {
   "cover": null,
   "elements": [
@@ -217,7 +185,7 @@ exports[`Document "Headings" to Objects 1`] = `
 }
 `;
 
-exports[`Document "Images" to Objects 1`] = `
+exports[`"Images" markdown 1`] = `
 {
   "cover": null,
   "elements": [
@@ -337,7 +305,7 @@ exports[`Document "Images" to Objects 1`] = `
 }
 `;
 
-exports[`Document "Link" to Objects 1`] = `
+exports[`"Link" markdown 1`] = `
 {
   "cover": null,
   "elements": [
@@ -349,16 +317,10 @@ exports[`Document "Link" to Objects 1`] = `
 }
 `;
 
-exports[`Document "Non-continous list" to Objects 1`] = `
+exports[`"Non-continous list" markdown 1`] = `
 {
   "cover": null,
   "elements": [
-    {
-      "type": "ul",
-      "value": [
-        "",
-      ],
-    },
     {
       "type": "p",
       "value": "This is a numbered list",
@@ -396,7 +358,7 @@ exports[`Document "Non-continous list" to Objects 1`] = `
 }
 `;
 
-exports[`Document "Table" to Objects 1`] = `
+exports[`"Table" markdown 1`] = `
 {
   "cover": null,
   "elements": [

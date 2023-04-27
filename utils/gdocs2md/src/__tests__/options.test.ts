@@ -1,13 +1,12 @@
-const documentLinks = require("./documents/links.json");
-const documentTexts = require("./documents/texts.json");
-const documentImages = require("./documents/images.json");
-const documentFootnotes = require("./documents/footnotes.json");
-const documentLists = require("./documents/lists.json");
-const documentQuotes = require("./documents/quotes.json");
-const documentCodes = require("./documents/codes.json");
-const documentTables = require("./documents/tables.json");
+const documentLinks = require("./expected-results/mock/skip-features/links.json");
+const documentTexts = require("./expected-results/mock/skip-features/texts.json");
+const documentImages = require("./expected-results/mock/skip-features/images.json");
+const documentFootnotes = require("./expected-results/mock/skip-features/footnotes.json");
+const documentLists = require("./expected-results/mock/skip-features/lists.json");
+const documentQuotes = require("./expected-results/mock/skip-features/quotes.json");
+const documentCodes = require("./expected-results/mock/skip-features/codes.json");
+const documentTables = require("./expected-results/mock/skip-features/tables.json");
 
-import { getMarkdown } from "../jekyllUtils";
 const optionsForTests = { skipFrontMatter: true, skipDiv: true };
 
 test(`"KeepDefaultStyle" option`, async () => {
