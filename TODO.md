@@ -22,19 +22,16 @@ Tasks
 - [x] Create test that it works
 - [x] Change google drive to markdown test to start from files on google drive
 THIS WEEK
-- [ ] Get all scripts to work
-- [ ] Get tests to work
-  - [ ] Elements test
-  - [ ] Options tests
-- [ ] Add parameters to script
+- [x] Get all scripts to work
+- [x] Get tests to work
+  - [x] Elements test
+  - [x] Options tests
+- [ ] Add parameters to script and reverify scripts
 - [x] Fix title issue
 - [ ] Verify reminders
 NEXT WEEK
 - [ ] ++ Auto generate provider link
-- [ ] +++ DOC: Make default svg on frontmatter a constant env variable
-- [ ] +++ DOC: Check if anything missing from frontmatter in schema
-- [ ] +++ DOC: Add custom formatting to test. Mock
-- [ ] +++ DOC: Generate certificate and token
+- [ ] Make default svg on frontmatter a constant env variable
 - [ ] +++ DOC: Env vars
 - [ ] DOC: Check documentation for service account
 - [ ] +++ DOC: How to test (check)
@@ -42,6 +39,7 @@ NEXT WEEK
 - [ ] +++ DOC: Front matter
 
 LATER
+- [ ] +++ DOC: Generate certificate and token
 - [ ] Move scripts
 - [ ] Separate into separate script
 - [ ] Add options (e.g, -skipDiv true) to scripts
