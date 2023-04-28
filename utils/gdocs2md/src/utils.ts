@@ -60,3 +60,43 @@ export function getPluginOptions({
     saveMarkdownToGitHub,
   };
 }
+
+export function setOptionsFromArgs(options: any, args: string[]) {
+  for (let x = 0; x < args.length; x++) {
+    const value = args[x];
+    console.log(x, value);
+    let option = _getOptionName(value);
+    if (option) {
+      x++;
+      let argValue: string | boolean = args[x];
+      argValue =
+        argValue === "true" ? true : argValue === "false" ? false : argValue;
+      options[option] = argValue;
+    }
+  }
+}
+function _getOptionName(value: string) {
+  let option = "";
+  if (value && value.startsWith("--")) {
+    option = value.substring(2);
+  } else if (value && value.startsWith("-")) {
+    option = value.substring(1);
+  }
+  return option;
+}
+
+export function getOutputdir(args: string[]) {
+  const index = args.indexOf("--outputdir");
+  let outputdir = "";
+  if (index < 0) {
+    outputdir = args[0];
+    args.splice(0, 1);
+  } else {
+    outputdir = args[index + 1];
+  }
+
+  if (!outputdir) {
+    throw new Error("No output directory specified");
+  }
+  return outputdir;
+}

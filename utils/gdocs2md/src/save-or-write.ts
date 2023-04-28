@@ -20,7 +20,7 @@ export async function writeMarkdown(
   markdown: any
 ) {
   await writeContentToFile({
-    targetDir: options.outputdir,
+    outputdir: options.outputdir,
     suffix: options.suffix,
     filename,
     extension: "md",
@@ -127,17 +127,17 @@ async function saveToGitHub({
 
 export async function writeContentToFile({
   content,
-  targetDir,
+  outputdir,
   filename,
   suffix,
   extension,
 }: any) {
   // todo: make location to write dependent on phase (draft, etc)
   // todo: create a map for status to google folder id
-  //${targetDir}/${filename}${suffix}.${extension
+  //${outputdir}/${filename}${suffix}.${extension
   let file = path.join(
-    targetDir,
-    `${filename ? filename : "index"}${suffix}.${extension}`
+    outputdir,
+    `${filename ? filename : "index"}${suffix || ""}.${extension}`
   );
   if (file.startsWith("<root>")) {
     file = file.replace("<root>", getRoot());

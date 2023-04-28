@@ -1,31 +1,19 @@
-const path = require("path");
-const { fetchGdocs } = require("../src/convert-gdocs");
-const { writeContentToFile } = require("../src/save-or-write");
-const { config } = require("dotenv");
-const { GdocObj } = require("../src/gdoc-obj");
-// Read .env file from directory where command is issued
-config({ path: path.resolve(process.cwd(), ".env") });
-// TODO: read parameters from command line
-const [, , ...args] = process.argv;
-const [outputdir, suffix] = args;
+const { setOptionsFromArgs } = require("../src/utils");
+const { getOutputdir } = require("../src/utils");
+const { saveElements } = require("../src/convert-gdocs");
 
-if (!outputdir) {
+const [, , ...args] = process.argv;
+const outputdir = getOutputdir(args);
+
+const options = {
+  outputdir,
+  extension: "elements.json",
+};
+
+setOptionsFromArgs(options, args);
+
+if (!outputdir || outputdir.startsWith("-")) {
   throw new Error("No output directory specified");
 }
 
-saveElements({ targetDir: outputdir, suffix: suffix || "" });
-
-async function saveElements(options) {
-  const gdocs = await fetchGdocs(options);
-  for (const gdoc of gdocs) {
-    const gdocObj = new GdocObj(gdoc);
-    gdocObj.setElements({}, options);
-    await writeContentToFile({
-      filename: gdocObj.properties.name,
-      targetDir: options.targetDir,
-      extension: "elements.json",
-      content: JSON.stringify(gdocObj.elements),
-      suffix: options.suffix,
-    });
-  }
-}
+saveElements(options);

@@ -10,6 +10,7 @@ import {
   getSlugsForGdocs,
 } from "./multi-gdocs";
 import { GdocObj } from "./gdoc-obj";
+import { writeContentToFile } from "./save-or-write";
 
 /**
  * Based on the options, filter google docs from specified folder and process them,
@@ -35,6 +36,17 @@ export async function fetchGdocs(customOptions: any) {
   return gdocs;
 }
 
+export async function saveElements(options: any) {
+  const gdocs = await fetchGdocs(options);
+  for (const gdoc of gdocs) {
+    const gdocObj = new GdocObj(gdoc);
+    gdocObj.setElements({}, options);
+    options.filename = gdocObj.properties.name;
+    options.content = JSON.stringify(gdocObj.elements);
+    await writeContentToFile(options);
+  }
+}
+
 export function processDeriveAndSaveMarkdowns(gdocs: any, options: any) {
   processGdocsArray(gdocs, options);
   deriveAndSaveMarkdowns(gdocs, options);
@@ -53,5 +65,15 @@ function convertGdocsToObjs(gdocs: any) {
       content: gdocs[i].content,
     });
     gdocs[i] = gdoc;
+  }
+}
+
+export async function saveGdocs(options: any) {
+  const gdocs = await fetchGdocs(options);
+  for (const gdoc of gdocs) {
+    writeContentToFile({
+      filename: gdoc.properties.name,
+      content: JSON.stringify(gdoc),
+    });
   }
 }

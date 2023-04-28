@@ -41,6 +41,7 @@ NEXT WEEK
 - [ ] Add crosslinks test (maybe)
 
 LATER
+- [ ] Change markdown and elements to use slug for filename
 - [ ] +++ DOC: Generate certificate and token
 - [ ] Move scripts
 - [ ] Separate into separate script
