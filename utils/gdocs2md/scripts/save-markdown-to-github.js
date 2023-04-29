@@ -14,8 +14,8 @@ if (process.env.ENV_PATH) {
 
 const options = getPluginOptions({
   saveGdoc: false,
-  saveMarkdownToFile: false,
-  saveMarkdownToGitHub: true,
+  savemarkdowntofile: false,
+  savemarkdowntogithub: true,
 });
-// default options saveGdoc is false, saveMarkdownToFile is true
+// default options saveGdoc is false, savemarkdowntofile is true
 convertGdocs(options);

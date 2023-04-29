@@ -1,15 +1,16 @@
 const { setOptionsFromArgs } = require("../src/utils");
 const { getOutputdir } = require("../src/utils");
-const { saveGdocs } = require("../src/convert-gdocs");
+const { convertGdocs } = require("../src/convert-gdocs");
 
 const [, , ...args] = process.argv;
 const outputdir = getOutputdir(args);
-
 const options = {
+  folderid: process.env.WEBSITE_GDRIVE_ROOT_ID,
   outputdir,
-  extension: "json",
+  savemarkdowntofile: true,
+  savemarkdowntogithub: false,
 };
 
 setOptionsFromArgs(options, args);
 
-saveGdocs(options);
+convertGdocs(options);

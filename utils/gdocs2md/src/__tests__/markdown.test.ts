@@ -21,9 +21,8 @@ fullnamesJson.forEach(function (fullname: string) {
     const gdoc = JSON.parse(gdocString);
     const skipstyles = filename.toLowerCase().includes("font") ? false : true;
     const options = {
-      saveMarkdownToGitHub: false,
-      saveMarkdownToFile: true,
-      saveMarkdownToArray: true,
+      savemarkdowntogithub: false,
+      savemarkdowntofile: false,
       skipstyles,
       skipdiv: true,
     };

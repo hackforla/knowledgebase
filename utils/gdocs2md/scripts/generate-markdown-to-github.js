@@ -16,9 +16,8 @@ const options = getPluginOptions({
   folderid: process.env.WEBSITE_GDRIVE_ROOT_ID,
   root: process.env.WEBSITE_LOCAL_ROOT,
   suffix: process.env.WEBSITE_SUFFIX,
-  saveGdoc: false,
-  saveMarkdownToFile: false,
-  saveMarkdownToGitHub: true,
+  savemarkdowntofile: false,
+  savemarkdowntogithub: true,
 });
-// default options saveGdoc is false, saveMarkdownToFile is true
+// default options saveGdoc is false, savemarkdowntofile is true
 convertGdocs(options);

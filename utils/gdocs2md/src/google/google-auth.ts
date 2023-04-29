@@ -7,7 +7,6 @@ const privatekey = require("./privatekey.json");
 let jwtClient: any;
 
 const refreshExpiredTokenVar = async () => {
-  console.log("refreshing token");
   let oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_OAUTH_CLIENT_ID,
     process.env.GOOGLE_OAUTH_CLIENT_SECRET
@@ -23,12 +22,10 @@ const refreshExpiredTokenVar = async () => {
     throw new Error(`Token expired ${new Date(expiry_date)}`);
   }
   const refreshToken = currentToken.refresh_token;
-  console.log("token refreshed a", currentToken.expiry_date);
   oauth2Client.credentials.refresh_token = refreshToken;
   await getRefreshToken(oauth2Client);
   process.env[ENV_TOKEN_VAR] = JSON.stringify(oauth2Client.credentials);
   replaceEnvVar(ENV_TOKEN_VAR, process.env[ENV_TOKEN_VAR]);
-  console.log("new expire date", oauth2Client.credentials.expiry_date);
 };
 
 export const getAuth = async () => {

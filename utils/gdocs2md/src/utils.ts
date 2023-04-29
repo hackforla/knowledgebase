@@ -47,8 +47,8 @@ export function getPluginOptions({
   subdir,
   suffix,
   saveGdoc,
-  saveMarkdownToFile,
-  saveMarkdownToGitHub,
+  savemarkdowntofile,
+  savemarkdowntogithub,
 }: any) {
   return {
     folder: folderid,
@@ -56,15 +56,14 @@ export function getPluginOptions({
     suffix: suffix,
     extension: "md",
     saveGdoc,
-    saveMarkdownToFile,
-    saveMarkdownToGitHub,
+    savemarkdowntofile,
+    savemarkdowntogithub,
   };
 }
 
 export function setOptionsFromArgs(options: any, args: string[]) {
   for (let x = 0; x < args.length; x++) {
     const value = args[x];
-    console.log(x, value);
     let option = _getOptionName(value);
     if (option) {
       x++;
@@ -88,15 +87,21 @@ function _getOptionName(value: string) {
 export function getOutputdir(args: string[]) {
   const index = args.indexOf("--outputdir");
   let outputdir = "";
-  if (index < 0) {
+  if (index > -1) {
+    outputdir = args[index + 1];
+  } else if (index < 0 && args[0] && !args[0].startsWith("--")) {
+    console.log("debug1", args[0], args[0].startsWith("--"));
     outputdir = args[0];
     args.splice(0, 1);
   } else {
-    outputdir = args[index + 1];
+    outputdir = process.env.WEBSITE_LOCAL_ROOT || "";
   }
 
   if (!outputdir) {
     throw new Error("No output directory specified");
+  }
+  if (outputdir.startsWith("/")) {
+    outputdir = outputdir.substring(1);
   }
   return outputdir;
 }

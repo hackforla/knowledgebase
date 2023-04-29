@@ -238,7 +238,6 @@ class GdocObj {
     let frontMatter = "";
     // todo: change below to be dynamic
 
-    console.log("dataJson", dataJson);
     const messageStart =
       Object.keys(dataJson).length === 0 ? "No data" : "Data";
     console.log(`${messageStart} found for ${this.content.title}`);

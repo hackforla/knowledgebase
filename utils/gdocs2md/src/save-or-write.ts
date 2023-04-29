@@ -23,7 +23,7 @@ export async function writeMarkdown(
     outputdir: options.outputdir,
     suffix: options.suffix,
     filename,
-    extension: "md",
+    extension: options.extension || "md",
     content: markdown,
     options: options,
   });
@@ -35,62 +35,59 @@ const octokit = new Octokit({
 
 export async function saveMarkdown(
   filename: string,
-  options: { saveMarkdownToFile: any; saveMarkdownToGitHub: any; suffix: any },
+  options: {
+    outputdir: string;
+    savemarkdowntofile: any;
+    savemarkdowntogithub: any;
+    suffix: any;
+  },
   markdown: string,
   phase_name: any
 ) {
-  console.log("saveMarkdown", filename);
-  filename = filename.startsWith("/")
-    ? filename.substring(1) // remove leading slash
-    : filename || "";
-  if (filename.indexOf("/") > -1) {
-    filename = filename.startsWith(FILE_PREFIX)
-      ? filename
-      : FILE_PREFIX + filename; // add leading underscore
-  }
-
-  if (options.saveMarkdownToFile) {
+  if (options.savemarkdowntofile) {
     await writeMarkdown(options, filename, markdown);
   }
-  if (options.saveMarkdownToGitHub) {
+  if (options.savemarkdowntogithub) {
     let githubFile = `${filename ? filename : "index"}${options.suffix}.md`;
-    console.log("about to save to github", githubFile);
     await saveToGitHub({
       owner: GITHUB_OWNER,
       repo: GITHUB_REPO,
+      outputdir: options.outputdir,
       email: GITHUB_EMAIL,
       githubName: GITHUB_NAME,
-      path: githubFile,
+      filename: githubFile,
       message: GITHUB_COMMIT_MESSAGE,
       content: markdown,
       phase_name,
     });
-    console.log("done saving to github");
   }
 }
 
 async function saveToGitHub({
   owner,
   repo,
-  path,
+  outputdir,
+  filename,
   githubName,
   email,
   message,
   content,
   phase_name,
 }: any) {
-  if (path.includes("subdir")) {
-    console.log("skipping subdir");
+  let githubFile = path.join(outputdir, filename);
+  if (githubFile.startsWith("/")) {
+    githubFile = githubFile.substring(1);
+  }
+  if (githubFile.includes("subdir")) {
     return;
   }
-  console.log("saveToGitHub start", path);
   const branch = GITHUB_BRANCH.hasOwnProperty(phase_name)
     ? GITHUB_BRANCH[phase_name.toLowerCase()]
     : GITHUB_BRANCH.default;
   const octokitValues = {
     owner: owner,
     repo: repo,
-    path: path,
+    path: githubFile,
     message: message,
     content: Base64.encode(content + " " + new Date().toISOString()),
     committer: {
@@ -103,7 +100,7 @@ async function saveToGitHub({
     .getContent({
       owner: owner,
       repo: repo,
-      path: path,
+      path: githubFile,
       ref: branch,
     })
     .catch(() => {
@@ -117,12 +114,8 @@ async function saveToGitHub({
     // @ts-ignore
     console.log("Updating existing file", octokitValues.sha);
   }
-  // @ts-ignore
-  console.log("octokit start", path, octokitValues.sha);
-  console.log("GITHUB_TOKEN", GITHUB_TOKEN);
   await octokit.repos.createOrUpdateFileContents(octokitValues);
-  console.log("octokit end", path);
-  console.log("okay");
+  console.log("done saving to github");
 }
 
 export async function writeContentToFile({

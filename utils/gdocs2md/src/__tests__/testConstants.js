@@ -10,7 +10,7 @@ const testMarkdownPluginOptions = getPluginOptions({
   root: process.env.TEST_LOCAL_ROOT_DIR,
   subdir: "actual-results/markdowns-generated-from-google-drive",
   suffix: process.env.TEST_SUFFIX,
-  saveMarkdownToFile: true,
+  savemarkdowntofile: true,
 });
 
 const mockPluginOptions = getPluginOptions({
@@ -18,7 +18,7 @@ const mockPluginOptions = getPluginOptions({
   root: process.env.MOCK_LOCAL_ROOT_DIR,
   suffix: process.env.MOCK_SUFFIX,
   saveGdoc: true,
-  saveMarkdownToFile: false,
+  savemarkdowntofile: false,
 });
 
 module.exports = {

@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/convert-all", (req, res) => {
-  // default options saveGdoc is false, saveMarkdownToFile is true
+  // default options saveGdoc is false, savemarkdowntofile is true
   jekyllifyDocs({});
 });
 

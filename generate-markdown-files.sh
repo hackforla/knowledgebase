@@ -1,1 +1,1 @@
-ts-node utils/gdocs2md/scripts/generate-markdown-files.js
+ts-node utils/gdocs2md/scripts/generate-markdown.js "$@" --savemarkdowntofile true --savemarkdowntogithub false
