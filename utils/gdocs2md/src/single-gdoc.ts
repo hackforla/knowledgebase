@@ -127,7 +127,7 @@ export function deriveMarkdown(gdoc: any, options: any) {
   markdown = addDiv(markdown, options);
   let jsonData = {} as any;
 
-  const frontMatter = options.skipFrontMatter
+  const frontMatter = options.skipfrontmatter
     ? ""
     : getFrontMatter(
         {
@@ -138,6 +138,6 @@ export function deriveMarkdown(gdoc: any, options: any) {
         options
       );
   markdown = frontMatter + markdown;
-  let filename = jsonData.slug || gdoc.properties.path;
+  let filename = jsonData.slug || gdoc.properties.slug;
   return { filename, markdown, phase_name: jsonData.phase_name || "" };
 }

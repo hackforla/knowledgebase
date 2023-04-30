@@ -7,6 +7,7 @@ import {
 } from "./multi-gdocs";
 import { GdocObj } from "./gdoc-obj";
 import { saveMarkdown, saveContentToFile } from "./save";
+import { deriveMarkdown } from "./single-gdoc";
 
 /**
  * Based on the options, filter google docs from specified folder and process them,
@@ -26,10 +27,26 @@ export async function deriveAndSaveMarkdowns(options: any) {
   for (const gdoc of gdocs) {
     const gdocObj = new GdocObj(gdoc);
     gdocObj.setElements({}, options);
+    const { filename, markdown, phase_name } = deriveMarkdown(gdocObj, options);
+    const filedata = {
+      filename,
+      content: markdown,
+      extension: "md",
+      branch: phase_name,
+    };
+    await saveMarkdown(filedata, options);
+  }
+}
+
+export async function deriveAndSaveElements(options: any) {
+  const gdocs = await fetchGdocs(options);
+  for (const gdoc of gdocs) {
+    const gdocObj = new GdocObj(gdoc);
+    gdocObj.setElements({}, options);
     const filename = gdocObj.properties.name;
     const content = JSON.stringify(gdocObj.elements);
-    const filedata = { filename, content, extension: "md" };
-    await saveMarkdown(filedata, options);
+    const filedata = { filename, content, extension: "elements.json" };
+    await saveContentToFile(filedata, options);
   }
 }
 

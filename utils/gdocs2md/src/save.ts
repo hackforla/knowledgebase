@@ -36,54 +36,56 @@ export async function saveMarkdown(filedata: any, options: any) {
     let githubFile = `${filedata.filename ? filedata.filename : "index"}${
       options.suffix
     }.md`;
-    await saveToGitHub({
-      owner: GITHUB_OWNER,
-      repo: GITHUB_REPO,
-      outputdir: options.outputdir,
-      email: GITHUB_EMAIL,
-      githubName: GITHUB_NAME,
-      filename: githubFile,
-      message: GITHUB_COMMIT_MESSAGE,
-      content: filedata.content,
-      phase_name: filedata.phase_name,
-    });
+    await saveToGitHub(
+      filedata,
+      {
+        owner: GITHUB_OWNER,
+        repo: GITHUB_REPO,
+        email: GITHUB_EMAIL,
+        githubName: GITHUB_NAME,
+        message: GITHUB_COMMIT_MESSAGE,
+      },
+      options
+    );
   }
 }
 
-async function saveToGitHub({
-  owner,
-  repo,
-  outputdir,
-  filename,
-  githubName,
-  email,
-  message,
-  content,
-  phase_name,
-}: any) {
-  let githubFile = path.join(outputdir, filename);
+async function saveToGitHub(
+  filedata: ifiledata,
+  config: {
+    owner: string;
+    repo: string;
+    githubName: string;
+    email: string;
+    message: string;
+  },
+  options: ioptions
+) {
+  let githubFile =
+    path.join(options.outputdir, filedata.filename) + "." + filedata.extension;
   if (githubFile.startsWith("/")) {
     githubFile = githubFile.substring(1);
   }
+  const phase_name = filedata.branch || "default";
   const branch = GITHUB_BRANCH.hasOwnProperty(phase_name)
     ? GITHUB_BRANCH[phase_name.toLowerCase()]
     : GITHUB_BRANCH.default;
   const octokitValues = {
-    owner: owner,
-    repo: repo,
+    owner: config.owner,
+    repo: config.repo,
     path: githubFile,
-    message: message,
-    content: Base64.encode(content + " " + new Date().toISOString()),
+    message: config.message,
+    content: Base64.encode(filedata.content + " " + new Date().toISOString()),
     committer: {
-      name: githubName,
-      email: email,
+      name: config.githubName,
+      email: config.email,
     },
     branch,
   };
   const existingCommit = await octokit.repos
     .getContent({
-      owner: owner,
-      repo: repo,
+      owner: config.owner,
+      repo: config.repo,
       path: githubFile,
       ref: branch,
     })
@@ -92,7 +94,6 @@ async function saveToGitHub({
     });
   console.log("Processing", githubFile);
   if (existingCommit) {
-    const existingData = existingCommit.data as any;
     // @ts-ignore
     octokitValues.sha = existingCommit.data.sha;
     // @ts-ignore
