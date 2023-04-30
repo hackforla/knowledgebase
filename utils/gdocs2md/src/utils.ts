@@ -100,8 +100,5 @@ export function getOutputdir(args: string[]) {
   if (!outputdir) {
     throw new Error("No output directory specified");
   }
-  if (outputdir.startsWith("/")) {
-    outputdir = outputdir.substring(1);
-  }
   return outputdir;
 }

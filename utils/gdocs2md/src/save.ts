@@ -13,42 +13,29 @@ import {
   GITHUB_NAME,
   GITHUB_COMMIT_MESSAGE,
 } from "./constants";
+import { ifiledata } from "./ifiledata";
+import { ioptions } from "./ioptions";
 
-export async function writeMarkdown(
-  options: any,
-  filename: any,
-  markdown: any
+export async function saveMarkdownToFile(
+  filedata: ifiledata,
+  options: ioptions
 ) {
-  await writeContentToFile({
-    outputdir: options.outputdir,
-    suffix: options.suffix,
-    filename,
-    extension: options.extension || "md",
-    content: markdown,
-    options: options,
-  });
+  filedata.extension = filedata.extension || "md";
+  await saveContentToFile(filedata, options);
 }
 
 const octokit = new Octokit({
   auth: GITHUB_TOKEN,
 });
 
-export async function saveMarkdown(
-  filename: string,
-  options: {
-    outputdir: string;
-    savemarkdowntofile: any;
-    savemarkdowntogithub: any;
-    suffix: any;
-  },
-  markdown: string,
-  phase_name: any
-) {
+export async function saveMarkdown(filedata: any, options: any) {
   if (options.savemarkdowntofile) {
-    await writeMarkdown(options, filename, markdown);
+    await saveContentToFile(filedata, options);
   }
   if (options.savemarkdowntogithub) {
-    let githubFile = `${filename ? filename : "index"}${options.suffix}.md`;
+    let githubFile = `${filedata.filename ? filedata.filename : "index"}${
+      options.suffix
+    }.md`;
     await saveToGitHub({
       owner: GITHUB_OWNER,
       repo: GITHUB_REPO,
@@ -57,8 +44,8 @@ export async function saveMarkdown(
       githubName: GITHUB_NAME,
       filename: githubFile,
       message: GITHUB_COMMIT_MESSAGE,
-      content: markdown,
-      phase_name,
+      content: filedata.content,
+      phase_name: filedata.phase_name,
     });
   }
 }
@@ -77,9 +64,6 @@ async function saveToGitHub({
   let githubFile = path.join(outputdir, filename);
   if (githubFile.startsWith("/")) {
     githubFile = githubFile.substring(1);
-  }
-  if (githubFile.includes("subdir")) {
-    return;
   }
   const branch = GITHUB_BRANCH.hasOwnProperty(phase_name)
     ? GITHUB_BRANCH[phase_name.toLowerCase()]
@@ -106,7 +90,7 @@ async function saveToGitHub({
     .catch(() => {
       console.log("Creating new file");
     });
-  console.log("here");
+  console.log("Processing", githubFile);
   if (existingCommit) {
     const existingData = existingCommit.data as any;
     // @ts-ignore
@@ -118,27 +102,26 @@ async function saveToGitHub({
   console.log("done saving to github");
 }
 
-export async function writeContentToFile({
-  content,
-  outputdir,
-  filename,
-  suffix,
-  extension,
-}: any) {
+export async function saveContentToFile(
+  filedata: ifiledata,
+  options: ioptions
+) {
   // todo: make location to write dependent on phase (draft, etc)
   // todo: create a map for status to google folder id
   //${outputdir}/${filename}${suffix}.${extension
-  let file = path.join(
+  let { outputdir, suffix } = options;
+  let { filename, extension, content } = filedata;
+  let filespec = path.join(
     outputdir,
     `${filename ? filename : "index"}${suffix || ""}.${extension}`
   );
-  if (file.startsWith("<root>")) {
-    file = file.replace("<root>", getRoot());
+  if (filespec.startsWith("<root>")) {
+    filespec = filespec.replace("<root>", getRoot());
   }
-  console.log("writing", file);
-  const dir = path.dirname(file);
+  console.log("writing", filespec);
+  const dir = path.dirname(filespec);
 
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(file, content);
-  console.log("wrote", file);
+  fs.writeFileSync(filespec, content);
+  console.log("wrote", filespec);
 }

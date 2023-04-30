@@ -1,6 +1,6 @@
 const { setOptionsFromArgs } = require("../src/utils");
 const { getOutputdir } = require("../src/utils");
-const { convertGdocs } = require("../src/convert-gdocs");
+const { deriveAndSaveMarkdowns } = require("../src/convert-gdocs");
 
 const [, , ...args] = process.argv;
 const outputdir = getOutputdir(args);
@@ -13,4 +13,4 @@ const options = {
 
 setOptionsFromArgs(options, args);
 
-convertGdocs(options);
+deriveAndSaveMarkdowns(options);

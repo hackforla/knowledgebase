@@ -536,7 +536,6 @@ class GdocObj {
         indexPos,
       });
     }
-    // todo: write to file
   }
 
   getTag(

@@ -3,24 +3,19 @@ import {
   fetchFromSubfolders,
   getMetadataFromDescription,
 } from "./google/google-drive";
-import {
-  fetchGdocCustomProperties,
-  deriveMarkdown,
-  getFrontMatter,
-} from "./single-gdoc";
+import { fetchGdocCustomProperties } from "./single-gdoc";
 import { GdocObj } from "./gdoc-obj";
-import { saveMarkdown } from "./save-or-write";
 
 import { fetchGoogleDocJson } from "./google/google-docs";
 
-function getSlugsForGdocs(gdocs: any) {
+export function getSlugsForGdocs(gdocs: any) {
   return gdocs.reduce(
     (acc: any, gdoc: any) => ({ ...acc, [gdoc.id]: gdoc.properties.slug }),
     {}
   );
 }
 
-async function fetchGdocsPropertiesFromTopFolder({
+export async function fetchGdocsPropertiesFromTopFolder({
   folder,
   matchpattern,
 }: any) {
@@ -54,24 +49,12 @@ async function fetchGdocsPropertiesFromTopFolder({
   return gdocs;
 }
 
-async function fetchAndSetGdocsContent(gdocs: any) {
+export async function fetchAndSetGdocsContent(gdocs: any) {
   await Promise.all(
     gdocs.map(async (gdoc: GdocObj) => {
       gdoc.content = await fetchGoogleDocJson(gdoc.id);
     })
   );
-}
-
-async function deriveAndSaveMarkdowns(gdocs: GdocObj[], options: any) {
-  for (let i = 0; i < gdocs.length; i++) {
-    // DO NOT USE MAP OR FOREACH HERE: will not wait for async function to finish
-    const { filename, markdown, phase_name } = deriveMarkdown(
-      gdocs[i],
-      options
-    );
-    console.log("filename is", filename, "phase_name", phase_name);
-    await saveMarkdown(filename, options, markdown, phase_name);
-  }
 }
 
 export function setGdocsElements(gdocs: any, gdocSlugs: any, options: any) {
@@ -91,13 +74,6 @@ export async function fetchAndSetGdocsCustomProperties(gdocs: GdocObj[]) {
   });
 }
 
-export {
-  deriveMarkdown,
-  fetchAndSetGdocsContent,
-  fetchGdocsPropertiesFromTopFolder,
-  getSlugsForGdocs,
-  deriveAndSaveMarkdowns,
-};
 function combineProperties(properties: any, customProperties: any): any {
   return {
     ...properties,
