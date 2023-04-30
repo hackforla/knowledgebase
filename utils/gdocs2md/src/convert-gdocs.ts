@@ -8,6 +8,7 @@ import {
 import { GdocObj } from "./gdoc-obj";
 import { saveMarkdown, saveContentToFile } from "./save";
 import { deriveMarkdown } from "./single-gdoc";
+import { ioptions } from "./ioptions";
 
 /**
  * Based on the options, filter google docs from specified folder and process them,
@@ -16,13 +17,13 @@ import { deriveMarkdown } from "./single-gdoc";
  */
 
 export async function fetchGdocs(customOptions: any) {
-  const options = merge({}, DEFAULT_OPTIONS, customOptions);
+  const options: ioptions = merge({}, DEFAULT_OPTIONS, customOptions);
   const gdocs = await fetchGdocsPropertiesFromTopFolder(options);
   await fetchAndSetGdocsContent(gdocs);
   return gdocs;
 }
 
-export async function deriveAndSaveMarkdowns(options: any) {
+export async function deriveAndSaveMarkdowns(options: ioptions) {
   const gdocs = await fetchGdocs(options);
   for (const gdoc of gdocs) {
     const gdocObj = new GdocObj(gdoc);
@@ -38,7 +39,7 @@ export async function deriveAndSaveMarkdowns(options: any) {
   }
 }
 
-export async function deriveAndSaveElements(options: any) {
+export async function deriveAndSaveElements(options: ioptions) {
   const gdocs = await fetchGdocs(options);
   for (const gdoc of gdocs) {
     const gdocObj = new GdocObj(gdoc);
