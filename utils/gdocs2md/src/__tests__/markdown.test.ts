@@ -1,4 +1,4 @@
-const optionsForTests = { skipFrontMatter: true, skipdiv: true };
+const optionsForTests = { skipfrontmatter: true, skipdiv: true };
 import * as fs from "fs";
 import * as path from "path";
 import { GdocObj } from "../gdoc-obj";

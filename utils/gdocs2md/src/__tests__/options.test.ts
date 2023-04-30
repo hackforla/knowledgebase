@@ -17,7 +17,7 @@ const testArray = [
   [`Skip codes`, { skipcodes: true }, "codes"],
   [`Skip tables`, { skiptables: true }, "tables"],
 ];
-const optionsForTests = { skipFrontMatter: true, skipdiv: true };
+const optionsForTests = { skipfrontmatter: true, skipdiv: true };
 
 for (const testValues of testArray) {
   const testname = testValues[0] as string;
