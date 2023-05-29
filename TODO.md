@@ -26,11 +26,11 @@ THIS WEEK
 - [x] Get tests to work
   - [x] Elements test
   - [x] Options tests
-- [ ] Add parameters to script and reverify scripts
+- [x] Add parameters to script
+- [ ] Reverify scripts
 - [x] Fix title issue
 - [ ] Verify reminders
 NEXT WEEK
-- [ ] Add parameters for output dir to generate-markdown-files.sh and generate-markdown-to-github.sh
 - [ ] ++ Auto generate provider link
 - [ ] Make default svg on frontmatter a constant env variable
 - [ ] +++ DOC: Env vars

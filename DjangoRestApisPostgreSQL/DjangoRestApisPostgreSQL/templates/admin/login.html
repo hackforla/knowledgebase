@@ -1,0 +1,26 @@
+{% extends "admin/login.html" %} {% block extrastyle %} {{ block.super }}
+<style>
+  {# Change Django default CSS behavior #}
+  .login #content {
+      padding: 20px 20px 0;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .login #content br.clear {
+      display: none;
+  }
+
+  {# Custom CSS #}
+  .alternative-login-section {
+      padding-top: 20px;
+      text-align: center;
+  }
+</style>
+{% endblock %} {% block content %} {{ block.super }}
+
+<section class="alternative-login-section">
+  {% comment %} <a href="{% url 'oidc_authentication_init' %}">Try single sign-on (SSO) 🔐</a> {% endcomment %}
+  <a href="http://localhost:8000/">Try single sign-on (SSO) 🔐</a>
+</section>
+{% endblock %}

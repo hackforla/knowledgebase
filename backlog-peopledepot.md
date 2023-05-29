@@ -1,0 +1,6 @@
+- [ ] React + Cognito tutorial
+- [ ] React + Cognito with peopledepot
+- [ ] React + Cognito with knowledgebase
+- [ ] React + Cognito with peopledepot and knowledgebase
+- [ ] Cognito + Django with knowledgebase
+- [ ] Cognito + Django + PeopleDepot
