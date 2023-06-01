@@ -20,6 +20,7 @@
 {% endblock %} {% block content %} {{ block.super }}
 
 <section class="alternative-login-section">
+  Value2 { %oidc_authentication_init% } ">x2
   {% comment %} <a href="{% url 'oidc_authentication_init' %}">Try single sign-on (SSO) 🔐</a> {% endcomment %}
   <a href="http://localhost:8000/">Try single sign-on (SSO) 🔐</a>
 </section>
