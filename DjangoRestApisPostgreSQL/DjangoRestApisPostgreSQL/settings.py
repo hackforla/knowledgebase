@@ -46,6 +46,12 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    # people depot config
+    'django.contrib.auth.backends.RemoteUserBackend',
+]
+
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -57,6 +63,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # CORS
     'django.middleware.common.CommonMiddleware',
+    # people depot config
+    'django.contrib.auth.middleware.RemoteUserMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoRestApisPostgreSQL.urls'

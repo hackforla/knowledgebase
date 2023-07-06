@@ -4,32 +4,26 @@ Tasks
 
 # PENDING
 
-## Use service account
-
-- [x] Check privileges
-- [x] Regenerate token and get existing code to work
-- [x] Search for example "service account" google drive get
-- [x] Search github google drive get
-- [x] Change .env for new google drive id for test
-- [x] subdir - print out the list
-- [x] Try google drive list
-
-## +++ NEXT \_\*\*
-
-- [x] Try saving to github
-- [x] Get script that creates mock google docs to work 
-- [x] Run mock google docs script to have new mock google docs
-- [x] Create test that it works
-- [x] Change google drive to markdown test to start from files on google drive
-THIS WEEK
-- [x] Get all scripts to work
-- [x] Get tests to work
-  - [x] Elements test
-  - [x] Options tests
 - [ ] Add parameters to script and reverify scripts
-- [x] Fix title issue
+
 - [ ] Verify reminders
 NEXT WEEK
+- [ ] Review proposal in peopledepot for security
+- [ ] Review bugs and add bugs as necessary in peopledepot (security for sign up so needs approval, three roles, archive)
+- [ ] PeopleDepot agenda
+  - [ ] Functional security document
+  - [ ] Archive vs delete
+- [x] Start peopledepot on a separate port
+- [x] Add knowledgebase roles for maintainer, admin, viewer to kb
+- [x] Set up security
+- [ ] Generate seeddata: 
+- [ ] Use roles from people depot in knowledgebase
+- [ ] Cognito / people depot login from knowledgebase
+- [ ] ? Have synchronize option which synchronizes everything
+- [ ] Webhook
+- [ ] 
+
+LATER
 - [ ] Add parameters for output dir to generate-markdown-files.sh and generate-markdown-to-github.sh
 - [ ] ++ Auto generate provider link
 - [ ] Make default svg on frontmatter a constant env variable

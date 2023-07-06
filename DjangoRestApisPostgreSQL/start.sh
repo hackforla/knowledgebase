@@ -14,4 +14,4 @@ if [[ $DJANGO_SETTINGS_MODULE == *"dev_settings"* ]]; then
     echo "******************************************************************************"
     echo .
 fi
-python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8001

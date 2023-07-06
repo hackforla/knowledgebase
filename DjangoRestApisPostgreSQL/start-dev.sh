@@ -1,4 +1,5 @@
 #!/bin/bash
+source set-dev-settings.sh
 export DJANGO_SETTINGS_MODULE=DjangoRestApisPostgreSQL.dev_settings
 echo Starting dev
 if [ -z "$VIRTUAL_ENV" ]; then
