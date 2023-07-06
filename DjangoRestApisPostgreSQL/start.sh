@@ -1,5 +1,14 @@
 #!/bin/bash
 export DJANGO_SUPERUSER_PASSWORD='admin'
+if [[ $1 != "" ]]; then
+    port=$1
+elif [[ $DJANGO_PORT != "" ]]; then
+    port=$DJANGO_PORT
+else
+    port=8001
+fi
+echo Port is $port
+exit
 echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
 python manage.py makemigrations knowledgebase
 python manage.py migrate
@@ -14,4 +23,4 @@ if [[ $DJANGO_SETTINGS_MODULE == *"dev_settings"* ]]; then
     echo "******************************************************************************"
     echo .
 fi
-python manage.py runserver 0.0.0.0:8001
+python manage.py runserver 0.0.0.0:$port
