@@ -8,7 +8,6 @@ else
     port=8001
 fi
 echo Port is $port
-exit
 echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
 python manage.py makemigrations knowledgebase
 python manage.py migrate
