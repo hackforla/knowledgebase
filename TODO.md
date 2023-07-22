@@ -8,16 +8,14 @@ Tasks
 
 - [ ] Verify reminders
 NEXT WEEK
-- [ ] Review proposal in peopledepot for security
 - [ ] Review bugs and add bugs as necessary in peopledepot (security for sign up so needs approval, three roles, archive)
 - [ ] PeopleDepot agenda
   - [ ] Functional security document
   - [ ] Archive vs delete
-- [x] Start peopledepot on a separate port
-- [x] Add knowledgebase roles for maintainer, admin, viewer to kb
-- [x] Set up security
+- [ ] Run script to seed data
+- [ ] Cognito log in
 - [ ] Generate seeddata: 
-- [ ] Use roles from people depot in knowledgebase
+  - [ ] Use roles from people depot in knowledgebase
 - [ ] Cognito / people depot login from knowledgebase
 - [ ] ? Have synchronize option which synchronizes everything
 - [ ] Webhook

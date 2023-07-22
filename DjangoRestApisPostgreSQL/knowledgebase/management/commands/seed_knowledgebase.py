@@ -13,21 +13,16 @@ MODE_CLEAR = 'clear'
 class Command(BaseCommand):
     help = "seed database for testing and development."
 
-    def add_arguments(self, parser):
-        parser.add_argument('--mode', type=str, help="Mode")
-
-    def handle(self, *args, **options):
+def handle(self, *args, **options):
         self.stdout.write('seeding data...')
         run_seed(self, options['mode'])
         self.stdout.write('done.')
-
 
 def clear_data():
     """Deletes all the table data"""
     # logger.info("Delete Program Area")
     ProgramArea.objects.all().delete()
     PracticeArea.objects.all().delete()
-
 
 def create_program():
 
@@ -76,8 +71,12 @@ def run_seed(self, mode):
     :return:
     """
     # Clear data from tables
+    print("Executing")
     clear_data()
     if mode == MODE_CLEAR:
         return
 
     create_program()
+
+if __name__ == '__main__':
+    run_seed()
