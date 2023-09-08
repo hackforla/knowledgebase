@@ -1,0 +1,24 @@
+import os
+from django.db import migrations
+
+from django.core.management import call_command
+
+fixture_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../core/initial_data'))
+fixture_filename = 'ProgramAreasSeed.json'
+print("debug")
+print(os.getcwd())  
+def loadFile(a,b):
+    fixture_file = os.path.join(fixture_dir, fixture_filename)
+    print("debugxx", fixture_file)
+    call_command('loaddata', fixture_file) 
+    
+class Migration(migrations.Migration):
+
+
+    dependencies = [
+        ("knowledgebase", "0001_initial"),
+    ]
+
+    operations = [
+        migrations.RunPython(loadFile),
+    ]

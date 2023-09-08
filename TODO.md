@@ -3,7 +3,8 @@ Tasks
 +++ Required for MVP
 
 # PENDING
-
+- [ ] Complete authorization for KB using SSO and PD
+- [ ] Server script to generate new html file when a file changes.  See [proposal for file change detection](./proposal-file-change.md)
 - [ ] Add parameters to script and reverify scripts
 
 - [ ] Verify reminders
