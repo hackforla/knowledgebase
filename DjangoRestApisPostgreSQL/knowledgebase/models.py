@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.db.models.constraints import UniqueConstraint
+from django.contrib import admin
 
 
 class Gdoc(models.Model):
@@ -41,7 +42,6 @@ class Gdoc(models.Model):
         return self.title + "(" + self.slug + ") " + self.phase.name
 
 
-from django.contrib import admin
 
 
 class Author(models.Model):

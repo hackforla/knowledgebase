@@ -1,13 +1,26 @@
 Tasks
 
 +++ Required for MVP
+CURRENT
+- [ ] Authentication and Authorization
+  - [X] Write up status on other project, what learned
+  - [ ] Follow CONTRIBUTING instructions and see what happens
+  - [ ] See if token URL works
+  - [X] Look at VRMS to see how they did authentication
+  - [ ] Look at different types of tokens and what they are used for and how to create in Django
+    - [ ] Decide on a token strategy
+  - [ ] During install, populate oone of the tables
+  - [ ] Create server job to keep it up to date
+  - [ ] Understand how AWS Lambda triggers work for username
+  - [ ] Change doc so use groups
+  - [ ] If token URL does not work, get it to work
+  - [ ] Add to agenda ask Bonnie - user group roles for VRMS.  API restricted by role + data criteria?
 
 # PENDING
 - [ ] Complete authorization for KB using SSO and PD
 - [ ] Server script to generate new html file when a file changes.  See [proposal for file change detection](./proposal-file-change.md)
 - [ ] Add parameters to script and reverify scripts
 
-- [ ] Verify reminders
 NEXT WEEK
 - [ ] Review bugs and add bugs as necessary in peopledepot (security for sign up so needs approval, three roles, archive)
 - [ ] PeopleDepot agenda
@@ -23,6 +36,9 @@ NEXT WEEK
 - [ ] 
 
 LATER
+
+- [ ] Add parameters to script and reverify scripts
+- [ ] Verify reminders
 - [ ] Add parameters for output dir to generate-markdown-files.sh and generate-markdown-to-github.sh
 - [ ] ++ Auto generate provider link
 - [ ] Make default svg on frontmatter a constant env variable
