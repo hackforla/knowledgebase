@@ -130,22 +130,22 @@ class Migration(migrations.Migration):
                     "phase",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="knowledgebase.phase",
+                        to="django_kb_app.phase",
                     ),
                 ),
                 (
                     "practiceAreas",
-                    models.ManyToManyField(blank=True, to="knowledgebase.practicearea"),
+                    models.ManyToManyField(blank=True, to="django_kb_app.practicearea"),
                 ),
                 (
                     "programAreas",
-                    models.ManyToManyField(blank=True, to="knowledgebase.programarea"),
+                    models.ManyToManyField(blank=True, to="django_kb_app.programarea"),
                 ),
                 (
                     "technologies",
-                    models.ManyToManyField(blank=True, to="knowledgebase.technology"),
+                    models.ManyToManyField(blank=True, to="django_kb_app.technology"),
                 ),
-                ("tools", models.ManyToManyField(blank=True, to="knowledgebase.tool")),
+                ("tools", models.ManyToManyField(blank=True, to="django_kb_app.tool")),
             ],
             options={
                 "unique_together": {("slug", "phase")},
@@ -168,14 +168,14 @@ class Migration(migrations.Migration):
                     "author",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="knowledgebase.author",
+                        to="django_kb_app.author",
                     ),
                 ),
                 (
                     "gdoc",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="knowledgebase.gdoc",
+                        to="django_kb_app.gdoc",
                     ),
                 ),
             ],

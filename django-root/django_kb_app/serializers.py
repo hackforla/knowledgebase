@@ -1,5 +1,5 @@
 # from rest_framework import serializers 
-# from knowledgebase.models import Gdoc
+# from django_kb_app.models import Gdoc
  
  
 # class GdocSerializer(serializers.ModelSerializer):
