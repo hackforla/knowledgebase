@@ -7,7 +7,7 @@ FROM hfla-django
 # Create app directory
 WORKDIR /
 
-COPY ./django-root/requirements.txt ./
-COPY ./django-root ./
+COPY ./django_root/requirements.txt ./
+COPY ./django_root ./
 CMD ["python", "manage.py", "runserver"]
 EXPOSE 8000

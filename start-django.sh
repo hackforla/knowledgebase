@@ -1,3 +1,3 @@
 ./symlink.sh
-cd django-root
+cd django_root
 ./start-dev.sh
