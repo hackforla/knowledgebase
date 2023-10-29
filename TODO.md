@@ -7,10 +7,12 @@ Tasks
   - [ ] Look at different types of tokens and what they are used for and how to create in Django
 - [ ] Authorization
   - [ ] Create Admin guide which explains how to add roles and what they do.  Use existing proposal as draft.  Needs to be modified to take approver into account
+- [ ] Write up strategy to make PD integration configurable, even after application implemented
 - [ ] Rename gdoc to asset group
 - [ ] Add BOP topic area (one to many) table and field 
 - [ ] Add primary technology as a one to many
 - [ ] Add Asset Type (one to many) table and field (google spreadsheet, HTML, PDF, etc)
+- [ ] Improve UI for all one to many using this article https://stackoverflow.com/questions/70709775/how-to-hide-specific-field-by-user-group-on-a-django-admin
 - [ ] Populate KB tables with preset values on startup
   - [ ] Tools (frameworks)
   - [ ] Status
@@ -28,6 +30,11 @@ Tasks
 
   
 # People Depot Dependencies
+# PENDING
+- [ ] Complete authorization for KB using SSO and PD
+- [ ] Server script to generate new html file when a file changes.  See [proposal for file change detection](./proposal-file-change.md)
+
+NEXT WEEK
 - [ ] Review bugs and add bugs as necessary in peopledepot (security for sign up so needs approval, three roles, archive)
 - [ ] Create tables needed by KB
   - [ ] Consider more automated generation of tables
@@ -44,6 +51,9 @@ Tasks
 
 
 LATER
+
+- [ ] Add parameters to script and reverify scripts
+- [ ] Verify reminders
 - [ ] Add parameters for output dir to generate-markdown-files.sh and generate-markdown-to-github.sh
 - [ ] ++ Auto generate provider link
 - [ ] Make default svg on frontmatter a constant env variable
