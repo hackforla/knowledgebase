@@ -30,9 +30,6 @@ Tasks
 
   
 # People Depot Dependencies
-# PENDING
-- [ ] Complete authorization for KB using SSO and PD
-- [ ] Server script to generate new html file when a file changes.  See [proposal for file change detection](./proposal-file-change.md)
 
 NEXT WEEK
 - [ ] Review bugs and add bugs as necessary in peopledepot (security for sign up so needs approval, three roles, archive)
@@ -45,6 +42,8 @@ NEXT WEEK
 
 # Generate Web pages from markdown
 
+- [ ] Figure out final requirements (especially work flow and when file is generated) and UI and create issues
+- [ ] Server script to generate new html file when a file changes.  See [proposal for file change detection](./proposal-file-change.md)
 - [ ] Add parameters to script for generating and reverify scripts
 - [ ] Verify generation of Reminders
 - [ ] Figure out if generate-signature.js is needed
