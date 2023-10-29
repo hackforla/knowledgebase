@@ -1,3 +1,3 @@
 ./symlink.sh
-cd DjangoRestAPIsPostgreSQL
+cd django-root
 ./start-dev.sh

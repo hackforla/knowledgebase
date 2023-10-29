@@ -1,5 +1,5 @@
 import json
-from knowledgebase.models import Gdoc, GdocAuthor
+from django_kb_app.models import Gdoc, GdocAuthor
 from django.http import JsonResponse
 from django.core import serializers
 

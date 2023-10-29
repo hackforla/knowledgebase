@@ -6,5 +6,5 @@ if [ "$sourced" != "true" ]; then
     exit 1
 fi
 source venv/bin/activate
-echo error $ERRORLEVEL
-echo "DjangoRestApisPostgreSQL/start.sh: Sourced OK"
+echo "Sourced OK"
+

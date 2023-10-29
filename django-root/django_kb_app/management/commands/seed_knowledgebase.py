@@ -1,6 +1,6 @@
 # <project>/<app>/management/commands/seed.py
 from django.core.management.base import BaseCommand
-from knowledgebase.models import PracticeArea, ProgramArea
+from django_kb_app.models import PracticeArea, ProgramArea
 
 # python manage.py seed --mode=refresh
 

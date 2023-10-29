@@ -11,8 +11,8 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY ./DjangoRestApisPostgreSQL/requirements.txt ./
-COPY ./DjangoRestApisPostgreSQL ./
+COPY ./django-root/requirements.txt ./
+COPY ./django-root ./
 RUN apt-get update 
 RUN apt-get -y install libpq-dev gcc
 RUN pip install -r requirements.txt
