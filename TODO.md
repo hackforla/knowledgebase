@@ -1,41 +1,47 @@
 Tasks
 
-+++ Required for MVP
-CURRENT
-- [ ] Authentication and Authorization
-  - [X] Write up status on other project, what learned
-  - [ ] Follow CONTRIBUTING instructions and see what happens
-  - [ ] See if token URL works
-  - [X] Look at VRMS to see how they did authentication
++++ Required for BOP MVP
+# BOP MVP
+- [ ] Authentication
+  - [ ] Implement single sign on in Django Admim using AllAuth
   - [ ] Look at different types of tokens and what they are used for and how to create in Django
-    - [ ] Decide on a token strategy
-  - [ ] During install, populate oone of the tables
-  - [ ] Create server job to keep it up to date
-  - [ ] Understand how AWS Lambda triggers work for username
-  - [ ] Change doc so use groups
-  - [ ] If token URL does not work, get it to work
-  - [ ] Add to agenda ask Bonnie - user group roles for VRMS.  API restricted by role + data criteria?
+- [ ] Authorization
+  - [ ] Create Admin guide which explains how to add roles and what they do.  Use existing proposal as draft.  Needs to be modified to take approver into account
+- [ ] Rename gdoc to asset group
+- [ ] Add BOP topic area (one to many) table and field 
+- [ ] Add primary technology as a one to many
+- [ ] Add Asset Type (one to many) table and field (google spreadsheet, HTML, PDF, etc)
+- [ ] Populate KB tables with preset values on startup
+  - [ ] Tools (frameworks)
+  - [ ] Status
+- [ ] During install, populate tables from PD
+  - See spreadsheet for values
+- [ ] Decide on strategy for syncing PD and KB data and implement - possibly WebHooks or queues.  
+  - [ ] Decide on strategy.  Must take into account that KB app could potentially be down
+  - [ ] Implrmrny
+- [ ] Create PD user when signing up first time through 
+  - [ ] Decide on strategy.  Consider AWS Lambda triggers or queues  
+- [ ] Change documentation from user roles to user groups
+- [ ] Hide google id (and any future generation screens) for role catalog-maintain and catalog-view
+  - See https://stackoverflow.com/questions/70709775/how-to-hide-specific-field-by-user-group-on-a-django-admin
+  - [ ] Add catalog-maintain and catalog-view to Admin guide
 
-
-
-
-LATER
-
-- [ ] Add parameters to script and reverify scripts
-- [ ] Verify reminders
-NEXT WEEK
+  
+# People Depot Dependencies
 - [ ] Review bugs and add bugs as necessary in peopledepot (security for sign up so needs approval, three roles, archive)
+- [ ] Create tables needed by KB
+  - [ ] Consider more automated generation of tables
+- [ ] Populate seed data required by KB
 - [ ] PeopleDepot agenda
   - [ ] Functional security document
   - [ ] Archive vs delete
-- [ ] Run script to seed data
-- [ ] Cognito log in
-- [ ] Generate seeddata: 
-  - [ ] Use roles from people depot in knowledgebase
-- [ ] Cognito / people depot login from knowledgebase
-- [ ] ? Have synchronize option which synchronizes everything
-- [ ] Webhook
-- [ ] 
+
+# Generate Web pages from markdown
+
+- [ ] Add parameters to script for generating and reverify scripts
+- [ ] Verify generation of Reminders
+- [ ] Figure out if generate-signature.js is needed
+
 
 LATER
 - [ ] Add parameters for output dir to generate-markdown-files.sh and generate-markdown-to-github.sh
@@ -47,8 +53,6 @@ LATER
 - [ ] +++ Verify output for Slack reminders
 - [ ] +++ DOC: Front matter
 - [ ] Add crosslinks test (maybe)
-
-LATER
 - [ ] Change markdown and elements to use slug for filename
 - [ ] +++ DOC: Generate certificate and token
 - [ ] Move scripts
