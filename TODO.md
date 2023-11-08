@@ -7,6 +7,16 @@ Tasks
   - [ ] Look at different types of tokens and what they are used for and how to create in Django
 - [ ] Authorization
   - [ ] Create Admin guide which explains how to add roles and what they do.  Use existing proposal as draft.  Needs to be modified to take approver into account
+- [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/Technical:-Design-for-Django-Amin#populate-data-from-people-depot
+  - [ ] People Depot Data
+      - **PEOPLE DEPOT**
+        - [ ] Create necessary scripts in People Depot to populate the data
+        - [ ] Secure user data
+        - [ ] Add API to get token
+      - **KNOWLEDGEBASE**
+        - [ ] Create scripts to pulate the data using APIs.  For user, get token
+  - [ ] Non People Depot Data
+    - [ ] Create scripts to populate non-people depot tabes
 - [ ] Write up strategy to make PD integration configurable, even after application implemented
 - [ ] Rename gdoc to asset group
 - [ ] Add BOP topic area (one to many) table and field 
