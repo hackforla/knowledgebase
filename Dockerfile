@@ -37,5 +37,5 @@ RUN pip install -r requirements.txt
 # COPY ./xyz .
 
 # CMD ["ls"]
-CMD ["python", "manage.py", "runserver"]
+CMD ["./start.sh"]]
 EXPOSE 8000
