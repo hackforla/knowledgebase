@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
 AUTHENTICATION_BACKENDS = [
     # people depot config
-    'django.contrib.auth.backends.RemoteUserBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 
@@ -98,7 +98,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

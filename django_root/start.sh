@@ -1,17 +1,18 @@
 #!/bin/bash
-export DJANGO_SUPERUSER_PASSWORD='admin'
+export DJANGO_SUPERUSER_PASSWORD='admin2'
+echo debug password $DJANGO_SUPERUSER_PASSWORD
 if [[ $1 != "" ]]; then
     port=$1
 elif [[ $DJANGO_PORT != "" ]]; then
     port=$DJANGO_PORT
 else
-    port=8001
+    port=8000
 fi
 echo Port is $port
 echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
 python manage.py makemigrations django_kb_app
 python manage.py migrate
-python manage.py createsuperuser --username admin --email admin@admin.com --no-input
+python manage.py createsuperuser --username admin2 --email admin@admin.com --no-input
 if [[ $DJANGO_SETTINGS_MODULE == *"dev_settings"* ]]; then
     echo .
     echo "******************************************************************************"
