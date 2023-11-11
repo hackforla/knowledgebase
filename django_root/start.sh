@@ -1,5 +1,5 @@
 #!/bin/bash
-export DJANGO_SUPERUSER_PASSWORD='admin2'
+export DJANGO_SUPERUSER_PASSWORD='admin'
 echo debug password $DJANGO_SUPERUSER_PASSWORD
 if [[ $1 != "" ]]; then
     port=$1
