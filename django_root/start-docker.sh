@@ -1,4 +1,6 @@
 #!/bin/bash
-export DJANGO_SUPERUSER_PASSWORD='admin'
 export DATABASES_HOST=db
+export DJANGO_SUPERUSER=docker2
+export DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER@fake.com
+export DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER
 source ./start.sh

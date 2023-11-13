@@ -10,4 +10,4 @@ if [ -z "$VIRTUAL_ENV" ]; then
     echo "You must be in a virtual environment to run this script"
     exit 1
 fi
-source ./start.sh 8001
+source ./start.sh

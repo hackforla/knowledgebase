@@ -1,5 +1,10 @@
 #!/bin/bash
-echo debug password $DJANGO_SUPERUSER_PASSWORD
+# Called by start-dev.sh and start-docker.sh, which sets
+#    - DATABASES_HOST
+#    - DJANGO_SUPERUSER
+#    - DJANGO_SUPERUSER_PASSWORD
+#    - DJANGO_SUPERUSER_EMAIL
+echo Admin user = $DJANGO_SUPERUSER email = $DJANGO_SUPERUSER_EMAIL
 if [[ $1 != "" ]]; then
     port=$1
 elif [[ $DJANGO_PORT != "" ]]; then
@@ -11,7 +16,7 @@ echo Port is $port
 echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
 python manage.py makemigrations django_kb_app
 python manage.py migrate
-python manage.py createsuperuser --username admin --email admin@admin.com --no-input
+python manage.py createsuperuser --username $DJANGO_SUPERUSER --email $DJANGO_SUPERUSER_EMAIL --no-input
 if [[ $DJANGO_SETTINGS_MODULE == *"dev_settings"* ]]; then
     echo .
     echo "******************************************************************************"
