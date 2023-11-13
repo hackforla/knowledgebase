@@ -12,7 +12,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 
-COPY ./django_root/requirements.txt ./
 COPY ./django_root ./
 RUN apt-get update 
 RUN apt-get -y install libpq-dev gcc
