@@ -9,11 +9,13 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import os
 import django
 from pathlib import Path
 from django.utils.encoding import smart_str
 django.utils.encoding.smart_text = smart_str
 
+DATABASES_HOST = os.environ.get("DATABASES_HOST")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -98,7 +100,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'HOST': DATABASES_HOST,
         'PORT': '5432',
     }
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 source set-dev-settings.sh
-echo Starting dev
+echo Starting dev $DATABASES_HOST
 if [ -z "$VIRTUAL_ENV" ]; then
     echo "Activating virtual environment for this script"
     source venv/bin/activate
