@@ -110,7 +110,7 @@ class AuthorAdmin(admin.ModelAdmin):
     search_fields = ["name", "email"]
 
 
-class PracticeArea(models.Model):
+class PracticeArea(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
@@ -120,7 +120,7 @@ class PracticeArea(models.Model):
     def __str__(self):
         return self.name
 
-class ProgramArea(models.Model):
+class ProgramArea(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
@@ -134,7 +134,7 @@ class ProgramArea(models.Model):
         return self.name
 
 
-class Phase(models.Model):
+class Phase(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
@@ -145,7 +145,7 @@ class Phase(models.Model):
         return self.name
 
 
-class Technology(models.Model):
+class Technology(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
@@ -156,7 +156,7 @@ class Technology(models.Model):
         return self.name
 
 
-class Tool(models.Model):
+class Tool(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
