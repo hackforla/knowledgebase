@@ -1,11 +1,27 @@
 # todo: return authors
-
+import uuid
 from django.db import models
 from django.db.models.constraints import UniqueConstraint
 from django.contrib import admin
 
+class AbstractBaseModel(models.Model):
+    """
+    Base abstract model, that has `uuid` instead of `id` and included `created_at`, `updated_at` fields.
+    """
 
-class Gdoc(models.Model):
+    uuid = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, unique=True
+    )
+    created_at = models.DateTimeField("Created at", auto_now_add=True)
+    updated_at = models.DateTimeField("Updated at", auto_now=True)
+
+    class Meta:
+        abstract = True
+
+    def __repr__(self):
+        return f"<{self.__class__.__name__} {self.uuid}>"
+
+class Gdoc(AbstractBaseModel):
     google_id = models.CharField(max_length=100, unique=True, blank=False, default="")
     title = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
@@ -44,7 +60,7 @@ class Gdoc(models.Model):
 
 
 
-class Author(models.Model):
+class Author(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
