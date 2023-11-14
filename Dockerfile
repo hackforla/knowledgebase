@@ -12,7 +12,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 
-COPY ./django_root ./
+COPY ./django_root/requirements.txt ./
 RUN apt-get update 
 RUN apt-get -y install libpq-dev gcc
 RUN pip install -r requirements.txt
@@ -25,7 +25,7 @@ RUN pip install -r requirements.txt
 
 
 # Set work directory
-# WORKDIR /code
+WORKDIR /usr/src/django_root
 
 # # Install dependencies
 # COPY ./xyz/requirements.txt .

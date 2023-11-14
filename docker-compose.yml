@@ -7,7 +7,7 @@
 #       - "3000:3000"
 #     command: ls /node/node_modules
 #     volumes:
-#       - .:/node
+#       - .:/node   
 #       - /node/node_modules:/node/node_modules
 services:
   # node:
@@ -25,15 +25,15 @@ services:
   #     - 3000:3000
 
   django:
-    image: hfla-django
-    container_name: hfla-django
+    image: kb-web-image
+    container_name: kb-web
+    build: ./django_root
     volumes:
       # https://stackoverflow.com/a/32785014/232619
-      - .:/app
+      - ./django_root/:/usr/src/django_root
     command: ./start-docker.sh
     ports:
       - 8000:8000
-      - 5432:5432
   db:
     image: postgres:13
     volumes:
@@ -43,6 +43,9 @@ services:
       - "POSTGRES_USER=postgres"
       - "POSTGRES_PASSWORD=postgres"
       - "POSTGRES_HOST=localhost"
+    ports:
+      - 5432:5432
+
 
 volumes:
   postgres_data:
