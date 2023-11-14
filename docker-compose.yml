@@ -31,7 +31,14 @@ services:
     volumes:
       # https://stackoverflow.com/a/32785014/232619
       - ./django_root/:/usr/src/django_root
-    command: ./start-docker.sh
+    command: 
+
+             - sh 
+             - -c
+             - |
+               cd /usr/src/django_root
+               find . -name "*.sh" -exec chmod +x {} \;
+               ./start-docker.sh
     ports:
       - 8000:8000
   db:
