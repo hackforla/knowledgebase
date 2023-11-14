@@ -76,7 +76,7 @@ class Author(AbstractBaseModel):
         return self.name
 
 
-class GdocAuthor(models.Model):
+class GdocAuthor(AbstractBaseModel):
     gdoc = models.ForeignKey(Gdoc, on_delete=models.CASCADE)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     role = models.CharField(max_length=20, default="author")

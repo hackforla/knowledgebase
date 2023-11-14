@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_kb_app.apps.DjangoKbAppConfig',
     'corsheaders',
+    'data'
 ]
 
 AUTHENTICATION_BACKENDS = [
