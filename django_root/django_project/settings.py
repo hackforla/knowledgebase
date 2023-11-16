@@ -98,7 +98,7 @@ MIDDLEWARE = [
     # people depot config
     'django.contrib.auth.middleware.RemoteUserMiddleware',
         # Add the account middleware:
-    "allauth.account.middleware.AccountMiddleware",
+    # "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'django_project.urls'
