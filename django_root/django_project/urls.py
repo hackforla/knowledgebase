@@ -18,6 +18,7 @@ from django.urls import path, re_path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     re_path(r'^', include('django_kb_app.urls')),
 ]
  

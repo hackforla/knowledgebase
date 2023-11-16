@@ -8,26 +8,27 @@ Tasks
   - [ ] Non-sensitve People Depot Data w/APIs
         - [ ] Create scripts to populate the data using APIs. 
   - [ ] Sensitive (user) Data w/APIs
-      *** PEOPLE DEPOT
+      **PEOPLE DEPOT**
       - [ ] Create users api if none
       - [ ] Secure so that it requires an admin
-      - [ ] Create PD API to get token
+      **GMAIL**
       - [ ] Create peopledepot@gmail.com account that uses an app with a non-expiring password
-      - [ ] Log into PD using that email address
+      **KB**
+      - [ ] Log into KB using that email address
       - [ ] Get token.  See https://stackoverflow.com/questions/64991155/how-do-i-get-a-token-from-django-allauth-socialaccount.
       - [ ] Assign peopledepot@gmail.com as admin
-      *** KB 
       - [ ] Create variable for token
       - [ ] Script:
             - get data by calling users api with token
-            - loop through data to populate KB 
-
+            - loop through data to populate KB
       
   - [ ] Non People Depot Data
         - [ ] Create scripts to populate non-people depot tabes
 - [ ] Authentication
   - [ ] Implement single sign on for Django Admin using Django AllAuth.  
   - [ ] Write article on how to implement allauth
+  - [ ] Check where logout goes - should go to admin page
+  - [ ] Figure out how to implement admin to be the same
 - [ ] Authorization
   - [ ] Create Admin guide which explains how to add roles and what they do.  Use existing proposal as draft.  Needs to be modified to take approver into account
 - [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/Technical:-Design-for-Django-Amin#populate-data-from-people-depot

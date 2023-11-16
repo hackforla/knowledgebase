@@ -6,6 +6,6 @@ if [ "$sourced" != "true" ]; then
 fi
 # export DJANGO_SETTINGS_MODULE=django_project.settings
 export DATABASES_HOST=localhost
-export DJANGO_SUPERUSER=dev
+export DJANGO_SUPERUSER=admin
 export DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER@fake.com
 export DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER

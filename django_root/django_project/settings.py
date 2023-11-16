@@ -13,8 +13,30 @@ import os
 import django
 from pathlib import Path
 from django.utils.encoding import smart_str
+import dotenv
+dotenv.load_dotenv()
+
 django.utils.encoding.smart_text = smart_str
 DATABASES_HOST = os.environ.get("DATABASES_HOST")
+COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default=None)
+COGNITO_USER_POOL = os.environ.get("COGNITO_USER_POOL", default=None)
+COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default=None)
+COGNITO_CLIENT_ID = os.environ.get("COGNITO_CLIENT_ID", default=None)
+COGNITO_CLIENT_SECRET = os.environ.get("COGNITO_CLIENT_SECRET", default=None)
+print("Debug COGNITO", COGNITO_CLIENT_ID)
+SOCIALACCOUNT_PROVIDERS = {
+    'amazon_cognito': {
+        'DOMAIN': 'https://peopledepot.auth.us-east-2.amazoncognito.com',
+        'APP': {
+            'client_id': f'{COGNITO_CLIENT_ID}',
+            'client_secret': f'{COGNITO_CLIENT_SECRET}',
+            'secret': '',
+            'key': ''
+        }
+    },
+ }
+ACCOUNT_EMAIL_VERIFICATION="none"
+print(SOCIALACCOUNT_PROVIDERS)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -45,12 +67,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_kb_app.apps.DjangoKbAppConfig',
     'corsheaders',
-    'data'
+    'data',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # include the providers you want to enable:
+    'allauth.socialaccount.providers.amazon_cognito',
 ]
 
 AUTHENTICATION_BACKENDS = [
-    # people depot config
+    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 
@@ -67,6 +97,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     # people depot config
     'django.contrib.auth.middleware.RemoteUserMiddleware',
+        # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'django_project.urls'
@@ -74,7 +106,7 @@ ROOT_URLCONF = 'django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
