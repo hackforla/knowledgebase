@@ -1,6 +1,6 @@
 #!/bin/bash
 # Called by start-dev.sh and start-docker.sh, which sets
-#    - DATABASES_HOST
+#    - DATABASE_HOST
 #    - DJANGO_SUPERUSER
 #    - DJANGO_SUPERUSER_PASSWORD
 #    - DJANGO_SUPERUSER_EMAIL

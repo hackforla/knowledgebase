@@ -2,6 +2,15 @@ Tasks
 
 +++ Required for BOP MVP
 # BOP MVP
+- [ ] Misc
+  - [ ] Change port to use DJANGO_PORT in start-dev.sh and start-docker.sh rather than passing
+  - [ ] Seed data update - change to use DUMPDATA
+  - [ ] Replace export with read from .env file
+  - [ ] Use kb_data.py for populating data on log in
+- [ ] Dev documentation
+  - [ ] Screen shots
+  - [ ] Data model
+  - [ ] Resources page, include link to spreadsheet
 - [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/Technical:-Design-for-Django-Amin#populate-data-from-people-depot
   - [ ] Non-sensitve People Depot Data w/script
         - [ ] Copy seed data scripts from KB/data/migrations

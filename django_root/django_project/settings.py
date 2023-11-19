@@ -17,16 +17,18 @@ import dotenv
 dotenv.load_dotenv()
 
 django.utils.encoding.smart_text = smart_str
-DATABASES_HOST = os.environ.get("DATABASES_HOST")
-COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default=None)
-COGNITO_USER_POOL = os.environ.get("COGNITO_USER_POOL", default=None)
-COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default=None)
-COGNITO_CLIENT_ID = os.environ.get("COGNITO_CLIENT_ID", default=None)
-COGNITO_CLIENT_SECRET = os.environ.get("COGNITO_CLIENT_SECRET", default=None)
+DATABASE_HOST = os.environ.get("DATABASE_HOST")
+DATABASE_PORT = os.environ.get("DATABASE_PORT")
+COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default="")
+# COGNITO_USER_POOL = os.environ.get("COGNITO_USER_POOL", default="")
+COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default="")
+COGNITO_USER_POOL_NAME = os.environ.get("COGNITO_USER_POOL_NAME", default="")
+COGNITO_CLIENT_ID = os.environ.get("COGNITO_CLIENT_ID", default="")
+COGNITO_CLIENT_SECRET = os.environ.get("COGNITO_CLIENT_SECRET", default="")
 print("Debug COGNITO", COGNITO_CLIENT_ID)
 SOCIALACCOUNT_PROVIDERS = {
     'amazon_cognito': {
-        'DOMAIN': 'https://peopledepot.auth.us-east-2.amazoncognito.com',
+        'DOMAIN': f'https://{COGNITO_USER_POOL_NAME}.auth.{COGNITO_AWS_REGION}.amazoncognito.com',
         'APP': {
             'client_id': f'{COGNITO_CLIENT_ID}',
             'client_secret': f'{COGNITO_CLIENT_SECRET}',
@@ -132,8 +134,8 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': DATABASES_HOST,
-        'PORT': '5432',
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
     }
 }
 

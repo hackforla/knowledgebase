@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.constraints import UniqueConstraint
 from django.contrib import admin
 
+
 class AbstractBaseModel(models.Model):
     """
     Base abstract model, that has `uuid` instead of `id` and included `created_at`, `updated_at` fields.
