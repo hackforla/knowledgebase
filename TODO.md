@@ -1,15 +1,44 @@
 Tasks
 
 +++ Required for BOP MVP
+# Issues to Create
+Rename
+- [ ] Rename Gdoc to AssetGroup
+
+API
+- [ ] Create Topic Area, including API, but not many to many
+- [ ] Make API schema dynamic
+- [ ] Create Python script to dynamically create table and API, using Assets
+- [ ] Add APIs for Practice Area, Tool, Status / Phase, Program Area, Tool
+
+Assets
+- [ ] Create Asset table - move URL to asset table
+- [ ] Create One to Many for Asset to AssetGroup
+- [ ] Add Primary Technology/Tool for Asset Group? Asset?
+- [ ] Create Asset Type table
+- [ ] Create One to Many for Assets to Asset Type
+
+Many to Many
+- [ ] Modify Many to Many for Practice Area
+- [ ] Create Python script to dynamically add Many to Many
+- [ ] Modify all Many to Manys
+- [ ] Change Many to Many for PracticeArea
+- [ ] Create script to make this dynamic
+- [ ] Change all Many to Manys
+
+Data
+- [ ] Populate data for PracticeArea, either from local file or URL (see https://stackoverflow.com/questions/2921847/what-do-double-star-asterisk-and-star-asterisk-mean-in-a-function-call/2921893#2921893)
+- [ ] Populate data for all query criteria table
+- [ ] Populate initial data for Assets
+- [ ] Populate Users (requires token)
 # BOP MVP
 - [ ] Misc
   - [ ] Change port to use DJANGO_PORT in start-dev.sh and start-docker.sh rather than passing
-  - [ ] Seed data update - change to use DUMPDATA
   - [ ] Replace export with read from .env file
-  - [ ] Use kb_data.py for populating data on log in
+  - [ ] Seed data
+    - [ ] Use kb_data.py for populating data on log in
+    - [ ] Do it in dynamic way from json using https://stackoverflow.com/questions/2921847/what-do-double-star-asterisk-and-star-asterisk-mean-in-a-function-call/2921893#2921893
 - [ ] Dev documentation
-  - [ ] Screen shots
-  - [ ] Data model
   - [ ] Resources page, include link to spreadsheet
 - [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/Technical:-Design-for-Django-Amin#populate-data-from-people-depot
   - [ ] Non-sensitve People Depot Data w/script
@@ -63,7 +92,7 @@ Tasks
   - See spreadsheet for values
 - [ ] Decide on strategy for syncing PD and KB data and implement - possibly WebHooks or queues.  
   - [ ] Decide on strategy.  Must take into account that KB app could potentially be down
-  - [ ] Implrmrny
+  - [ ] Implement
 - [ ] Create PD user when signing up first time through 
   - [ ] Decide on strategy.  Consider AWS Lambda triggers or queues  
 - [ ] Change documentation from user roles to user groups
