@@ -1,47 +1,38 @@
 [
   {
     "uuid": 100,
-    "name": "Citizen Engagement2",
-    "description": ""
+    "name": "Citizen Engagement"
   },
   {
     "uuid": 2,
-    "name": "Civic Tech Infrastructure",
-    "description": ""
+    "name": "Civic Tech Infrastructure"
   },
   {
     "uuid": 3,
-    "name": "Diversity / Equity and Inclusion",
-    "description": ""
+    "name": "Diversity / Equity and Inclusion"
   },
   {
     "uuid": 4,
-    "name": "Environment",
-    "description": ""
+    "name": "Environment"
   },
   {
     "uuid": 5,
-    "name": "Justice",
-    "description": "a"
+    "name": "Justice"
   },
   {
     "uuid": 6,
-    "name": "Social Safety Net",
-    "description": "a"
+    "name": "Social Safety Net"
   },
   {
     "uuid": 7,
-    "name": "Vote / Representation",
-    "description": "a"
+    "name": "Vote / Representation"
   },
   {
     "uuid": 8,
-    "name": "Workforce Development",
-    "description": "a"
+    "name": "Workforce Development"
   },
   {
     "uuid": 9,
-    "name": "Community of Practice",
-    "description": "a"
+    "name": "Community of Practice"
   }
 ]

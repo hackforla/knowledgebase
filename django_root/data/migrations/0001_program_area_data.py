@@ -18,10 +18,13 @@ def update(__code__, __reverse_code__):
 
 
 def update_with_specific_values():
-  f = open('ProgramArea_export.json')
-  data = json.load(f)
-  for record in data:
-    ProgramArea.objects.update_or_create(**record)
+    print("")
+    print("Updating ProgramArea from ProgramArea_export.json")
+    f = open('data/migrations/ProgramArea_export.json')
+    data = json.load(f)
+    for record in data:
+        ProgramArea.objects.update_or_create(**record)
+    print("Done")
 
 def update_from_pd():
     people_depot_url = PEOPLE_DEPOT_URL
