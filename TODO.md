@@ -21,14 +21,11 @@ Assets
 Many to Many
 - [ ] Modify Many to Many for Practice Area
 - [ ] Create Python script to dynamically add Many to Many
-- [ ] Modify all Many to Manys
-- [ ] Change Many to Many for PracticeArea
-- [ ] Create script to make this dynamic
-- [ ] Change all Many to Manys
+- [ ] Modify Many to Many for Tool, Status / Phase, Program Area, Tool
 
 Data
 - [ ] Populate data for PracticeArea, either from local file or URL (see https://stackoverflow.com/questions/2921847/what-do-double-star-asterisk-and-star-asterisk-mean-in-a-function-call/2921893#2921893)
-- [ ] Populate data for all query criteria table
+- [ ] Populate data for Practice Area, Tool, Status / Phase, Program Area, Tool, Asset Type
 - [ ] Populate initial data for Assets
 - [ ] Populate Users (requires token)
 # BOP MVP
