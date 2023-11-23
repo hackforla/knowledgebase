@@ -1,0 +1,47 @@
+[
+  {
+    "uuid": 100,
+    "name": "Citizen Engagement2",
+    "description": ""
+  },
+  {
+    "uuid": 2,
+    "name": "Civic Tech Infrastructure",
+    "description": ""
+  },
+  {
+    "uuid": 3,
+    "name": "Diversity / Equity and Inclusion",
+    "description": ""
+  },
+  {
+    "uuid": 4,
+    "name": "Environment",
+    "description": ""
+  },
+  {
+    "uuid": 5,
+    "name": "Justice",
+    "description": "a"
+  },
+  {
+    "uuid": 6,
+    "name": "Social Safety Net",
+    "description": "a"
+  },
+  {
+    "uuid": 7,
+    "name": "Vote / Representation",
+    "description": "a"
+  },
+  {
+    "uuid": 8,
+    "name": "Workforce Development",
+    "description": "a"
+  },
+  {
+    "uuid": 9,
+    "name": "Community of Practice",
+    "description": "a"
+  }
+]

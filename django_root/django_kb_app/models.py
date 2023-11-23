@@ -7,7 +7,7 @@ from django.contrib import admin
 
 class AbstractBaseModel(models.Model):
     """
-    Base abstract model, that has `uuid` instead of `id` and included `created_at`, `updated_at` fields.
+    Base abstract model, that has `uuid` instead of `uuid` and included `created_at`, `updated_at` fields.
     """
 
     uuid = models.UUIDField(
@@ -23,7 +23,7 @@ class AbstractBaseModel(models.Model):
         return f"<{self.__class__.__name__} {self.uuid}>"
 
 class Gdoc(AbstractBaseModel):
-    google_id = models.CharField(max_length=100, unique=True, blank=False, default="")
+    google_uuid = models.CharField(max_length=100, unique=True, blank=False, default="")
     title = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
     slug = models.CharField(max_length=200, blank=False, default="")
@@ -43,8 +43,8 @@ class Gdoc(AbstractBaseModel):
 
     def to_json(self):
         return {
-            "id": self.id,
-            "google_id": self.google_id,
+            "uuid": self.uuid,
+            "google_uuid": self.google_uuid,
             "title": self.title,
             "description": self.description,
             "slug": self.slug,
@@ -127,7 +127,9 @@ class ProgramArea(AbstractBaseModel):
         blank=False,
         unique=True,
     )
-    
+    description = models.TextField(blank=True)
+    image = models.URLField(blank=True)
+        
     class Meta:
         ordering = ['name']
 
