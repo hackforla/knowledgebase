@@ -9,8 +9,9 @@ fi
 source set-dev-settings.sh
 
 # Set VENV_DIR if not set
-if [ -z $VENV_DIR ]
+if [ -z $VENV_DIR ]; then
   export VENV_DIR=venv
+fi
 
 echo Starting dev $DATABASE_HOST
 
