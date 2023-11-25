@@ -1,10 +1,14 @@
+# Steps to upgrade to most recent python package:
+# - unless there is a comment, make sure each line below uses "==" instead of "~="
+# - python -m pur -r requuirements.txt
 asgiref==3.7.2
-Django==4.1.2 # Django 4.2.7 resulted in garbled admin page.  May be related to static content.
+Django~=4.1.2 # Django 4.2.7 resulted in garbled admin page.  May be related to static content or DEBUG=True.
 python-dotenv==1.0.0
 django-cors-headers==4.3.1
 djangorestframework==3.14.0
 django-allauth==0.58.2
 psycopg2==2.9.9 # If issues with this version, revert to 2.9.5
+pur==7.3.1
 pytz==2023.3.post1
 sqlparse==0.4.4
 
