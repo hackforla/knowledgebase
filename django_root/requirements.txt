@@ -7,7 +7,7 @@ python-dotenv==1.0.0
 django-cors-headers==4.3.1
 djangorestframework==3.14.0
 django-allauth==0.58.2
-psycopg2==2.9.9 # If issues with this version, revert to 2.9.5
+psycopg2==2.9.9 # If issues with this version, revert to psycopg2~=2.9.5
 pur==7.3.1
 pytz==2023.3.post1
 sqlparse==0.4.4
