@@ -19,7 +19,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-    from data.program_area_data import ProgramAreaData
-    ProgramAreaData.update_from_pd()
     
     

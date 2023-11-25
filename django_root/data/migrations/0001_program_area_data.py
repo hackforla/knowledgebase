@@ -1,6 +1,5 @@
 from django.db import migrations
-from data.program_area_data import ProgramAreaData
-print("001_program_area_data debug")
+print("0001_program_area_data debug")
 
 
 class Migration(migrations.Migration):
@@ -11,5 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython( ProgramAreaData.update, migrations.RunPython.noop )
     ]

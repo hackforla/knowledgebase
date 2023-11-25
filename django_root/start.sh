@@ -16,6 +16,7 @@ echo Port is $port
 echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
 python manage.py makemigrations django_kb_app
 python manage.py migrate
+python manage.py populatedata
 python manage.py createsuperuser --username $DJANGO_SUPERUSER --email $DJANGO_SUPERUSER_EMAIL --no-input
 if [[ $DJANGO_SETTINGS_MODULE == *"dev_settings"* ]]; then
     echo .

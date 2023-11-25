@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="PracticeArea",
             fields=[
-                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
                 (
                     "created_at",
                     models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
@@ -88,7 +88,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="ProgramArea",
             fields=[
-                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
                 (
                     "created_at",
                     models.DateTimeField(auto_now_add=True, verbose_name="Created at"),

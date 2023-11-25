@@ -10,7 +10,7 @@ PEOPLE_DEPOT_URL=os.environ.get("PEOPLE_DEPOT_URL", default="")
 
 
 class ProgramAreaData:
-    def update(__code__, __reverse_code__):
+    def update():
         if (PEOPLE_DEPOT_URL):
             ProgramAreaData.update_from_pd()
         else:
