@@ -17,14 +17,14 @@ import dotenv
 dotenv.load_dotenv()
 
 django.utils.encoding.smart_text = smart_str
-DATABASE_HOST = os.environ.get("DATABASE_HOST")
-DATABASE_PORT = os.environ.get("DATABASE_PORT")
-COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default="")
-# COGNITO_USER_POOL = os.environ.get("COGNITO_USER_POOL", default="")
-COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default="")
-COGNITO_USER_POOL_NAME = os.environ.get("COGNITO_USER_POOL_NAME", default="")
-COGNITO_CLIENT_ID = os.environ.get("COGNITO_CLIENT_ID", default="")
-COGNITO_CLIENT_SECRET = os.environ.get("COGNITO_CLIENT_SECRET", default="")
+DATABASE_HOST = os.environ.get('DATABASE_HOST')
+DATABASE_PORT = os.environ.get('DATABASE_PORT')
+COGNITO_AWS_REGION = os.environ.get('COGNITO_AWS_REGION', default="")
+# COGNITO_USER_POOL = os.environ.get('COGNITO_USER_POOL', default="")
+COGNITO_AWS_REGION = os.environ.get('COGNITO_AWS_REGION', default="")
+COGNITO_USER_POOL_NAME = os.environ.get('COGNITO_USER_POOL_NAME', default="")
+COGNITO_CLIENT_ID = os.environ.get('COGNITO_CLIENT_ID', default="")
+COGNITO_CLIENT_SECRET = os.environ.get('COGNITO_CLIENT_SECRET', default="")
 SOCIALACCOUNT_STORE_TOKENS=True
 SOCIALACCOUNT_PROVIDERS = {
     'amazon_cognito': {
@@ -37,7 +37,7 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     },
  }
-ACCOUNT_EMAIL_VERIFICATION="none"
+ACCOUNT_EMAIL_VERIFICATION='none'
 print(SOCIALACCOUNT_PROVIDERS)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -100,7 +100,7 @@ MIDDLEWARE = [
     # people depot config
     'django.contrib.auth.middleware.RemoteUserMiddleware',
         # Add the account middleware:
-    "allauth.account.middleware.AccountMiddleware",    
+    'allauth.account.middleware.AccountMiddleware',    
 ]
 
 ROOT_URLCONF = 'django_project.urls'
