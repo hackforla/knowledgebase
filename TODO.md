@@ -1,40 +1,20 @@
 Tasks
 
 +++ Required for BOP MVP
-# Issues to Create
-Rename
-- [ ] Rename Gdoc to AssetGroup
 
-API
-- [ ] Create Topic Area, including API, but not many to many
-- [ ] Make API schema dynamic
-- [ ] Create Python script to dynamically create table and API, using Assets
-- [ ] Add APIs for Practice Area, Tool, Status / Phase, Program Area, Tool
 
-Assets
-- [ ] Create Asset table - move URL to asset table
-- [ ] Create One to Many for Asset to AssetGroup
-- [ ] Add Primary Technology/Tool for Asset Group? Asset?
-- [ ] Create Asset Type table
-- [ ] Create One to Many for Assets to Asset Type
-
-Many to Many
-- [ ] Modify Many to Many for Practice Area
-- [ ] Create Python script to dynamically add Many to Many
-- [ ] Modify Many to Many for Tool, Status / Phase, Program Area, Tool
-
-Data
-- [ ] Populate data for PracticeArea, either from local file or URL (see https://stackoverflow.com/questions/2921847/what-do-double-star-asterisk-and-star-asterisk-mean-in-a-function-call/2921893#2921893)
-- [ ] Populate data for Practice Area, Tool, Status / Phase, Program Area, Tool, Asset Type
-- [ ] Populate initial data for Assets
-- [ ] Populate Users (requires token)
 # BOP MVP
 - [ ] Misc
+  - [ ] Dir structure
+    - [ ] Move source code up a level
+    - [ ] Clone into gdoc repo
+    - [ ] Remove gdoc related code from kb
+    - [ ] Rename django_kb_app to knowledgebase
+    - [ ] Remove core
+    - [ ] Rename django_project to core
   - [ ] Change port to use DJANGO_PORT in start-dev.sh and start-docker.sh rather than passing
   - [ ] Replace export with read from .env file
-  - [ ] Seed data
-    - [ ] Use kb_data.py for populating data on log in
-    - [ ] Do it in dynamic way from json using https://stackoverflow.com/questions/2921847/what-do-double-star-asterisk-and-star-asterisk-mean-in-a-function-call/2921893#2921893
+ 
 - [ ] Dev documentation
   - [ ] Resources page, include link to spreadsheet
 - [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/Technical:-Design-for-Django-Amin#populate-data-from-people-depot
