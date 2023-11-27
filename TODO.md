@@ -12,6 +12,7 @@ Tasks
     - [ ] Rename django_kb_app to knowledgebase
     - [ ] Remove core
     - [ ] Rename django_project to core
+  - [ ] Move token_view to separate file (views.py?)
   - [ ] Change port to use DJANGO_PORT in start-dev.sh and start-docker.sh rather than passing
   - [ ] Replace export with read from .env file
  

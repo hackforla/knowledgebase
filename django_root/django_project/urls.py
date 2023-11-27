@@ -30,4 +30,3 @@ urlpatterns = [
     path('token/', token_view),
     re_path(r'^', include('django_kb_app.urls')),
 ]
- 
