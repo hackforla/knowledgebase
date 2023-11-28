@@ -25,6 +25,7 @@ COGNITO_AWS_REGION = os.environ.get('COGNITO_AWS_REGION', default="")
 COGNITO_USER_POOL_NAME = os.environ.get('COGNITO_USER_POOL_NAME', default="")
 COGNITO_CLIENT_ID = os.environ.get('COGNITO_CLIENT_ID', default="")
 COGNITO_CLIENT_SECRET = os.environ.get('COGNITO_CLIENT_SECRET', default="")
+SOCIALACCOUNT_ADAPTER = 'django_kb_app.custom_adapter.CustomSocialAccountAdapter'
 SOCIALACCOUNT_STORE_TOKENS=True
 SOCIALACCOUNT_PROVIDERS = {
     'amazon_cognito': {
