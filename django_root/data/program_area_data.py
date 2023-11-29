@@ -18,11 +18,9 @@ class ProgramAreaData:
 
 
     def update_from_json_file():
-        print('')
         print('Updating ProgramArea from ProgramArea_export.json')
         f = open('data/migrations/ProgramArea_export.json')
         data = json.load(f)
-        print('Debug json', data)
         for record in data:
             ProgramArea.objects.update_or_create(**record)
         print('Done')
@@ -37,6 +35,5 @@ class ProgramAreaData:
         data = requests.get(people_depot_url).content
         data = json.loads(data)
         for record in data:
-            print('adding or updating', record['id'], record['name'])
             ProgramArea.objects.update_or_create(**record)
         print(f'Added {len(data)} program area records')

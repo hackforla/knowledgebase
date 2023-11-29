@@ -8,7 +8,6 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
     
     def pre_social_login(self, __request__, sociallogin: SocialLogin ):
         # Check if the user already exists in your PostgreSQL database
-        print("Debug pre social log in", sociallogin.is_existing)
         if not sociallogin.is_existing:
             provider = sociallogin.account.provider  
             redirect_url = f'../../../../kb/socialsignup/?provider={provider}'

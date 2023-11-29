@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_kb_app.apps.DjangoKbAppConfig',
+    'django_kb_app.apps.Djangodjango_kb_appConfig',
     'corsheaders',
     'data',
     'allauth',
@@ -128,6 +128,7 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databasescr
 DJANGO_SUPERUSER_PASSWORD = 'admin'
+AUTH_USER_MODEL = "django_kb_app.User"
 
 DATABASES = {
     'default': {

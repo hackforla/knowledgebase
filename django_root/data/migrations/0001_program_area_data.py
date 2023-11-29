@@ -6,7 +6,7 @@ class Migration(migrations.Migration):
 
     initial = True
     dependencies = [
-        ('django_kb_app', '0001_initial')
+        ('django_kb_app', '0002_user')
     ]
 
     operations = [
