@@ -18,7 +18,7 @@ echo Starting dev $DATABASE_HOST
 # Attempt to activate
 if [ -z "$VIRTUAL_ENV" ]; then
     echo "Activating virtual environment for this script"
-    source venv/bin/activate
+    source $VENV_DIR/bin/activate
     echo "Recommended: run 'source ./activate.sh' from terminal"
 fi
 
