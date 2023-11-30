@@ -10,7 +10,6 @@ def token_view(request):
     return render(request, 'admin/token.html', { 'token': token })
 
 def social_signup_view(request: WSGIRequest):
-    print('debug',request.content_params, request.get_full_path(),request.GET)
     return render(request, 'kb/socialsignup.html', {'provider_name': 'WOOHOO HAH'})
 
     

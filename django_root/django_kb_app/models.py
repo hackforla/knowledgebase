@@ -9,8 +9,6 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
-from timezone_field import TimeZoneField
 
 
 
@@ -113,11 +111,7 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     github_handle = models.CharField(max_length=255, blank=True)
     slack_id = models.CharField(max_length=11, blank=True)
 
-    phone = PhoneNumberField(blank=True)
 
-    texting_ok = models.BooleanField(default=True)
-
-    time_zone = TimeZoneField(blank=True, use_pytz=False, default="America/Los_Angeles")
     # conduct = models.BooleanField()  # not in ERD. Maybe we should remove this
 
     objects = UserManager()

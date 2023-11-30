@@ -8,11 +8,9 @@
     {% element h1 %}
         {% trans "Sign Up" %}
     {% endelement %}
-    <p>You successfuly registered a HackForLA {{request.GET.provider}} account.  Here are some additional steps:</p>
-    <ul>
-        <li>Sign up for a People Depot account with HackForLA using the same email and any provider (Cognito, Google).</li>
-        <li>Ask an adminstator to grant you read, maintainer, approver, or admin access.</li>
-        <li>Log into Knowledgebase again.</li>
+    <p>You successfuly registered a Cognito account with HackForLA.  You must also </p>
+        <li>ask an adminstator to grant you read, maintainer, approver, or admin access and</li>
+        <li>then login again.</li>
     </ul>
     {% url 'socialaccount_signup' as action_url %}
     {% element form form=form method="post" action=action_url %}

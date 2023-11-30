@@ -23,7 +23,7 @@ class ProgramAreaData:
         data = json.load(f)
         for record in data:
             ProgramArea.objects.update_or_create(**record)
-        print('Done')
+
 
     def update_from_pd():
         people_depot_url = PEOPLE_DEPOT_URL

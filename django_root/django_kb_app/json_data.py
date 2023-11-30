@@ -10,7 +10,6 @@ def get_gdoc_json(self, google_id):
     if gdocResultSet.__len__() == 1:
         gdocValues = list(gdocResultSet.values())
 
-        print("debug: gdocValues: ", json.dumps(gdocValues, indent=4))
         gdocAuthorValues = list(
             gdocResultSet[0]
             .gdocauthor_set.all()

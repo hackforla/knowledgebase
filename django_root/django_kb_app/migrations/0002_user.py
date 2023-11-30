@@ -3,8 +3,6 @@
 import django.contrib.auth.models
 import django.contrib.auth.validators
 from django.db import migrations, models
-import phonenumber_field.modelfields
-import timezone_field.fields
 import uuid
 
 
@@ -86,19 +84,6 @@ class Migration(migrations.Migration):
                 ("linkedin_account", models.CharField(blank=True, max_length=255)),
                 ("github_handle", models.CharField(blank=True, max_length=255)),
                 ("slack_id", models.CharField(blank=True, max_length=11)),
-                (
-                    "phone",
-                    phonenumber_field.modelfields.PhoneNumberField(
-                        blank=True, max_length=128, region=None
-                    ),
-                ),
-                ("texting_ok", models.BooleanField(default=True)),
-                (
-                    "time_zone",
-                    timezone_field.fields.TimeZoneField(
-                        blank=True, default="America/Los_Angeles", use_pytz=False
-                    ),
-                ),
                 (
                     "groups",
                     models.ManyToManyField(
