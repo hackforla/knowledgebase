@@ -1,13 +1,37 @@
-/* static/myapp/styles.css */
+.large {
+  font-size: 20px;
+}
 
 .button-link {
-  display: inline-block;
-  padding: 10px 20px;
-  text-decoration: none;
-  background-color: #3498db;
-  color: #ffffff;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+    appearance: auto;
+    font-family: Arial;
+    font-size: 16px;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: buttonface;
+    margin: 0em;
+}
+.button-border {
+    text-decoration: none;
+    border-radius: 2px;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
+    padding-block: 1px;
+    padding-inline: 6px;
+    padding: 4px;
 }
 
 .button-link:hover {
