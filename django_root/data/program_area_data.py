@@ -18,8 +18,8 @@ class ProgramAreaData:
 
 
     def update_from_json_file():
-        print('Updating ProgramArea from ProgramArea_export.json')
-        f = open('data/migrations/ProgramArea_export.json')
+        print('Updating ProgramArea from program_area_export.json')
+        f = open('data/ProgramArea_export.json')
         data = json.load(f)
         for record in data:
             ProgramArea.objects.update_or_create(**record)

@@ -5,6 +5,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
+    print("manage 1")
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project.settings')
     try:
         from django.core.management import execute_from_command_line
@@ -14,6 +15,7 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    print("manage 3")
     execute_from_command_line(sys.argv)
 
 
