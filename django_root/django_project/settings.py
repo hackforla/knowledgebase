@@ -39,7 +39,6 @@ SOCIALACCOUNT_PROVIDERS = {
     },
  }
 ACCOUNT_EMAIL_VERIFICATION='none'
-print(SOCIALACCOUNT_PROVIDERS)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
