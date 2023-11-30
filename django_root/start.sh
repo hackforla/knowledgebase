@@ -15,35 +15,35 @@ fi
 echo Port is $port
 echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
 
-echo .
+echo
 echo --- Executing python manage.py makemigrations ---
-echo .
+echo
 python manage.py makemigrations django_kb_app
 makemigration_success=$?
 
-echo .
+echo
 echo --- Executing python manage.py migrate ---
-echo .
+echo
 python manage.py migrate
 migrate_success=$?
 
-echo .
+echo
 echo --- Executing python manage.py populatedata ---
-echo .
+echo
 python manage.py populatedata
 populatedata_success=$?
 
 echo Executing python manage.py shell to check if user exists
-python manage.py shell -c "from django_kb_app.models import User; print(User.objects.filter(username='$DJANGO_ADMIN').exists())"
+python manage.py shell -c "from django_kb_app.models import User; exists = (User.objects.filter(username='$DJANGO_SUPERUSER').exists()); sys.exit(0 if exists else 1)"
 superuser_exists=$?
 
-echo .
-echo .
-echo .
+echo
+echo
+echo
 if [ $superuser_exists -eq 1 ]; then
-  echo .
+  echo
   echo --- Executing python manage.py createsuperuser ---
-  echo .
+  echo 
   python manage.py createsuperuser --username $DJANGO_SUPERUSER --email $DJANGO_SUPERUSER_EMAIL --no-input
 else
   echo --- INFO: Skipping python manage.py createsuperuser - super user $DJANGO_SUPERUSER already exists.
@@ -74,5 +74,6 @@ fi
 if [ $success -eq 1 ]; then
   read -p "Press [Ctrl-c] to abort, [Enter] to run server with errors..."
 fi
-
+echo
+echo
 python manage.py runserver 0.0.0.0:$port

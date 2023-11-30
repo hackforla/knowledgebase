@@ -126,7 +126,6 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databasescr
-DJANGO_SUPERUSER_PASSWORD = 'admin'
 AUTH_USER_MODEL = "django_kb_app.User"
 
 DATABASES = {

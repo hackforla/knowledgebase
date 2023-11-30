@@ -21,6 +21,10 @@
     background-color: buttonface;
     margin: 0em;
 }
+/* Button-border is used in Django html to make template appearance
+   which is not enclosed by %element% more similar to the html code 
+   that is within %element%,
+*/
 .button-border {
     text-decoration: none;
     border-radius: 2px;
