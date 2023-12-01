@@ -13,8 +13,10 @@ from .models import (
     ProgramArea,
     Technology,
     Tool,
+    User,
 )
 
+admin.site.register(User)
 admin.site.register(Gdoc, GdocAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(GdocAuthor)
