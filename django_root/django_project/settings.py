@@ -25,7 +25,6 @@ COGNITO_AWS_REGION = os.environ.get('COGNITO_AWS_REGION', default="")
 COGNITO_USER_POOL_NAME = os.environ.get('COGNITO_USER_POOL_NAME', default="")
 COGNITO_CLIENT_ID = os.environ.get('COGNITO_CLIENT_ID', default="")
 COGNITO_CLIENT_SECRET = os.environ.get('COGNITO_CLIENT_SECRET', default="")
-SOCIALACCOUNT_ADAPTER = 'django_kb_app.custom_adapter.CustomSocialAccountAdapter'
 SOCIALACCOUNT_STORE_TOKENS=True
 SOCIALACCOUNT_PROVIDERS = {
     'amazon_cognito': {
@@ -127,7 +126,30 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databasescr
 AUTH_USER_MODEL = "django_kb_app.User"
+LOGIN_REDIRECT_URL="/admin/"
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'filters': ['require_debug_true'],
+        },
+    },
+    'loggers': {
+        'mylogger': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': True,
+        },
+    },
+}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

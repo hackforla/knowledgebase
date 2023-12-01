@@ -96,7 +96,7 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     email = models.EmailField("Email address", blank=True)  # allow non-unique emails
     is_staff = models.BooleanField(
         "staff status",
-        default=False,
+        default=True,
         help_text="Designates whether the user can log into this admin site.",
     )
 
