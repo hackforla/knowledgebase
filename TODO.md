@@ -59,6 +59,8 @@ Tasks
     - [ ] Create scripts to populate non-people depot tabes
 - [ ] Write up strategy to make PD integration configurable, even after application implemented
 - [ ] Rename gdoc to asset group
+- [ ] Remove program area
+- [ ] Add organization and user organizat
 - [ ] Add BOP topic area (one to many) table and field 
 - [ ] Add primary technology as a one to many
 - [ ] Add Asset Type (one to many) table and field (google spreadsheet, HTML, PDF, etc)

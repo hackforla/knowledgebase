@@ -27,6 +27,8 @@ class PopulateData:
             'X-API-Signature': signature,
         }
 
+
+
     def update_users():
         headers = PopulateData.prepare_headers()
         # Make the signed request
@@ -58,3 +60,5 @@ class Command(BaseCommand):
 
     def handle(self, *__args__, **__options__):
         PopulateData.update_all_data()
+        
+
