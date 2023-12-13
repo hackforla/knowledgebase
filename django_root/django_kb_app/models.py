@@ -126,6 +126,11 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
 
     def __str__(self):
         return f"{self.email}"
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+        DataUtil.create_peopledepot_user(username=self.username, email=self.email, first_name=self.first_name, last_name=self.last_name)
+
 
 
 class Gdoc(AbstractBaseModelUuid):
@@ -274,3 +279,5 @@ class Tool(AbstractBaseModelUuid):
 
     def __str__(self):
         return self.name
+
+from data.data_utils import DataUtil

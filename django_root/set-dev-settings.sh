@@ -10,3 +10,6 @@ export DATABASE_PORT=5433
 export DJANGO_SUPERUSER=kbadmin
 export DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER@fake.com
 export DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER
+export PEOPLE_DEPOT_URL="http://localhost:8000"
+export PEOPLE_DEPOT_API_SECRET=people-depot-api-secret
+export PEOPLE_DEPOT_API_KEY=people-depot-api-key
