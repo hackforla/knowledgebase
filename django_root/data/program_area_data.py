@@ -9,12 +9,12 @@ PEOPLE_DEPOT_URL=os.environ.get('PEOPLE_DEPOT_URL', default='')
 
 class ProgramAreaData:
 
-    def update():
-        from django_kb_app.models import ProgramArea
+    def update_from_source():
         if (PEOPLE_DEPOT_URL):
             ProgramAreaData.update_from_pd()
         else:
             ProgramAreaData.update_from_json_file()
+    
 
 
     def update_from_json_file():
@@ -39,6 +39,7 @@ class ProgramAreaData:
         data = json.loads(data)
         print(f'data: {data}')
         for record in data:
+            print(f'record: {record}')
             ProgramArea.objects.update_or_create(**record)
         print(f'Added {len(data)} program area records')
 

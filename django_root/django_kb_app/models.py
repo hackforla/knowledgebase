@@ -129,7 +129,7 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Call the "real" save() method.
-        DataUtil.create_peopledepot_user(username=self.username, email=self.email, first_name=self.first_name, last_name=self.last_name)
+        UserData.create_peopledepot_user(username=self.username, email=self.email, first_name=self.first_name, last_name=self.last_name)
 
 
 
@@ -280,4 +280,5 @@ class Tool(AbstractBaseModelUuid):
     def __str__(self):
         return self.name
 
-from data.data_utils import DataUtil
+# Put import at end to avoid circular import
+from data.user_data import UserData
