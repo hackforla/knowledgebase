@@ -18,7 +18,7 @@ echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
 echo
 echo --- Executing python manage.py makemigrations ---
 echo
-python manage.py makemigrations django_kb_app
+python manage.py makemigrations kb
 makemigration_success=$?
 
 echo
@@ -34,7 +34,7 @@ python manage.py populatedata
 populatedata_success=$?
 
 echo Executing python manage.py shell to check if user exists
-python manage.py shell -c "from django_kb_app.models import User; exists = (User.objects.filter(username='$DJANGO_SUPERUSER').exists()); sys.exit(0 if exists else 1)"
+python manage.py shell -c "from kb.models import User; exists = (User.objects.filter(username='$DJANGO_SUPERUSER').exists()); sys.exit(0 if exists else 1)"
 superuser_exists=$?
 
 echo

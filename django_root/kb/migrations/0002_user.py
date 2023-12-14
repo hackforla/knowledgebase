@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("auth", "0012_alter_user_first_name_max_length"),
-        ("django_kb_app", "0001_initial"),
+        ("kb", "0001_initial"),
     ]
     run_before = [
         ("account","0001_initial")

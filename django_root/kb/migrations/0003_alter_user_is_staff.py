@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("django_kb_app", "0002_user"),
+        ("kb", "0002_user"),
     ]
 
     operations = [

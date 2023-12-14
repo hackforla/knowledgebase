@@ -1,4 +1,4 @@
-"""django_project URL Configuration
+"""core URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -18,12 +18,12 @@ from allauth.socialaccount.models import SocialAccount
 from django.shortcuts import render
 from django.urls import path, re_path, include
 from django.core.handlers.wsgi import WSGIRequest
-from django_project.non_data_views import token_view, social_signup_view
+from core.non_data_views import token_view, social_signup_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('kb/socialsignup/', social_signup_view),
     path('kb/token/', token_view),
-    re_path(r'^', include('django_kb_app.urls')),
+    re_path(r'^', include('kb.urls')),
 ]

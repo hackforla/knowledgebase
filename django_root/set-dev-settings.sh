@@ -4,7 +4,7 @@ if [ "$sourced" != "true" ]; then
     echo "Error, script not sourced.  Please run 'source ./set-dev-settings.sh'"
     exit 1
 fi
-# export DJANGO_SETTINGS_MODULE=django_project.settings
+# export DJANGO_SETTINGS_MODULE=core.settings
 export DATABASE_HOST=localhost
 export DATABASE_PORT=5433
 export DJANGO_SUPERUSER=kbadmin

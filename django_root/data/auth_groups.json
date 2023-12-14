@@ -1,16 +1,30 @@
-[  
-{
+[
+  {
     "model": "auth.group",
     "pk": 1,
     "fields": {
-      "name": "kb.maintainer"
+      "name": "kb.admin"
     }
   },
   {
     "model": "auth.group",
     "pk": 2,
     "fields": {
-      "name": "kb.viewer",
+      "name": "kb.approver"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "kb.maintainer"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 4,
+    "fields": {
+      "name": "kb.viewer"
     }
   }
 ]

@@ -193,22 +193,22 @@ class Migration(migrations.Migration):
                     "phase",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="django_kb_app.phase",
+                        to="kb.phase",
                     ),
                 ),
                 (
                     "practiceAreas",
-                    models.ManyToManyField(blank=True, to="django_kb_app.practicearea"),
+                    models.ManyToManyField(blank=True, to="kb.practicearea"),
                 ),
                 (
                     "programAreas",
-                    models.ManyToManyField(blank=True, to="django_kb_app.programarea"),
+                    models.ManyToManyField(blank=True, to="kb.programarea"),
                 ),
                 (
                     "technologies",
-                    models.ManyToManyField(blank=True, to="django_kb_app.technology"),
+                    models.ManyToManyField(blank=True, to="kb.technology"),
                 ),
-                ("tools", models.ManyToManyField(blank=True, to="django_kb_app.tool")),
+                ("tools", models.ManyToManyField(blank=True, to="kb.tool")),
             ],
             options={
                 "unique_together": {("slug", "phase")},
@@ -240,14 +240,14 @@ class Migration(migrations.Migration):
                     "author",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="django_kb_app.author",
+                        to="kb.author",
                     ),
                 ),
                 (
                     "gdoc",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="django_kb_app.gdoc",
+                        to="kb.gdoc",
                     ),
                 ),
             ],
