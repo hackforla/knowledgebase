@@ -47,7 +47,7 @@ class UserData:
             )
         
 # put imports here to avoid circular imports
-from kb.models import User
+from pd_data.models import User
 from data.data_utils import DataUtil
 
 

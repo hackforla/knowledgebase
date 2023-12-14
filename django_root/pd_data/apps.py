@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class kb_appConfig(AppConfig):
+class pd_appConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "kb"
+    name = "pd_data"
     

@@ -1,38 +1,38 @@
 import json
-from kb.models import Gdoc, GdocAuthor
+from kb.models import AssetGroup, AssetGroupAuthor
 from django.http import JsonResponse
 from django.core import serializers
 
 
-def get_gdoc_json(self, google_id):
-    # todo: do the below in a single query by including authors in gdoc object
-    gdocResultSet = Gdoc.objects.filter(google_id=google_id)
-    if gdocResultSet.__len__() == 1:
-        gdocValues = list(gdocResultSet.values())
+def get_assetGroup_json(self, google_id):
+    # todo: do the below in a single query by including authors in assetGroup object
+    assetGroupResultSet = AssetGroup.objects.filter(google_id=google_id)
+    if assetGroupResultSet.__len__() == 1:
+        assetGroupValues = list(assetGroupResultSet.values())
 
-        gdocAuthorValues = list(
-            gdocResultSet[0]
-            .gdocauthor_set.all()
+        assetGroupAuthorValues = list(
+            assetGroupResultSet[0]
+            .assetGroupauthor_set.all()
             .values("author__name", "author__email")
         )
-        data_json = gdocValues[0]
-        data_json.update({"phase_name": gdocResultSet[0].phase.name})
-        data_json.update({"authors": gdocAuthorValues})
+        data_json = assetGroupValues[0]
+        data_json.update({"phase_name": assetGroupResultSet[0].phase.name})
+        data_json.update({"authors": assetGroupAuthorValues})
     else:
         data_json = {}
     return JsonResponse(data_json, safe=False)
 
 
-def list_gdoc_json(self):
-    data = Gdoc.objects.values()
+def list_assetGroup_json(self):
+    data = AssetGroup.objects.values()
     data_json = json.dumps(list(data))
     return JsonResponse(data_json, safe=False)
 
 
-def generate_gdoc_markdown(self):
+def generate_assetGroup_markdown(self):
     from subprocess import Popen, PIPE
 
-    command = ["ts-node", "knowledgebase/gdocs2md/scripts/generate-markdown-files.js"]
+    command = ["ts-node", "knowledgebase/assetGroups2md/scripts/generate-markdown-files.js"]
     result = {}
     try:
         process = Popen(command, stdout=PIPE, stderr=PIPE)

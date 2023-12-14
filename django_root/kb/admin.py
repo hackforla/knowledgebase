@@ -3,25 +3,15 @@ from django.core.exceptions import FieldDoesNotExist
 
 # Register your models here.
 from .models import (
-    Gdoc,
+    AssetGroup,
     Author,
-    GdocAuthor,
-    GdocAdmin,
+    AssetGroupAuthor,
+    AssetGroupAdmin,
     AuthorAdmin,
     Phase,
-    PracticeArea,
-    ProgramArea,
-    Technology,
-    Tool,
-    User,
 )
 
-admin.site.register(User)
-admin.site.register(Gdoc, GdocAdmin)
+admin.site.register(AssetGroup, AssetGroupAdmin)
 admin.site.register(Author, AuthorAdmin)
-admin.site.register(GdocAuthor)
+admin.site.register(AssetGroupAuthor)
 admin.site.register(Phase)
-admin.site.register(PracticeArea)
-admin.site.register(ProgramArea)
-admin.site.register(Tool)
-admin.site.register(Technology)

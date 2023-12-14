@@ -9,6 +9,7 @@ Tasks
   - [ ] Mark complexity and size for all
   - [ ] Move bugs I am working to in progress
   - [ ] Move ones to ice box that are dependent
+  - [ ] Review below for bugs
   - [ ] Dir structure
     - [ ] Move source code up a level
     - [ ] Clone into gdoc repo
@@ -20,6 +21,7 @@ Tasks
   - [ ] Create new app pd_data
   - [ ] Look for all files with practice_area
   - [ ] Move code for practice_area, technologies to pd_data
+- [ ] Populate practice areas, go one at a time
 - [ ] Populate auth app
   - [ ] Populate groups
   - [ ] kb.admin: add all view groups and all non-view privileges for kb

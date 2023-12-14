@@ -3,8 +3,9 @@ class AuthData:
 
 
     def load_all():
-        AuthData.load_permissions()
-        AuthData.load_groups()
+        pass
+        # AuthData.load_permissions()
+        # AuthData.load_groups()
         
         
     def load_permissions():
@@ -13,5 +14,6 @@ class AuthData:
 
         
     def load_groups():
+        pass
         print("Loading auth groups")
         call_command('loaddata', 'data/auth_groups.json')

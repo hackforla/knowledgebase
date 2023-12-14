@@ -1,11 +1,11 @@
 # from rest_framework import serializers 
-# from kb.models import Gdoc
+# from kb.models import AssetGroup
  
  
-# class GdocSerializer(serializers.ModelSerializer):
+# class AssetGroupSerializer(serializers.ModelSerializer):
  
 #     class Meta:
-#         model = Gdoc
+#         model = AssetGroup
 #         fields = ('id',
 #                   'title',
 #                   'description',
