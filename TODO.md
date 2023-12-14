@@ -4,7 +4,11 @@ Tasks
 
 
 # BOP MVP
-- [ ] Misc
+- [ ] Bugs
+  - [ ] Spell out the easy ones in detail
+  - [ ] Mark complexity and size for all
+  - [ ] Move bugs I am working to in progress
+  - [ ] Move ones to ice box that are dependent
   - [ ] Dir structure
     - [ ] Move source code up a level
     - [ ] Clone into gdoc repo
@@ -12,8 +16,19 @@ Tasks
     - [ ] Rename django_kb_app to knowledgebase
     - [ ] Remove core
     - [ ] Rename django_project to core
+- [ ] Divide into two groups: Knowledgebase, PeopleDepot
+  - [ ] Create new app pd_data
+  - [ ] Look for all files with practice_area
+  - [ ] Move code for practice_area, technologies to pd_data
+- [ ] Populate auth app
+  - [ ] Populate groups
+  - [ ] kb.admin: add all view groups and all non-view privileges for kb
+  - [ ] kb.maintainer: add all privileges for kb, view privileges for pd
+  - [ ] kb.approver: same as maintainer
+  - [ ] kb.view: all view privileges for kb and pd
+- [ ] Populate user groups from people depot
+- [ ] Misc
   - [ ] Move token_view to separate file (views.py?)
-  - [ ] Change port to use DJANGO_PORT in start-dev.sh and start-docker.sh rather than passing
   - [ ] Replace export with read from .env file
  
 - [ ] Dev documentation
