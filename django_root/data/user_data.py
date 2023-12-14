@@ -47,7 +47,7 @@ class UserData:
             )
         
 # put imports here to avoid circular imports
-from django_kb_app.models import User
+from kb.models import User
 from data.data_utils import DataUtil
 
 

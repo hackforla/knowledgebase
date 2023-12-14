@@ -18,7 +18,7 @@ class ProgramAreaData:
 
 
     def update_from_json_file():
-        from django_kb_app.models import ProgramArea
+        from kb.models import ProgramArea
         print('Updating ProgramArea from program_area_export.json')
         f = open('data/program_area_export.json')
         data = json.load(f)
@@ -43,4 +43,4 @@ class ProgramAreaData:
             ProgramArea.objects.update_or_create(**record)
         print(f'Added {len(data)} program area records')
 
-from django_kb_app.models import ProgramArea
+from kb.models import ProgramArea

@@ -1,5 +1,5 @@
 from django.urls import re_path 
-from django_kb_app.json_data import get_gdoc_json, list_gdoc_json, generate_gdoc_markdown
+from kb.json_data import get_gdoc_json, list_gdoc_json, generate_gdoc_markdown
 
 urlpatterns = [ 
     re_path(r'^gdocs/generate$', generate_gdoc_markdown),
