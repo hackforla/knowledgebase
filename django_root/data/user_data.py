@@ -52,8 +52,13 @@ class UserData:
                 username=user_data['username'],
             )
             user = result[0]
+            current_ids = [user.id for user in user.groups.all()]
             for id in group_ids:
-                user.groups.add(id)
+                if not id in current_ids:
+                    user.groups.add(id)
+            for id in current_ids:
+                if not id in group_ids:
+                    user.groups.remove(id)
                         
 # put imports here to avoid circular imports
 from pd_data.models import User
