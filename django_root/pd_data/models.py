@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin, Permission, Group
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
@@ -113,7 +113,25 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     # conduct = models.BooleanField()  # not in ERD. Maybe we should remove this
 
     objects = UserManager()
-
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name="groups",
+        blank=True,
+        help_text=
+            "The groups this user belongs to. A user will get all permissions "
+            "granted to each of their groups."
+        ,
+        related_name="user_set",
+        related_query_name="user",
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        verbose_name="user permissions",
+        blank=True,
+        help_text="Specific permissions for this user.",
+        related_name="user_set",
+        related_query_name="user",
+    )
     USERNAME_FIELD = "username"
     EMAIL_FIELD = "preferred_email"
     REQUIRED_FIELDS = ["email"]  # used only on createsuperuser
@@ -127,7 +145,8 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Call the "real" save() method.
-        UserData.create_peopledepot_user(username=self.username, email=self.email, first_name=self.first_name, last_name=self.last_name)
+        if (self.password==""):
+            UserData.create_peopledepot_user(username=self.username, email=self.email, first_name=self.first_name, last_name=self.last_name)
 
 
 

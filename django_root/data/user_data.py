@@ -28,26 +28,36 @@ class UserData:
         requests.post(url, data=data, headers=headers)
  
     def update_users_from_pd():
-        print("r debug 1")
         headers = DataUtil.prepare_headers()
         # Make the signed request
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers'
         response = requests.get(url, headers=headers)
+        for r in json.loads(response.json()['groups']):
+            id = r['pk']
+            Group.objects.update_or_create(
+                id = id,
+                name = r['fields']['name'],
+            )
+
         for r in json.loads(response.json()['users']):
-            print("r debug 2")
             uuid = r['pk']
             user_data = r['fields']
+            group_ids = user_data['groups']
 
-            User.objects.update_or_create(
+            result = User.objects.update_or_create(
                 uuid=uuid,
                 email=user_data['email'], 
                 first_name=user_data['first_name'],
                 last_name=user_data['last_name'],
-                username=user_data['username']
+                username=user_data['username'],
             )
-        
+            user = result[0]
+            for id in group_ids:
+                user.groups.add(id)
+                        
 # put imports here to avoid circular imports
 from pd_data.models import User
+from django.contrib.auth.models import Group
 from data.data_utils import DataUtil
 
 

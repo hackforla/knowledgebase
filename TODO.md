@@ -4,8 +4,10 @@ Tasks
 
 
 # BOP MVP
+- [ ] Update data model
 - [ ] Bugs
   - [ ] Spell out the easy ones in detail
+    - [ ] Create script that makes it easy for creating table and API
   - [ ] Mark complexity and size for all
   - [ ] Move bugs I am working to in progress
   - [ ] Move ones to ice box that are dependent

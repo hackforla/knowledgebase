@@ -25,7 +25,6 @@ class DataUtil:
         message = f"{timestamp}{PEOPLE_DEPOT_API_KEY}"
         
         signature = hmac.new(PEOPLE_DEPOT_API_SECRET.encode('utf-8'), message.encode('utf-8'), hashlib.sha256).hexdigest()
-        print("key", PEOPLE_DEPOT_API_KEY)
         return {
             'X-API-Key': PEOPLE_DEPOT_API_KEY,
             'X-API-Timestamp': timestamp,
