@@ -1,5 +1,11 @@
 from django.contrib import admin
 from django.core.exceptions import FieldDoesNotExist
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
+from django.contrib.auth.forms import UserChangeForm as DefaultUserChangeForm
+from django.contrib.auth.forms import UserCreationForm as DefaultUserCreationForm
+from django.contrib.auth.forms import UsernameField
+
 
 # Register your models here.
 from .models import (
@@ -11,15 +17,53 @@ from .models import (
 admin.site.register(PracticeArea)
 admin.site.register(Tool)
 
+class UserCreationForm(DefaultUserCreationForm):
+    class Meta(DefaultUserCreationForm.Meta):
+        model = User
+
+
+class UserChangeForm(DefaultUserChangeForm):
+    class Meta(DefaultUserCreationForm.Meta):
+        model = User
+        fields = "__all__"
+        field_classes = {"username": UsernameField}
+
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    add_form_template = "admin/auth/user/add_form.html"
-    change_user_password_template = None
+class UserAdmin(DefaultUserAdmin):
     fieldsets = (
-        (None, {"fields": ("username", "password")}),
-        (("Personal info"), {"fields": ("first_name", "last_name", "email")}),
         (
-            ("Permissions"),
+            None,
+            {
+                "fields": (
+                    "username",
+                    "email",
+                    "password",
+                )
+            },
+        ),
+        (
+            "Profile",
+            {
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    # "gmail",
+                    # "preferred_email",
+                    # "current_job_title",
+                    # "target_job_title",
+                    # "current_skills",
+                    # "target_skills",
+                    "linkedin_account",
+                    "github_handle",
+                    "slack_id",
+                    # "phone",
+                    # "texting_ok",
+                    # "time_zone",
+                )
+            },
+        ),
+        (
+            "Permissions",
             {
                 "fields": (
                     "is_active",
@@ -27,47 +71,36 @@ class UserAdmin(admin.ModelAdmin):
                     "is_superuser",
                     "groups",
                     "user_permissions",
-                ),
+                )
             },
         ),
-        # (("Important dates"), {"fields": ("last_login")}),
+        (
+            "Important_dates",
+            {
+                "fields": (
+                    "created_at",
+                    "updated_at",
+                )
+            },
+        ),
     )
+    readonly_fields = ("username", "email", "created_at", "updated_at")
     add_fieldsets = (
         (
             None,
             {
                 "classes": ("wide",),
-                "fields": ("username", "password1", "password2"),
+                "fields": (
+                    "username",
+                    "email",
+                    "password",
+                    "password2",
+                ),
             },
         ),
     )
-    list_display = ("username", "email", "first_name", "last_name", "is_staff")
-    list_filter = ("is_staff", "is_superuser", "is_active", "groups")
-    search_fields = ("username", "first_name", "last_name", "email")
-    ordering = ("username",)
-    filter_horizontal = (
-        "groups",
-        "user_permissions",
-    )
-
-    def get_fieldsets(self, request, obj=None):
-        if not obj:
-            return self.add_fieldsets
-        return super().get_fieldsets(request, obj)
-
-    def get_form(self, request, obj=None, **kwargs):
-        """
-        Use special form during user creation
-        """
-        defaults = {}
-        if obj is None:
-            defaults["form"] = self.add_form
-        defaults.update(kwargs)
-        return super().get_form(request, obj, **defaults)
-
-    def lookup_allowed(self, lookup, value):
-        # Don't allow lookups involving passwords.
-        return not lookup.startswith("password") and super().lookup_allowed(
-            lookup, value
-        )
+    form = UserChangeForm
+    add_form = UserCreationForm
+    list_display = ("username", "is_staff", "is_active")
+    list_filter = ("username", "email")
 

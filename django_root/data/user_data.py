@@ -14,11 +14,12 @@ PEOPLE_DEPOT_URL = os.environ.get('PEOPLE_DEPOT_URL')
 
 class UserData:
 
-    def create_peopledepot_user(username=None, email=None, first_name=None, last_name=None):
+    def create_peopledepot_user(uuid, username, email, first_name=None, last_name=None):
         headers = DataUtil.prepare_headers()
         # Make the signed request
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/createuser'
         data = {
+            'uuid': uuid,
             'username': username,
             'email': email,
             'first_name': first_name,

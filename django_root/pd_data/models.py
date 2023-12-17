@@ -146,7 +146,7 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Call the "real" save() method.
         if (self.password==""):
-            UserData.create_peopledepot_user(username=self.username, email=self.email, first_name=self.first_name, last_name=self.last_name)
+            UserData.create_peopledepot_user(uuid=self.uuid, username=self.username, email=self.email, first_name=self.first_name, last_name=self.last_name)
 
 
 
