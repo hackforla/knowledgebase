@@ -36,7 +36,8 @@ services:
              - sh 
              - -c
              - |
-               cd /usr/src/django_root
+               cd /usr/src/django_root 
+               ls *.sh
                find . -name "*.sh" -exec chmod +x {} \;
                ./start-docker.sh
     ports:
