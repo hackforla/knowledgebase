@@ -46,7 +46,7 @@ class Gdoc(AbstractBaseModel):
             "google_id": self.google_id,
             "title": self.title,
             "description": self.description,
-            "slug": self.slug,
+            "slug": self.slug, 
             "published": self.published,
             "practiceAreas": [pa.name for pa in self.practiceAreas.all()],
             "programAreas": [pa.name for pa in self.programAreas.all()],
@@ -56,8 +56,6 @@ class Gdoc(AbstractBaseModel):
 
     def __str__(self):
         return self.title + "(" + self.slug + ") " + self.phase.name
-
-
 
 
 class Author(AbstractBaseModel):
@@ -115,6 +113,16 @@ class PracticeArea(AbstractBaseModel):
         max_length=70,
         blank=False,
         unique=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+class TopicArea(AbstractBaseModel):
+    name = models.CharField(
+        max_length=70,
+        blank=False,
+        unique=True
     )
 
     def __str__(self):

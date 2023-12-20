@@ -3,7 +3,6 @@ from django_kb_app.models import Gdoc, GdocAuthor
 from django.http import JsonResponse
 from django.core import serializers
 
-
 def get_gdoc_json(self, google_id):
     # todo: do the below in a single query by including authors in gdoc object
     gdocResultSet = Gdoc.objects.filter(google_id=google_id)

@@ -13,6 +13,7 @@ from .models import (
     ProgramArea,
     Technology,
     Tool,
+    TopicArea
 )
 
 admin.site.register(Gdoc, GdocAdmin)
@@ -23,3 +24,4 @@ admin.site.register(PracticeArea)
 admin.site.register(ProgramArea)
 admin.site.register(Tool)
 admin.site.register(Technology)
+admin.site.register(TopicArea)

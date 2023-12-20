@@ -73,6 +73,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # include the providers you want to enable:
     'allauth.socialaccount.providers.amazon_cognito',
+
+    # 3rd party
+    "rest_framework",
+    "drf_spectacular",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -97,7 +101,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     # people depot config
     'django.contrib.auth.middleware.RemoteUserMiddleware',
-        # Add the account middleware:
+    # Add the account middleware:
     # "allauth.account.middleware.AccountMiddleware",
 ]
 
