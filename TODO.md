@@ -1,7 +1,38 @@
 Tasks
 
 +++ Required for BOP MVP
+
+
 # BOP MVP
+- [ ] Bugs
+  - [ ] Spell out the easy ones in detail
+  - [ ] Mark complexity and size for all
+  - [ ] Move bugs I am working to in progress
+  - [ ] Move ones to ice box that are dependent
+  - [ ] Dir structure
+    - [ ] Move source code up a level
+    - [ ] Clone into gdoc repo
+    - [ ] Remove gdoc related code from kb
+    - [ ] Rename django_kb_app to knowledgebase
+    - [ ] Remove core
+    - [ ] Rename django_project to core
+- [ ] Divide into two groups: Knowledgebase, PeopleDepot
+  - [ ] Create new app pd_data
+  - [ ] Look for all files with practice_area
+  - [ ] Move code for practice_area, technologies to pd_data
+- [ ] Populate auth app
+  - [ ] Populate groups
+  - [ ] kb.admin: add all view groups and all non-view privileges for kb
+  - [ ] kb.maintainer: add all privileges for kb, view privileges for pd
+  - [ ] kb.approver: same as maintainer
+  - [ ] kb.view: all view privileges for kb and pd
+- [ ] Populate user groups from people depot
+- [ ] Misc
+  - [ ] Move token_view to separate file (views.py?)
+  - [ ] Replace export with read from .env file
+ 
+- [ ] Dev documentation
+  - [ ] Resources page, include link to spreadsheet
 - [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/Technical:-Design-for-Django-Amin#populate-data-from-people-depot
   - [ ] Non-sensitve People Depot Data w/script
         - [ ] Copy seed data scripts from KB/data/migrations
@@ -43,6 +74,8 @@ Tasks
     - [ ] Create scripts to populate non-people depot tabes
 - [ ] Write up strategy to make PD integration configurable, even after application implemented
 - [ ] Rename gdoc to asset group
+- [ ] Remove program area
+- [ ] Add organization and user organizat
 - [ ] Add BOP topic area (one to many) table and field 
 - [ ] Add primary technology as a one to many
 - [ ] Add Asset Type (one to many) table and field (google spreadsheet, HTML, PDF, etc)
@@ -54,7 +87,7 @@ Tasks
   - See spreadsheet for values
 - [ ] Decide on strategy for syncing PD and KB data and implement - possibly WebHooks or queues.  
   - [ ] Decide on strategy.  Must take into account that KB app could potentially be down
-  - [ ] Implrmrny
+  - [ ] Implement
 - [ ] Create PD user when signing up first time through 
   - [ ] Decide on strategy.  Consider AWS Lambda triggers or queues  
 - [ ] Change documentation from user roles to user groups

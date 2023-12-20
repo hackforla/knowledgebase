@@ -29,3 +29,8 @@ rpds-py==0.13.2
 sqlparse==0.4.3
 uritemplate==4.1.1
 urllib3==2.1.0
+# Steps to upgrade to most recent python package:
+# - unless there is a comment, make sure each line below uses "==" instead of "~="
+# - python -m pur -r requuirements.txt
+
+

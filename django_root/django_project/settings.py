@@ -17,16 +17,18 @@ import dotenv
 dotenv.load_dotenv()
 
 django.utils.encoding.smart_text = smart_str
-DATABASES_HOST = os.environ.get("DATABASES_HOST")
-COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default=None)
-COGNITO_USER_POOL = os.environ.get("COGNITO_USER_POOL", default=None)
-COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default=None)
-COGNITO_CLIENT_ID = os.environ.get("COGNITO_CLIENT_ID", default=None)
-COGNITO_CLIENT_SECRET = os.environ.get("COGNITO_CLIENT_SECRET", default=None)
-print("Debug COGNITO", COGNITO_CLIENT_ID)
+DATABASE_HOST = os.environ.get('DATABASE_HOST')
+DATABASE_PORT = os.environ.get('DATABASE_PORT')
+COGNITO_AWS_REGION = os.environ.get('COGNITO_AWS_REGION', default="")
+# COGNITO_USER_POOL = os.environ.get('COGNITO_USER_POOL', default="")
+COGNITO_AWS_REGION = os.environ.get('COGNITO_AWS_REGION', default="")
+COGNITO_USER_POOL_NAME = os.environ.get('COGNITO_USER_POOL_NAME', default="")
+COGNITO_CLIENT_ID = os.environ.get('COGNITO_CLIENT_ID', default="")
+COGNITO_CLIENT_SECRET = os.environ.get('COGNITO_CLIENT_SECRET', default="")
+SOCIALACCOUNT_STORE_TOKENS=True
 SOCIALACCOUNT_PROVIDERS = {
     'amazon_cognito': {
-        'DOMAIN': 'https://peopledepot.auth.us-east-2.amazoncognito.com',
+        'DOMAIN': f'https://{COGNITO_USER_POOL_NAME}.auth.{COGNITO_AWS_REGION}.amazoncognito.com',
         'APP': {
             'client_id': f'{COGNITO_CLIENT_ID}',
             'client_secret': f'{COGNITO_CLIENT_SECRET}',
@@ -35,11 +37,9 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     },
  }
-ACCOUNT_EMAIL_VERIFICATION="none"
-print(SOCIALACCOUNT_PROVIDERS)
+ACCOUNT_EMAIL_VERIFICATION='none'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_kb_app.apps.DjangoKbAppConfig',
+    'django_kb_app.apps.Djangodjango_kb_appConfig',
     'corsheaders',
     'data',
     'allauth',
@@ -128,16 +128,39 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databasescr
-DJANGO_SUPERUSER_PASSWORD = 'admin'
+AUTH_USER_MODEL = "django_kb_app.User"
+LOGIN_REDIRECT_URL="/admin/"
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'filters': ['require_debug_true'],
+        },
+    },
+    'loggers': {
+        'mylogger': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': True,
+        },
+    },
+}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': DATABASES_HOST,
-        'PORT': '5432',
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
     }
 }
 

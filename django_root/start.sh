@@ -1,6 +1,6 @@
 #!/bin/bash
 # Called by start-dev.sh and start-docker.sh, which sets
-#    - DATABASES_HOST
+#    - DATABASE_HOST
 #    - DJANGO_SUPERUSER
 #    - DJANGO_SUPERUSER_PASSWORD
 #    - DJANGO_SUPERUSER_EMAIL
@@ -14,17 +14,66 @@ else
 fi
 echo Port is $port
 echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
+
+echo
+echo --- Executing python manage.py makemigrations ---
+echo
 python manage.py makemigrations django_kb_app
+makemigration_success=$?
+
+echo
+echo --- Executing python manage.py migrate ---
+echo
 python manage.py migrate
-python manage.py createsuperuser --username $DJANGO_SUPERUSER --email $DJANGO_SUPERUSER_EMAIL --no-input
-if [[ $DJANGO_SETTINGS_MODULE == *"dev_settings"* ]]; then
-    echo .
-    echo "******************************************************************************"
-    echo "*                                                                            *"
-    echo "*   TO MODIFY DATA, USE THE ADMIN INTERFACE AT http://localhost:8000/admin   *"
-    echo "*   Local username: admin Password: admin                                    *"
-    echo "*                                                                            *"
-    echo "******************************************************************************"
-    echo .
+migrate_success=$?
+
+echo
+echo --- Executing python manage.py populatedata ---
+echo
+python manage.py populatedata
+populatedata_success=$?
+
+echo Executing python manage.py shell to check if user exists
+python manage.py shell -c "from django_kb_app.models import User; exists = (User.objects.filter(username='$DJANGO_SUPERUSER').exists()); sys.exit(0 if exists else 1)"
+superuser_exists=$?
+
+echo
+echo
+echo
+if [ $superuser_exists -eq 1 ]; then
+  echo
+  echo --- Executing python manage.py createsuperuser ---
+  echo 
+  python manage.py createsuperuser --username $DJANGO_SUPERUSER --email $DJANGO_SUPERUSER_EMAIL --no-input
+else
+  echo --- INFO: Skipping python manage.py createsuperuser - super user $DJANGO_SUPERUSER already exists.
 fi
+createsuperuser_success=$?
+
+success=0
+if [ $makemigration_success -eq 1 ]; then
+  success=1
+  echo --- ERROR: python manage.py makemigrations failed.  See errors above.
+fi
+
+if [ $migrate_success -eq 1 ]; then
+  success=1
+  echo --- ERROR: python manage.py migrate failed.  See errors above.
+fi
+
+if [ $populatedata_success -eq 1 ]; then
+  success=1
+  echo --- ERROR: python manage.py populatedata failed.  See errors above.
+fi
+
+if [ $createsuperuser_success -eq 1 ]; then
+  success=1
+  echo --- ERROR: python manage.py createsuper failed.  See errors above.
+fi
+
+if [ $success -eq 1 ]; then
+  read -p "Press [Ctrl-c] to abort, [Enter] to run server with errors..."
+fi
+echo
+echo
 python manage.py runserver 0.0.0.0:$port

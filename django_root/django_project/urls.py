@@ -14,11 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from allauth.socialaccount.models import SocialAccount
+from django.shortcuts import render
 from django.urls import path, re_path, include
+from django.core.handlers.wsgi import WSGIRequest
+from django_project.non_data_views import token_view, social_signup_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('kb/socialsignup/', social_signup_view),
+    path('kb/token/', token_view),
     re_path(r'^', include('django_kb_app.urls')),
 ]
- 

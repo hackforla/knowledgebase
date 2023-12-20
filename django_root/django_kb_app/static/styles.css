@@ -1,0 +1,43 @@
+.large {
+  font-size: 20px;
+}
+
+.button-link {
+    appearance: auto;
+    font-family: Arial;
+    font-size: 16px;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: buttonface;
+    margin: 0em;
+}
+/* Button-border is used in Django html to make template appearance
+   which is not enclosed by %element% more similar to the html code 
+   that is within %element%,
+*/
+.button-border {
+    text-decoration: none;
+    border-radius: 2px;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
+    padding-block: 1px;
+    padding-inline: 6px;
+    padding: 4px;
+}
+
+.button-link:hover {
+  background-color: #2980b9;
+}

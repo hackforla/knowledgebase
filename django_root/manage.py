@@ -2,7 +2,6 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from django.core.exceptions import FieldDoesNotExist
 
 def main():
     """Run administrative tasks."""
@@ -15,8 +14,12 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    print('sys.argv', sys.argv)
     execute_from_command_line(sys.argv)
 
 
 if __name__ == '__main__':
+    print("manage.py")
     main()
+    
+    
