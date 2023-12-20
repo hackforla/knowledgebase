@@ -162,5 +162,15 @@ class Phase(AbstractBaseModelUuid):
     def __str__(self):
         return self.name
 
+class TopicArea(AbstractBaseModelId):
+    name = models.CharField(
+        max_length=70,
+        blank=False,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.name
+
 
 

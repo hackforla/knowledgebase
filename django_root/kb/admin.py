@@ -9,9 +9,12 @@ from .models import (
     AssetGroupAdmin,
     AuthorAdmin,
     Phase,
+    TopicArea,
 )
 
 admin.site.register(AssetGroup, AssetGroupAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(AssetGroupAuthor)
 admin.site.register(Phase)
+admin.site.register(TopicArea)
+

@@ -19,7 +19,7 @@ echo Starting dev $DATABASE_HOST
 if [ -z "$VIRTUAL_ENV" ]; then
     echo "Activating virtual environment for this script"
     source $VENV_DIR/bin/activate
-    echo "Recommended: run 'source ./activate.sh' from terminal"
+    echo "Recommended: pythorun 'source ./activate.sh' from terminal"
 fi
 
 # Exit if not successfully activated
