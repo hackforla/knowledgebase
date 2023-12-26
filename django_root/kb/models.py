@@ -7,7 +7,12 @@ from django.db import models
 from pd_data.models import User
 
 
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
 
+    def __str__(self):
+        return self.name
 
 class AbstractBaseModel(models.Model):
     """
@@ -93,6 +98,19 @@ class AssetGroup(AbstractBaseModelUuid):
         return self.title + "(" + self.slug + ") " + self.phase.name
 
 
+class AssetGroupAuthor(AbstractBaseModelUuid):
+    assetGroup = models.ForeignKey(AssetGroup, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=20, default="user")
+
+    class Meta:
+        unique_together = (
+            "assetGroup",
+            "user",
+        )
+
+    def __str__(self):
+        return self.assetGroup.__str__() + " / " + self.user.__str__()
 
 class AssetGroupUser(AbstractBaseModelUuid):
     assetGroup = models.ForeignKey(AssetGroup, on_delete=models.CASCADE)
@@ -113,7 +131,10 @@ class AssetGroupUserInline(admin.TabularInline):
     model = AssetGroupUser
     extra = 5
 
-
+class AssetGroupAuthorInline(admin.TabularInline):
+    model = AssetGroupAuthor
+    extra = 5
+    
 class AssetGroupAdmin(admin.ModelAdmin):
     inlines = [AssetGroupUserInline]
     list_display = ("title", "slug", "phase", "published")
