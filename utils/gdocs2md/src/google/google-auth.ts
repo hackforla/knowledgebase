@@ -40,7 +40,7 @@ export const getAuth = async () => {
     ["https://www.googleapis.com/auth/drive"]
   );
   //authenticate request
-  await jwtClient.authorize(function (err: any) {
+  await jwtClient.userize(function (err: any) {
     if (err) {
       console.log(err);
       return;

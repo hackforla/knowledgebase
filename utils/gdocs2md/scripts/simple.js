@@ -17,7 +17,7 @@ function newFunction() {
     ["https://www.googleapis.com/auth/drive"]
   );
   //authenticate request
-  jwtClient.authorize(function (err, tokens) {
+  jwtClient.userize(function (err, tokens) {
     if (err) {
       console.log(err);
       return;

@@ -1,9 +1,11 @@
-# todo: return authors
+# todo: return users
 import uuid
 from django.db import models
 from django.contrib import admin
 
 from django.db import models
+from pd_data.models import User
+
 
 
 
@@ -91,52 +93,37 @@ class AssetGroup(AbstractBaseModelUuid):
         return self.title + "(" + self.slug + ") " + self.phase.name
 
 
-class Author(AbstractBaseModelUuid):
-    name = models.CharField(
-        max_length=70,
-        blank=False,
-        unique=True,
-    )
-    email = models.EmailField(
-        max_length=70,
-        blank=False,
-        unique=True,
-    )
 
-    def __str__(self):
-        return self.name
-
-
-class AssetGroupAuthor(AbstractBaseModelUuid):
+class AssetGroupUser(AbstractBaseModelUuid):
     assetGroup = models.ForeignKey(AssetGroup, on_delete=models.CASCADE)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    role = models.CharField(max_length=20, default="author")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=20, default="user")
 
     class Meta:
         unique_together = (
             "assetGroup",
-            "author",
+            "user",
         )
 
     def __str__(self):
-        return self.assetGroup.__str__() + " / " + self.author.__str__()
+        return self.assetGroup.__str__() + " / " + self.user.__str__()
 
 
-class AssetGroupAuthorInline(admin.TabularInline):
-    model = AssetGroupAuthor
+class AssetGroupUserInline(admin.TabularInline):
+    model = AssetGroupUser
     extra = 5
 
 
 class AssetGroupAdmin(admin.ModelAdmin):
-    inlines = [AssetGroupAuthorInline]
+    inlines = [AssetGroupUserInline]
     list_display = ("title", "slug", "phase", "published")
     list_filter = ["phase", "published"]
     search_fields = ["title", "description"]
     prepopulated_fields = {"slug": ("title",)}
 
 
-class AuthorAdmin(admin.ModelAdmin):
-    inlines = [AssetGroupAuthorInline]
+class UserAdmin(admin.ModelAdmin):
+    inlines = [AssetGroupUserInline]
     list_display = ("name", "email")
     search_fields = ["name", "email"]
 

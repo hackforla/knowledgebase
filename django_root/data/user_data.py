@@ -15,7 +15,7 @@ PEOPLE_DEPOT_URL = os.environ.get('PEOPLE_DEPOT_URL')
 class UserData:
 
     def create_peopledepot_user(uuid, username, email, first_name=None, last_name=None):
-        headers = DataUtil.prepare_headers()
+        headers = HeaderUtil.prepare_headers()
         # Make the signed request
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/createuser'
         data = {
@@ -29,7 +29,7 @@ class UserData:
         requests.post(url, data=data, headers=headers)
  
     def update_users_from_pd():
-        headers = DataUtil.prepare_headers()
+        headers = HeaderUtil.prepare_headers()
         # Make the signed request
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers'
         response = requests.get(url, headers=headers)
@@ -64,7 +64,7 @@ class UserData:
 # put imports here to avoid circular imports
 from pd_data.models import User
 from django.contrib.auth.models import Group
-from data.data_utils import DataUtil
+from data.header import HeaderUtil
 
 
          

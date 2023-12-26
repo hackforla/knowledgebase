@@ -1,4 +1,4 @@
-# todo: return authors
+# todo: return users
 import uuid
 from django.db import models
 

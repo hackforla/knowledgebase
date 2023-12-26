@@ -37,7 +37,7 @@ const getAuth = async () => {
     ["https://www.googleapis.com/auth/drive"]
   );
   //authenticate request
-  await jwtClient.authorize(function (err, tokens) {
+  await jwtClient.userize(function (err, tokens) {
     if (err) {
       console.log(err);
       return;
