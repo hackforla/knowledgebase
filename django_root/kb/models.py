@@ -122,11 +122,6 @@ class AssetGroupAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
 
-class UserAdmin(admin.ModelAdmin):
-    inlines = [AssetGroupUserInline]
-    list_display = ("name", "email")
-    search_fields = ["name", "email"]
-
 
 class PracticeArea(AbstractBaseModelId):
     name = models.CharField(
