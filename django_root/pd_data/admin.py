@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserChangeForm as DefaultUserChangeForm
 from django.contrib.auth.forms import UserCreationForm as DefaultUserCreationForm
 from django.contrib.auth.forms import UsernameField
 
-from django_root.kb.models import AssetGroupAdmin
+# from kb.models import AssetGroupAdmin
 
 
 # Register your models here.
@@ -30,7 +30,8 @@ class UserChangeForm(DefaultUserChangeForm):
         fields = "__all__"
         field_classes = {"username": UsernameField}
 
-@admin.register(User, AssetGroupAdmin)
+# @admin.register(User, AssetGroupAdmin)
+@admin.register(User)
 class UserAdmin(DefaultUserAdmin):
     fieldsets = (
         (
