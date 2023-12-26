@@ -98,20 +98,6 @@ class AssetGroup(AbstractBaseModelUuid):
         return self.title + "(" + self.slug + ") " + self.phase.name
 
 
-class AssetGroupAuthor(AbstractBaseModelUuid):
-    assetGroup = models.ForeignKey(AssetGroup, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=20, default="user")
-
-    class Meta:
-        unique_together = (
-            "assetGroup",
-            "user",
-        )
-
-    def __str__(self):
-        return self.assetGroup.__str__() + " / " + self.user.__str__()
-
 class AssetGroupUser(AbstractBaseModelUuid):
     assetGroup = models.ForeignKey(AssetGroup, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -131,8 +117,8 @@ class AssetGroupUserInline(admin.TabularInline):
     model = AssetGroupUser
     extra = 5
 
-class AssetGroupAuthorInline(admin.TabularInline):
-    model = AssetGroupAuthor
+class AssetGroupUserInline(admin.TabularInline):
+    model = AssetGroupUser
     extra = 5
     
 class AssetGroupAdmin(admin.ModelAdmin):
