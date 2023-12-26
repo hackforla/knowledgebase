@@ -1,5 +1,7 @@
+from contextlib import redirect_stdout
 import json
 import os
+import sys
 import requests
 import json
 import os
@@ -31,7 +33,27 @@ class UserData:
     def update_users_from_pd():
         headers = HeaderUtil.prepare_headers()
         # Make the signed request
+        from urllib3.exceptions import MaxRetryError
+
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers'
+        original_stderr = sys.stderr
+        try:
+            original_tracebacklimit=sys.tracebacklimit
+        except AttributeError:
+            pass
+        sys.tracebacklimit = 0
+
+        try:
+            response = requests.get(url, headers=headers)
+        except requests.exceptions.ConnectionError or MaxRetryError as e:
+            message = str(e).split('\n', 1)[0]
+            print(f'--- ERROR: Unable to connect to People Depot.', type(e), message)
+            sys.stderr = None
+            raise Exception("Unable to connect to People Depot")
+        finally:
+            sys.stdout = original_stderr
+
+
         response = requests.get(url, headers=headers)
         for r in json.loads(response.json()['groups']):
             id = r['pk']

@@ -7,13 +7,6 @@ from django.db import models
 from pd_data.models import User
 
 
-class Author(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-
-    def __str__(self):
-        return self.name
-
 class AbstractBaseModel(models.Model):
     """
     Base abstract model, that has `uuid` instead of `uuid` and included `created_at`, `updated_at` fields.
