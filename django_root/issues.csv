@@ -1,0 +1,45 @@
+53,OPEN,Data: Asset Category - populate and finalize approach,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T03:02:39Z
+52,OPEN,Data: Tool - populate,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T03:03:12Z
+51,OPEN,1-M: Add foreign key from asset to asset category to asset,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:16Z
+50,OPEN,Add FK from asset to organization (an asset is owned by one organization),role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:15Z
+49,OPEN,M-M: Organization to User - create table, api, and tests,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:15Z
+48,OPEN,Data: Populate organization,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:14Z
+47,OPEN,Table: Create table, API, and tests for organization,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:14Z
+46,OPEN,Data: Populate asset category,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:13Z
+45,OPEN,Data: Populate asset category,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:13Z
+44,OPEN,Data: Populate asset type,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:12Z
+43,OPEN,Table: Create table, API, and tests for Asset Category,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:12Z
+42,OPEN,Create tests for topic area,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-12-26T02:52:11Z
+40,OPEN,Data: During log in sync data with People Depot,size: 2pt, milestone: missing, Complexity: large, role: back end dev, feature: user login,2023-12-26T02:51:40Z
+39,OPEN,API: API for Asset groups with query (detail needed),size: missing, complexity: missing, draft, milestone: missing, role: back end dev, feature: issue making,2023-12-26T02:51:40Z
+38,OPEN,API: API for Assets with query (detail needed),size: missing, feature: missing, complexity: missing, draft, milestone: missing, role: back end dev,2023-12-26T02:51:39Z
+37,OPEN,M-M: Modify Many to Many for Tool,size: missing, feature: missing, complexity: missing, milestone: missing, role: back end dev,2023-12-26T02:51:39Z
+36,OPEN,M-M: Create Python script to dynamically add Many to Many, using Practice Area,size: missing, feature: missing, complexity: missing, milestone: missing, role: back end dev,2023-12-26T02:51:38Z
+35,OPEN,M-M: Modify Many to Many for Practice Area,size: missing, feature: missing, Complexity: small, milestone: missing, role: back end dev, good first issue,2023-12-26T02:51:38Z
+34,OPEN,Data: Populate Users (requires token),size: missing, feature: missing, complexity: missing, milestone: missing, role: back end dev,2023-12-26T02:51:37Z
+33,OPEN,Data: Populate initial data for Assets,size: missing, feature: missing, complexity: missing, draft, milestone: missing, role: back end dev,2023-12-26T02:51:37Z
+32,OPEN,Data: Populate data for Practice Area and finalize script template,size: missing, feature: missing, complexity: missing, draft, milestone: missing, role: back end dev,2023-12-26T02:51:36Z
+31,OPEN,Data: Populate data for PracticeArea, either from local file or URL,size: missing, feature: missing, complexity: missing, draft, milestone: missing, role: back end dev,2023-12-26T02:51:36Z
+30,CLOSED,Asset: Create One to Many for Assets to Asset Type,,2023-11-22T23:45:45Z
+29,CLOSED,Asset: Create Asset table,,2023-11-21T20:01:27Z
+28,OPEN,Field: Add Primary Tool for Asset Group,size: missing, feature: missing, complexity: missing, draft, milestone: missing, role: back end dev,2023-12-26T02:51:35Z
+27,OPEN,1-M: Create One to Many for Asset to AssetGroup,size: missing, complexity: missing, milestone: missing, role: back end dev, feature: table: asset type,2023-12-26T02:51:35Z
+26,OPEN,Asset: Create Asset Table,size: missing, feature: missing, Complexity: small, milestone: missing, role: back end dev, good first issue,2023-12-26T02:51:34Z
+25,CLOSED,API: Add APIs for Practice Area, Tool, Status / Phase, Practice Area, Tool,size: missing, feature: missing, complexity: missing, milestone: missing, role: back end dev, dependency,2023-12-26T02:43:29Z
+24,OPEN,API: Create Asset Type table and APIs using autogeneration script,size: missing, feature: missing, complexity: missing, milestone: missing, role: back end dev,2023-12-26T02:51:34Z
+23,CLOSED,API: Make API schema dynamic,,2023-11-21T14:46:20Z
+22,OPEN,API: Create Topic Area, including API, but not many to many,size: 1pt, Complexity: small, milestone: missing, role: back end dev, feature: API, feature: table: topic area, good first issue,2023-12-26T02:51:34Z
+21,OPEN,Rename Gdoc to AssetGroup,size: missing, feature: missing, complexity: missing, milestone: missing, role: back end dev,2023-12-26T02:51:33Z
+20,CLOSED,Technical: Proposal - Structure of files,role: missing, size: missing, feature: missing, complexity: missing, draft, milestone: missing,2023-11-20T19:40:30Z
+19,OPEN,Tasks for Bonnie to reorganize knowledgebase and converter,size: 0.25pt, role: org rep, feature: github / team wiki / etc., Complexity: small, milestone: missing,2023-11-19T23:33:45Z
+18,CLOSED,Questions from Ethan for Bonnie on related projects,size: 0.25pt, feature: github / team wiki / etc., milestone: missing, Complexity: medium, role: product, role: dev lead,2023-11-20T17:50:35Z
+17,CLOSED,## 2023-11-03 Meeting Agenda,,2023-11-06T22:34:27Z
+16,CLOSED,Questions from Developer,role: missing, size: missing, feature: missing, complexity: missing, draft,2023-11-15T21:19:03Z
+15,CLOSED,Add Asset Type (many to many) table and field (google spreadsheet, HTML, PDF, etc),size: 0.5pt, complexity: missing, role: back end dev, feature: table: asset type,2023-11-23T00:15:42Z
+14,CLOSED,Add topic area table,size: missing, complexity: missing, role: back end dev, feature: add gdoc, feature: table: topic area,2023-11-23T00:15:22Z
+13,OPEN,Identify potential feature labels,size: 0.25pt, Complexity: small, milestone: missing, role: product, feature: issue making,2023-11-15T21:42:43Z
+12,OPEN,Create list of tasks that we can turn into Initial stories,size: missing, complexity: missing, milestone: missing, role: back end dev, role: dev lead, feature: issue making,2023-12-26T02:51:33Z
+11,OPEN,KB: Dev team agenda,size: 0.25pt, Complexity: small, milestone: missing, role: back end dev, role: security admin, role: dev lead,2023-12-26T02:51:33Z
+8,CLOSED,Questions from Developers,size: 3pt,2023-10-31T16:49:40Z
+7,CLOSED,Dev Meeting Notes,,2023-10-31T16:55:27Z
+6,CLOSED,Ethan / Bonnie meeting Nov 1,,2023-10-31T17:15:11Z

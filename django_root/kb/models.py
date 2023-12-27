@@ -82,7 +82,6 @@ class AssetGroup(AbstractBaseModelUuid):
             "slug": self.slug,
             "published": self.published,
             "practiceAreas": [pa.name for pa in self.practiceAreas.all()],
-            "programAreas": [pa.name for pa in self.programAreas.all()],
             "tools": [t.name for t in self.tools.all()],
             "technologies": [t.name for t in self.technologies.all()],
         }

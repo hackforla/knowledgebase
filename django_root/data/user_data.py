@@ -6,6 +6,7 @@ import requests
 import json
 import os
 import requests
+from data.data_utils import DataUtil
 
 PEOPLE_DEPOT_URL=os.environ.get('PEOPLE_DEPOT_URL', default="")
 
@@ -31,30 +32,15 @@ class UserData:
         requests.post(url, data=data, headers=headers)
  
     def update_users_from_pd():
+        if not PEOPLE_DEPOT_URL:
+            return
         headers = HeaderUtil.prepare_headers()
         # Make the signed request
         from urllib3.exceptions import MaxRetryError
 
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers'
-        original_stderr = sys.stderr
-        try:
-            original_tracebacklimit=sys.tracebacklimit
-        except AttributeError:
-            pass
-        sys.tracebacklimit = 0
+        response = DataUtil.try_get(url, headers)
 
-        try:
-            response = requests.get(url, headers=headers)
-        except requests.exceptions.ConnectionError or MaxRetryError as e:
-            message = str(e).split('\n', 1)[0]
-            print(f'--- ERROR: Unable to connect to People Depot.', type(e), message)
-            sys.stderr = None
-            raise Exception("Unable to connect to People Depot")
-        finally:
-            sys.stdout = original_stderr
-
-
-        response = requests.get(url, headers=headers)
         for r in json.loads(response.json()['groups']):
             id = r['pk']
             Group.objects.update_or_create(

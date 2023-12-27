@@ -24,7 +24,6 @@ class Command(BaseCommand):
 
 def clear_data():
     """Deletes all the table data"""
-    # logger.info("Delete Program Area")
     print("Debugging Clearing")
     Group.objects.all().delete()
     Permission.objects.all().delete()
