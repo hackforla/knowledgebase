@@ -37,12 +37,10 @@ class PracticeAreaData:
         print(f'Updating PracticeArea from {people_depot_url}')
         response = DataUtil.try_get(url)
         data = response.decode()
-        print(f'content: {data}')
         data = json.loads(data)
-        print(f'data: {data}')
         for record in data:
-            print(f'record: {record}')
             PracticeArea.objects.update_or_create(**record)
+        
         print(f'Added {len(data)} practice area records')
 
 from pd_data.models import PracticeArea
