@@ -37,28 +37,31 @@ class UserData:
         # Make the signed request
         from urllib3.exceptions import MaxRetryError
 
+        # set user_data to json from response
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers'
         response = DataUtil.try_get(url, headers=headers)
         decodedText = response.decode()
         response_json = json.loads(decodedText)
-        print("json", response_json)
         user_data = json.loads(response_json['users'])
-        print("user_data", user_data)
 
-        for r in user_data:
-            print("record", r)
-            uuid = r['pk']
-            # user_json = r['fields']
-            data = r['fields']
-            group_ids = data['groups']
+        for user_record in user_data:
+            group_ids = user_record['groups']
+            
+            # remove keys not in User model and remove groups
+            keys_not_in_user_record = [key for key in user_record.keys() if key not in User.__dict__]
+            for key in keys_not_in_user_record:
+                user_record.pop(key)
+            user_record.pop('groups')
+            user_record.pop('user_permissions')
+
+            lookup_params = { 'uuid': user_record['uuid'] }
 
             result = User.objects.update_or_create(
-                uuid=uuid,
-                email=data['email'], 
-                first_name=data['first_name'],
-                last_name=data['last_name'],
-                username=data['username'],
+                defaults=user_record,
+                **lookup_params,
             )
+            
+            # set groups
             user = result[0]
             user.groups.set(group_ids)
 
