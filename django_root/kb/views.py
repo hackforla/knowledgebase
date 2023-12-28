@@ -11,4 +11,3 @@ class TopicAreaViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = []
     queryset = TopicArea.objects.all()
     serializer_class = TopicAreaSerializer
-

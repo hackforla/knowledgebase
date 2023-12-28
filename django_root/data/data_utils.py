@@ -15,16 +15,18 @@ PEOPLE_DEPOT_URL=os.environ.get('PEOPLE_DEPOT_URL', default="")
 PEOPLE_DEPOT_API_KEY = os.environ.get('PEOPLE_DEPOT_API_KEY')
 PEOPLE_DEPOT_API_SECRET = os.environ.get('PEOPLE_DEPOT_API_SECRET')
 PEOPLE_DEPOT_URL = os.environ.get('PEOPLE_DEPOT_URL')
+from urllib3.exceptions import MaxRetryError
 
 
 class DataUtil:
     
+
     @staticmethod
     def try_get(url, headers=None):
         original_stderr = sys.stderr
         data = None
         try:
-            data = requests.get(url, headers).content
+            data = requests.get(url, headers=headers).content
         except requests.exceptions.ConnectionError or MaxRetryError as e:
             message = str(e).split('\n', 1)[0]
             print(f'--- ERROR: Unable to connect to People Depot.  Updates aborted.', type(e), message)
@@ -37,7 +39,7 @@ class DataUtil:
     @staticmethod
     def update_all_data():
         print("Updating practice areas")
-        PracticeAreaData.update_from_source()
+        # PracticeAreaData.update_from_source()
         print("Updating users")
         UserData.update_users_from_pd()
         print("Loading auth data")

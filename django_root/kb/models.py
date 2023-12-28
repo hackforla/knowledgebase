@@ -122,17 +122,6 @@ class AssetGroupAdmin(admin.ModelAdmin):
 
 
 
-class PracticeArea(AbstractBaseModelId):
-    name = models.CharField(
-        max_length=70,
-        blank=False,
-        unique=True,
-    )
-
-    def __str__(self):
-        return self.name
-
-
 class Phase(AbstractBaseModelUuid):
     name = models.CharField(
         max_length=70,

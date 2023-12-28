@@ -6,7 +6,6 @@ import requests
 import json
 import os
 import requests
-from data.data_utils import DataUtil
 
 PEOPLE_DEPOT_URL=os.environ.get('PEOPLE_DEPOT_URL', default="")
 
@@ -39,30 +38,41 @@ class UserData:
         from urllib3.exceptions import MaxRetryError
 
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers'
-        response = DataUtil.try_get(url, headers)
+        response = DataUtil.try_get(url, headers=headers)
+        decodedText = response.decode()
+        print(f'content: {decodedText}')
+        user_json = json.loads(decodedText)
+        print(f'user_json: {user_json}')
+        # user_json = decodedText
+        # print(f'user_json: {user_json}')
+        # group_data = json.loads(json_data['groups'])
+        # print('group_data: ', group_data)
+        
 
-        for r in json.loads(response.json()['groups']):
-            id = r['pk']
-            Group.objects.update_or_create(
-                id = id,
-                name = r['fields']['name'],
-            )
+        # for r in group_data:
+            # id = r['pk']
+            # Group.objects.update_or_create(
+            #     id = id,
+            #     name = r['fields']['name'],
+            # )
 
-        for r in json.loads(response.json()['users']):
-            uuid = r['pk']
-            user_data = r['fields']
-            group_ids = user_data['groups']
+        for r in user_json:
+            print(f'r: {r}')
+            uuid = r['uuid']
+            # user_json = r['fields']
+            group_ids = r['groups']
 
             result = User.objects.update_or_create(
                 uuid=uuid,
-                email=user_data['email'], 
-                first_name=user_data['first_name'],
-                last_name=user_data['last_name'],
-                username=user_data['username'],
+                email=r['email'], 
+                first_name=r['first_name'],
+                last_name=r['last_name'],
+                username=r['username'],
             )
             user = result[0]
             current_ids = [user.id for user in user.groups.all()]
-            for id in group_ids:
+            for r in group_ids:
+                id = r['id']
                 if not id in current_ids:
                     user.groups.add(id)
             for id in current_ids:
@@ -73,6 +83,6 @@ class UserData:
 from pd_data.models import User
 from django.contrib.auth.models import Group
 from data.header import HeaderUtil
-
+from data.data_utils import DataUtil
 
          
