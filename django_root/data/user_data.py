@@ -40,29 +40,28 @@ class UserData:
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers'
         response = DataUtil.try_get(url, headers=headers)
         decodedText = response.decode()
-        user_json = json.loads(decodedText)
+        response_json = json.loads(decodedText)
+        print("json", response_json)
+        user_data = json.loads(response_json['users'])
+        print("user_data", user_data)
 
-        for r in user_json:
-            uuid = r['uuid']
+        for r in user_data:
+            print("record", r)
+            uuid = r['pk']
             # user_json = r['fields']
-            group_ids = r['groups']
+            data = r['fields']
+            group_ids = data['groups']
 
             result = User.objects.update_or_create(
                 uuid=uuid,
-                email=r['email'], 
-                first_name=r['first_name'],
-                last_name=r['last_name'],
-                username=r['username'],
+                email=data['email'], 
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                username=data['username'],
             )
             user = result[0]
-            current_ids = [user.id for user in user.groups.all()]
-            for r in group_ids:
-                id = r['id']
-                if not id in current_ids:
-                    user.groups.add(id)
-            for id in current_ids:
-                if not id in group_ids:
-                    user.groups.remove(id)
+            user.groups.set(group_ids)
+
                         
 # put imports here to avoid circular imports
 from pd_data.models import User

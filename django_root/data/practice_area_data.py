@@ -38,12 +38,11 @@ class PracticeAreaData:
         response = DataUtil.try_get(url)
         data = response.decode()
         data = json.loads(data)
-        print(PracticeArea.objects.count())
-
+        original_count = PracticeArea.objects.count()
         for record in data:
             PracticeArea.objects.get_or_create(name=record['name'])
-        print(PracticeArea.objects.count())
-        print(f'Added {len(data)} practice area records')
+        new_count = PracticeArea.objects.count()
+        print(f'Added {new_count-original_count} practice area records')
 
 from pd_data.models import PracticeArea
 from data.data_utils import DataUtil
