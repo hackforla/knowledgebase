@@ -24,7 +24,7 @@ class PracticeAreaData:
         f = open('data/practice_area_export.json')
         data = json.load(f)
         for record in data:
-            PracticeArea.objects.update_or_create(**record)
+            PracticeArea.objects.update_or_create(name=record['name'])
 
 
     def update_from_pd():
@@ -38,9 +38,11 @@ class PracticeAreaData:
         response = DataUtil.try_get(url)
         data = response.decode()
         data = json.loads(data)
+        print(PracticeArea.objects.count())
+
         for record in data:
-            PracticeArea.objects.update_or_create(**record)
-        
+            PracticeArea.objects.get_or_create(name=record['name'])
+        print(PracticeArea.objects.count())
         print(f'Added {len(data)} practice area records')
 
 from pd_data.models import PracticeArea

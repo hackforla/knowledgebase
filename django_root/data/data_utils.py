@@ -39,7 +39,7 @@ class DataUtil:
     @staticmethod
     def update_all_data():
         print("Updating practice areas")
-        # PracticeAreaData.update_from_source()
+        PracticeAreaData.update_from_source()
         print("Updating users")
         UserData.update_users_from_pd()
         print("Loading auth data")
