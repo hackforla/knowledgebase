@@ -40,24 +40,9 @@ class UserData:
         url = f'{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers'
         response = DataUtil.try_get(url, headers=headers)
         decodedText = response.decode()
-        print(f'content: {decodedText}')
         user_json = json.loads(decodedText)
-        print(f'user_json: {user_json}')
-        # user_json = decodedText
-        # print(f'user_json: {user_json}')
-        # group_data = json.loads(json_data['groups'])
-        # print('group_data: ', group_data)
-        
-
-        # for r in group_data:
-            # id = r['pk']
-            # Group.objects.update_or_create(
-            #     id = id,
-            #     name = r['fields']['name'],
-            # )
 
         for r in user_json:
-            print(f'r: {r}')
             uuid = r['uuid']
             # user_json = r['fields']
             group_ids = r['groups']
