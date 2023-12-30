@@ -24,7 +24,7 @@ class PracticeAreaData:
         f = open('data/practice_area_export.json')
         data = json.load(f)
         for record in data:
-            PracticeArea.objects.update_or_create(name=record['name'])
+            PracticeArea.objects.get_or_create(name=record['fields']['name'])
 
 
     def update_from_pd():

@@ -1,0 +1,42 @@
+[
+  {
+    "model": "core.practicearea",
+    "pk": "00000000-0000-0000-0000-000000000001",
+    "fields": {
+      "created_at": "2023-12-13T01:47:59.800Z",
+      "updated_at": "2023-12-13T01:47:59.800Z",
+      "name": "Development",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.practicearea",
+    "pk": "00000000-0000-0000-0000-000000000002",
+    "fields": {
+      "created_at": "2023-12-13T01:47:59.801Z",
+      "updated_at": "2023-12-13T01:47:59.801Z",
+      "name": "Project Management",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.practicearea",
+    "pk": "00000000-0000-0000-0000-000000000003",
+    "fields": {
+      "created_at": "2023-12-13T01:47:59.801Z",
+      "updated_at": "2023-12-13T01:47:59.801Z",
+      "name": "Design",
+      "description": ""
+    }
+  },
+  {
+    "model": "core.practicearea",
+    "pk": "00000000-0000-0000-0000-000000000004",
+    "fields": {
+      "created_at": "2023-12-13T01:47:59.801Z",
+      "updated_at": "2023-12-13T01:47:59.801Z",
+      "name": "Professional Development",
+      "description": ""
+    }
+  }
+]
