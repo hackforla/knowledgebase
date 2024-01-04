@@ -1,6 +1,6 @@
 from django.urls import re_path 
 from rest_framework import routers
-from .views import TopicAreaViewSet 
+from kb.api.views import TopicAreaViewSet 
 from kb.json_data import get_assetGroup_json, list_assetGroup_json, generate_assetGroup_markdown
 
 router = routers.SimpleRouter()

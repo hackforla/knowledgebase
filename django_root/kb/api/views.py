@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from .models import TopicArea
+from kb.models import TopicArea
 from .serializers import TopicAreaSerializer
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
