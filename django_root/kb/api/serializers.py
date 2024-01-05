@@ -16,14 +16,14 @@ class TopicAreaSerializer(serializers.ModelSerializer):
     class Meta: 
         model = TopicArea
         fields = (
-            "uuid",
+            "id",
             "created_at",
             "updated_at", 
             "name",
         )
 
         read_only_fields = (
-            "uuid",
+            "id",
             "created_at",
             "updated_at,"
         )
