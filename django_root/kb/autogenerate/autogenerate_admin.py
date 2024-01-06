@@ -30,7 +30,15 @@ with open(file_path, 'w') as file:
                 file.write(f"    {model_name},\n")
             model_found = False
             
-        if "admin.site.register" in line and not admin_register_found:
+        if "admin.site.register" in line:
             admin_register_found = True
-            file.write(f"admin.site.register({model_name})\n")
-    
+        
+        if admin_register_found and not admin_register_written and "admin.site.register" not in line:
+            admin_register_written = True
+            if not model_found:
+                file.write(f"admin.site.register({model_name})\n")
+        
+        file.write(line)
+
+    if not admin_register_written and not model_found:
+        file.write(f"admin.site.register({model_name})\n")        

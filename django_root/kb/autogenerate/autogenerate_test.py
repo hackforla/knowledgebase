@@ -1,8 +1,5 @@
-from importlib import import_module
 import os
-import sys
 from django.apps import apps
-
 
 def doit(model_name):
     model = apps.get_model("kb", model_name)
@@ -13,7 +10,7 @@ def doit(model_name):
     
 
     text = f"""\
-router.register(r"{api_route}", {model_name}, basename="{api_name}")
+router.register(r"{api_route}", TopicAreaViewSet, basename="{api_name}")
 """
 
     # Relative file path
@@ -27,12 +24,11 @@ router.register(r"{api_route}", {model_name}, basename="{api_name}")
         lines = file.readlines()
 
     # Open the file in write mode
-    router_started = False
+    url_exists = False
     with open(file_path, 'w') as file:
         for line in lines:
-            if not router_started and "router.register" in line:
-                router_started = True
+            if url_exists and "router.register" not in line:
                 file.write(text)
-        file.write(line)
+            url_exists = "router.register" in line
 
-
+        

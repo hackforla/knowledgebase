@@ -13,7 +13,7 @@ def doit(model_name):
     
 
     text = f"""\
-router.register(r"{api_route}", {model_name}, basename="{api_name}")
+router.register(r"{api_route}", {model_name}ViewSet, basename="{api_name}")
 """
 
     # Relative file path
@@ -29,10 +29,11 @@ router.register(r"{api_route}", {model_name}, basename="{api_name}")
     # Open the file in write mode
     router_started = False
     with open(file_path, 'w') as file:
+        file.write(f"from kb.api.views import {model_name}ViewSet\n")
         for line in lines:
             if not router_started and "router.register" in line:
                 router_started = True
                 file.write(text)
-        file.write(line)
+            file.write(line)
 
 
