@@ -1,5 +1,7 @@
 from rest_framework import serializers 
-from kb.models import TopicArea
+from kb.models import (
+    TopicArea,
+)
 # from kb.models import Gdoc
  
 # class GdocSerializer(serializers.ModelSerializer):
@@ -27,3 +29,4 @@ class TopicAreaSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at,"
         )
+        
