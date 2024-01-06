@@ -7,6 +7,7 @@ from drf_spectacular.views import SpectacularRedocView
 from drf_spectacular.views import SpectacularSwaggerView
 
 router = routers.SimpleRouter()
+router.register(r"asset-types", AssetType, basename="asset-type")
 router.register(r"api/v1/topic-areas", TopicAreaViewSet, basename="topic-area")
 
 urlpatterns = [ 
