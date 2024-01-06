@@ -31,9 +31,8 @@ def doit(model_name):
             if "from kb.models" in line and not kb_models_import_found:
                 kb_models_import_found = True
                 modified_content += f"    {model_name},\n"
-            if "from kb.serializers" in line:
-                modified_content += f"    {model_name}Serializer\n"
-            modified_content += line
+            if "from .serializers" in line:
+                modified_content += f"    {model_name}Serializer,\n"
                      
 
     # Open the file in write mode

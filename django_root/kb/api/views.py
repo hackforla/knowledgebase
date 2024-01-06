@@ -1,8 +1,10 @@
 from rest_framework import viewsets
 from kb.models import (
+    AssetType,
     TopicArea,
 )
 from .serializers import (
+    AssetTypeSerializer,
     TopicAreaSerializer,
 )
 
@@ -18,3 +20,11 @@ class TopicAreaViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TopicAreaSerializer
 
 
+@extend_schema_view(
+    list=extend_schema(description="Return a list of all the asset types"),
+    retrieve=extend_schema(description="Retrieve a asset type"),
+)
+class AssetTypeViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = []
+    queryset = AssetType.objects.all()
+    serializer_class = AssetTypeSerializer
