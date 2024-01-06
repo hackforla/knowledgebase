@@ -23,13 +23,11 @@ def doit(model_name):
     print("Writing...")
     
     modified_content = ""
-    kb_models_import_found = False
     with open(file_path, 'r') as file:
         lines = file.readlines()
         for line in lines:
             modified_content += line
-            if "from kb.models" in line and not kb_models_import_found:
-                kb_models_import_found = True
+            if "from kb.models" in line:
                 modified_content += f"    {model_name},\n"
             if "from .serializers" in line:
                 modified_content += f"    {model_name}Serializer,\n"
