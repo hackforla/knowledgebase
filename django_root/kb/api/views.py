@@ -2,7 +2,10 @@ from rest_framework import viewsets
 from kb.models import (
     TopicArea,
 )
-from .serializers import TopicAreaSerializer
+from .serializers import (
+    TopicAreaSerializer,
+)
+
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
 @extend_schema_view(

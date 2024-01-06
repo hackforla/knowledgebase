@@ -12,30 +12,32 @@ def doit(model_name):
 
     text_path = os.path.join(os.getcwd(), 'python_scripts/view_template.txt')
     with open(text_path, 'r') as file:
-        new_ending_text = file.read()
-    new_ending_text = new_ending_text.replace("{model_name}", model_name)
-    new_ending_text = new_ending_text.replace("{verbose_name_plural}", verbose_name_plural)
-    new_ending_text = new_ending_text.replace("{verbose_name}", verbose_name)
+        new_ending_content = file.read()
+    new_ending_content = new_ending_content.replace("{model_name}", model_name)
+    new_ending_content = new_ending_content.replace("{verbose_name_plural}", verbose_name_plural)
+    new_ending_content = new_ending_content.replace("{verbose_name}", verbose_name)
     
     
-    # Relative file path
     relative_file_path = 'kb/api/views.py'
-
-    # Complete file path
     file_path = os.path.join(os.getcwd(), relative_file_path)
     print("Writing...")
-    # Read existing content
     
+    modified_content = ""
+    kb_models_import_found = False
     with open(file_path, 'r') as file:
-        existing_content = file.read()
-    
-    start_index = existing_content.find("from kb.models")
-    import_line = f"from kb.models import {model_name}\n"
-    new_content = existing_content[:start_index] + import_line + existing_content[start_index:] + new_ending_text
-         
+        lines = file.readlines()
+        for line in lines:
+            modified_content += line
+            if "from kb.models" in line and not kb_models_import_found:
+                kb_models_import_found = True
+                modified_content += f"    {model_name},\n"
+            if "from kb.serializers" in line:
+                modified_content += f"    {model_name}Serializer\n"
+            modified_content += line
+                     
 
     # Open the file in write mode
     with open(file_path, 'w') as file:
         # Write back the original content
-        file.write(new_content)
+        file.write(modified_content+new_ending_content)
         
