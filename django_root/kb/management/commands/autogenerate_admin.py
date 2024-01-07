@@ -1,36 +1,42 @@
 import os
-import sys
+from django.core.management.base import BaseCommand
 
-model_name = sys.argv[1]
-# Relative file path
-relative_file_path = 'kb/admin.py'
+class Command(BaseCommand):
+    help = "Adds code to serializers.py to serialize a model."
 
-def generate(file_path, model_name):
-    # Complete file path
-    file_path = os.path.join(os.getcwd(), relative_file_path)
+    def add_arguments(self, parser):
+         parser.add_argument('app_name', type=str)
+         parser.add_argument('model_name', type=str)
 
+    def handle(self, *__args__, **options):
+        app_name = options['app_name']
+        model_name = options['model_name']
+        file_path = os.path.join(os.getcwd(), f"{app_name}/admin.py")
+        generate(file_path, app_name, model_name)
+
+def generate(file_path, app_name, model_name):
     # Read existing content
+    print (f"Generating admin for {app_name}.{model_name}")
     with open(file_path, 'r') as file:
         lines = file.readlines()
+    if any(model_name in line for line in lines):
+        print(f"Admin for {app_name}.{model_name} already exists.")
+        return 1
 
-    # Open the file in write mode
-    parenthesis_found = False
-
-    admin_register_found = False
-    model_found = False
+    registered = False
+    imported = False
+    
     with open(file_path, 'w') as file:
         # Write lines up to the desired position
         for line in lines:  
-            if model_name in line:
-                model_found = True
-                
-            if ")" in line and not parenthesis_found:
-                parenthesis_found = True
-                if not model_found:
-                    file.write(f"    {model_name},\n")
-                model_found = False
-                
-            if "admin.site.register" in line and not admin_register_found:
-                admin_register_found = True
+            if "admin.site.register" in line and not registered:
+                registered = True
                 file.write(f"admin.site.register({model_name})\n")
+            file.write(line)
+            if ".models import" in line and not imported:
+                imported = True
+                file.write(f"    {model_name},\n")
+    
+    print("Done")
+                
         
