@@ -5,3 +5,4 @@ class {model_name}Serializer(serializers.ModelSerializer):
         fields = ({fields_text})
         read_only_fields = ("{primary_key}", "updated_at", "created_at")
 
+
