@@ -4,7 +4,7 @@ import sys
 from django.apps import apps
 
 
-def doit(model_name):
+def generate(model_name):
     model = apps.get_model("kb", model_name)
     verbose_name_plural = model._meta.verbose_name_plural
     api_route = verbose_name_plural.replace(" ", "-").lower()
@@ -12,9 +12,7 @@ def doit(model_name):
     api_name = verbose_name.replace(" ", "-").lower()
     
 
-    text = f"""\
-router.register(r"{api_route}", {model_name}, basename="{api_name}")
-"""
+    text = f'router.register(r"{api_route}", {model_name}, basename="{api_name}\n")
 
     # Relative file path
     relative_file_path = 'kb/urls.py'

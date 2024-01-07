@@ -2,7 +2,7 @@ import os
 from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
-    help = "Adds code to serializers.py to serialize a model."
+    help = "Adds code to admin.py for a model."
 
     def add_arguments(self, parser):
          parser.add_argument('app_name', type=str)
