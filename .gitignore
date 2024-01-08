@@ -3,7 +3,6 @@ archive
 temp
 
 out/
-tests
 node_modules
 .env
 *.bkup*
