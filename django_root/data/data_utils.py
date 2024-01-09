@@ -21,6 +21,14 @@ from urllib3.exceptions import MaxRetryError
 class DataUtil:
     @staticmethod
     def try_get(url, headers=None):
+        print("Trying to get", PEOPLE_DEPOT_URL)
+        if not PEOPLE_DEPOT_URL:
+            print("PEOPLE_DEPOT_URL not set.  Updating using local values.")
+            return
+        if PEOPLE_DEPOT_URL and not PEOPLE_DEPOT_API_KEY:
+            raise Exception(
+                "PEOPLE_DEPOT_API_KEY not set.  Updating using local values."
+            )
         original_stderr = sys.stderr
         data = None
         try:
