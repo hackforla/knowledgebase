@@ -74,7 +74,14 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     # include the providers you want to enable:
     "allauth.socialaccount.providers.amazon_cognito",
+    "rest_framework",
+    "drf_spectacular"
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # Other DRF settings...
+}
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

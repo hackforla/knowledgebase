@@ -9,15 +9,7 @@ from .serializers import (
 )
 
 from drf_spectacular.utils import extend_schema, extend_schema_view
-
-
-
-
-
-
-
-
-
+#from drf_spectacular.openapi import AutoSchema
 
 
 @extend_schema_view(
@@ -25,6 +17,7 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
     retrieve=extend_schema(description="Retrieve a topic area"),
 )
 class TopicAreaViewSet(viewsets.ReadOnlyModelViewSet):
+    #schema = AutoSchema
     permission_classes = []
     queryset = TopicArea.objects.all()
     serializer_class = TopicAreaSerializer
