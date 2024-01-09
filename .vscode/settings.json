@@ -1,5 +1,14 @@
 {
   "jest.jestCommandLine": "yarn jest",
-  "jest.enableSnapshotUpdateMessages": false,
-  "python.formatting.provider": "black",
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.formatDocument": "explicit"
+    },
+    "editor.formatOnSave": true
+  },
+  "editor.defaultFormatter": "ms-python.black-formatter",
+  "editor.formatOnType": true,
+  "black-formatter.importStrategy": "fromEnvironment",
+
 }

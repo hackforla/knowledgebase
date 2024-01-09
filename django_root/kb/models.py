@@ -11,13 +11,12 @@ class AbstractBaseModel(models.Model):
     """
     Base abstract model, that has `uuid` instead of `uuid` and included `created_at`, `updated_at` fields.
     """
-    
+
     created_at = models.DateTimeField("Created at", auto_now_add=True)
     updated_at = models.DateTimeField("Updated at", auto_now=True)
 
     class Meta:
         abstract = True
-
 
 
 class AbstractBaseModelUuid(AbstractBaseModel):
@@ -28,7 +27,7 @@ class AbstractBaseModelUuid(AbstractBaseModel):
     uuid = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True
     )
-    
+
     created_at = models.DateTimeField("Created at", auto_now_add=True)
     updated_at = models.DateTimeField("Updated at", auto_now=True)
 
@@ -45,7 +44,7 @@ class AbstractBaseModelId(AbstractBaseModel):
     """
 
     id = models.BigAutoField(primary_key=True)
-    
+
     created_at = models.DateTimeField("Created at", auto_now_add=True)
     updated_at = models.DateTimeField("Updated at", auto_now=True)
 
@@ -109,17 +108,18 @@ class AssetGroupUserInline(admin.TabularInline):
     model = AssetGroupUser
     extra = 5
 
+
 class AssetGroupUserInline(admin.TabularInline):
     model = AssetGroupUser
     extra = 5
-    
+
+
 class AssetGroupAdmin(admin.ModelAdmin):
     inlines = [AssetGroupUserInline]
     list_display = ("title", "slug", "phase", "published")
     list_filter = ["phase", "published"]
     search_fields = ["title", "description"]
     prepopulated_fields = {"slug": ("title",)}
-
 
 
 class Phase(AbstractBaseModelUuid):
@@ -131,6 +131,7 @@ class Phase(AbstractBaseModelUuid):
 
     def __str__(self):
         return self.name
+
 
 class TopicArea(AbstractBaseModelId):
     name = models.CharField(
@@ -152,6 +153,3 @@ class AssetType(AbstractBaseModelId):
 
     def __str__(self):
         return self.name
-
-
-

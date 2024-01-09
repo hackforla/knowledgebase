@@ -21,9 +21,9 @@ from django.core.handlers.wsgi import WSGIRequest
 from core.non_data_views import token_view, social_signup_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('kb/socialsignup/', social_signup_view),
-    path('kb/token/', token_view),
-    re_path(r'^', include('kb.urls')),
+    path("admin/", admin.site.urls),
+    path("accounts/", include("allauth.urls")),
+    path("kb/socialsignup/", social_signup_view),
+    path("kb/token/", token_view),
+    re_path(r"^", include("kb.urls")),
 ]

@@ -15,4 +15,3 @@ admin.site.register(AssetType)
 admin.site.register(AssetGroup, AssetGroupAdmin)
 admin.site.register(Phase)
 admin.site.register(TopicArea)
-

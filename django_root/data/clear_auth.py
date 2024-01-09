@@ -5,22 +5,24 @@ from django.contrib.auth.models import Permission, Group
 # python manage.py seed --mode=refresh
 
 """ Clear all data and creates addresses """
-MODE_REFRESH = 'refresh'
+MODE_REFRESH = "refresh"
 print("Debugging start", __name__)
 
 """ Clear all data and do not create any object """
-MODE_CLEAR = 'clear'
+MODE_CLEAR = "clear"
+
 
 class Command(BaseCommand):
     help = "seed database for testing and development."
 
     def add_arguments(self, parser):
-        parser.add_argument('--mode', type=str, help="Mode")
+        parser.add_argument("--mode", type=str, help="Mode")
 
     def handle(self, *args, **options):
-        self.stdout.write('seeding data...')
+        self.stdout.write("seeding data...")
         clear_data()
-        self.stdout.write('done.')
+        self.stdout.write("done.")
+
 
 def clear_data():
     """Deletes all the table data"""
@@ -28,6 +30,7 @@ def clear_data():
     Group.objects.all().delete()
     Permission.objects.all().delete()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     print("Debugging calling")
     clear_data()

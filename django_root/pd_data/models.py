@@ -9,18 +9,16 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 
 
-
 class AbstractBaseModel(models.Model):
     """
     Base abstract model, that has `uuid` instead of `uuid` and included `created_at`, `updated_at` fields.
     """
-    
+
     created_at = models.DateTimeField("Created at", auto_now_add=True)
     updated_at = models.DateTimeField("Updated at", auto_now=True)
 
     class Meta:
         abstract = True
-
 
 
 class AbstractBaseModelUuid(AbstractBaseModel):
@@ -31,7 +29,7 @@ class AbstractBaseModelUuid(AbstractBaseModel):
     uuid = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True
     )
-    
+
     created_at = models.DateTimeField("Created at", auto_now_add=True)
     updated_at = models.DateTimeField("Updated at", auto_now=True)
 
@@ -48,7 +46,7 @@ class AbstractBaseModelId(AbstractBaseModel):
     """
 
     id = models.BigAutoField(primary_key=True)
-    
+
     created_at = models.DateTimeField("Created at", auto_now_add=True)
     updated_at = models.DateTimeField("Updated at", auto_now=True)
 
@@ -57,6 +55,7 @@ class AbstractBaseModelId(AbstractBaseModel):
 
     def __repr__(self):
         return f"<{self.__class__.__name__} {self.uuid}>"
+
 
 class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     """
@@ -109,7 +108,6 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     github_handle = models.CharField(max_length=255, blank=True)
     slack_id = models.CharField(max_length=11, blank=True)
 
-
     # conduct = models.BooleanField()  # not in ERD. Maybe we should remove this
 
     objects = UserManager()
@@ -117,10 +115,8 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
         Group,
         verbose_name="groups",
         blank=True,
-        help_text=
-            "The groups this user belongs to. A user will get all permissions "
-            "granted to each of their groups."
-        ,
+        help_text="The groups this user belongs to. A user will get all permissions "
+        "granted to each of their groups.",
         related_name="user_set",
         related_query_name="user",
     )
@@ -142,12 +138,17 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
 
     def __str__(self):
         return f"{self.email}"
-    
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Call the "real" save() method.
-        if (self.password==""):
-            UserData.create_peopledepot_user(uuid=self.uuid, username=self.username, email=self.email, first_name=self.first_name, last_name=self.last_name)
-
+        if self.password == "":
+            UserData.create_peopledepot_user(
+                uuid=self.uuid,
+                username=self.username,
+                email=self.email,
+                first_name=self.first_name,
+                last_name=self.last_name,
+            )
 
 
 class PracticeArea(AbstractBaseModelId):
@@ -170,6 +171,7 @@ class Tool(AbstractBaseModelUuid):
 
     def __str__(self):
         return self.name
+
 
 # Put import at end to avoid circular imports
 from data.user_data import UserData

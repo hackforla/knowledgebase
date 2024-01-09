@@ -8,6 +8,7 @@ pytestmark = pytest.mark.django_db
 ASSET_TYPE_URL = reverse("asset-type-list")
 TOPIC_AREA_URL = reverse("topic-area-list")
 
+
 def test_asset_type(asset_type):
     response = client.get(ASSET_TYPE_URL)
     assert response.json()[0]["name"] == asset_type.name
@@ -16,5 +17,3 @@ def test_asset_type(asset_type):
 def test_topic_area(topic_area):
     response = client.get(TOPIC_AREA_URL)
     assert response.json()[0]["name"] == topic_area.name
-
-

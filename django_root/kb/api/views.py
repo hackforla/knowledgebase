@@ -10,6 +10,16 @@ from .serializers import (
 
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
+
+
+
+
+
+
+
+
+
+
 @extend_schema_view(
     list=extend_schema(description="Return a list of all the topic areas"),
     retrieve=extend_schema(description="Retrieve a topic area"),

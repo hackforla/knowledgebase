@@ -10,14 +10,11 @@ from kb.models import AssetGroupUserInline
 
 
 # Register your models here.
-from .models import (
-    PracticeArea,
-    Tool,
-    User
-)
+from .models import PracticeArea, Tool, User
 
 admin.site.register(PracticeArea)
 admin.site.register(Tool)
+
 
 class UserCreationForm(DefaultUserCreationForm):
     class Meta(DefaultUserCreationForm.Meta):
@@ -29,6 +26,7 @@ class UserChangeForm(DefaultUserChangeForm):
         model = User
         fields = "__all__"
         field_classes = {"username": UsernameField}
+
 
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
@@ -108,4 +106,3 @@ class UserAdmin(DefaultUserAdmin):
     add_form = UserCreationForm
     list_display = ("username", "is_staff", "is_active")
     list_filter = ("username", "email")
-

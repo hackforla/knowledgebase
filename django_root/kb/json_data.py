@@ -32,7 +32,10 @@ def list_assetGroup_json(self):
 def generate_assetGroup_markdown(self):
     from subprocess import Popen, PIPE
 
-    command = ["ts-node", "knowledgebase/assetGroups2md/scripts/generate-markdown-files.js"]
+    command = [
+        "ts-node",
+        "knowledgebase/assetGroups2md/scripts/generate-markdown-files.js",
+    ]
     result = {}
     try:
         process = Popen(command, stdout=PIPE, stderr=PIPE)
