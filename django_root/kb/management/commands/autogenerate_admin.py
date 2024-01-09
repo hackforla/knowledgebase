@@ -1,6 +1,8 @@
 import os
 from django.core.management.base import BaseCommand
 
+from utils.utils import read_lines_and_close
+
 
 class Command(BaseCommand):
     help = "Adds code to admin.py for a model."
@@ -17,10 +19,10 @@ class Command(BaseCommand):
 
 
 def generate(file_path, app_name, model_name):
-    # Read existing content
     print(f"Generating admin for {app_name}.{model_name}")
-    with open(file_path, "r") as file:
-        lines = file.readlines()
+    lines = read_lines_and_close(file_path)
+
+    # if the admin already exists, don't do anything
     if any(model_name in line for line in lines):
         print(f"Admin for {app_name}.{model_name} already exists.")
         return 1
@@ -28,6 +30,8 @@ def generate(file_path, app_name, model_name):
     registered = False
     imported = False
 
+    # add model_name before list of import
+    # add admin.site.register(model_name) before the first admin.site.register
     with open(file_path, "w") as file:
         # Write lines up to the desired position
         for line in lines:

@@ -1,8 +1,12 @@
 from rest_framework import serializers
+
+# fmt:off
 from kb.models import (
-    TopicArea,
     AssetType,
+    TopicArea,
 )
+
+# fmt:on
 
 
 class TopicAreaSerializer(serializers.ModelSerializer):

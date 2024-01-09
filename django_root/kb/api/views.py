@@ -3,21 +3,16 @@ from kb.models import (
     AssetType,
     TopicArea,
 )
+
+# fmt:off
 from .serializers import (
     AssetTypeSerializer,
     TopicAreaSerializer,
 )
 
+# fmt:on
+
 from drf_spectacular.utils import extend_schema, extend_schema_view
-
-
-
-
-
-
-
-
-
 
 
 @extend_schema_view(

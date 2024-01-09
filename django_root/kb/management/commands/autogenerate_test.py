@@ -6,6 +6,8 @@ from django.apps import apps
 from django.core.management.base import BaseCommand
 from django.urls import reverse
 
+from utils.utils import read_lines_and_close
+
 
 class Command(BaseCommand):
     help = "Adds APIs to urls.py for a model"
@@ -40,8 +42,7 @@ def generate_conftest(app_name, model_name):
     # Complete file path
     file_path = os.path.join(os.getcwd(), f"{app_name}/tests/conftest.py")
     # Read existing content
-    with open(file_path, "r") as file:
-        lines = file.readlines()
+    lines = read_lines_and_close(file_path)
     if any(model_name in line for line in lines):
         print(f"conftest.py already modified for {app_name}.{model_name}.")
         return 1
@@ -59,7 +60,7 @@ def {function_name}():
             if "_json" in line and not json_added:
                 json_added = True
                 fields_text = ""
-                for (index, field) in enumerate(unique_fields):
+                for index, field in enumerate(unique_fields):
                     print("field", field.name, field.unique, field.primary_key)
                     if index > 0:
                         fields_text += ", "
@@ -86,9 +87,7 @@ def generate_test(app_name, model_name):
     file_path = os.path.join(os.getcwd(), f"{app_name}/tests/test_get_apis.py")
     # Read existing content
 
-    with open(file_path, "r") as file:
-        print("a")
-        lines = file.readlines()
+    lines = read_lines_and_close(file_path)
     if any(verbose_with_underscore in line for line in lines):
         print(f"test_get_apis.py already modified for {app_name}.{model_name}.")
         return 1

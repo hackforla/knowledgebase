@@ -3,6 +3,8 @@ from django.apps import apps
 
 from django.core.management.base import BaseCommand
 
+from utils.utils import read_file_and_close, read_lines_and_close
+
 
 class Command(BaseCommand):
     help = "Adds code to serializers.py to serialize a model."
@@ -18,12 +20,10 @@ class Command(BaseCommand):
 
 
 def generate(app_name, model_name):
-    print(
-        f"Generating serializer for {app_name}.{model_name}",
-    )
+    print(f"Generating serializer for {app_name}.{model_name}")
 
     file_path = os.path.join(os.getcwd(), f"{app_name}/api/serializers.py")
-    content_with_import = add_import_to_text(file_path, app_name, model_name)
+    content_with_import = insert_model_text(file_path, app_name, model_name)
 
     template_path = os.path.join(
         os.getcwd(), "kb/management/commands/serializer_template.txt"
@@ -39,23 +39,20 @@ def generate(app_name, model_name):
     return 0
 
 
-def add_import_to_text(file_path, app_name, model_name):
-    with open(file_path, "r") as file:
-        lines = file.readlines()
+def insert_model_text(file_path, app_name, model_name):
+    lines = read_lines_and_close(file_path)
     already_exists = any(model_name in line for line in lines)
     if already_exists:
         return ""
 
     modified_content = ""
-    models_found = False
-    right_paren_found = False
+    from_model_found = False
+
     for line in lines:
-        if f"from {app_name}.models" in line and not models_found:
-            models_found = True
-        if ")" in line and models_found and not right_paren_found:
-            right_paren_found = True
-            modified_content += f"    {model_name},\n"
         modified_content += line
+        if f"from {app_name}.models" in line and not from_model_found:
+            from_model_found = True
+            modified_content += f"    {model_name},\n"
     return modified_content
 
 
@@ -70,16 +67,13 @@ def get_serializer_text(template_path, app_name, model_name):
         fields_text += f'"{field}"'
 
     # set new_ending_text = text from serializer_template.txt
-    with open(template_path, "r") as file:
-        new_text = file.read()
+    new_text = read_file_and_close(template_path)
 
     # set primary_key = primary key of model
     primary_key = model._meta.pk.name
 
     # replace {model_name}, {fields_text}, and {primary_key} in new_ending_text
-    print("before", new_text)
     new_text = new_text.replace("{model_name}", model_name)
     new_text = new_text.replace("{fields_text}", fields_text)
     new_text = new_text.replace("{primary_key}", primary_key)
-    print("after", new_text)
     return new_text

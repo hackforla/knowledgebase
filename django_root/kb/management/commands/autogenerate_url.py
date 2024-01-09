@@ -5,6 +5,8 @@ from django.apps import apps
 
 from django.core.management.base import BaseCommand
 
+from utils.utils import read_lines_and_close
+
 
 class Command(BaseCommand):
     help = "Adds APIs to urls.py for a model"
@@ -21,8 +23,8 @@ class Command(BaseCommand):
 
 def generate(app_name, model_name):
     model = apps.get_model(app_name, model_name)
-    verbose_name_plural = model._meta.verbose_name_plural
-    api_route = verbose_name_plural.replace(" ", "-").lower()
+    verbose_plural = model._meta.verbose_name_plural
+    api_route = verbose_plural.replace(" ", "-").lower()
     verbose_name = model._meta.verbose_name
     api_name = verbose_name.replace(" ", "-").lower()
 
@@ -34,8 +36,7 @@ def generate(app_name, model_name):
     file_path = os.path.join(os.getcwd(), f"{app_name}/urls.py")
     print("writing")
     # Read existing content
-    with open(file_path, "r") as file:
-        lines = file.readlines()
+    lines = read_lines_and_close(file_path)
     if any(model_name in line for line in lines):
         print(f"URLs for {app_name}.{model_name} already exist.")
         return 1
