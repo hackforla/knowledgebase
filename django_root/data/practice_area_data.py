@@ -12,8 +12,10 @@ import sys
 class PracticeAreaData:
     def update_from_source():
         if PEOPLE_DEPOT_URL:
+            print("Updating PracticeArea from People Depot")
             PracticeAreaData.update_from_pd()
         else:
+            print("Updating PracticeArea from script")
             PracticeAreaData.update_from_json_file()
 
     def update_from_json_file():
@@ -27,9 +29,7 @@ class PracticeAreaData:
 
     def update_from_pd():
         people_depot_url = PEOPLE_DEPOT_URL
-        if not PEOPLE_DEPOT_URL:
-            return
-        if not PEOPLE_DEPOT_URL.endswith("/"):
+        if PEOPLE_DEPOT_URL and not PEOPLE_DEPOT_URL.endswith("/"):
             people_depot_url += "/"
         url = people_depot_url + "api/v1/practice-areas"
         print(f"Updating PracticeArea from {people_depot_url}")

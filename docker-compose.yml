@@ -27,7 +27,8 @@ services:
   django:
     image: kb-web-image
     container_name: kb-web
-    build: ./django_root
+    build: 
+      dockerfile: ./Dockerfile
     volumes:
       # https://stackoverflow.com/a/32785014/232619
       - ./django_root/:/usr/src/django_root
