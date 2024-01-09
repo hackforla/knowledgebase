@@ -2,11 +2,16 @@
 # Check if script is sourced
 (return 0 2>/dev/null) && sourced="true" || sourced="false"
 if [ "$sourced" != "true" ]; then
-    echo "Error, script not sourced.  Please run 'source ./set-dev-settings.sh'"
-    exit 1
+    echo "Error, script not sourced.  Please run 'source ./start-dev.sh'"
+    return 1
 fi
 
-source set-dev-settings.sh
+if [[ ! -e ".env.local" ]]; then
+    echo "Error, .env.local not found.  Please run 'cp .env.local-example .env.local'"
+    return 1
+fi
+source loadenv.sh .env.local
+echo Settings $DJANGO_SETTINGS_MODULE / $DATABASE_HOST
 
 # Set VENV_DIR if not set
 if [ -z $VENV_DIR ]; then

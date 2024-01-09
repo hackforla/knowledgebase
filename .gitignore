@@ -5,6 +5,8 @@ temp
 out/
 node_modules
 .env
+.env.local
+.env.docker
 *.bkup*
 *.backup*
 _site
