@@ -1,10 +1,7 @@
 import json
 import os
-import dotenv
-import requests
 from urllib3.exceptions import MaxRetryError
 
-dotenv.load_dotenv()
 PEOPLE_DEPOT_URL = os.environ.get("PEOPLE_DEPOT_URL", default="")
 import sys
 

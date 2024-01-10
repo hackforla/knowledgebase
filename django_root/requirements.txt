@@ -3,7 +3,6 @@
 # - python -m pur -r requuirements.txt
 asgiref==3.7.2
 Django==4.2.7 # Django 4.2.7 resulted in garbled admin page.  May be related to static content or DEBUG=True.
-python-dotenv==1.0.0
 django-cors-headers==4.3.1
 djangorestframework==3.14.0
 django-allauth==0.58.2

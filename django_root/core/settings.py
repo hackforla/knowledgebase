@@ -13,9 +13,6 @@ import os
 import django
 from pathlib import Path
 from django.utils.encoding import smart_str
-import dotenv
-
-dotenv.load_dotenv()
 
 django.utils.encoding.smart_text = smart_str
 DATABASE_HOST = os.environ.get("DATABASE_HOST")
@@ -75,11 +72,11 @@ INSTALLED_APPS = [
     # include the providers you want to enable:
     "allauth.socialaccount.providers.amazon_cognito",
     "rest_framework",
-    "drf_spectacular"
+    "drf_spectacular",
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # Other DRF settings...
 }
 
