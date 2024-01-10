@@ -74,7 +74,6 @@ def get_fields_text(app_name, model_name):
     ]
     fields_text = ""
     for index, field in enumerate(unique_fields):
-        print("field", field.name, field.unique, field.primary_key)
         if index > 0:
             fields_text += ", "
         fields_text += f'"{field.name}": "Test {field.name} {verbose_name}"'
@@ -110,9 +109,7 @@ def generate_test(app_name, model_name):
         if field.unique and not field.is_relation and not field.primary_key
     ]
     asserts_text = ""
-    print("pk", model._meta.pk.name)
     for field in unique_fields:
-        print("unique", field.unique, field.primary_key)
         asserts_text += f'    assert response.json()[0]["{field.name}"] == {verbose_with_underscore}.{field.name}\n'
     url_added = False
     test_added = False

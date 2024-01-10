@@ -22,16 +22,16 @@ class Command(BaseCommand):
 
 
 def generate(app_name, model_name):
+    print("Generating urls...")
     model = apps.get_model(app_name, model_name)
     verbose_plural = model._meta.verbose_name_plural
     api_route = verbose_plural.replace(" ", "-").lower()
     verbose_name = model._meta.verbose_name
     underscore_name = verbose_name.replace(" ", "-").lower()
 
-    text = f'router.register(r"{api_route}", {model_name}ViewSet, basename="{underscore_name}")\n'
+    register_text = f'router.register(r"aapi/v1/{api_route}", {model_name}ViewSet, basename="{underscore_name}")\n'
 
     file_path = os.path.join(os.getcwd(), f"{app_name}/urls.py")
-    print("writing")
     # Read existing content
     lines = read_lines_and_close(file_path)
     if any(model_name in line for line in lines):
@@ -40,13 +40,15 @@ def generate(app_name, model_name):
     import_added = False
     router_added = False
 
+    content = ""
+    for line in lines:
+        if not router_added and "router.register" in line:
+            router_added = True
+            content += register_text
+        content += line
+        if f"from {app_name}.api.views" in line and not import_added:
+            import_added = True
+            content += f"    {model_name}ViewSet,\n"
     with open(file_path, "w") as file:
-        for line in lines:
-            if not router_added and "router.register" in line:
-                router_added = True
-                file.write(text)
-            file.write(line)
-            if f"from {app_name}.api.views" in line and not import_added:
-                import_added = True
-                file.write(f"    {model_name}ViewSet,\n")
+        file.write(content)
     print("done")

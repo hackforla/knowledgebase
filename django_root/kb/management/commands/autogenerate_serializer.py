@@ -33,7 +33,7 @@ def generate(app_name, model_name):
         return 1
     content = insert_model_text(app_name, model_name, content)
 
-    serializer_content = read_lines_and_close(template_path)
+    serializer_content = read_file_and_close(template_path)
     serializer_content = get_serializer_text(app_name, model_name, serializer_content)
 
     with open(file_path, "w") as file:
@@ -48,11 +48,12 @@ def insert_model_text(app_name, model_name, content):
     from_model_found = False
 
     for line in lines:
-        new_content += line
+        print("line", line)
+        new_content += line + "\n"
         if f"from {app_name}.models" in line and not from_model_found:
             from_model_found = True
-            modified_content += f"    {model_name},\n"
-    return modified_content
+            new_content += f"    {model_name},\n"
+    return new_content
 
 
 def get_serializer_text(app_name, model_name, content):

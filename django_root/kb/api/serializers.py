@@ -1,11 +1,12 @@
 from rest_framework import serializers
 
-# fmt:off
+# fmt: off
 from kb.models import (
-    TopicArea,
+    AssetType,
+    TopicArea
 )
 
-# fmt:on
+# fmt: on
 
 
 class TopicAreaSerializer(serializers.ModelSerializer):
@@ -13,3 +14,12 @@ class TopicAreaSerializer(serializers.ModelSerializer):
         model = TopicArea
         fields = ("id", "name", "created_at", "updated_at")
         read_only_fields = ("id", "created_at", "updated_at")
+
+class AssetTypeSerializer(serializers.ModelSerializer):
+
+    class Meta: 
+        model = AssetType
+        fields = ("id", "created_at", "updated_at", "name")
+        read_only_fields = ("id", "updated_at", "created_at")
+
+
