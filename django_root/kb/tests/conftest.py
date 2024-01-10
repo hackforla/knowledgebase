@@ -8,7 +8,7 @@ from ..models import (
 )
 # fmt: on
 
-asset_type_json = { "name": "Test name asset type" }
+asset_type_json = {"name": "Test name asset type"}
 topic_area_json = {"name": "Test Topic Area"}
 
 
@@ -18,7 +18,7 @@ def asset_type():
     return AssetType.objects.create(**asset_type_json)
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture
 def topic_area():
     value = TopicArea.objects.create(name="Test Topic Area")
     return value
