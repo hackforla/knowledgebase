@@ -1,6 +1,4 @@
-from importlib import import_module
 import os
-import sys
 from django.apps import apps
 
 from django.core.management.base import BaseCommand
@@ -30,11 +28,6 @@ def generate(app_name, model_name):
 def generate_conftest(app_name, model_name):
     print("Writing to conftest.py...")
     model = apps.get_model(app_name, model_name)
-    unique_fields = [
-        field
-        for field in model._meta.get_fields()
-        if field.unique and not field.is_relation and not field.primary_key
-    ]
 
     verbose_name = model._meta.verbose_name
     function_name = verbose_name.replace(" ", "_").lower()
@@ -49,32 +42,52 @@ def generate_conftest(app_name, model_name):
     import_added = False
     json_added = False
     fixture_added = False
-    fixture_text = f"""@pytest.fixture
+    lines = read_lines_and_close(file_path)
+    content = ""
+    for line in lines:
+        if "_json" in line and not json_added:
+            json_added = True
+            fields_text = get_fields_text(app_name, model_name)
+            content += f"{function_name}_json = {{ {fields_text} }}\n"
+        if "@pytest.fixture" in line and not fixture_added:
+            fixture_added = True
+            content += get_fixture_text(model_name, function_name)
+        content += line
+        if "models import" in line and not import_added:
+            import_added = True
+            content += f"    {model_name},\n"
+
+    with open(file_path, "w") as file:
+        file.write(content)
+
+    print("done")
+
+
+def get_fields_text(app_name, model_name):
+    model = apps.get_model(app_name, model_name)
+    verbose_name = model._meta.verbose_name
+
+    unique_fields = [
+        field
+        for field in model._meta.get_fields()
+        if field.unique and not field.is_relation and not field.primary_key
+    ]
+    fields_text = ""
+    for index, field in enumerate(unique_fields):
+        print("field", field.name, field.unique, field.primary_key)
+        if index > 0:
+            fields_text += ", "
+        fields_text += f'"{field.name}": "Test {field.name} {verbose_name}"'
+    return fields_text
+
+
+def get_fixture_text(model_name, function_name):
+    return f"""@pytest.fixture
 def {function_name}():
     return {model_name}.objects.create(**{function_name}_json)
 
 
 """
-    with open(file_path, "w") as file:
-        for line in lines:
-            if "_json" in line and not json_added:
-                json_added = True
-                fields_text = ""
-                for index, field in enumerate(unique_fields):
-                    print("field", field.name, field.unique, field.primary_key)
-                    if index > 0:
-                        fields_text += ", "
-                    fields_text += f'"{field.name}": "Test {field.name} {verbose_name}"'
-                file.write(f"{function_name}_json = {{ {fields_text} }}\n")
-            if "@pytest.fixture" in line and not fixture_added:
-                fixture_added = True
-                file.write(fixture_text)
-            file.write(line)
-            if "models import" in line and not import_added:
-                import_added = True
-                file.write(f"    {model_name},\n")
-
-    print("done")
 
 
 def generate_test(app_name, model_name):

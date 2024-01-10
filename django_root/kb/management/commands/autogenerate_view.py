@@ -2,7 +2,7 @@ import os
 from django.apps import apps
 from django.core.management.base import BaseCommand
 
-from utils.utils import read_file_and_close
+from utils.utils import read_file_and_close, read_lines_and_close
 
 
 class Command(BaseCommand):
@@ -26,11 +26,8 @@ def generate(app_name, model_name):
     verbose_plural = model._meta.verbose_name_plural.__str__()
     verbose_name = model._meta.verbose_name.__str__()
 
-    # new_ending_content = view_template replace {model_name}, {verbose_plural}, {verbose_name
-    template_path = os.path.join(
-        os.getcwd(), "kb/management/commands/view_template.txt"
-    )
-    end_text = read_file_and_close(template_path)
+    view_path = os.path.join(os.getcwd(), "kb/management/commands/view_template.txt")
+    end_text = read_file_and_close(view_path)
     end_text = end_text.replace("{model_name}", model_name)
     end_text = end_text.replace("{verbose_plural}", verbose_plural)
     end_text = end_text.replace("{verbose_name}", verbose_name)
@@ -38,14 +35,13 @@ def generate(app_name, model_name):
     file_path = os.path.join(os.getcwd(), f"{app_name}/api/views.py")
 
     modified_content = ""
-    with open(file_path, "r") as file:
-        lines = file.readlines()
-        for line in lines:
-            modified_content += line
-            if "from kb.models" in line:
-                modified_content += f"    {model_name},\n"
-            if "from .serializers" in line:
-                modified_content += f"    {model_name}Serializer,\n"
+    lines = read_lines_and_close(file_path)
+    for line in lines:
+        modified_content += line
+        if "from kb.models" in line:
+            modified_content += f"    {model_name},\n"
+        if "from .serializers" in line:
+            modified_content += f"    {model_name}Serializer,\n"
 
     # Open the file in write mode
     with open(file_path, "w") as file:

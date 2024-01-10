@@ -38,7 +38,9 @@ def generate(file_path, app_name, model_name):
             if "admin.site.register" in line and not registered:
                 registered = True
                 file.write(f"admin.site.register({model_name})\n")
+
             file.write(line)
+
             if ".models import" in line and not imported:
                 imported = True
                 file.write(f"    {model_name},\n")

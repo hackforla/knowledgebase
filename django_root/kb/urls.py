@@ -1,17 +1,20 @@
 from django.urls import re_path, path
 from rest_framework import routers
-from kb.api.views import AssetTypeViewSet, TopicAreaViewSet
-from kb.json_data import (
-    get_assetGroup_json,
-    list_assetGroup_json,
-    generate_assetGroup_markdown,
+# fmt: off
+from kb.api.views import (
+    TopicAreaViewSet
 )
+#
+# from kb.json_data import (
+#     get_assetGroup_json,
+#     list_assetGroup_json,
+#     generate_assetGroup_markdown,
+# )
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularRedocView
 from drf_spectacular.views import SpectacularSwaggerView
 
 router = routers.SimpleRouter()
-router.register(r"asset-types", AssetTypeViewSet, basename="asset-type")
 router.register(r"api/v1/topic-areas", TopicAreaViewSet, basename="topic-area")
 
 urlpatterns = [
