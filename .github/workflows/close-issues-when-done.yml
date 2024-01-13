@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check if in "done" column
         id: check-done-column
-        run: echo "::set-output name=isDone::${{ contains(github.event.project_card.column_name, 'done') }}"
+        run: echo "::set-output name=isDone::${{ contains(github.event.project_card.column_name, 'Done') }}"
 
       - name: Close Issue
         if: steps.check-done-column.outputs.isDone == 'true'
