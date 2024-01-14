@@ -1,9 +1,7 @@
 import json
 import os
-from urllib3.exceptions import MaxRetryError
 
 PEOPLE_DEPOT_URL = os.environ.get("PEOPLE_DEPOT_URL", default="")
-import sys
 
 
 class PracticeAreaData:
