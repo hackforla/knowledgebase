@@ -9,7 +9,7 @@ from people_depot.models import User
 
 class AbstractBaseModel(models.Model):
     """
-    Base abstract model, that has `uuid` instead of `uuid` and included `created_at`, `updated_at` fields.
+    Base abstract model
     """
 
     created_at = models.DateTimeField("Created at", auto_now_add=True)
@@ -19,11 +19,7 @@ class AbstractBaseModel(models.Model):
         abstract = True
 
 
-class AbstractBaseModelUuid(AbstractBaseModel):
-    """
-    Base abstract model, that has `uuid` instead of `uuid` and included `created_at`, `updated_at` fields.
-    """
-
+class AssetGroupUser(AbstractBaseModel):
     uuid = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True
     )
@@ -34,29 +30,9 @@ class AbstractBaseModelUuid(AbstractBaseModel):
     class Meta:
         abstract = True
 
-    def __repr__(self):
-        return f"<{self.__class__.__name__} {self.uuid}>"
 
-
-class AbstractBaseModelId(AbstractBaseModel):
-    """
-    Base abstract model, that has `uuid` instead of `uuid` and included `created_at`, `updated_at` fields.
-    """
-
-    id = models.BigAutoField(primary_key=True)
-
-    created_at = models.DateTimeField("Created at", auto_now_add=True)
-    updated_at = models.DateTimeField("Updated at", auto_now=True)
-
-    class Meta:
-        abstract = True
-
-    def __repr__(self):
-        return f"<{self.__class__.__name__} {self.uuid}>"
-
-
-class AssetGroup(AbstractBaseModelUuid):
-    google_uuid = models.CharField(max_length=100, unique=True, blank=False, default="")
+class AssetGroup(AbstractBaseModel):
+    google_id = models.CharField(max_length=100, unique=True, blank=False, default="")
     title = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
     slug = models.CharField(max_length=200, blank=False, default="")
@@ -74,8 +50,8 @@ class AssetGroup(AbstractBaseModelUuid):
 
     def to_json(self):
         return {
-            "uuid": self.uuid,
-            "google_uuid": self.google_uuid,
+            "id": self.id,
+            "google_id": self.google_id,
             "title": self.title,
             "description": self.description,
             "slug": self.slug,
@@ -89,7 +65,7 @@ class AssetGroup(AbstractBaseModelUuid):
         return self.title + "(" + self.slug + ") " + self.phase.name
 
 
-class AssetGroupUser(AbstractBaseModelUuid):
+class AssetGroupUser(AbstractBaseModel):
     assetGroup = models.ForeignKey(AssetGroup, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=20, default="user")
@@ -122,7 +98,7 @@ class AssetGroupAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
 
-class Phase(AbstractBaseModelUuid):
+class Phase(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
@@ -133,7 +109,7 @@ class Phase(AbstractBaseModelUuid):
         return self.name
 
 
-class TopicArea(AbstractBaseModelId):
+class TopicArea(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
@@ -144,7 +120,7 @@ class TopicArea(AbstractBaseModelId):
         return self.name
 
 
-class AssetType(AbstractBaseModelId):
+class AssetType(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
