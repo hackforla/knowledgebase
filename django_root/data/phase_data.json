@@ -1,0 +1,6 @@
+[ 
+    {"id": 1, "name": "DRAFT"},
+    {"id": 2, "name": "IN REVIEW"},
+    {"id": 3, "name": "PUBLISHED"},
+    {"id": 4, "name": "ARCHIVED"}
+]

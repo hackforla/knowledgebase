@@ -17,7 +17,7 @@ from django.utils.encoding import smart_str
 django.utils.encoding.smart_text = smart_str
 DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
-print("Database port: ", DATABASE_PORT)
+print("Database port: ", DATABASE_PORT, "Database host: ", DATABASE_HOST)
 COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default="")
 # COGNITO_USER_POOL = os.environ.get('COGNITO_USER_POOL', default="")
 COGNITO_AWS_REGION = os.environ.get("COGNITO_AWS_REGION", default="")

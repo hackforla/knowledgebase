@@ -8,7 +8,7 @@ class Command(BaseCommand):
     #     parser.add_argument('poll_ids', nargs='+', type=int)
 
     def handle(self, *__args__, **__options__):
-        DataUtil.update_all_data()
+        PdDataUtil.update_all_data()
 
 
-from data.people_depot.data_utils import DataUtil
+from data.people_depot.pd_data_utils import PdDataUtil

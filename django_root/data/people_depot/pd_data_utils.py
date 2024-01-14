@@ -1,8 +1,4 @@
 import os
-import hashlib
-import hmac
-import time
-from django.core.management import call_command
 import os
 import sys
 import requests
@@ -18,7 +14,7 @@ PEOPLE_DEPOT_URL = os.environ.get("PEOPLE_DEPOT_URL")
 from urllib3.exceptions import MaxRetryError
 
 
-class DataUtil:
+class PdDataUtil:
     @staticmethod
     def try_get(url, headers=None):
         print("Trying to get", PEOPLE_DEPOT_URL)

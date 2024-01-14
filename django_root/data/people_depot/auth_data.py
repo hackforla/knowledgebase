@@ -3,6 +3,7 @@ from django.core.management import call_command
 
 class AuthData:
     def load_all():
+        print("Loading auth data")
         pass
         # AuthData.load_permissions()
         # AuthData.load_groups()

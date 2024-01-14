@@ -32,14 +32,14 @@ class UserData:
 
     def update_users_from_pd():
         if not PEOPLE_DEPOT_URL:
+            print("Skipping fetch users from People Depot", PEOPLE_DEPOT_URL)
             return
+        print("Fetching users from People Depot", PEOPLE_DEPOT_URL)
         headers = HeaderUtil.prepare_headers()
-        # Make the signed request
-        from urllib3.exceptions import MaxRetryError
 
         # set user_data to json from response
         url = f"{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers"
-        response = DataUtil.try_get(url, headers=headers)
+        response = PdDataUtil.try_get(url, headers=headers)
         decodedText = response.decode()
         response_json = json.loads(decodedText)
         user_data = json.loads(response_json["users"])
@@ -72,4 +72,4 @@ class UserData:
 from people_depot.models import User
 from django.contrib.auth.models import Group
 from data.people_depot.header import HeaderUtil
-from data.people_depot.data_utils import DataUtil
+from data.people_depot.pd_data_utils import PdDataUtil
