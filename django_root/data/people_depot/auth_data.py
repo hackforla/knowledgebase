@@ -9,9 +9,9 @@ class AuthData:
 
     def load_permissions():
         print("Loading auth permissions")
-        call_command("loaddata", "data/auth_permissions.json")
+        call_command("loaddata", "data/people_depot/auth_permissions.json")
 
     def load_groups():
         pass
         print("Loading auth groups")
-        call_command("loaddata", "data/auth_groups.json")
+        call_command("loaddata", "data/people_depot/auth_groups.json")

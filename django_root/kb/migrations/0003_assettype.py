@@ -4,9 +4,8 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ("kb", "0003_delete_practicearea"),
+        ("kb", "0002_initial"),
     ]
 
     operations = [

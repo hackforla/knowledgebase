@@ -11,4 +11,4 @@ class Command(BaseCommand):
         DataUtil.update_all_data()
 
 
-from data.data_utils import DataUtil
+from data.people_depot.data_utils import DataUtil

@@ -69,7 +69,7 @@ class UserData:
 
 
 # put imports here to avoid circular imports
-from pd_data.models import User
+from people_depot.models import User
 from django.contrib.auth.models import Group
-from data.header import HeaderUtil
-from data.data_utils import DataUtil
+from data.people_depot.header import HeaderUtil
+from data.people_depot.data_utils import DataUtil

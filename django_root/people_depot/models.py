@@ -174,4 +174,4 @@ class Tool(AbstractBaseModelUuid):
 
 
 # Put import at end to avoid circular imports
-from data.user_data import UserData
+from data.people_depot.user_data import UserData

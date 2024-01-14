@@ -11,15 +11,6 @@ Tasks
 - [ ] Bugs
 
   - [ ] New
-    - [ ] Add tests
-    - [ ] Add organization
-    - [ ] Add many to many for organization <-> user
-  
-  - [ ] Spell out the easy ones in detail
-    - [ ] Create script that makes it easy for creating table and API
-  - [ ] Mark complexity and size for all
-  - [ ] Move bugs I am working to in progress
-  - [ ] Move ones to ice box that are dependent
   - [ ] Review below for bugs
 
 - [ ] Populate auth app

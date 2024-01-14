@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     "kb.apps.kb_appConfig",
     "corsheaders",
     "data",
-    "pd_data.apps.pd_appConfig",
+    "people_depot.apps.pd_appConfig",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -128,7 +128,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databasescr
-AUTH_USER_MODEL = "pd_data.User"
+AUTH_USER_MODEL = "people_depot.User"
 LOGIN_REDIRECT_URL = "/admin/"
 AUTH_PASSWORD_VALIDATORS = [
     {

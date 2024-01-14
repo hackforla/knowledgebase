@@ -16,10 +16,10 @@ class PracticeAreaData:
             PracticeAreaData.update_from_json_file()
 
     def update_from_json_file():
-        from pd_data.models import PracticeArea
+        from people_depot.models import PracticeArea
 
         print("Updating PracticeArea from practice_area_export.json")
-        f = open("data/practice_area_export.json")
+        f = open("data/people_depot/practice_area_export.json")
         data = json.load(f)
         for record in data:
             PracticeArea.objects.get_or_create(name=record["fields"]["name"])
@@ -40,5 +40,5 @@ class PracticeAreaData:
         print(f"Added {new_count-original_count} practice area records")
 
 
-from pd_data.models import PracticeArea
-from data.data_utils import DataUtil
+from people_depot.models import PracticeArea
+from data.people_depot.data_utils import DataUtil

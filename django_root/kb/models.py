@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib import admin
 
 from django.db import models
-from pd_data.models import User
+from people_depot.models import User
 
 
 class AbstractBaseModel(models.Model):
@@ -63,8 +63,8 @@ class AssetGroup(AbstractBaseModelUuid):
     active = models.BooleanField(blank=False, default=False)
     phase = models.ForeignKey("Phase", on_delete=models.PROTECT, blank=False)
     published = models.BooleanField(default=False)
-    practiceAreas = models.ManyToManyField("pd_data.PracticeArea", blank=True)
-    tools = models.ManyToManyField("pd_data.Tool", blank=True)
+    practiceAreas = models.ManyToManyField("people_depot.PracticeArea", blank=True)
+    tools = models.ManyToManyField("people_depot.Tool", blank=True)
 
     class Meta:
         unique_together = (

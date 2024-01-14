@@ -7,7 +7,7 @@ import os
 import sys
 import requests
 
-from data.auth_data import AuthData
+from data.people_depot.auth_data import AuthData
 
 PEOPLE_DEPOT_URL = os.environ.get("PEOPLE_DEPOT_URL", default="")
 
@@ -57,5 +57,5 @@ class DataUtil:
 
 
 # put imports here to avoid circular imports
-from data.practice_area_data import PracticeAreaData
-from data.user_data import UserData
+from data.people_depot.practice_area_data import PracticeAreaData
+from data.people_depot.user_data import UserData

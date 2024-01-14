@@ -48,7 +48,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo Executing python manage.py shell to check if user exists
-python manage.py shell -c "from pd_data.models import User; exists = (User.objects.filter(username='$DJANGO_SUPERUSER').exists()); sys.exit(0 if exists else 1)"
+python manage.py shell -c "from people_depot.models import User; exists = (User.objects.filter(username='$DJANGO_SUPERUSER').exists()); sys.exit(0 if exists else 1)"
 superuser_exists=$?
 
 echo

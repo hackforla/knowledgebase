@@ -6,11 +6,10 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ("pd_data", "0001_initial"),
+        ("people_depot", "0001_initial"),
         ("kb", "0001_initial"),
     ]
 
@@ -32,12 +31,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="assetgroup",
             name="practiceAreas",
-            field=models.ManyToManyField(blank=True, to="pd_data.practicearea"),
+            field=models.ManyToManyField(blank=True, to="people_depot.practicearea"),
         ),
         migrations.AddField(
             model_name="assetgroup",
             name="tools",
-            field=models.ManyToManyField(blank=True, to="pd_data.tool"),
+            field=models.ManyToManyField(blank=True, to="people_depot.tool"),
         ),
         migrations.AlterUniqueTogether(
             name="assetgroupuser",
