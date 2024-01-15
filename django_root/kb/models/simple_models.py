@@ -3,9 +3,6 @@ import uuid
 from django.db import models
 from django.contrib import admin
 
-from django.db import models
-from people_depot.models import User
-
 
 class AbstractBaseModel(models.Model):
     """
@@ -51,34 +48,6 @@ class AssetGroup(AbstractBaseModel):
 
     def __str__(self):
         return self.title + "(" + self.slug + ") " + self.phase.name
-
-
-class AssetGroupUser(AbstractBaseModel):
-    assetGroup = models.ForeignKey(AssetGroup, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=20, default="user")
-
-    class Meta:
-        unique_together = (
-            "assetGroup",
-            "user",
-        )
-
-    def __str__(self):
-        return self.assetGroup.__str__() + " / " + self.user.__str__()
-
-
-class AssetGroupUserInline(admin.TabularInline):
-    model = AssetGroupUser
-    extra = 5
-
-
-class AssetGroupUserAdmin(admin.ModelAdmin):
-    inlines = [AssetGroupUserInline]
-    list_display = ("title", "slug", "phase", "published")
-    list_filter = ["phase", "published"]
-    search_fields = ["title", "description"]
-    prepopulated_fields = {"slug": ("title",)}
 
 
 class Phase(AbstractBaseModel):
