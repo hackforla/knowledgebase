@@ -1,23 +1,21 @@
 import json
-from kb.models import AssetGroup, AssetGroupUser
+from kb.models import AssetGroup, AssetUser
 from django.http import JsonResponse
 from django.core import serializers
 
 
-def get_assetGroup_json(self, google_id):
+def get_asset_json(self, google_id):
     # todo: do the below in a single query by including users in assetGroup object
-    assetGroupResultSet = AssetGroup.objects.filter(google_id=google_id)
-    if assetGroupResultSet.__len__() == 1:
-        assetGroupValues = list(assetGroupResultSet.values())
+    assetResultSet = Asset.objects.filter(google_id=google_id)
+    if assetResultSet.__len__() == 1:
+        assetValues = list(assetResultSet.values())
 
-        assetGroupUserValues = list(
-            assetGroupResultSet[0]
-            .assetGroupuser_set.all()
-            .values("user__name", "user__email")
+        assetUserValues = list(
+            assetResultSet[0].assetuser_set.all().values("user__name", "user__email")
         )
-        data_json = assetGroupValues[0]
-        data_json.update({"phase_name": assetGroupResultSet[0].phase.name})
-        data_json.update({"users": assetGroupUserValues})
+        data_json = assetValues[0]
+        data_json.update({"phase_name": assetResultSet[0].phase.name})
+        data_json.update({"users": assetUserValues})
     else:
         data_json = {}
     return JsonResponse(data_json, safe=False)

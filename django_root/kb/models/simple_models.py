@@ -16,7 +16,7 @@ class AbstractBaseModel(models.Model):
         abstract = True
 
 
-class AssetGroup(AbstractBaseModel):
+class Asset(AbstractBaseModel):
     google_id = models.CharField(max_length=100, unique=True, blank=False, default="")
     title = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
@@ -24,8 +24,6 @@ class AssetGroup(AbstractBaseModel):
     active = models.BooleanField(blank=False, default=False)
     phase = models.ForeignKey("Phase", on_delete=models.PROTECT, blank=False)
     published = models.BooleanField(default=False)
-    practiceAreas = models.ManyToManyField("people_depot.PracticeArea", blank=True)
-    tools = models.ManyToManyField("people_depot.Tool", blank=True)
 
     class Meta:
         unique_together = (
@@ -41,13 +39,29 @@ class AssetGroup(AbstractBaseModel):
             "description": self.description,
             "slug": self.slug,
             "published": self.published,
-            "practiceAreas": [pa.name for pa in self.practiceAreas.all()],
             "tools": [t.name for t in self.tools.all()],
-            "technologies": [t.name for t in self.technologies.all()],
         }
 
     def __str__(self):
         return self.title + "(" + self.slug + ") " + self.phase.name
+
+
+class AssetGroup(AbstractBaseModel):
+    title = models.CharField(max_length=70, blank=False, default="")
+    description = models.CharField(max_length=200, blank=False, default="")
+    practiceAreas = models.ManyToManyField("people_depot.PracticeArea", blank=True)
+    tools = models.ManyToManyField("people_depot.Tool", blank=True)
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "practiceAreas": [pa.name for pa in self.practiceAreas.all()],
+        }
+
+    def __str__(self):
+        return self.title
 
 
 class Phase(AbstractBaseModel):

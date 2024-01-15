@@ -9,5 +9,5 @@ def run(__apps__, __schema_editor__):
 
 class Migration(migrations.Migration):
     initial = True
-    dependencies = [("kb", "0001_initial")]
+    dependencies = [("kb", "0002_step2")]
     operations = [migrations.RunPython(run, migrations.RunPython.noop)]

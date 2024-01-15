@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserChangeForm as DefaultUserChangeForm
 from django.contrib.auth.forms import UserCreationForm as DefaultUserCreationForm
 from django.contrib.auth.forms import UsernameField
 
-from kb.models import AssetGroupUserInline
+from kb.models import AssetUserInline
 
 
 # Register your models here.
@@ -30,7 +30,7 @@ class UserChangeForm(DefaultUserChangeForm):
 
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
-    inlines = [AssetGroupUserInline]
+    inlines = [AssetUserInline]
     list_display = ("name", "email")
     search_fields = ["name", "email"]
     fieldsets = (
