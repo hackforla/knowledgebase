@@ -3,6 +3,8 @@ from people_depot.models import AbstractBaseModel, User
 from django.db import models
 from django.contrib import admin
 
+# __init__.py imports all models in this file
+
 # Many to many models come in triplets. 1) The model itself, 2) the inline admin class, 3) the admin class itself.
 
 
@@ -27,9 +29,12 @@ class AssetUserInline(admin.TabularInline):
     extra = 5
 
 
-class AssetUserAdmin(admin.ModelAdmin):
-    inlines = [AssetUserInline]
+class AssetInlineAdmin(admin.ModelAdmin):
+    # Asset fields to display and search
     list_display = ("title", "slug", "phase", "published")
     list_filter = ["phase", "published"]
     search_fields = ["title", "description"]
     prepopulated_fields = {"slug": ("title",)}
+
+    # When combined with Asset, this will show
+    inlines = [AssetUserInline]
