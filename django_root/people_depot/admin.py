@@ -30,7 +30,6 @@ class UserChangeForm(DefaultUserChangeForm):
 
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
-    inlines = [AssetUserInline]
     list_display = ("name", "email")
     search_fields = ["name", "email"]
     fieldsets = (
@@ -106,3 +105,6 @@ class UserAdmin(DefaultUserAdmin):
     add_form = UserCreationForm
     list_display = ("username", "is_staff", "is_active")
     list_filter = ("username", "email")
+
+    # Display assets for this user
+    inlines = [AssetUserInline]
