@@ -1,4 +1,4 @@
-from kb.models.simple_models import Asset
+from .asset_models import Asset
 from people_depot.models import AbstractBaseModel, User
 from django.db import models
 from django.contrib import admin

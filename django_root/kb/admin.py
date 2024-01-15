@@ -7,13 +7,13 @@ from .models import (
     AssetType,
     Asset,
     AssetGroup,
-    AssetUserAdmin,
+    AssetInlineAdmin,
     Phase,
     TopicArea,
 )
 
 admin.site.register(AssetType)
 admin.site.register(AssetGroup)
-admin.site.register(Asset, AssetUserAdmin)
+admin.site.register(Asset, AssetInlineAdmin)
 admin.site.register(Phase)
 admin.site.register(TopicArea)
