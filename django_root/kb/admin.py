@@ -6,12 +6,12 @@ from django.core.exceptions import FieldDoesNotExist
 from .models import (
     AssetType,
     AssetGroup,
-    AssetGroupAdmin,
+    AssetGroupUserAdmin,
     Phase,
     TopicArea,
 )
 
 admin.site.register(AssetType)
-admin.site.register(AssetGroup, AssetGroupAdmin)
+admin.site.register(AssetGroup, AssetGroupUserAdmin)
 admin.site.register(Phase)
 admin.site.register(TopicArea)

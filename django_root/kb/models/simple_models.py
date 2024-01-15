@@ -19,18 +19,6 @@ class AbstractBaseModel(models.Model):
         abstract = True
 
 
-class AssetGroupUser(AbstractBaseModel):
-    uuid = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False, unique=True
-    )
-
-    created_at = models.DateTimeField("Created at", auto_now_add=True)
-    updated_at = models.DateTimeField("Updated at", auto_now=True)
-
-    class Meta:
-        abstract = True
-
-
 class AssetGroup(AbstractBaseModel):
     google_id = models.CharField(max_length=100, unique=True, blank=False, default="")
     title = models.CharField(max_length=70, blank=False, default="")
@@ -85,12 +73,7 @@ class AssetGroupUserInline(admin.TabularInline):
     extra = 5
 
 
-class AssetGroupUserInline(admin.TabularInline):
-    model = AssetGroupUser
-    extra = 5
-
-
-class AssetGroupAdmin(admin.ModelAdmin):
+class AssetGroupUserAdmin(admin.ModelAdmin):
     inlines = [AssetGroupUserInline]
     list_display = ("title", "slug", "phase", "published")
     list_filter = ["phase", "published"]
