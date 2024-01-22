@@ -5,8 +5,9 @@ from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from django.contrib.auth.forms import UserChangeForm as DefaultUserChangeForm
 from django.contrib.auth.forms import UserCreationForm as DefaultUserCreationForm
 from django.contrib.auth.forms import UsernameField
+from kb.models.manytomany_models import AssetUser
 
-from kb.models import AssetUserInline
+from kb.models import UserAssetsInline
 
 
 # Register your models here.
@@ -107,4 +108,13 @@ class UserAdmin(DefaultUserAdmin):
     list_filter = ("username", "email")
 
     # Display assets for this user
-    inlines = [AssetUserInline]
+    inlines = [UserAssetsInline]
+
+class AssetUsersInline(admin.TabularInline):
+    model = AssetUser
+    extra = 2
+    show_change_link = True
+    fields = ["name", "asset_type", "phase", "topic_area", "practice_area"]
+    readonly_fields = ["name", "asset_type", "phase", "topic_area", "practice_area"]
+
+ 

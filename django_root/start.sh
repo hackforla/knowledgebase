@@ -25,7 +25,7 @@ echo --- Executing python manage.py makemigrations ---
 echo
 python manage.py makemigrations kb
 if [ $? -ne 0 ]; then
-  echo --- ERROR: python manage.py makemigrations failed.  See errors above.
+  echo --- ERROR: python manage.py makemigrations failed.  See errors above. ---
   return 1
 fi
 
@@ -34,7 +34,7 @@ echo --- Executing python manage.py migrate ---
 echo
 python manage.py migrate
 if [ $? -ne 0 ]; then
-  echo --- ERROR: python manage.py makemigrations failed.  See errors above.
+  echo --- ERROR: python manage.py makemigrations failed.  See errors above. ---
   return 1
 fi
 

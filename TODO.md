@@ -4,6 +4,8 @@ Tasks
 
 
 # BOP MVP
+- [ ] Q for Bonnie
+  - [ ] Which fields at group level?  Roll up?
 - [ ] Misc
   - [ ] Replace export with read from .env file
   - [ ] Populate assets from spreadsheet
@@ -12,6 +14,12 @@ Tasks
 
   - [ ] New
   - [ ] Review below for bugs
+- [ ] Phase issue?
+- [ ] Asset Group -> Asset - UI options:
+  - Allow autocreation of group if none is selected
+  - Show assets on Asset Group
+  - When add another, default to the previous Asset Group?
+- [ ] Comment empty tests.py and doc to say where files are located
 
 - [ ] Populate auth app
   - [x] Populate groups
@@ -29,9 +37,8 @@ Tasks
   - [x] Implement single sign on for Django Admin using Django AllAuth.  
 
 - [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/- [ ] Write up strategy to make PD integration configurable, even after application implemented
-- [ ] Add organization and user organizat
-- [ ] Add BOP topic area (one to many) table and field 
-- [ ] Add primary technology as a one to many
+- [ ] Add organization and user organization
+- [ ] Modify tool to include primary
 - [ ] Add Asset Type (one to many) table and field (google spreadsheet, HTML, PDF, etc)
 - [ ] Improve UI for all one to many using this article https://stackoverflow.com/questions/70709775/how-to-hide-specific-field-by-user-group-on-a-django-admin
 

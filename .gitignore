@@ -1,6 +1,7 @@
 .idea
 archive
 temp
+db.sqlite3
 
 out/
 node_modules

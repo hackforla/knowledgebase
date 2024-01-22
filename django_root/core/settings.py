@@ -15,6 +15,10 @@ from pathlib import Path
 from django.utils.encoding import smart_str
 
 django.utils.encoding.smart_text = smart_str
+USE_SQLITE = os.environ.get("USE_SQLITE", default=False)
+if USE_SQLITE=="True":
+    USE_SQLITE=True
+print("Use sqlite: ", USE_SQLITE)
 DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
 print("Database port: ", DATABASE_PORT, "Database host: ", DATABASE_HOST)
@@ -73,6 +77,10 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.amazon_cognito",
     "rest_framework",
     "drf_spectacular",
+    # autocomplete light
+    "dal",
+    "dal_select2",
+    'queryset_sequence',
 ]
 
 REST_FRAMEWORK = {
@@ -167,17 +175,25 @@ LOGGING = {
         },
     },
 }
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": DATABASE_HOST,
-        "PORT": DATABASE_PORT,
+if not USE_SQLITE:
+    print("Using postgres")
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "postgres",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": DATABASE_HOST,
+            "PORT": DATABASE_PORT,
+        }
     }
-}
-
+else:
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / "db.sqlite3",
+            }
+        }
 
 # ƒ validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

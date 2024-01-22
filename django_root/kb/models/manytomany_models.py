@@ -24,7 +24,7 @@ class AssetUser(AbstractBaseModel):
         return self.asset.__str__() + " / " + self.user.__str__()
 
 
-class AssetUserInline(admin.TabularInline):
+class UserAssetsInline(admin.TabularInline):
     model = AssetUser
     extra = 5
 
@@ -37,4 +37,4 @@ class AssetInlineAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
     # When combined with Asset, this will show
-    inlines = [AssetUserInline]
+    inlines = [UserAssetsInline]
