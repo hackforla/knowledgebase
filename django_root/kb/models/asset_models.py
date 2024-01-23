@@ -42,20 +42,20 @@ class Asset(AbstractBaseModel):
 
 
 class AssetGroup(AbstractBaseModel):
-    title = models.CharField(max_length=70, blank=False, default="")
+    name = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
     practiceAreas = models.ManyToManyField("people_depot.PracticeArea", blank=True)
 
     def to_json(self):
         return {
             "id": self.id,
-            "title": self.title,
+            "name": self.name,
             "description": self.description,
             "practiceAreas": [pa.name for pa in self.practiceAreas.all()],
         }
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class AssetType(AbstractBaseModel):

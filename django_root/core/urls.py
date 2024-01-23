@@ -25,5 +25,6 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("kb/socialsignup/", social_signup_view),
     path("kb/token/", token_view),
-    re_path(r"^", include("kb.urls")),
+    re_path(r"^", include("kb.autocomplete_urls")),
+    re_path(r"^", include("kb.api.api_urls")),
 ]

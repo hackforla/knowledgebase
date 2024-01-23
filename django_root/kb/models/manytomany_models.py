@@ -24,17 +24,5 @@ class AssetUser(AbstractBaseModel):
         return self.asset.__str__() + " / " + self.user.__str__()
 
 
-class UserAssetsInline(admin.TabularInline):
-    model = AssetUser
-    extra = 5
 
 
-class AssetInlineAdmin(admin.ModelAdmin):
-    # Asset fields to display and search
-    list_display = ("title", "slug", "phase", "published")
-    list_filter = ["phase", "published"]
-    search_fields = ["title", "description"]
-    prepopulated_fields = {"slug": ("title",)}
-
-    # When combined with Asset, this will show
-    inlines = [UserAssetsInline]
