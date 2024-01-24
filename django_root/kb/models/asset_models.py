@@ -15,7 +15,7 @@ class Asset(AbstractBaseModel):
     slug = models.CharField(max_length=200, blank=False, default="")
     active = models.BooleanField(blank=False, default=False)
     phase = models.ForeignKey("Phase", on_delete=models.PROTECT, blank=False)
-    assetGroup = models.ForeignKey("AssetGroup", on_delete=models.PROTECT, blank=False)
+    asset_group = models.ForeignKey("AssetGroup", on_delete=models.PROTECT, blank=False)
     asset_type = models.ForeignKey("AssetType", on_delete=models.PROTECT, blank=False)
     published = models.BooleanField(default=False)
     tools = models.ManyToManyField("people_depot.Tool", blank=True)

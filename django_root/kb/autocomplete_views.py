@@ -1,6 +1,8 @@
+import json
 from dal import autocomplete
 from people_depot.models import User
-from kb.models import Asset
+from kb.models import AssetGroup
+
 
 class UserAutocomplete(autocomplete.Select2QuerySetView):
     model = User
@@ -18,18 +20,18 @@ class UserAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
-class AssetAutocomplete(autocomplete.Select2QuerySetView):
-    model = Asset
+class AssetGroupAutocomplete(autocomplete.Select2QuerySetView):
+    model = AssetGroup
     # search_fields = ["title"]
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        if not self.request.asset.is_authenticated:
-            return Asset.objects.none()
+        if not self.request.user.is_authenticated:
+            return AssetGroup.objects.none()
 
-        qs = Asset.objects.all()
+        qs = AssetGroup.objects.all()
 
         if self.q:
-            qs = qs.filter(title__contains=self.q)
+            qs = qs.filter(name__contains=self.q)
 
         return qs
 
