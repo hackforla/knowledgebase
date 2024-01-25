@@ -18,7 +18,6 @@ class Asset(AbstractBaseModel):
     asset_group = models.ForeignKey("AssetGroup", on_delete=models.PROTECT, blank=False)
     asset_type = models.ForeignKey("AssetType", on_delete=models.PROTECT, blank=False)
     published = models.BooleanField(default=False)
-    tools = models.ManyToManyField("people_depot.Tool", blank=True)
 
     class Meta:
         unique_together = (
@@ -44,7 +43,6 @@ class Asset(AbstractBaseModel):
 class AssetGroup(AbstractBaseModel):
     name = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
-    practiceAreas = models.ManyToManyField("people_depot.PracticeArea", blank=True)
 
     def to_json(self):
         return {

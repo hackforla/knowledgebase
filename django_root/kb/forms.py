@@ -6,7 +6,7 @@ from django import forms
 
 from django.contrib import admin
 from kb.models.asset_models import Asset
-from kb.models.manytomany_models import AssetUser
+from kb.models.manytomany_models import AssetGroupTopicArea, AssetPracticeArea, AssetTool, AssetUser
 
 # widget for foreign key (1-M)
 class AssetForm(forms.ModelForm):
@@ -26,11 +26,50 @@ class AssetUserForm(forms.ModelForm):
             'user': autocomplete.ModelSelect2(url='user-autocomplete'),
         }
 
+class AssetPracticeAreaForm(forms.ModelForm):
+    class Meta:
+        model = AssetPracticeArea
+        fields = ('__all__')
+        widgets = {
+            'practice_area': autocomplete.ModelSelect2(url='practicearea-autocomplete'),
+        }
+
+class AssetToolForm(forms.ModelForm):
+    class Meta:
+        model = AssetTool
+        fields = ('__all__')
+        widgets = {
+            'tool': autocomplete.ModelSelect2(url='tool-autocomplete'),
+        }
+        
+class AssetGroupTopicAreaForm(forms.ModelForm):
+    class Meta:
+        model = AssetGroupTopicArea
+        fields = ('__all__')
+        widgets = {
+            'topic_area': autocomplete.ModelSelect2(url='topicarea-autocomplete'),
+        }
+
 # M-M
 class AssetUsersInline(admin.TabularInline):
     form = AssetUserForm
     model = AssetUser       
-    extra = 5
+    extra = 2
+
+class AssetPracticeAreasInline(admin.TabularInline):
+    form = AssetPracticeAreaForm
+    model = AssetPracticeArea       
+    extra = 2
+
+class AssetToolsInline(admin.TabularInline):
+    form = AssetToolForm
+    model = AssetTool       
+    extra = 2
+
+class AssetGroupTopicAreasInline(admin.TabularInline):
+    form = AssetGroupTopicAreaForm
+    model = AssetGroupTopicArea       
+    extra = 2
 
 # inlines for M-M
 class AssetAdmin(admin.ModelAdmin):
@@ -42,7 +81,8 @@ class AssetAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
     # When combined with Asset, this will show
-    inlines = [AssetUsersInline]
+    inlines = [AssetUsersInline, AssetPracticeAreasInline, AssetToolsInline]
+   
 
 
 # M-M
@@ -57,6 +97,6 @@ class AssetGroupAdmin(admin.ModelAdmin):
     search_fields = ["name","description"]
 
     # When combined with Asset, this will show
-    inlines = [AssetInline]
+    inlines = [AssetInline, AssetGroupTopicAreasInline]
 
 
