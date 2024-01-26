@@ -10,5 +10,8 @@
   "editor.defaultFormatter": "ms-python.black-formatter",
   "editor.formatOnType": true,
   "black-formatter.importStrategy": "fromEnvironment",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
 }
