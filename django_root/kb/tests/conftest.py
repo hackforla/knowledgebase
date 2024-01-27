@@ -4,11 +4,13 @@ from rest_framework.test import APIClient
 # fmt: off
 from ..models import (
     AssetType,
+    AssetCategory,
     TopicArea,
     Phase
 )
 # fmt: on
 
+asset_category_json = {"name": "Test name asset category"}
 asset_type_json = {"name": "Test name asset type"}
 topic_area_json = {"name": "Test Topic Area"}
 
@@ -16,6 +18,10 @@ topic_area_json = {"name": "Test Topic Area"}
 @pytest.fixture
 def asset_type():
     return AssetType.objects.create(**asset_type_json)
+
+@pytest.fixture
+def asset_category():
+    return AssetCategory.objects.create(**asset_category_json)
 
 
 @pytest.fixture

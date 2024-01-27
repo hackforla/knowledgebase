@@ -3,12 +3,14 @@ from rest_framework import viewsets
 
 # fmt: off
 from kb.models import (
+    AssetCategory,
     AssetType,
     Phase,
     TopicArea
 )
 
 from .serializers import (
+    AssetCategorySerializer,
     AssetTypeSerializer,
     TopicAreaSerializer,
     PhaseSerializer
@@ -26,6 +28,16 @@ class TopicAreaViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = []
     queryset = TopicArea.objects.all()
     serializer_class = TopicAreaSerializer
+
+@extend_schema_view(
+    list=extend_schema(description="Return a list of all the asset categories"),
+    retrieve=extend_schema(description="Retrieve an asset category"),
+)
+class AssetCategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = []
+    queryset = AssetCategory.objects.all()
+    serializer_class = AssetCategorySerializer
+
 
 
 @extend_schema_view(

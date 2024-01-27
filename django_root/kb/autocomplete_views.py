@@ -36,7 +36,6 @@ class AssetGroupAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 class PracticeAreaAutocomplete(autocomplete.Select2QuerySetView):
-    print("debug a1")
     model = PracticeArea
     # search_fields = ["title"]
     def get_queryset(self):
@@ -52,7 +51,6 @@ class PracticeAreaAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 class TopicAreaAutocomplete(autocomplete.Select2QuerySetView):
-    print("debug a2")
     model = TopicArea
     # search_fields = ["title"]
     def get_queryset(self):
@@ -68,7 +66,6 @@ class TopicAreaAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 class ToolAutocomplete(autocomplete.Select2QuerySetView):
-    print("debug a3")
     model = Tool
     # search_fields = ["title"]
     def get_queryset(self):

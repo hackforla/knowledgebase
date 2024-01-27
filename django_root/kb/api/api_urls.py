@@ -4,6 +4,7 @@ from rest_framework import routers
 # fmt: off
 from kb.api.api_views import (
     AssetTypeViewSet,
+    AssetCategoryViewSet,
     TopicAreaViewSet,
     PhaseViewSet
 )

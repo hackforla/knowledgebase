@@ -55,6 +55,19 @@ class AssetGroup(AbstractBaseModel):
     def __str__(self):
         return self.name
 
+class AssetCategory(AbstractBaseModel):
+    name = models.CharField(
+        max_length=70,
+        blank=False,
+        unique=True,
+    )
+    
+    class Meta:
+        verbose_name_plural = "asset categories"
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
 
 class AssetType(AbstractBaseModel):
     name = models.CharField(

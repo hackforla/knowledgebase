@@ -63,15 +63,3 @@ class AssetPracticeArea(AbstractBaseModel):
     def __str__(self):
         return self.asset.__str__() + " / " + self.practice_area.__str__()
 
-class AssetPracticeArea(AbstractBaseModel):
-    asset = models.ForeignKey(Asset, on_delete=models.CASCADE)
-    practice_area = models.ForeignKey(PracticeArea, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = (
-            "asset",
-            "practice_area",
-        )
-
-    def __str__(self):
-        return self.asset.__str__() + " / " + self.practice_area.__str__()
