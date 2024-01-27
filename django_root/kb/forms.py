@@ -5,10 +5,18 @@ from dal import autocomplete
 from django import forms
 
 from django.contrib import admin
-from kb.models.asset_models import Asset
+from kb.models.asset_models import Asset, AssetType
 from kb.models.manytomany_models import AssetGroupTopicArea, AssetPracticeArea, AssetTool, AssetUser
 
 # widget for foreign key (1-M)
+class AssetTypeForm(forms.ModelForm):
+    class Meta:
+        model = AssetType
+        fields = ('__all__')
+        widgets = {
+            'asset_category': autocomplete.ModelSelect2(url='assetcategory-autocomplete'),
+        }
+
 class AssetForm(forms.ModelForm):
     class Meta:
         model = Asset
@@ -16,6 +24,7 @@ class AssetForm(forms.ModelForm):
         widgets = {
             'asset_group': autocomplete.ModelSelect2(url='assetgroup-autocomplete'),
         }
+
 
 # widget for foreign key (1-M) on an m-m table
 class AssetUserForm(forms.ModelForm):
@@ -72,6 +81,13 @@ class AssetGroupTopicAreasInline(admin.TabularInline):
     extra = 2
 
 # inlines for M-M
+class AssetTypeAdmin(admin.ModelAdmin):
+    # Asset fields to display and search
+    form = AssetTypeForm
+
+   
+
+
 class AssetAdmin(admin.ModelAdmin):
     # Asset fields to display and search
     form = AssetForm
@@ -82,12 +98,11 @@ class AssetAdmin(admin.ModelAdmin):
 
     # When combined with Asset, this will show
     inlines = [AssetUsersInline, AssetPracticeAreasInline, AssetToolsInline]
-   
 
 
 # M-M
 class AssetInline(admin.TabularInline):
-    model = Asset       
+    model = Asset    
     extra = 2
 
 # 1-M

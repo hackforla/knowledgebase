@@ -9,9 +9,9 @@ from .models import (
     Phase,
     TopicArea,
 )
-from kb.forms import AssetAdmin, AssetGroupAdmin
+from kb.forms import AssetAdmin, AssetTypeAdmin, AssetGroupAdmin
 
-admin.site.register(AssetType)
+admin.site.register(AssetType, AssetTypeAdmin)
 admin.site.register(AssetCategory)
 admin.site.register(AssetGroup, AssetGroupAdmin)
 admin.site.register(Asset, AssetAdmin)

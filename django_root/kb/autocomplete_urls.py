@@ -1,6 +1,6 @@
 from django.urls import re_path as url
 
-from kb.autocomplete_views import PracticeAreaAutocomplete, ToolAutocomplete, TopicAreaAutocomplete, UserAutocomplete, AssetGroupAutocomplete
+from kb.autocomplete_views import AssetCategoryAutocomplete, PracticeAreaAutocomplete, ToolAutocomplete, TopicAreaAutocomplete, UserAutocomplete, AssetGroupAutocomplete
 
 # importing forms instantiates widgets without explicitly importing a specific form
 # from .forms import foo as __foo__
@@ -10,6 +10,11 @@ urlpatterns = [
         "user-autocomplete/$",
         UserAutocomplete.as_view(),
         name="user-autocomplete",
+    ),
+    url(
+        "assetcategory-autocomplete/$",
+        AssetCategoryAutocomplete.as_view(),
+        name="assetcategory-autocomplete"
     ),
     url(
         "assetgroup-autocomplete/$",

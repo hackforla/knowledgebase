@@ -2,7 +2,7 @@ import json
 from dal import autocomplete
 from kb.models.simple_models import TopicArea
 from people_depot.models import PracticeArea, Tool, User
-from kb.models import AssetGroup
+from kb.models import AssetGroup, AssetCategory
 
 
 class UserAutocomplete(autocomplete.Select2QuerySetView):
@@ -20,6 +20,21 @@ class UserAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+class AssetCategoryAutocomplete(autocomplete.Select2QuerySetView):
+    model = AssetCategory
+    # search_fields = ["title"]
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return AssetCategory.objects.none()
+
+        qs = AssetCategory.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__contains=self.q)
+
+        return qs
+    
 class AssetGroupAutocomplete(autocomplete.Select2QuerySetView):
     model = AssetGroup
     # search_fields = ["title"]

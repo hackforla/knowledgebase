@@ -70,6 +70,7 @@ class AssetCategory(AbstractBaseModel):
         return self.name
 
 class AssetType(AbstractBaseModel):
+    asset_category = models.ForeignKey("AssetCategory", on_delete=models.PROTECT, blank=False)
     name = models.CharField(
         max_length=70,
         blank=False,
