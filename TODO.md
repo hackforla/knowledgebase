@@ -14,7 +14,12 @@ Tasks
 
   - [ ] New
   - [ ] Review below for bugs
-- [ ] Phase issue?
+- [ ] Version structure
+  - Asset Groups - version
+    -< Assets >-< Topic Area
+      -< Asset Versions - Primary, Name, Description >- Status
+    
+- [ ] Change way google_id unique is defined
 - [ ] Asset Group -> Asset - UI options:
   - Allow autocreation of group if none is selected
   - Show assets on Asset Group

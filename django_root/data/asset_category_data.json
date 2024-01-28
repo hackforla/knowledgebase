@@ -1,9 +1,9 @@
 [ 
-    {"id": 1, "name": "DOCUMENT"},
-    {"id": 2, "name": "SPREADSHEET"},
-    {"id": 3, "name": "WEBSITE"},
-    {"id": 4, "name": "PRESENTATION"},
-    {"id": 5, "name": "IMAGE"},
-    {"id": 6, "name": "VIDEO"},
-    {"id": 9, "name": "OTHER"}
+    {"id": 1, "name": "Document"},
+    {"id": 2, "name": "Spreadsheet"},
+    {"id": 3, "name": "Website"},
+    {"id": 4, "name": "Presentation"},
+    {"id": 5, "name": "Image"},
+    {"id": 6, "name": "Video"},
+    {"id": 9, "name": "Other"}
 ]

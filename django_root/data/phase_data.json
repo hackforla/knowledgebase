@@ -1,6 +1,6 @@
 [ 
-    {"id": 1, "name": "DRAFT"},
-    {"id": 2, "name": "IN REVIEW"},
-    {"id": 3, "name": "PUBLISHED"},
-    {"id": 4, "name": "ARCHIVED"}
+    {"id": 1, "name": "Draft"},
+    {"id": 2, "name": "In Review"},
+    {"id": 3, "name": "Published"},
+    {"id": 4, "name": "Archived"}
 ]
