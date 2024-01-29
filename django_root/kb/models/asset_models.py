@@ -9,7 +9,7 @@ from people_depot.models import AbstractBaseModel
 
 
 class Asset(AbstractBaseModel):
-    google_id = models.CharField(max_length=100, unique=True, blank=False, default="")
+    google_id = models.CharField(max_length=100, blank=False, default="")
     title = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
     slug = models.CharField(max_length=200, blank=False, default="")
@@ -21,9 +21,12 @@ class Asset(AbstractBaseModel):
 
     class Meta:
         unique_together = (
+            "asset_group",
             "slug",
             "phase",
         )
+
+        unique_together = ("asset_group", "title", "phase")
 
     def to_json(self):
         return {
@@ -43,6 +46,11 @@ class Asset(AbstractBaseModel):
 class AssetGroup(AbstractBaseModel):
     name = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
+    group_version = models.IntegerField(blank=False, default=1)
+
+    class Meta:
+        ordering = ["name", "group_version"]
+        unique_together = ("name", "group_version")
 
     def to_json(self):
         return {
@@ -55,13 +63,14 @@ class AssetGroup(AbstractBaseModel):
     def __str__(self):
         return self.name
 
+
 class AssetCategory(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
         unique=True,
     )
-    
+
     class Meta:
         verbose_name_plural = "asset categories"
         ordering = ["name"]
@@ -69,8 +78,11 @@ class AssetCategory(AbstractBaseModel):
     def __str__(self):
         return self.name
 
+
 class AssetType(AbstractBaseModel):
-    asset_category = models.ForeignKey("AssetCategory", on_delete=models.PROTECT, blank=False)
+    asset_category = models.ForeignKey(
+        "AssetCategory", on_delete=models.PROTECT, blank=False
+    )
     name = models.CharField(
         max_length=70,
         blank=False,

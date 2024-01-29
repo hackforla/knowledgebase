@@ -1,6 +1,8 @@
 import csv
 import json
 
+from psycopg2 import IntegrityError
+
 print("here")
 
 
@@ -21,8 +23,7 @@ def get_json(csvFilePath):
             # Topic, Asset_Name, Asset_Category, Asset_Type
 
             data[index] = row
-            if index > 5:
-                break
+
     return data
 
 
@@ -62,10 +63,30 @@ def run():
         topic_area, _ = TopicArea.objects.update_or_create(
             name=value["Topic"],
         )
-        asset_group, _ = AssetGroup.objects.update_or_create(
-            name=value["Asset_Name"],
-        )
+        asset_name = value["Asset_Name"]
+        try:
+            print("Adding asset group: ", asset_name)
+            asset_group = AssetGroup.objects.create(
+                name=asset_name,
+                group_version=1,
+            )
+        except Exception as e:
+            # Check if the exception is related to the UNIQUE constraint you want to catch
+            if "UNIQUE constraint failed" in str(e):
+                # Handle the specific case where the UNIQUE constraint is violated
+                max_group_version_obj = AssetGroup.objects.filter(
+                    name=asset_name
+                ).latest("group_version")
+                max_group_version = max_group_version_obj.group_version
+                print("max_group_version.group_version: ", max_group_version)
+                asset_group = AssetGroup.objects.create(
+                    name=asset_name,
+                    group_version=max_group_version + 1,
+                )
+            else:
+                raise
         phase = Phase.objects.filter(name="Draft").first()
+
         Asset.objects.update_or_create(
             title=value["Asset_Name"],
             asset_group=asset_group,
@@ -80,9 +101,6 @@ def run():
         )
 
         print("topic: ", topic_area)
-        tally += 1
-        if tally > 5:
-            break
 
     print("Assets", Asset.objects.all())
 
