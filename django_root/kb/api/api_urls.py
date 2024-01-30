@@ -1,10 +1,9 @@
-from django.urls import re_path, path
+from django.urls import path
 from rest_framework import routers
 
 # fmt: off
 from kb.api.api_views import (
     AssetTypeViewSet,
-    AssetCategoryViewSet,
     TopicAreaViewSet,
     PhaseViewSet
 )

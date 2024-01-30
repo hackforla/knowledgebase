@@ -6,86 +6,101 @@ from django import forms
 
 from django.contrib import admin
 from kb.models.asset_models import Asset, AssetType
-from kb.models.manytomany_models import AssetGroupTopicArea, AssetPracticeArea, AssetTool, AssetUser
+from kb.models.manytomany_models import (
+    AssetGroupTopicAreas,
+    AssetPracticeAreas,
+    AssetTools,
+    AssetUsers,
+)
+
 
 # widget for foreign key (1-M)
 class AssetTypeForm(forms.ModelForm):
     class Meta:
         model = AssetType
-        fields = ('__all__')
+        fields = "__all__"
         widgets = {
-            'asset_category': autocomplete.ModelSelect2(url='assetcategory-autocomplete'),
+            "asset_category": autocomplete.ModelSelect2(
+                url="assetcategory-autocomplete"
+            ),
         }
+
 
 class AssetForm(forms.ModelForm):
     class Meta:
         model = Asset
-        fields = ('__all__')
+        fields = "__all__"
         widgets = {
-            'asset_group': autocomplete.ModelSelect2(url='assetgroup-autocomplete'),
+            "asset_group": autocomplete.ModelSelect2(url="assetgroup-autocomplete"),
         }
 
 
 # widget for foreign key (1-M) on an m-m table
 class AssetUserForm(forms.ModelForm):
     class Meta:
-        model = AssetUser
-        fields = ('__all__')
+        model = AssetUsers
+        fields = "__all__"
         widgets = {
-            'user': autocomplete.ModelSelect2(url='user-autocomplete'),
+            "user": autocomplete.ModelSelect2(url="user-autocomplete"),
         }
+
 
 class AssetPracticeAreaForm(forms.ModelForm):
     class Meta:
-        model = AssetPracticeArea
-        fields = ('__all__')
+        model = AssetPracticeAreas
+        fields = "__all__"
         widgets = {
-            'practice_area': autocomplete.ModelSelect2(url='practicearea-autocomplete'),
+            "practice_area": autocomplete.ModelSelect2(url="practicearea-autocomplete"),
         }
+
 
 class AssetToolForm(forms.ModelForm):
     class Meta:
-        model = AssetTool
-        fields = ('__all__')
+        model = AssetTools
+        fields = "__all__"
         widgets = {
-            'tool': autocomplete.ModelSelect2(url='tool-autocomplete'),
+            "tool": autocomplete.ModelSelect2(url="tool-autocomplete"),
         }
-        
+
+
 class AssetGroupTopicAreaForm(forms.ModelForm):
     class Meta:
-        model = AssetGroupTopicArea
-        fields = ('__all__')
+        model = AssetGroupTopicAreas
+        fields = "__all__"
         widgets = {
-            'topic_area': autocomplete.ModelSelect2(url='topicarea-autocomplete'),
+            "topic_area": autocomplete.ModelSelect2(url="topicarea-autocomplete"),
         }
+
 
 # M-M
 class AssetUsersInline(admin.TabularInline):
     form = AssetUserForm
-    model = AssetUser       
+    model = AssetUsers
     extra = 2
+
 
 class AssetPracticeAreasInline(admin.TabularInline):
     form = AssetPracticeAreaForm
-    model = AssetPracticeArea       
+    model = AssetPracticeAreas
     extra = 2
+
 
 class AssetToolsInline(admin.TabularInline):
     form = AssetToolForm
-    model = AssetTool       
+    model = AssetTools
     extra = 2
+
 
 class AssetGroupTopicAreasInline(admin.TabularInline):
     form = AssetGroupTopicAreaForm
-    model = AssetGroupTopicArea       
+    model = AssetGroupTopicAreas
     extra = 2
+
 
 # inlines for M-M
 class AssetTypeAdmin(admin.ModelAdmin):
     # Asset fields to display and search
     form = AssetTypeForm
-
-   
 
 
 class AssetAdmin(admin.ModelAdmin):
@@ -102,16 +117,15 @@ class AssetAdmin(admin.ModelAdmin):
 
 # M-M
 class AssetInline(admin.TabularInline):
-    model = Asset    
+    model = Asset
     extra = 2
+
 
 # 1-M
 class AssetGroupAdmin(admin.ModelAdmin):
     # Asset Group fields to display and search
     list_display = ("name",)
-    search_fields = ["name","description"]
+    search_fields = ["name", "description"]
 
     # When combined with Asset, this will show
     inlines = [AssetInline, AssetGroupTopicAreasInline]
-
-

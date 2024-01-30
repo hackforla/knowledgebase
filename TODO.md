@@ -11,7 +11,11 @@ Tasks
   - [ ] Populate assets from spreadsheet
 
 - [ ] Bugs
-
+  - [ ] Asset Group api
+  - [ ] 
+  - [ ] Add parent_asset and display flag to asset as a required field
+  - [ ] Create Asset API and tests - include topic_area
+  - [ ] Create Asset Group API and tests
   - [ ] New
   - [ ] Review below for bugs
 - [ ] Version structure
@@ -26,7 +30,7 @@ Tasks
   - When add another, default to the previous Asset Group?
 - [ ] Comment empty tests.py and doc to say where files are located
 
-- [ ] Populate auth app
+- [ ] Issue - Populate auth app
   - [x] Populate groups
   - [ ] kb.admin: add all view groups and all non-view privileges for kb
   - [ ] kb.maintainer: add all privileges for kb, view privileges for pd
@@ -35,7 +39,6 @@ Tasks
 
 - [ ] Documentation
   - [ ] Create Admin guide which explains how to add roles and what they do.  Use existing proposal as draft.  Needs to be modified to take approver into account
-  - [ ] Change documentation from user roles to user groups
   - [ ] Write article on how to implement allauth
 
 - [ ] Authentication

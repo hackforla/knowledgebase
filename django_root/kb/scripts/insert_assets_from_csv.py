@@ -44,7 +44,7 @@ def run():
         AssetCategory,
         AssetGroup,
         AssetType,
-        AssetGroupTopicArea,
+        AssetGroupTopicAreas,
         Phase,
         TopicArea,
     )
@@ -95,7 +95,7 @@ def run():
             phase=phase,
             google_id=key,
         )
-        AssetGroupTopicArea.objects.update_or_create(
+        AssetGroupTopicAreas.objects.update_or_create(
             asset_group=asset_group,
             topic_area=topic_area,
         )

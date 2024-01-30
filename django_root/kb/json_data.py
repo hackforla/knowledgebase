@@ -1,5 +1,5 @@
 import json
-from kb.models import AssetGroup, AssetUser
+from kb.models import AssetGroup, AssetUsers
 from django.http import JsonResponse
 from django.core import serializers
 
