@@ -23,7 +23,7 @@ echo DJANGO_SETTINGS_MODULE $DJANGO_SETTINGS_MODULE
 echo
 echo --- Executing python manage.py makemigrations ---
 echo
-python manage.py makemigrations kb
+python manage.py makemigrations
 if [ $? -ne 0 ]; then
   echo --- ERROR: python manage.py makemigrations failed.  See errors above. ---
   return 1
