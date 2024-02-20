@@ -11,18 +11,16 @@ Tasks
   - [ ] Populate assets from spreadsheet
 
 - [ ] Bugs
-  - [ ] Asset Group api
-  - [ ] 
   - [ ] Add parent_asset and display flag to asset as a required field
   - [ ] Create Asset API and tests - include topic_area
   - [ ] Create Asset Group API and tests
-  - [ ] New
-  - [ ] Review below for bugs
 - [ ] Version structure
   - Asset Groups - version
+    - Review design
+```
     -< Assets >-< Topic Area
       -< Asset Versions - Primary, Name, Description >- Status
-    
+```    
 - [ ] Change way google_id unique is defined
 - [ ] Asset Group -> Asset - UI options:
   - Allow autocreation of group if none is selected
@@ -44,7 +42,8 @@ Tasks
 - [ ] Authentication
   - [x] Implement single sign on for Django Admin using Django AllAuth.  
 
-- [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/- [ ] Write up strategy to make PD integration configurable, even after application implemented
+- [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/
+- [ ] Write up strategy to make PD integration configurable, even after application implemented
 - [ ] Add organization and user organization
 - [ ] Modify tool to include primary
 - [ ] Add Asset Type (one to many) table and field (google spreadsheet, HTML, PDF, etc)
