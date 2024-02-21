@@ -5,7 +5,7 @@ from kb.models import AssetCategory
 
 def run(__apps__, __schema_editor__):
     print("Loading phases")
-    DataUtils.update_model_from_json(AssetCategory, "data/asset_category_data.json")
+    DataUtils.update_model_from_json_data(AssetCategory)
 
 
 class Migration(migrations.Migration):

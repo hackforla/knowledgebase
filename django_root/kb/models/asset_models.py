@@ -1,7 +1,7 @@
 # todo: return users
 import uuid
 from django.db import models
-from django.contrib import admin
+from django.db.models.functions import Upper
 
 from people_depot.models import AbstractBaseModel
 
@@ -91,6 +91,9 @@ class AssetType(AbstractBaseModel):
         blank=False,
         unique=True,
     )
+
+    class Meta:
+        ordering = ["asset_category__name", Upper("name")]
 
     def __str__(self):
         return self.name

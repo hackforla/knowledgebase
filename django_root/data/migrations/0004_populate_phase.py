@@ -5,7 +5,7 @@ from kb.models import Phase
 
 def run(__apps__, __schema_editor__):
     print("Loading phases")
-    DataUtils.update_model_from_json(Phase, "data/phase_data.json")
+    DataUtils.update_model_from_json_file(Phase, "data/phase_data.json")
 
 
 class Migration(migrations.Migration):
