@@ -17,6 +17,9 @@ class Asset(AbstractBaseModel):
     phase = models.ForeignKey("Phase", on_delete=models.PROTECT, blank=False)
     asset_group = models.ForeignKey("AssetGroup", on_delete=models.PROTECT, blank=False)
     asset_type = models.ForeignKey("AssetType", on_delete=models.PROTECT, blank=False)
+    organization = models.ForeignKey(
+        "people_depot.Organization", on_delete=models.PROTECT, blank=False
+    )
     published = models.BooleanField(default=False)
 
     class Meta:

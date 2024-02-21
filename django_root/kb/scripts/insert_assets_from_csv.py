@@ -1,8 +1,8 @@
 import csv
-import json
 import traceback
 
 from psycopg2 import IntegrityError
+
 
 print("here")
 
@@ -43,6 +43,7 @@ print("got json")
 
 def run():
     print("running")
+    from people_depot.models import Organization
     from kb.models import (
         Asset,
         AssetCategory,
@@ -62,6 +63,9 @@ def run():
         asset_type, _ = AssetType.objects.update_or_create(
             asset_category=asset_category,
             name=value["Asset_Type"],
+        )
+        organization, _ = Organization.objects.update_or_create(
+            name=value["Brigade_Name"],
         )
         topic_area, _ = TopicArea.objects.update_or_create(
             name=value["Topic"],
@@ -96,6 +100,7 @@ def run():
             asset_type=asset_type,
             slug=value["Asset_Name"],
             phase=phase,
+            organization=organization,
             google_id=key,
         )
         AssetGroupTopicAreas.objects.update_or_create(

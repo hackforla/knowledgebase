@@ -32,6 +32,7 @@ class AssetForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "asset_group": autocomplete.ModelSelect2(url="assetgroup-autocomplete"),
+            "organization": autocomplete.ModelSelect2(url="organization-autocomplete"),
         }
 
 
