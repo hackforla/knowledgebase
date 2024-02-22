@@ -4,60 +4,46 @@ Tasks
 
 
 # BOP MVP
-- [ ] Q for Bonnie
-  - [ ] Which fields at group level?  Roll up?
-- [ ] Misc
-  - [ ] Replace export with read from .env file
-  - [ ] Populate assets from spreadsheet
+
 
 - [ ] Bugs
-  - [ ] Asset Group api
-  - [ ] 
   - [ ] Add parent_asset and display flag to asset as a required field
-  - [ ] Create Asset API and tests - include topic_area
-  - [ ] Create Asset Group API and tests
-  - [ ] New
-  - [ ] Review below for bugs
-- [ ] Version structure
-  - Asset Groups - version
-    -< Assets >-< Topic Area
+  - [ ] Create Asset API and tests - include all fields and 1-M, M-M
+  - [ ] Create Asset Group API and tests - include all fields and 1-M, M-M
+
+```
+    Assets >-< Topic Area
       -< Asset Versions - Primary, Name, Description >- Status
-    
+```    
 - [ ] Change way google_id unique is defined
 - [ ] Asset Group -> Asset - UI options:
   - Allow autocreation of group if none is selected
   - Show assets on Asset Group
   - When add another, default to the previous Asset Group?
-- [ ] Comment empty tests.py and doc to say where files are located
 
 - [ ] Issue - Populate auth app
   - [x] Populate groups
-  - [ ] kb.admin: add all view groups and all non-view privileges for kb
-  - [ ] kb.maintainer: add all privileges for kb, view privileges for pd
-  - [ ] kb.approver: same as maintainer
-  - [ ] kb.view: all view privileges for kb and pd
-
-- [ ] Documentation
-  - [ ] Create Admin guide which explains how to add roles and what they do.  Use existing proposal as draft.  Needs to be modified to take approver into account
-  - [ ] Write article on how to implement allauth
-
-- [ ] Authentication
-  - [x] Implement single sign on for Django Admin using Django AllAuth.  
-
-- [ ] Populate Data - see See https://github.com/hackforla/knowledgebase/wiki/- [ ] Write up strategy to make PD integration configurable, even after application implemented
-- [ ] Add organization and user organization
-- [ ] Modify tool to include primary
-- [ ] Add Asset Type (one to many) table and field (google spreadsheet, HTML, PDF, etc)
-- [ ] Improve UI for all one to many using this article https://stackoverflow.com/questions/70709775/how-to-hide-specific-field-by-user-group-on-a-django-admin
-
-- [ ] Decide on strategy for syncing PD and KB data and implement - possibly WebHooks or queues.  
+  - [ ] If people depot url is defined
+    - [ ] kb.admin: all privileges for kb,view privileges for PD.  For V2, allow update of users
+    - [ ] kb.maintainer: all privileges for kb, view privileges for pd
+    - [ ] kb.approver: same as maintainer
+    - [ ] kb.view: all view privileges for kb and pd
+  - [ ] If people_depot_url is not defined, admin should have update privileges for PD data, maintainer and approver should have update priv for pd data excluding user.
+  - [ ] Add user organization
+  - [ ] Modify tool to include primary
   - [ ] Decide on strategy.  Must take into account that KB app could potentially be down
-  - [ ] Implement
-- [ ] Create PD user when signing up first time through 
-  - [ ] Decide on strategy.  Consider AWS Lambda triggers or queues  
+    - [ ] Implement
+    - [ ] Decide on strategy.  Consider AWS Lambda triggers or queues  
+  - [ ] Documentation
+    - [ ] How PD user data is populated
+    - [ ] Auth when people_depot_url is defined and when not
+    - [ ] Asset Group Version
+    - [ ] Write article on how to implement allauth
+    - [ ] Write up strategy to make PD integration configurable, even after application implemented
+  - [ ] Authentication
+    - [x] Implement single sign on for Django Admin using Django AllAuth.  
 
 
-  
 # People Depot Dependencies
 
 NEXT WEEK

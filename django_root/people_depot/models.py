@@ -40,23 +40,6 @@ class AbstractBaseModelUuid(AbstractBaseModel):
         return f"<{self.__class__.__name__} {self.uuid}>"
 
 
-class AbstractBaseModelId(AbstractBaseModel):
-    """
-    Base abstract model, that has `uuid` instead of `uuid` and included `created_at`, `updated_at` fields.
-    """
-
-    id = models.BigAutoField(primary_key=True)
-
-    created_at = models.DateTimeField("Created at", auto_now_add=True)
-    updated_at = models.DateTimeField("Updated at", auto_now=True)
-
-    class Meta:
-        abstract = True
-
-    def __repr__(self):
-        return f"<{self.__class__.__name__} {self.uuid}>"
-
-
 class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     """
     Table contains cognito-users & django-users.
@@ -151,7 +134,7 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
             )
 
 
-class PracticeArea(AbstractBaseModelId):
+class PracticeArea(AbstractBaseModel):
     name = models.CharField(
         max_length=70,
         blank=False,
@@ -168,6 +151,20 @@ class Tool(AbstractBaseModelUuid):
         blank=False,
         unique=True,
     )
+
+    def __str__(self):
+        return self.name
+
+
+class Organization(AbstractBaseModel):
+    name = models.CharField(
+        max_length=70,
+        blank=False,
+        unique=True,
+    )
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self):
         return self.name

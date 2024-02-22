@@ -8,8 +8,9 @@ from django.contrib.auth.forms import UsernameField
 
 
 # Register your models here.
-from .models import PracticeArea, Tool, User
+from .models import PracticeArea, Tool, User, Organization
 
+admin.site.register(Organization)
 admin.site.register(PracticeArea)
 admin.site.register(Tool)
 
@@ -103,7 +104,3 @@ class UserAdmin(DefaultUserAdmin):
     add_form = UserCreationForm
     list_display = ("username", "is_staff", "is_active")
     list_filter = ("username", "email")
-
-
-
- 

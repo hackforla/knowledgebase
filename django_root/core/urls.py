@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from allauth.socialaccount.models import SocialAccount
 from django.shortcuts import render
@@ -27,4 +28,5 @@ urlpatterns = [
     path("kb/token/", token_view),
     re_path(r"^", include("kb.autocomplete_urls")),
     re_path(r"^", include("kb.api.api_urls")),
+    re_path(r"^", include("people_depot.api.api_urls")),
 ]

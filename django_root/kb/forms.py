@@ -32,6 +32,7 @@ class AssetForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "asset_group": autocomplete.ModelSelect2(url="assetgroup-autocomplete"),
+            "organization": autocomplete.ModelSelect2(url="organization-autocomplete"),
         }
 
 
@@ -101,6 +102,23 @@ class AssetGroupTopicAreasInline(admin.TabularInline):
 class AssetTypeAdmin(admin.ModelAdmin):
     # Asset fields to display and search
     form = AssetTypeForm
+
+    def get_category_name(self, obj):
+        return obj.asset_category.name
+
+    get_category_name.short_description = "Category"
+
+    list_display = (
+        "get_category_name",
+        "name",
+    )
+    list_filter = [
+        "asset_category__name",
+    ]
+    search_fields = [
+        "asset_category__name",
+        "name",
+    ]
 
 
 class AssetAdmin(admin.ModelAdmin):

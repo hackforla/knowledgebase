@@ -1,7 +1,8 @@
 import csv
-import json
+import traceback
 
 from psycopg2 import IntegrityError
+
 
 print("here")
 
@@ -35,10 +36,14 @@ csvFilePath = r"assets.csv"
 
 # Call the make_json function
 tally = 0
+print("getting json ")
 json_data = get_json(csvFilePath)
+print("got json")
 
 
 def run():
+    print("running")
+    from people_depot.models import Organization
     from kb.models import (
         Asset,
         AssetCategory,
@@ -53,12 +58,14 @@ def run():
     AssetGroup.objects.all().delete()
     AssetType.objects.all().delete()
     TopicArea.objects.all().delete()
-    tally = 0
     for key, value in json_data.items():
         asset_category = AssetCategory.objects.filter(name="Document").first()
         asset_type, _ = AssetType.objects.update_or_create(
             asset_category=asset_category,
             name=value["Asset_Type"],
+        )
+        organization, _ = Organization.objects.update_or_create(
+            name=value["Brigade_Name"],
         )
         topic_area, _ = TopicArea.objects.update_or_create(
             name=value["Topic"],
@@ -93,6 +100,7 @@ def run():
             asset_type=asset_type,
             slug=value["Asset_Name"],
             phase=phase,
+            organization=organization,
             google_id=key,
         )
         AssetGroupTopicAreas.objects.update_or_create(
@@ -101,9 +109,18 @@ def run():
         )
 
         print("topic: ", topic_area)
+    print("Asset.objects.count(): ", Asset.objects.count())
 
-    print("Assets", Asset.objects.all())
 
-
-if __name__ == "__main__":
+try:
+    # Your script logic here
+    print("about to run")
     run()
+    print("ran")
+except Exception as e:
+    # Print the exception traceback
+    traceback.print_exc()
+    print("Exception: ", e)
+    print("Oops! An exception occurred.")
+    # Optionally, you can raise the exception again to halt script execution
+    raise
