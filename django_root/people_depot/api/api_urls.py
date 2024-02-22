@@ -1,5 +1,6 @@
 from django.urls import path
 from rest_framework import routers
+from people_depot.api.secure_pd_api_urls import call_people_depot_api
 
 # fmt: off
 from people_depot.api.api_views import (
@@ -19,6 +20,7 @@ from drf_spectacular.views import SpectacularSwaggerView
 router = routers.SimpleRouter()
 router.register(r"api/v1/organizations", OrganizationViewSet, basename="organization")
 urlpatterns = [
+    path("call-people-depot-api/", call_people_depot_api, name="call_people_depot_api"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/schema/swagger-ui/",
