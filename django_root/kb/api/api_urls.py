@@ -5,7 +5,8 @@ from rest_framework import routers
 from kb.api.api_views import (
     AssetTypeViewSet,
     TopicAreaViewSet,
-    PhaseViewSet
+    PhaseViewSet,
+    AssetCategoryViewSet
 )
 # fmt: on
 #
@@ -22,6 +23,9 @@ router = routers.SimpleRouter()
 router.register(r"api/v1/asset-types", AssetTypeViewSet, basename="asset-type")
 router.register(r"api/v1/topic-areas", TopicAreaViewSet, basename="topic-area")
 router.register(r"api/v1/phase", PhaseViewSet, basename="phase")
+router.register(
+    r"api/v1/asset-category", AssetCategoryViewSet, basename="asset-category"
+)
 
 urlpatterns = [
     #     re_path(r'^gdocs/generate$', generate_assetGroup_markdown),

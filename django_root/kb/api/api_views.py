@@ -13,7 +13,8 @@ from .serializers import (
     AssetCategorySerializer,
     AssetTypeSerializer,
     TopicAreaSerializer,
-    PhaseSerializer
+    PhaseSerializer, 
+    AssetCategorySerializer
 )
 # fmt: on
 
@@ -29,6 +30,7 @@ class TopicAreaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = TopicArea.objects.all()
     serializer_class = TopicAreaSerializer
 
+
 @extend_schema_view(
     list=extend_schema(description="Return a list of all the asset categories"),
     retrieve=extend_schema(description="Retrieve an asset category"),
@@ -37,7 +39,6 @@ class AssetCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = []
     queryset = AssetCategory.objects.all()
     serializer_class = AssetCategorySerializer
-
 
 
 @extend_schema_view(
@@ -58,3 +59,13 @@ class PhaseViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = []
     queryset = Phase.objects.all()
     serializer_class = PhaseSerializer
+
+
+@extend_schema_view(
+    list=extend_schema(description="Return a list of all asset category"),
+    retrieve=extend_schema(description="Retrieve an asset category"),
+)
+class AssetCategorySerializer(viewsets.ReadOnlyModelViewSet):
+    permission_classes = []
+    queryset = AssetCategory.objects.all()
+    serializer_class = AssetCategorySerializer
