@@ -8,6 +8,7 @@ from .models import (
     AssetCategory,
     Phase,
     TopicArea,
+    Usability,
 )
 from kb.forms import AssetAdmin, AssetTypeAdmin, AssetGroupAdmin
 
@@ -17,3 +18,4 @@ admin.site.register(AssetGroup, AssetGroupAdmin)
 admin.site.register(Asset, AssetAdmin)
 admin.site.register(Phase)
 admin.site.register(TopicArea)
+admin.site.register(Usability)

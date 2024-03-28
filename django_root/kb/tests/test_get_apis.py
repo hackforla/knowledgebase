@@ -5,9 +5,15 @@ from django.test import Client
 client = Client()
 
 pytestmark = pytest.mark.django_db
+USABILITY_URL = reverse("usability-list")
 ASSET_TYPE_URL = reverse("asset-type-list")
 TOPIC_AREA_URL = reverse("topic-area-list")
 PHASE_URL = reverse("phase-list")
+
+
+def test_usability(usability):
+    response = client.get(USABILITY_URL)
+    assert response.json()[0]["name"] == usability.name
 
 
 def test_asset_type(asset_type):
