@@ -6,7 +6,8 @@ from kb.models import (
     AssetType,
     Phase,
     TopicArea,
-    AssetCategory
+    AssetCategory,
+    Usability,
 )
 
 # fmt: on
@@ -39,7 +40,11 @@ class PhaseSerializer(serializers.ModelSerializer):
         fields = ("id", "name", "created_at", "updated_at")
         read_only_fields = ("id", "created_at", "updated_at")
 
-
+class UsabilitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usability
+        fields = ("id", "name", "created_at", "updated_at")
+        read_only_fields = ("id", "created_at", "updated_at")
 class AssetCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = AssetCategory

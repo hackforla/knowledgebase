@@ -3,6 +3,7 @@ from rest_framework.test import APIClient
 
 # fmt: off
 from ..models import (
+    Usability,
     AssetType,
     AssetCategory,
     TopicArea,
@@ -10,6 +11,7 @@ from ..models import (
 )
 # fmt: on
 
+usability_json = { "name": "Test name usability" }
 asset_category_json = {"id": 1000, "name": "Test name asset category"}
 asset_type_json = {"id": 1000, "name": "Test name asset type"}
 topic_area_json = {"id": 1000, "name": "Test Topic Area"}
@@ -23,6 +25,11 @@ phase_json = {"id": 1000, "name": "Test Phase Name"}
 
 
 @pytest.mark.django_db
+@pytest.fixture
+def usability():
+    return Usability.objects.create(**usability_json)
+
+
 @pytest.fixture
 def asset_category():
     return AssetCategory.objects.create(**asset_category_json)

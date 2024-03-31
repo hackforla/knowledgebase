@@ -6,7 +6,8 @@ from kb.api.api_views import (
     AssetTypeViewSet,
     TopicAreaViewSet,
     PhaseViewSet,
-    AssetCategoryViewSet
+    AssetCategoryViewSet,
+    UsabilityViewSet,
 )
 # fmt: on
 #
@@ -26,6 +27,7 @@ router.register(r"api/v1/phase", PhaseViewSet, basename="phase")
 router.register(
     r"api/v1/asset-category", AssetCategoryViewSet, basename="asset-category"
 )
+router.register(r"api/v1/usabilities", UsabilityViewSet, basename="usability")
 
 urlpatterns = [
     #     re_path(r'^gdocs/generate$', generate_assetGroup_markdown),
