@@ -5,48 +5,11 @@ Tasks
 
 # BOP MVP
 
-- [ ] https://github.com/hackforla/peopledepot/issues/149
-- [ ] User synch
-  - [ ] If PEOPLE_DEPOT_URL is defined in kb when user logs in, confirm PEOPLE_DEPOT URL works.  If it doesn't work, error message and prevent creation of user.  
-  - [ ] Prevent creation of user in KB ifcannot create in PD
-  - [ ] Manual tests
-    - [ ] Sign up for account in kb.  
-      - From sqlite browser
-        - verify account is created in PD
-        - verify account is created in BD 
-        - Compare user account in PD and KB
-        - compare to Cognito
-      - Log in to kb using new account - verify message no authorization
-      - Log in to pd using new account- verify message no authorization
-      - Test API call from kb to pd
-        - Verify call people depot URL indicates authenticated but not authorized
-        - Set is_staff to true in PD
-        - Verify call people depot urlworks
-      - Document manual tests
-    - [ ] Sign up for account in pd.  
-      - From sqlite browser
-        - verify account is created in PD
-        - sign in to using KB cognito account
-        - verify account is created in KB 
-        - Compare user account in PD and KB
-        - compare to Cognito
-      - Log in to kb using new account - verify message no authorization
-      - Log in to pd using new account- verify message no authorization
-      - Test API call from kb to pd
-        - Verify call people depot URL indicates authenticated but not authorized
-        - Set is_staff to true in PD
-        - Verify call people depot urlworks
-      - Document manual tests
-  - [ ] Implement and test updating user in kb, see gets changed in pd
-  - [ ] Implement and test updating user in pd, see gets changed in kb
-  - [ ] Decide on strategy on 
-    - what to do if pd is down and new account is created - how to eventually resynch
 
-- [ ] Create Asset API and tests - include all fields and 1-M, M-M
-- [ ] Create Asset Group API and tests - include all fields and 1-M, M-M
-- [ ] Add parent_asset and display flag to asset as a required field
-
-
+- [ ] Bugs
+  - [ ] Add parent_asset and display flag to asset as a required field
+  - [ ] Create Asset API and tests - include all fields and 1-M, M-M
+  - [ ] Create Asset Group API and tests - include all fields and 1-M, M-M
 
 ```
     Assets >-< Topic Area
@@ -54,9 +17,10 @@ Tasks
 ```    
 - [ ] Change way google_id unique is defined
 - [ ] Asset Group -> Asset - UI options:
-  - Allow autocreation of asset group if none is selected
+  - Allow autocreation of group if none is selected
   - Show assets on Asset Group
   - When add another, default to the previous Asset Group?
+
 - [ ] Issue - Populate auth app
   - [x] Populate groups
   - [ ] If people depot url is defined
@@ -64,9 +28,12 @@ Tasks
     - [ ] kb.maintainer: all privileges for kb, view privileges for pd
     - [ ] kb.approver: same as maintainer
     - [ ] kb.view: all view privileges for kb and pd
-  - [ ] Add user organizateion
+  - [ ] If people_depot_url is not defined, admin should have update privileges for PD data, maintainer and approver should have update priv for pd data excluding user.
+  - [ ] Add user organization
   - [ ] Modify tool to include primary
-
+  - [ ] Decide on strategy.  Must take into account that KB app could potentially be down
+    - [ ] Implement
+    - [ ] Decide on strategy.  Consider AWS Lambda triggers or queues  
   - [ ] Documentation
     - [ ] How PD user data is populated
     - [ ] Auth when people_depot_url is defined and when not

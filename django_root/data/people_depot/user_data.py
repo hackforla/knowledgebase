@@ -41,34 +41,31 @@ class UserData:
         url = f"{ PEOPLE_DEPOT_URL }/api/v1/secure-api/getusers"
         response = PdDataUtil.try_get(url, headers=headers)
         decodedText = response.decode()
-        user_data = json.loads(decodedText)
+        response_json = json.loads(decodedText)
+        user_data = json.loads(response_json["users"])
 
         for user_record in user_data:
             group_ids = user_record["groups"]
 
             # remove keys not in User model and remove groups
-            keys_to_remove_from_user_record = [
+            keys_not_in_user_record = [
                 key for key in user_record.keys() if key not in User.__dict__
             ]
-            for key in keys_to_remove_from_user_record:
+            for key in keys_not_in_user_record:
                 user_record.pop(key)
+            user_record.pop("groups")
+            user_record.pop("user_permissions")
 
-            if user_record["groups"] is not None:
-                print("pop groups")
-                user_record.pop("groups")
-
-            if user_record["user_permissions"] is not None:
-                user_record.pop("user_permissions")
+            lookup_params = {"uuid": user_record["uuid"]}
 
             result = User.objects.update_or_create(
-                defaults=user_record, uuid=user_record["uuid"]
+                defaults=user_record,
+                **lookup_params,
             )
 
             # set groups
             user = result[0]
-            print("debug 1")
             user.groups.set(group_ids)
-            print("debug 2")
 
 
 # put imports here to avoid circular imports
