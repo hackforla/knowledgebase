@@ -9,32 +9,25 @@ PEOPLE_DEPOT_URL = os.environ.get("PEOPLE_DEPOT_URL", default="")
 
 @login_required
 def call_people_depot_api(request):
-    print("call_people_depot_api", request.user.__dict__)
-    try:
-        social_token = (
-            SocialToken.objects.filter(account__user=request.user)
-            .order_by("-expires_at")
-            .first()
+    social_token = (
+        SocialToken.objects.filter(account__user=request.user)
+        .order_by("-expires_at")
+        .first()
+    )
+    if not social_token:
+        return HttpResponse("No social token found", status=400)
+
+    access_token = social_token.token
+    headers = {"Authorization": "Bearer " + access_token}
+    url = PEOPLE_DEPOT_URL + "/api/v1/users"
+    response = requests.get(url, headers=headers)
+
+    if response.status_code != 200:
+        # Handle error response
+        return HttpResponse(
+            "Failed to send API request: " + response.text,
+            status=response.status_code,
         )
-        if not social_token:
-            return HttpResponse("No social token found", status=400)
-
-        access_token = social_token.token
-        headers = {"Authorization": "Bearer " + access_token}
-        url = PEOPLE_DEPOT_URL + "/api/v1/users"
-        response = requests.get(url, headers=headers)
-
-        if response.status_code == 200:
-            # Success
-            print("Success")
-            return HttpResponse("API Request sent successfully")
-        else:
-            # Handle error response
-            print("Error")
-            return HttpResponse(
-                "Failed to send API request: " + response.text,
-                status=response.status_code,
-            )
-    except SocialToken.DoesNotExist:
-        # Handle case where token doesn't exist for the user
-        return HttpResponse("Social token not found for the user", status=400)
+    # Success
+    print("Success")
+    return HttpResponse("API Request sent successfully")
