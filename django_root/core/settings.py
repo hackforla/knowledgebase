@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "kb.apps.kb_appConfig",
     "corsheaders",
-    "data",
+    # "data",
     "people_depot.apps.pd_appConfig",
     "allauth",
     "allauth.account",
