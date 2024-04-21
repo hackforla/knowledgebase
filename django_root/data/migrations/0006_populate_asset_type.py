@@ -11,6 +11,5 @@ def run(__apps__, __schema_editor__):
 class Migration(migrations.Migration):
     dependencies = [
         ("data", "0005_populate_asset_category"),
-        ("kb", "0010_alter_assetgroup_options_alter_asset_unique_together_and_more"),
     ]
     operations = [migrations.RunPython(run, migrations.RunPython.noop)]
