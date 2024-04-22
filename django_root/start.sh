@@ -9,7 +9,7 @@ if [ $DJANGO_SETTINGS_MODULE == "" ]; then
   return 1
 fi
 
-echo Admin user = $DJANGO_SUPERUSER email = $DJANGO_SUPERUSER_EMAIL
+echo Admin user = $DJANGO_SUPERUSER email = $DJANGO_SUPERUSER_EMAIL Database port = $DJANGO_PORT
 if [[ $1 != "" ]]; then
     port=$1
 elif [[ $DJANGO_PORT != "" ]]; then

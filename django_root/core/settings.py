@@ -16,10 +16,11 @@ from pathlib import Path
 from django.utils.encoding import smart_str
 
 django.utils.encoding.smart_text = smart_str
-USE_SQLITE = os.environ.get("USE_SQLITE", default=False)
-if USE_SQLITE == "True":
-    USE_SQLITE = True
-print("Use sqlite: ", USE_SQLITE)
+USE_SQLITE_ENV_VALUE = os.environ.get("USE_SQLITE", default="False")
+if type(USE_SQLITE_ENV_VALUE) == bool:
+    USE_SQLITE = USE_SQLITE_ENV_VALUE
+else:
+    USE_SQLITE = USE_SQLITE_ENV_VALUE.upper() == "TRUE"
 DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
 print("Database port: ", DATABASE_PORT, "Database host: ", DATABASE_HOST)
@@ -190,6 +191,8 @@ if not USE_SQLITE:
         }
     }
 else:
+    print("Using sqlite", USE_SQLITE)
+
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
