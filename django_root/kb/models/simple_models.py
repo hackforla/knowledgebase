@@ -38,6 +38,7 @@ class TopicArea(AbstractBaseModel):
 
     def __str__(self):
         return self.name
+    
 
 class Usability(AbstractBaseModel):
     name = models.CharField(

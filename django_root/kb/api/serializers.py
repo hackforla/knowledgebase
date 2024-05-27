@@ -45,6 +45,7 @@ class UsabilitySerializer(serializers.ModelSerializer):
         model = Usability
         fields = ("id", "name", "created_at", "updated_at")
         read_only_fields = ("id", "created_at", "updated_at")
+        
 class AssetCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = AssetCategory
