@@ -8,22 +8,6 @@ from people_depot.models import AbstractBaseModel
 # When you add a model, you need to add it to the __init__.py file
 
 
-class Test(AbstractBaseModel):
-    name = models.CharField(max_length=70, blank=False, default="")
-    description = models.CharField(max_length=200, blank=False, default="")
-
-    def __str__(self):
-        return self.name
-
-
-class Test2(AbstractBaseModel):
-    name = models.CharField(max_length=70, blank=False, default="")
-    description = models.CharField(max_length=200, blank=False, default="")
-
-    def __str__(self):
-        return self.name
-
-
 class Asset(AbstractBaseModel):
     google_id = models.CharField(max_length=100, blank=False, default="")
     title = models.CharField(max_length=70, blank=False, default="")
@@ -62,6 +46,7 @@ class Asset(AbstractBaseModel):
         return self.title + "(" + self.slug + ") " + self.phase.name
 
 
+# TODO: put examples
 class AssetGroup(AbstractBaseModel):
     name = models.CharField(max_length=70, blank=False, default="")
     description = models.CharField(max_length=200, blank=False, default="")
@@ -82,7 +67,7 @@ class AssetGroup(AbstractBaseModel):
     def __str__(self):
         return self.name
 
-
+# 
 class AssetCategory(AbstractBaseModel):
     name = models.CharField(
         max_length=70,

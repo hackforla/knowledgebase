@@ -2,6 +2,8 @@ Tasks
 
 +++ Required for BOP MVP
 
+# Stuff
+- [ ] Add examples to models.py
 
 # BOP MVP
 
