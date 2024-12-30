@@ -1,0 +1,10 @@
+site_name: My Docs
+theme:
+  name: material
+plugins:
+  - awesome-pages
+  - search:
+      indexing: full
+features:
+  - navigation.tabs
+  - navigation.sections  # This enables section-based navigation in the sidebar

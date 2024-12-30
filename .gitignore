@@ -2,6 +2,7 @@
 archive
 temp
 db.sqlite3
+site
 
 out/
 node_modules

@@ -12,8 +12,6 @@ django-querysetsequence==0.17.0
 drf-spectacular==0.27.0
 psycopg2==2.9.9 # If issue with this version, revert to psycopg2~=2.9.5
 pur==7.3.1
-pytest==7.4.4
-pytest-django==4.7.0
-pytz==2023.3.post1
+
 sqlparse==0.4.4
 
