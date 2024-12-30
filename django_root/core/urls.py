@@ -15,10 +15,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from allauth.socialaccount.models import SocialAccount
-from django.shortcuts import render
 from django.urls import path, re_path, include
-from django.core.handlers.wsgi import WSGIRequest
 from core.non_data_views import token_view, social_signup_view
 
 urlpatterns = [
