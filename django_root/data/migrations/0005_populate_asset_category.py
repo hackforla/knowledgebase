@@ -9,5 +9,5 @@ def run(__apps__, __schema_editor__):
 
 
 class Migration(migrations.Migration):
-    dependencies = [("data", "0004_populate_phase"), ("kb", "0008_assetcategory")]
+    dependencies = [("data", "0004_populate_phase")]
     operations = [migrations.RunPython(run, migrations.RunPython.noop)]

@@ -45,13 +45,7 @@ class Migration(migrations.Migration):
             name="PracticeArea",
             fields=[
                 (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
+                'uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)
                 ),
                 (
                     "created_at",

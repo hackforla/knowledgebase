@@ -1,6 +1,8 @@
 import os
 import json
+from core.settings import BASE_DIR
 from django.db import migrations
+from people_depot.sync import update_practice_areas_from_pd
 
 PEOPLE_DEPOT_URL = os.environ.get("PEOPLE_DEPOT_URL", default="")
 
@@ -17,7 +19,9 @@ def update_from_json_file():
         PracticeArea.objects.get_or_create(name=record["fields"]["name"])
 
 def run(__apps__, __schema_editor__):
-    if not PEOPLE_DEPOT_URL:
+    if PEOPLE_DEPOT_URL:
+        update_practice_areas_from_pd()
+    else:
         update_from_json_file
 
 class Migration(migrations.Migration):

@@ -125,6 +125,10 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
 
 
 class PracticeArea(AbstractBaseModel):
+    uuid = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, unique=True
+    )
+
     name = models.CharField(
         max_length=70,
         blank=False,
