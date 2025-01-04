@@ -1,6 +1,11 @@
 from allauth.socialaccount.models import SocialAccount
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.handlers.wsgi import WSGIRequest
+from people_depot.sync import update_all_from_pd
+
+def sync_view(__request__):
+    update_all_from_pd()
+    return redirect("/admin/")
 
 
 def token_view(request):

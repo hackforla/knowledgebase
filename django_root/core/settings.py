@@ -140,7 +140,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databasescr
 AUTH_USER_MODEL = "people_depot.User"
-LOGIN_REDIRECT_URL = "/admin/"
+LOGIN_REDIRECT_URL = "/sync/"
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",

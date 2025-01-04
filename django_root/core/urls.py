@@ -16,13 +16,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, re_path, include
-from core.non_data_views import token_view, social_signup_view
+from core.non_data_views import token_view, social_signup_view, sync_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("kb/socialsignup/", social_signup_view),
     path("kb/token/", token_view),
+    path("sync", sync_view),
     re_path(r"^", include("kb.autocomplete_urls")),
     re_path(r"^", include("kb.api.api_urls")),
     re_path(r"^", include("people_depot.api.api_urls")),

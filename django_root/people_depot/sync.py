@@ -2,7 +2,6 @@ import json
 import os
 import requests
 from urllib3.exceptions import MaxRetryError
-git 
 
 PEOPLE_DEPOT_URL = os.environ.get("PEOPLE_DEPOT_URL", default="")
 
