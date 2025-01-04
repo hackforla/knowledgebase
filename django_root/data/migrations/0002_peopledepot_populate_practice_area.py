@@ -20,7 +20,8 @@ def update_from_json_file():
 
 def run(__apps__, __schema_editor__):
     if PEOPLE_DEPOT_URL:
-        update_practice_areas_from_pd()
+        pass
+        # update_practice_areas_from_pd()
     else:
         update_from_json_file
 

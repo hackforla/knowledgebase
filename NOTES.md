@@ -22,6 +22,37 @@ Other capability
 ## Google Document Features
 # Technical Documentation
 # Technical Implementation
+## People Depot Replication with SSO
+People Depot data is replicated when user logs in.
+### User Profile
+1. User attempts to login using kb url.
+2. If user is configured for SSO
+   - user is redirected to login
+   - user logs in
+   - Cognito calls kb callback with parameters necessary to derive token using Cognito algorithm.  Token is stored in variable.
+   - /sync is called which calls update_all_from_pd.  This is configured using LOGIN_REDIRECT_URL
+3. If user is not configured for SSO
+   - user is drected to kb login page
+   - user logs in using local account
+   - token is derived using local algorithm.  Token is stored in variable.
+4. /sync url is called.  This is configured in LOGIN_REDIRECT_URL
+5. sync url triggers call to update_all_from_pd
+6. update_all_from_pd 
+   6.1 calls update_practice_area_from_pd
+     - gets practice area data from https://<people depot server>/practice-areas w
+     - data returned is used to create and update practice area records 
+   6.2 calls update_user_profile_from_pd
+     - gets current user data from https://<people depot server>/profile with token in header
+     - data returned is used to create or update information for current user
+   6.3 calls update_users_from_pd
+     - gets current user data from https://<people depot server>/users with token in header
+     - data returned is used to create or update groups and users
+### 
+1. User attempts to login using kb url.
+2. gets token from  https://<people depot server>/login that passes entered user and password
+3. 
+
+## People Depot without SSO
 ## Servers
 - Javascript service for converting a Google doc into a markdown and placed in a location to be picked up by Jekyll Hack for LA website.
 - Django app to implement the Knowledge Base Features

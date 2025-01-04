@@ -1,10 +1,9 @@
 from django.db import migrations
-from people_depot.sync import update_users_from_pd
 
 
 def run(__apps__, __schema_editor__):
     pass
-    # update_users_from_pd()
+    # update_users_from_pd is called
 
 class Migration(migrations.Migration):
     initial = True
