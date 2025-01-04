@@ -122,16 +122,6 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModelUuid):
     def __str__(self):
         return f"{self.email}"
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-        if self.password == "":
-            UserData.create_peopledepot_user(
-                uuid=self.uuid,
-                username=self.username,
-                email=self.email,
-                first_name=self.first_name,
-                last_name=self.last_name,
-            )
 
 
 class PracticeArea(AbstractBaseModel):
@@ -170,5 +160,3 @@ class Organization(AbstractBaseModel):
         return self.name
 
 
-# Put import at end to avoid circular imports
-from data.people_depot.user_data import UserData

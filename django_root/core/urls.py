@@ -28,3 +28,4 @@ urlpatterns = [
     re_path(r"^", include("kb.api.api_urls")),
     re_path(r"^", include("people_depot.api.api_urls")),
 ]
+
