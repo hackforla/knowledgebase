@@ -99,60 +99,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name="Test",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "created_at",
-                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
-                ),
-                (
-                    "updated_at",
-                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
-                ),
-                ("name", models.CharField(default="", max_length=70)),
-                ("description", models.CharField(default="", max_length=200)),
-            ],
-            options={
-                "abstract": False,
-            },
-        ),
-        migrations.CreateModel(
-            name="Test2",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "created_at",
-                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
-                ),
-                (
-                    "updated_at",
-                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
-                ),
-                ("name", models.CharField(default="", max_length=70)),
-                ("description", models.CharField(default="", max_length=200)),
-            ],
-            options={
-                "abstract": False,
-            },
-        ),
-        migrations.CreateModel(
             name="TopicArea",
             fields=[
                 (
