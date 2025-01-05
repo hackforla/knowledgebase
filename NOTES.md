@@ -1,21 +1,45 @@
-# HfLA Knowledgebase Webb App
-The Knowledgebase App helps Hack for LA manage it's documentation. It includes:
-- Associating a Google doc with a topic for the purposes of filtering and listing by section
-- Setting one Google doc to be the primary document of a topic for purposes of filtering and listing by primary section
-- Associating Google docs with practice areas, technologies, contributors that are maintained separately (by the People Depot)
-- Associating files and links with their Google document
-- Managing review and approval status of docs
-- Tracking Google doc versions
-- Adding a list of the contributors for a document with details to the document's web page
-- Converting contributors' Google Docs into website pages
+# Terminology
+- Assset: this Django app, an asset refers to any resourthce or content that can be accessed and read via the internet.  An asset is characterized by its accessibility through a unique link or identifier, allowing it to be easily retrieved or viewed by users of the app.  The document can be viewed directly in the browser and/or using a client tool.  Assets are highly versatile and can encompass a wide range of items, including but not limited to: Google Docs, web pages, Miro Diagrams, Google Slides, Microsoft Powerpoint slides.
 
-The API should allow for:
-- filtering documents by contributor, practice area, technology, and topic (by section or by primary section)
-- getting the review status of a document
-- viewing a particular version (draft, in review, or approved) version of a document
+
+# Knowledgebase App Overview
+The Knowledgebase App helps Hack for LA 
+- maintain it's assets and related information.  See data_values.md for details and examples for the catalog and categorization
+- managing draft, in review, and completed versions of an asset
+- filtering:
+   - filter by assets based on related information
+   - identifying a primary asset in an asset group for purposes of filtering
+   - Identifying a primary asset in a topic area for purposes of filtering
+- Google doc to web page conversion
+  - Convert google doc to HTML
+  - Add a section to the HTML that lists contributors and details
+
+**Related information**:
+
+Related information that is maintained in the Knowledge base app:
+- topic area
+- asset group
+- asset category
+- asset type
+
+Related information that is maintained in 
+- practice area
+- technology
+- contributors
 
 Other capability
 - Provide authorization to manage Knowledgebase users
+
+# API Overview
+The API should allow for:
+- gettiing asset contributor, practice area, technology, topic area, asset type, asset category, and asset group
+- filtering assets by contributor, practice area, technology, topic area, asset type, asset category, and asset group
+- filtering by primary asset for an asset group
+- filtering by topic area for an asset group
+- getting the review status of a document
+- viewing a particular version (draft, in review, or approved) version of an asset
+
+
 
 
 # Features
@@ -30,7 +54,6 @@ People Depot data is replicated when user logs in.
    - user is redirected to login
    - user logs in
    - Cognito calls kb callback with parameters necessary to derive token using Cognito algorithm.  Token is stored in variable.
-   - /sync is called which calls update_all_from_pd.  This is configured using LOGIN_REDIRECT_URL
 3. If user is not configured for SSO
    - user is drected to kb login page
    - user logs in using local account
@@ -79,6 +102,22 @@ What features needs to be covered:
 
 
 
+OLD CONTENT
+# HfLA Knowledgebase Webb App
+The Knowledgebase App helps Hack for LA manage it's documentation. It includes:
+- Associating a Google doc with a topic for the purposes of filtering and listing by section
+- Setting one Google doc to be the primary document of a topic for purposes of filtering and listing by primary section
+- Associating Google docs with practice areas, technologies, contributors that are maintained separately (by the People Depot)
+- Associating files and links with their Google document
+- Managing review and approval status of docs
+- Tracking Google doc versions
+- Adding a list of the contributors for a document with details to the document's web page
+- Converting contributors' Google Docs into website pages
+
+The API should allow for:
+- filtering documents by contributor, practice area, technology, and topic (by section or by primary section)
+- getting the review status of a document
+- viewing a particular version (draft, in review, or approved) version of a document
 
 
 OLD CONTENT

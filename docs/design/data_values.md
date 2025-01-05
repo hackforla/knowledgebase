@@ -54,7 +54,7 @@ Asset Group: "How to Cook Bacon".
   - Design
   - Professional Development
 
-### Tools 
+### Technology 
 - Example values: Google Sheets, Python, Flask, React, Microsoft Powerpoint
 - Will be entered by user either while or before adding a new Asset Group.
 
