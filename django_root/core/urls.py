@@ -23,7 +23,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("kb/socialsignup/", social_signup_view),
     path("kb/token/", token_view),
-    path("sync", sync_view),
+    path("sync/", sync_view),
     re_path(r"^", include("kb.autocomplete_urls")),
     re_path(r"^", include("kb.api.api_urls")),
     re_path(r"^", include("people_depot.api.api_urls")),

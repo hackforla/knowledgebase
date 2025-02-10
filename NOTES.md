@@ -1,20 +1,25 @@
 # Terminology
-- Assset: this Django app, an asset refers to any resourthce or content that can be accessed and read via the internet.  An asset is characterized by its accessibility through a unique link or identifier, allowing it to be easily retrieved or viewed by users of the app.  The document can be viewed directly in the browser and/or using a client tool.  Assets are highly versatile and can encompass a wide range of items, including but not limited to: Google Docs, web pages, Miro Diagrams, Google Slides, Microsoft Powerpoint slides.
+TODO: Make less passive and less verbose
+- Asset: any resource or content that can be accessed and read via the internet.  An asset is characterized by its accessibility through a unique link or identifier, allowing it to be easily retrieved or viewed by users of the app.  The asset can be viewed directly in the browser and/or using a client tool.  Assets are highly versatile and can encompass a wide range of items, including but not limited to: Google Docs, web pages, Miro Diagrams, Google Slides, Microsoft Powerpoint slides.
 
 
 # Knowledgebase App Overview
+
 The Knowledgebase App helps Hack for LA 
-- maintain it's assets and related information.  See data_values.md for details and examples for the catalog and categorization
+- maintain it's assets and related information.  See [data_values.md](docs/design/data_values.md) for details and examples of topic areas, asset groups, and other related information.
 - managing draft, in review, and completed versions of an asset
 - filtering:
-   - filter by assets based on related information
+   - filter by assets based on related information such as topic area, asset groups, and other related information
    - identifying a primary asset in an asset group for purposes of filtering
    - Identifying a primary asset in a topic area for purposes of filtering
 - Google doc to web page conversion
   - Convert google doc to HTML
   - Add a section to the HTML that lists contributors and details
+- Manage authorization of Knowledgebase users
 
-**Related information**:
+## Related information
+
+For more details see [data_values.md](docs/design/data_values.md).
 
 Related information that is maintained in the Knowledge base app:
 - topic area
@@ -22,22 +27,21 @@ Related information that is maintained in the Knowledge base app:
 - asset category
 - asset type
 
-Related information that is maintained in 
+Related information that is maintained in People Depot:
 - practice area
 - technology
 - contributors
 
-Other capability
-- Provide authorization to manage Knowledgebase users
-
 # API Overview
-The API should allow for:
-- gettiing asset contributor, practice area, technology, topic area, asset type, asset category, and asset group
-- filtering assets by contributor, practice area, technology, topic area, asset type, asset category, and asset group
-- filtering by primary asset for an asset group
-- filtering by topic area for an asset group
-- getting the review status of a document
-- viewing a particular version (draft, in review, or approved) version of an asset
+
+The API should let a user:
+- get a list of assets, contributors, practice areas, technologies, topic areas, asset types, asset categories, and asset groups
+- filter assets by contributor, practice area, technology, topic area, asset type, asset category, and asset group
+- filter an asset group by primary asset
+- filter an asset group by topic area
+- get the review status of a document
+
+The API user must pick a version status - draft, in review, or approved - for any asset or assets they get. They can only get one version status at a time.
 
 
 
@@ -46,43 +50,43 @@ The API should allow for:
 ## Google Document Features
 # Technical Documentation
 # Technical Implementation
-## People Depot Replication with SSO
-People Depot data is replicated when user logs in.
-### User Profile
-1. User attempts to login using kb url.
-2. If user is configured for SSO
-   - user is redirected to login
-   - user logs in
-   - Cognito calls kb callback with parameters necessary to derive token using Cognito algorithm.  Token is stored in variable.
-3. If user is not configured for SSO
-   - user is drected to kb login page
-   - user logs in using local account
-   - token is derived using local algorithm.  Token is stored in variable.
-4. /sync url is called.  This is configured in LOGIN_REDIRECT_URL
-5. sync url triggers call to update_all_from_pd
-6. update_all_from_pd 
-   6.1 calls update_practice_area_from_pd
-     - gets practice area data from https://<people depot server>/practice-areas w
-     - data returned is used to create and update practice area records 
-   6.2 calls update_user_profile_from_pd
-     - gets current user data from https://<people depot server>/profile with token in header
-     - data returned is used to create or update information for current user
-   6.3 calls update_users_from_pd
-     - gets current user data from https://<people depot server>/users with token in header
-     - data returned is used to create or update groups and users
-### 
-1. User attempts to login using kb url.
-2. gets token from  https://<people depot server>/login that passes entered user and password
-3. 
 
-## People Depot without SSO
-## Servers
-- Javascript service for converting a Google doc into a markdown and placed in a location to be picked up by Jekyll Hack for LA website.
-- Django app to implement the Knowledge Base Features
-- Interacts with Jekyll server
-- Interacts with People Depot
+## People Depot Replication with SSO
+
+The Knowledgebase replicates the People Depot table when the user logs in. This is the log in flow:
+
+1. User attempts to login using Knowledgebase url.
+2. For a normal user, we configure the Knowledgebase for SSO, therefore:
+   2.1 user is redirected to Cognito login
+   2.2 user logs in to Cognito
+   TODO: 2.3 Cognito and Knowledgebase work together to create a token
+   2.4 Knowledgebase calls People Depot /profile API to validate the user.  If no such user exists,
+   Knowledgebase shows an error screen.
+3. For an internal developers who is using Knowledgebase without SSO:
+   3.1 user is directed to Knowledgebase login page
+   3.2 user logs in with username and password
+   3.3 Knowledgebase calls People Depot /login API to validate username and password against People Depot
+   3.4 Knowledgebase creates a token
+5. Knowledgebase redirects the user to the /sync url.  This is configured in the LOGIN_REDIRECT_URL environment variable.
+6. The view associated with the /sync url, `sync_view()`, calls `update_all_from_pd()`, which:
+   6.1 calls `update_user_profile_from_pd()`, which:
+      6.1.1 gets current user data from `https://<people depot server>/profile` with token in header
+      6.1.2 creates or updates the user's record
+   6.2 calls `update_users_from_pd()`
+      6.2.1 gets current user data from `https://<people depot server>/users` with token in header
+      6.2.2 creates or updates the records for the users and security groups
+   6.3 calls `update_practice_area_from_pd()`
+      6.3.1 gets practice area data from `https://<people depot server>/practice-areas` (without a token)
+      6.3.2 creates or updates the practice area records
+
+## Servers Knowledgebase interacts with
+
+- Google doc conversion server. It converts a Google doc into markdown. We have written the backend for this server in javascript.
+- Jekyll server. The Jekyll server converts the markdown to HTML for the Hack for LA website.
+- People Depot API server
 
 # User Documentation
+
 What features needs to be covered:
 - List of supported Google Doc features
 - Security configuration

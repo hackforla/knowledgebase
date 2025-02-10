@@ -40,8 +40,10 @@ SOCIALACCOUNT_PROVIDERS = {
             "secret": "",
             "key": "",
         },
+        "SCOPE": ["openid", "profile", "email"],  # Include 'openid' for the aud claim
     },
 }
+# print("Social account provider debug", SOCIALACCOUNT_PROVIDERS)
 ACCOUNT_EMAIL_VERIFICATION = "none"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

@@ -3,8 +3,9 @@ from django.shortcuts import render, redirect
 from django.core.handlers.wsgi import WSGIRequest
 from people_depot.sync import update_all_from_pd
 
-def sync_view(__request__):
-    update_all_from_pd()
+def sync_view(request):
+    print("debug syncing")
+    update_all_from_pd(request.user)
     return redirect("/admin/")
 
 
