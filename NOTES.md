@@ -49,8 +49,9 @@ The API user must pick a version status - draft, in review, or approved - for an
 # Features
 ## Google Document Features
 # Technical Documentation
-# Technical Implementation
 
+# Technical Implementation
+## Maintenance with Django
 ## People Depot Replication with SSO
 
 The Knowledgebase replicates the People Depot table when the user logs in. This is the log in flow:
@@ -67,7 +68,7 @@ The Knowledgebase replicates the People Depot table when the user logs in. This 
    3.2 user logs in with username and password
    3.3 Knowledgebase calls People Depot /login API to validate username and password against People Depot
    3.4 Knowledgebase creates a token
-5. Knowledgebase redirects the user to the /sync url.  This is configured in the LOGIN_REDIRECT_URL environment variable.
+5. Knowledgebase redirects the user to the /sync url.  This is configured in the dLOGIN_REDIRECT_URL environment variable.
 6. The view associated with the /sync url, `sync_view()`, calls `update_all_from_pd()`, which:
    6.1 calls `update_user_profile_from_pd()`, which:
       6.1.1 gets current user data from `https://<people depot server>/profile` with token in header
@@ -79,7 +80,7 @@ The Knowledgebase replicates the People Depot table when the user logs in. This 
       6.3.1 gets practice area data from `https://<people depot server>/practice-areas` (without a token)
       6.3.2 creates or updates the practice area records
 
-## Servers Knowledgebase interacts with
+## Related Servers
 
 - Google doc conversion server. It converts a Google doc into markdown. We have written the backend for this server in javascript.
 - Jekyll server. The Jekyll server converts the markdown to HTML for the Hack for LA website.
