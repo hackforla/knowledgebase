@@ -44,4 +44,3 @@ for asset_type_with_category_name in data["asset_type_with_category_name"]:
 
 
 data[AssetType.__name__] = asset_type
-print(data)

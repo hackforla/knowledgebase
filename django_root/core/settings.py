@@ -14,7 +14,6 @@ import os
 import django
 from pathlib import Path
 from django.utils.encoding import smart_str
-
 django.utils.encoding.smart_text = smart_str
 USE_SQLITE_ENV_VALUE = os.environ.get("USE_SQLITE", default="False")
 if type(USE_SQLITE_ENV_VALUE) == bool:

@@ -6,7 +6,6 @@ from data.data import data
 
 class DataUtils:
     def update_model_from_json_file(model, json_file):
-        print(f"Updating {model.__name__} from {json_file}")
         json_file = os.path.join(BASE_DIR, json_file)
         with open(json_file, "r") as f:
             json_data = json.load(f)

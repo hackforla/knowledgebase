@@ -4,7 +4,7 @@ from kb.models import AssetCategory
 
 
 def run(__apps__, __schema_editor__):
-    print("Loading phases")
+    print("Loading asset categories")
     DataUtils.update_model_from_json_data(AssetCategory)
 
 

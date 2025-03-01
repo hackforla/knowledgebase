@@ -48,7 +48,6 @@ The API user must pick a version status - draft, in review, or approved - for an
 
 # Features
 ## Google Document Features
-# Technical Documentation
 
 # Technical Implementation
 ## Maintenance with Django
