@@ -44,7 +44,7 @@ superuser_exists=$?
 
 echo
 echo
-echo
+echo Super user $DJANGO_SUPERUSER
 if [ $superuser_exists -eq 1 ]; then
   echo
   echo --- Executing python manage.py createsuperuser ---

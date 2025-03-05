@@ -1,3 +1,5 @@
+How to Contribute Overview
+
 # Terminology
 - Asset: content accessible through a URL
 
@@ -25,4 +27,10 @@ Knowledgebase can also interact with
 - Google Doc to Markdown Server service: TypeScript and Express
   - technologies: Typescript, Express, Google API
   - [development setup](https://github.com/hackforla/gdoc-converter/blob/main/CONTRIBUTING.md)
+
+# How to documents for setup
+- [set up dev environment](./docs/how-to/set-up-dev-environment.md)
+- [create tables, APIs, and tests](./docs/how-to/create-table-api-and-tests.md)
+- [x](./docs/how-to/)
+- [Configuring-single-sign-on-with-cognito](./)
 

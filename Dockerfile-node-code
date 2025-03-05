@@ -1,9 +1,0 @@
-FROM hfla-gdocs2md-node
-# RUN mkdir -p /node/node_modules && chown -R node:node /node
-WORKDIR /node
-
-COPY ./utils/package*.json ./
-COPY ./utils ./
-CMD ["npm", "gdocs2md/scripts/start-express.js"]
-
-EXPOSE 3000
